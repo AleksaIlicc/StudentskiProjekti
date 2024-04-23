@@ -10,12 +10,11 @@ using System.Windows.Forms;
 
 namespace StudentskiProjekti.Forme
 {
-    public partial class Predmeti : Form
+    public partial class IzmeniPredmet : Form
     {
-        public Predmeti()
+        public IzmeniPredmet()
         {
             InitializeComponent();
         }
-
     }
 }
