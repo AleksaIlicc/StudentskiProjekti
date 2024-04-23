@@ -30,7 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Predmeti));
             ObrisiPredmetBtn = new Button();
-            ProdavniceGB = new GroupBox();
+            PredmetiGB = new GroupBox();
+            ProdavniceListv = new ListView();
             Podaci_o_predmetimaGB = new GroupBox();
             IzmeniPredmetBtn = new Button();
             DodajPredmetBtn = new Button();
@@ -42,8 +43,7 @@
             SviStudentiBtn = new Button();
             StudentNaTeorijskimBtn = new Button();
             StudentNaPrakticnimBtn = new Button();
-            ProdavniceListv = new ListView();
-            ProdavniceGB.SuspendLayout();
+            PredmetiGB.SuspendLayout();
             Podaci_o_predmetimaGB.SuspendLayout();
             Projekti_na_predmetimaGB.SuspendLayout();
             Studenti_na_predmetimaGB.SuspendLayout();
@@ -60,16 +60,24 @@
             ObrisiPredmetBtn.Text = "Obrisi Predmet";
             ObrisiPredmetBtn.UseVisualStyleBackColor = false;
             // 
-            // ProdavniceGB
+            // PredmetiGB
             // 
-            ProdavniceGB.Controls.Add(ProdavniceListv);
-            ProdavniceGB.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            ProdavniceGB.Location = new System.Drawing.Point(6, 4);
-            ProdavniceGB.Name = "ProdavniceGB";
-            ProdavniceGB.Size = new System.Drawing.Size(883, 278);
-            ProdavniceGB.TabIndex = 2;
-            ProdavniceGB.TabStop = false;
-            ProdavniceGB.Text = "Prodavnice";
+            PredmetiGB.Controls.Add(ProdavniceListv);
+            PredmetiGB.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            PredmetiGB.Location = new System.Drawing.Point(6, 4);
+            PredmetiGB.Name = "PredmetiGB";
+            PredmetiGB.Size = new System.Drawing.Size(883, 278);
+            PredmetiGB.TabIndex = 2;
+            PredmetiGB.TabStop = false;
+            PredmetiGB.Text = "Predmeti";
+            // 
+            // ProdavniceListv
+            // 
+            ProdavniceListv.Location = new System.Drawing.Point(6, 39);
+            ProdavniceListv.Name = "ProdavniceListv";
+            ProdavniceListv.Size = new System.Drawing.Size(871, 233);
+            ProdavniceListv.TabIndex = 0;
+            ProdavniceListv.UseCompatibleStateImageBehavior = false;
             // 
             // Podaci_o_predmetimaGB
             // 
@@ -105,6 +113,7 @@
             DodajPredmetBtn.TabIndex = 2;
             DodajPredmetBtn.Text = "Dodaj Predmet";
             DodajPredmetBtn.UseVisualStyleBackColor = false;
+            DodajPredmetBtn.Click += DodajPredmetBtn_Click;
             // 
             // Projekti_na_predmetimaGB
             // 
@@ -154,6 +163,7 @@
             Studenti_na_predmetimaGB.Controls.Add(SviStudentiBtn);
             Studenti_na_predmetimaGB.Controls.Add(StudentNaTeorijskimBtn);
             Studenti_na_predmetimaGB.Controls.Add(StudentNaPrakticnimBtn);
+            Studenti_na_predmetimaGB.Font = new System.Drawing.Font("Georgia", 9F);
             Studenti_na_predmetimaGB.ForeColor = System.Drawing.SystemColors.ControlText;
             Studenti_na_predmetimaGB.Location = new System.Drawing.Point(560, 305);
             Studenti_na_predmetimaGB.Name = "Studenti_na_predmetimaGB";
@@ -165,6 +175,7 @@
             // SviStudentiBtn
             // 
             SviStudentiBtn.BackColor = System.Drawing.Color.AntiqueWhite;
+            SviStudentiBtn.Font = new System.Drawing.Font("Georgia", 9F);
             SviStudentiBtn.Location = new System.Drawing.Point(6, 140);
             SviStudentiBtn.Name = "SviStudentiBtn";
             SviStudentiBtn.Size = new System.Drawing.Size(274, 36);
@@ -175,6 +186,7 @@
             // StudentNaTeorijskimBtn
             // 
             StudentNaTeorijskimBtn.BackColor = System.Drawing.Color.AntiqueWhite;
+            StudentNaTeorijskimBtn.Font = new System.Drawing.Font("Georgia", 9F);
             StudentNaTeorijskimBtn.Location = new System.Drawing.Point(6, 89);
             StudentNaTeorijskimBtn.Name = "StudentNaTeorijskimBtn";
             StudentNaTeorijskimBtn.Size = new System.Drawing.Size(274, 36);
@@ -185,20 +197,13 @@
             // StudentNaPrakticnimBtn
             // 
             StudentNaPrakticnimBtn.BackColor = System.Drawing.Color.AntiqueWhite;
+            StudentNaPrakticnimBtn.Font = new System.Drawing.Font("Georgia", 9F);
             StudentNaPrakticnimBtn.Location = new System.Drawing.Point(6, 38);
             StudentNaPrakticnimBtn.Name = "StudentNaPrakticnimBtn";
             StudentNaPrakticnimBtn.Size = new System.Drawing.Size(274, 36);
             StudentNaPrakticnimBtn.TabIndex = 1;
             StudentNaPrakticnimBtn.Text = "Prikazi studente na predmetu";
             StudentNaPrakticnimBtn.UseVisualStyleBackColor = false;
-            // 
-            // ProdavniceListv
-            // 
-            ProdavniceListv.Location = new System.Drawing.Point(6, 39);
-            ProdavniceListv.Name = "ProdavniceListv";
-            ProdavniceListv.Size = new System.Drawing.Size(871, 233);
-            ProdavniceListv.TabIndex = 0;
-            ProdavniceListv.UseCompatibleStateImageBehavior = false;
             // 
             // Predmeti
             // 
@@ -208,13 +213,13 @@
             Controls.Add(Projekti_na_predmetimaGB);
             Controls.Add(Podaci_o_predmetimaGB);
             Controls.Add(Studenti_na_predmetimaGB);
-            Controls.Add(ProdavniceGB);
+            Controls.Add(PredmetiGB);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "Predmeti";
             Text = "Predmeti";
-            ProdavniceGB.ResumeLayout(false);
+            PredmetiGB.ResumeLayout(false);
             Podaci_o_predmetimaGB.ResumeLayout(false);
             Projekti_na_predmetimaGB.ResumeLayout(false);
             Studenti_na_predmetimaGB.ResumeLayout(false);
@@ -223,7 +228,7 @@
 
         #endregion
         private Button ObrisiPredmetBtn;
-        private GroupBox ProdavniceGB;
+        private GroupBox PredmetiGB;
         private GroupBox Podaci_o_predmetimaGB;
         private Button IzmeniPredmetBtn;
         private Button DodajPredmetBtn;

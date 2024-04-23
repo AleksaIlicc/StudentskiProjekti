@@ -17,5 +17,12 @@ namespace StudentskiProjekti.Forme
             InitializeComponent();
         }
 
+
+        private void DodajPredmetBtn_Click(object sender, EventArgs e)
+        {
+            DodajPredmet DodajPred = new();
+            DodajPred.StartPosition = FormStartPosition.CenterParent;
+            DodajPred.ShowDialog();
+        }
     }
 }

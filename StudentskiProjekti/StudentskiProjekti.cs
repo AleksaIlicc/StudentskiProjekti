@@ -20,7 +20,8 @@ namespace StudentskiProjekti
         private void prodavnica_btn_clk(object sender, EventArgs e)
         {
                 Forme.Predmeti Predmeti = new();
-                Predmeti.ShowDialog(); 
+                Predmeti.StartPosition = FormStartPosition.CenterParent;
+                Predmeti.ShowDialog(this);
         }
     }
 }
