@@ -116,7 +116,6 @@
             label2.Size = new System.Drawing.Size(52, 18);
             label2.TabIndex = 1;
             label2.Text = "Naziv:";
-            label2.Click += label2_Click;
             // 
             // label1
             // 
