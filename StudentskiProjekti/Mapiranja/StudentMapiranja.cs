@@ -1,0 +1,19 @@
+﻿namespace StudentskiProjekti.Mapiranja
+{
+    public class StudentMapiranja : ClassMap<Student>
+    {
+        public StudentMapiranja()
+        {
+            Table("STUDENT");
+
+            Id(x => x.BrIndeksa, "BR_INDEKSA").GeneratedBy.Assigned();
+
+            Map(x => x.LIme, "IME"); 
+            Map(x => x.ImeRoditelja, "IME_RODITELJA");
+            Map(x => x.Prezime, "PREZIME");
+            Map(x => x.Smer, "SMER");
+
+			HasMany(x => x.UcestvujeProjekti).KeyColumn("STUDENT_ID").Cascade.All().Inverse();
+		}
+    }
+}
