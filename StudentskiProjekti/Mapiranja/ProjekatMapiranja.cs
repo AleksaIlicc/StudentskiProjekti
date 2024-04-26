@@ -4,7 +4,7 @@ using FluentNHibernate.Conventions.Inspections;
 
 namespace StudentskiProjekti.Mapiranja
 {
-    public abstract class ProjekatMapiranja : ClassMap<Projekat>
+    public class ProjekatMapiranja : ClassMap<Projekat>
     {
         public ProjekatMapiranja()
         {

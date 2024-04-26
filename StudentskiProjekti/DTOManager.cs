@@ -13,7 +13,8 @@
 
                 foreach (Predmet p in sviPredmeti)
                 {
-                    predmeti.Add(new PredmetPregled(p.Id, p.Naziv, p.Semestar , p.Katedra));
+                    
+                    predmeti.Add(new PredmetPregled(p.Id, p.Naziv, p.Semestar, p.Katedra));
                 }
 
                 s.Close();
