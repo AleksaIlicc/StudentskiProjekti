@@ -31,7 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Predmeti));
             ObrisiPredmetBtn = new Button();
             PredmetiGB = new GroupBox();
-            ProdavniceListv = new ListView();
+            Predmeti_ListV = new ListView();
+            columnHeader1 = new ColumnHeader();
+            columnHeader2 = new ColumnHeader();
+            columnHeader3 = new ColumnHeader();
+            columnHeader4 = new ColumnHeader();
             Podaci_o_predmetimaGB = new GroupBox();
             IzmeniPredmetBtn = new Button();
             DodajPredmetBtn = new Button();
@@ -62,7 +66,7 @@
             // 
             // PredmetiGB
             // 
-            PredmetiGB.Controls.Add(ProdavniceListv);
+            PredmetiGB.Controls.Add(Predmeti_ListV);
             PredmetiGB.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             PredmetiGB.Location = new System.Drawing.Point(6, 4);
             PredmetiGB.Name = "PredmetiGB";
@@ -71,13 +75,40 @@
             PredmetiGB.TabStop = false;
             PredmetiGB.Text = "Predmeti";
             // 
-            // ProdavniceListv
+            // Predmeti_ListV
             // 
-            ProdavniceListv.Location = new System.Drawing.Point(6, 39);
-            ProdavniceListv.Name = "ProdavniceListv";
-            ProdavniceListv.Size = new System.Drawing.Size(723, 269);
-            ProdavniceListv.TabIndex = 0;
-            ProdavniceListv.UseCompatibleStateImageBehavior = false;
+            Predmeti_ListV.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4 });
+            Predmeti_ListV.FullRowSelect = true;
+            Predmeti_ListV.GridLines = true;
+            Predmeti_ListV.Location = new System.Drawing.Point(7, 48);
+            Predmeti_ListV.Name = "Predmeti_ListV";
+            Predmeti_ListV.Size = new System.Drawing.Size(723, 269);
+            Predmeti_ListV.TabIndex = 0;
+            Predmeti_ListV.UseCompatibleStateImageBehavior = false;
+            Predmeti_ListV.View = View.Details;
+            // 
+            // columnHeader1
+            // 
+            columnHeader1.Text = "Sifra";
+            columnHeader1.Width = 90;
+            // 
+            // columnHeader2
+            // 
+            columnHeader2.Text = "Naziv";
+            columnHeader2.TextAlign = HorizontalAlignment.Center;
+            columnHeader2.Width = 320;
+            // 
+            // columnHeader3
+            // 
+            columnHeader3.Text = "Semestar";
+            columnHeader3.TextAlign = HorizontalAlignment.Center;
+            columnHeader3.Width = 80;
+            // 
+            // columnHeader4
+            // 
+            columnHeader4.Text = "Katedra";
+            columnHeader4.TextAlign = HorizontalAlignment.Center;
+            columnHeader4.Width = 225;
             // 
             // Podaci_o_predmetimaGB
             // 
@@ -213,6 +244,7 @@
             MinimumSize = new System.Drawing.Size(772, 599);
             Name = "Predmeti";
             Text = "Predmeti";
+            Load += Predmeti_Load;
             PredmetiGB.ResumeLayout(false);
             Podaci_o_predmetimaGB.ResumeLayout(false);
             PrikazPredmeta_GB.ResumeLayout(false);
@@ -227,7 +259,7 @@
         private GroupBox Podaci_o_predmetimaGB;
         private Button IzmeniPredmetBtn;
         private Button DodajPredmetBtn;
-        private ListView ProdavniceListv;
+        private ListView Predmeti_ListV;
 		private GroupBox PrikazPredmeta_GB;
 		private Label label2;
 		private Label label1;
@@ -236,5 +268,9 @@
 		private Button Sortiraj;
 		private Label label3;
 		private Button button1;
-	}
+        private ColumnHeader columnHeader1;
+        private ColumnHeader columnHeader2;
+        private ColumnHeader columnHeader3;
+        private ColumnHeader columnHeader4;
+    }
 }

@@ -6,7 +6,26 @@
         {
             InitializeComponent();
         }
+        private void Predmeti_Load(object sender, EventArgs e)
+        {
+            popuniPodacima();
+        }
 
+        public void popuniPodacima()
+        {
+
+            Predmeti_ListV.Items.Clear();
+            List<PredmetPregled> predmeti = DTOManager.vratiSvePredmete();
+            predmeti = predmeti.OrderBy(p => p.Naziv).ToList();
+
+            foreach (PredmetPregled p in predmeti)
+            {
+                ListViewItem item = new ListViewItem(new string[] { p.Id.ToString(), p.Naziv, p.Semestar.ToString(), p.Katedra });
+                Predmeti_ListV.Items.Add(item);
+            }
+         
+            Predmeti_ListV.Refresh();
+        }
         private void DodajPredmet_Btn_Click(object sender, EventArgs e)
         {
             DodajPredmet dodajPredmet = new DodajPredmet()
@@ -37,5 +56,7 @@
 
             }
         }
+
+
     }
 }
