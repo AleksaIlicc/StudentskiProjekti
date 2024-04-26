@@ -4,8 +4,8 @@
     {
         public virtual string Id { get; protected set; }
         public virtual string Naziv { get; set; }
-        public virtual int Semestar { get; set; }
-        public virtual string Katedra { get; set; }
+        public virtual int? Semestar { get; set; }
+        public virtual string? Katedra { get; set; }
 
         public virtual IList<Projekat> Projekti { get; set; }
 

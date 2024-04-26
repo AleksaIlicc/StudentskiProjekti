@@ -6,8 +6,7 @@
 		{
 			Table("UCESTVUJE");
 
-			// TO DO, ALTER TABLE, IZMENITI TRENUTNI PK, DODATI ID ZA PK, NAPRAVITI SEKVENCU
-			Id(x => x.Id, "ID").GeneratedBy.SequenceIdentity("S16323.SEFUJE_ID_SEQ");
+			Id(x => x.Id, "ID").GeneratedBy.SequenceIdentity("UCESTVUJE_ID_SEQ");
 
 			Map(x => x.DatumPocetkaIzrade, "DATUM_POCETKA_IZRADE");
 			Map(x => x.DatumZavrsetka, "DATUM_ZAVRSETKA");

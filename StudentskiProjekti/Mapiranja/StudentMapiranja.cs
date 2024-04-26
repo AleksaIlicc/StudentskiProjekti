@@ -14,6 +14,7 @@
             Map(x => x.Smer, "SMER");
 
 			HasMany(x => x.UcestvujeProjekti).KeyColumn("STUDENT_ID").Cascade.All().Inverse();
+			HasMany(x => x.PredaoIzvestaji).KeyColumn("STUDENT_ID").Cascade.All().Inverse();
 		}
     }
 }
