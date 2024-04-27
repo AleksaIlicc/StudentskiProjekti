@@ -1,5 +1,6 @@
-﻿namespace StudentskiProjekti.Forme;
+﻿using static StudentskiProjekti.DTOs;
 
+namespace StudentskiProjekti.Forme;
 public partial class Predmeti : Form
 {
     public Predmeti()
@@ -8,14 +9,14 @@ public partial class Predmeti : Form
     }
     private void Predmeti_Load(object sender, EventArgs e)
     {
-        popuniPodacima();
+        PopuniPodacima();
     }
 
-    public void popuniPodacima()
+    public void PopuniPodacima()
     {
 
         Predmeti_ListV.Items.Clear();
-        List<PredmetPregled> predmeti = DTOManager.vratiSvePredmete();
+        List<PredmetPregled> predmeti = DTOManager.VratiSvePredmete();
         predmeti = predmeti.OrderBy(p => p.Naziv).ToList();
 
         foreach (PredmetPregled p in predmeti)
@@ -33,7 +34,7 @@ public partial class Predmeti : Form
             StartPosition = FormStartPosition.CenterParent
         };
         dodajPredmet.ShowDialog();
-        this.popuniPodacima();
+        this.PopuniPodacima();
     }
     private void IzmeniPredmet_Btn_Click(object sender, EventArgs e)
     {
@@ -45,7 +46,7 @@ public partial class Predmeti : Form
         else
         {
             string idPredmeta = Predmeti_ListV.SelectedItems[0].SubItems[0].Text;
-            PredmetPregled ob = DTOManager.vratiPredmet(idPredmeta);
+            PredmetPregled ob = DTOManager.VratiPredmet(idPredmeta);
 
             IzmeniPredmet formaUpdate = new IzmeniPredmet(ob)
             {
@@ -54,7 +55,7 @@ public partial class Predmeti : Form
 
             formaUpdate.ShowDialog();
 
-            this.popuniPodacima();
+            this.PopuniPodacima();
         }
     }
 
@@ -74,9 +75,9 @@ public partial class Predmeti : Form
 
         if (result == DialogResult.OK)
         {
-            DTOManager.obrisiPredmet(idPredmeta);
+			DTOManager.ObrisiPredmet(idPredmeta);
             MessageBox.Show("Brisanje predmeta je uspesno obavljeno!");
-            this.popuniPodacima();
+            this.PopuniPodacima();
         }
         else
         {

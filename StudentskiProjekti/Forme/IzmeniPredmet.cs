@@ -1,9 +1,10 @@
-﻿namespace StudentskiProjekti.Forme;
+﻿using static StudentskiProjekti.DTOs;
 
+namespace StudentskiProjekti.Forme;
 public partial class IzmeniPredmet : Form
 {
-
     public PredmetPregled predmet = new PredmetPregled();
+
     public IzmeniPredmet()
     {
         InitializeComponent();
@@ -17,11 +18,11 @@ public partial class IzmeniPredmet : Form
 
     private void IzmeniPredmet_Load(object sender, EventArgs e)
     {
-        popuniPodacima();
+        PopuniPodacima();
         this.Text = $"Azuriranje predmeta {predmet.Naziv}";
     }
 
-    public void popuniPodacima()
+    public void PopuniPodacima()
     {
         Sifra_TB.Text = this.predmet.Id;
         Naziv_TB.Text = this.predmet.Naziv;
@@ -38,7 +39,7 @@ public partial class IzmeniPredmet : Form
         if (result == DialogResult.OK)
         {
 
-            if (DTOManager.vratiPredmet(Sifra_TB.Text) == null || DTOManager.vratiPredmet(Sifra_TB.Text).Id == this.predmet.Id)
+            if (DTOManager.VratiPredmet(Sifra_TB.Text) == null || DTOManager.VratiPredmet(Sifra_TB.Text).Id == this.predmet.Id)
             {
                 this.predmet.Id = Sifra_TB.Text;
                 this.predmet.Naziv = Naziv_TB.Text;
@@ -46,7 +47,7 @@ public partial class IzmeniPredmet : Form
                 this.predmet.Semestar = int.TryParse(Semestar_TB.Text, out int semestar) ? semestar : 0;
 
 
-                DTOManager.azurirajPredmet(this.predmet);
+                DTOManager.AzurirajPredmet(this.predmet);
                 MessageBox.Show("Azuriranje predmeta je uspesno izvrseno!");
                 this.Close();
             }

@@ -12,5 +12,4 @@ global using FluentNHibernate.Cfg;
 global using FluentNHibernate.Cfg.Db;
 global using System.Configuration;
 global using System.Windows.Forms;
-global using static StudentskiProjekti.DTOs;
 

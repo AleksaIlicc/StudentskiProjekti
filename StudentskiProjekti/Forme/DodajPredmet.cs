@@ -1,14 +1,16 @@
-﻿namespace StudentskiProjekti.Forme
+﻿using static StudentskiProjekti.DTOs;
+namespace StudentskiProjekti.Forme
 {
     public partial class DodajPredmet : Form
     {
-
         PredmetPregled predmet = new PredmetPregled();
+
         public DodajPredmet()
         {
             InitializeComponent();
         }
-        private void button1_Click(object sender, EventArgs e)
+
+        private void Dodaj_Btn_Click(object sender, EventArgs e)
         {
             string poruka = "Da li zelite da dodate novi predmet?";
             string title = "Pitanje";
@@ -23,7 +25,7 @@
                 this.predmet.Katedra = Katedra_TB.Text;
 
 
-                DTOManager.dodajPredmet(this.predmet);
+                DTOManager.DodajPredmet(this.predmet);
                 MessageBox.Show("Uspesno ste dodali novi predmet!");
                 this.Close();
             }

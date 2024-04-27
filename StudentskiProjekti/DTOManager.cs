@@ -1,8 +1,9 @@
-﻿namespace StudentskiProjekti;
+﻿using static StudentskiProjekti.DTOs;
 
+namespace StudentskiProjekti;
 public class DTOManager
 {
-    public static List<PredmetPregled> vratiSvePredmete()
+    public static List<PredmetPregled> VratiSvePredmete()
     {
         List<PredmetPregled> predmeti = new List<PredmetPregled>();
         try
@@ -13,7 +14,6 @@ public class DTOManager
 
             foreach (Predmet p in sviPredmeti)
             {
-
                 predmeti.Add(new PredmetPregled(p.Id, p.Naziv, p.Semestar, p.Katedra));
             }
 
@@ -27,19 +27,19 @@ public class DTOManager
         return predmeti;
     }
 
-    public static void dodajPredmet(PredmetPregled p)
+    public static void DodajPredmet(PredmetPregled p)
     {
         try
         {
             ISession s = DataLayer.GetSession();
 
-            Predmet o = new Predmet();
-
-            o.Id = p.Id;
-            o.Naziv = p.Naziv;
-            o.Katedra = p.Katedra;
-            o.Semestar = p.Semestar;
-
+            Predmet o = new Predmet()
+            {
+				Id = p.Id,
+			    Naziv = p.Naziv,
+			    Katedra = p.Katedra,
+			    Semestar = p.Semestar
+		    };
 
             s.SaveOrUpdate(o);
 
@@ -52,7 +52,7 @@ public class DTOManager
             Console.WriteLine(ec.Message);
         }
     }
-    public static void obrisiPredmet(string id)
+    public static void ObrisiPredmet(string id)
     {
         try
         {
@@ -70,7 +70,7 @@ public class DTOManager
             Console.WriteLine(ec.Message);
         }
     }
-    public static PredmetPregled azurirajPredmet(PredmetPregled p)
+    public static PredmetPregled AzurirajPredmet(PredmetPregled p)
     {
         try
         {
@@ -96,7 +96,7 @@ public class DTOManager
         return p;
     }
 
-    public static PredmetPregled vratiPredmet(string id)
+    public static PredmetPregled VratiPredmet(string id)
     {
         PredmetPregled pb = new PredmetPregled();
         try
