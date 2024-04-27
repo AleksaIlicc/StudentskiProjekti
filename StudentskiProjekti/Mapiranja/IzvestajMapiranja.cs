@@ -1,16 +1,14 @@
-﻿namespace StudentskiProjekti.Mapiranja
+﻿namespace StudentskiProjekti.Mapiranja;
+public class IzvestajMapiranja : ClassMap<Izvestaj>
 {
-    public class IzvestajMapiranja : ClassMap<Izvestaj>
+    public IzvestajMapiranja()
     {
-        public IzvestajMapiranja()
-        {
-            Table("IZVESTAJ");
+        Table("IZVESTAJ");
 
-            Id(x => x.Id, "ID");
-            Map(x => x.Opis, "OPIS");
-            Map(x => x.DatumPredaje, "DATUM_PREDAJE");
+        Id(x => x.Id, "ID").GeneratedBy.SequenceIdentity("IZVESTAJ_ID_SEQ");
+        Map(x => x.Opis, "OPIS");
+        Map(x => x.DatumPredaje, "DATUM_PREDAJE");
 
-            HasMany(x => x.PredaoIzvestaji).KeyColumn("IZVESTAJ_ID").Cascade.All().Inverse();
-        }
+        HasMany(x => x.PredaoIzvestaji).KeyColumn("IZVESTAJ_ID").Cascade.All().Inverse();
     }
 }
