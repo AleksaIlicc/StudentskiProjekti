@@ -30,10 +30,10 @@
         {
             OsnovnipodaciopredmetuGB = new GroupBox();
             button1 = new Button();
-            textBox4 = new TextBox();
-            textBox3 = new TextBox();
-            textBox2 = new TextBox();
-            textBox1 = new TextBox();
+            Katedra_TB = new TextBox();
+            Naziv_TB = new TextBox();
+            Sifra_TB = new TextBox();
+            Semestar_TB = new TextBox();
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
@@ -44,10 +44,10 @@
             // OsnovnipodaciopredmetuGB
             // 
             OsnovnipodaciopredmetuGB.Controls.Add(button1);
-            OsnovnipodaciopredmetuGB.Controls.Add(textBox4);
-            OsnovnipodaciopredmetuGB.Controls.Add(textBox3);
-            OsnovnipodaciopredmetuGB.Controls.Add(textBox2);
-            OsnovnipodaciopredmetuGB.Controls.Add(textBox1);
+            OsnovnipodaciopredmetuGB.Controls.Add(Katedra_TB);
+            OsnovnipodaciopredmetuGB.Controls.Add(Naziv_TB);
+            OsnovnipodaciopredmetuGB.Controls.Add(Sifra_TB);
+            OsnovnipodaciopredmetuGB.Controls.Add(Semestar_TB);
             OsnovnipodaciopredmetuGB.Controls.Add(label4);
             OsnovnipodaciopredmetuGB.Controls.Add(label3);
             OsnovnipodaciopredmetuGB.Controls.Add(label2);
@@ -69,34 +69,35 @@
             button1.TabIndex = 8;
             button1.Text = "Dodaj";
             button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
-            // textBox4
+            // Katedra_TB
             // 
-            textBox4.Location = new System.Drawing.Point(88, 130);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new System.Drawing.Size(217, 25);
-            textBox4.TabIndex = 7;
+            Katedra_TB.Location = new System.Drawing.Point(88, 130);
+            Katedra_TB.Name = "Katedra_TB";
+            Katedra_TB.Size = new System.Drawing.Size(217, 25);
+            Katedra_TB.TabIndex = 7;
             // 
-            // textBox3
+            // Naziv_TB
             // 
-            textBox3.Location = new System.Drawing.Point(88, 68);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new System.Drawing.Size(217, 25);
-            textBox3.TabIndex = 6;
+            Naziv_TB.Location = new System.Drawing.Point(88, 68);
+            Naziv_TB.Name = "Naziv_TB";
+            Naziv_TB.Size = new System.Drawing.Size(217, 25);
+            Naziv_TB.TabIndex = 6;
             // 
-            // textBox2
+            // Sifra_TB
             // 
-            textBox2.Location = new System.Drawing.Point(88, 37);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new System.Drawing.Size(217, 25);
-            textBox2.TabIndex = 5;
+            Sifra_TB.Location = new System.Drawing.Point(88, 37);
+            Sifra_TB.Name = "Sifra_TB";
+            Sifra_TB.Size = new System.Drawing.Size(217, 25);
+            Sifra_TB.TabIndex = 5;
             // 
-            // textBox1
+            // Semestar_TB
             // 
-            textBox1.Location = new System.Drawing.Point(88, 99);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(217, 25);
-            textBox1.TabIndex = 4;
+            Semestar_TB.Location = new System.Drawing.Point(88, 99);
+            Semestar_TB.Name = "Semestar_TB";
+            Semestar_TB.Size = new System.Drawing.Size(217, 25);
+            Semestar_TB.TabIndex = 4;
             // 
             // label4
             // 
@@ -162,10 +163,10 @@
         private Label label3;
         private Label label2;
         private Label label1;
-        private TextBox textBox4;
-        private TextBox textBox3;
-        private TextBox textBox2;
-        private TextBox textBox1;
+        private TextBox Katedra_TB;
+        private TextBox Naziv_TB;
+        private TextBox Sifra_TB;
+        private TextBox Semestar_TB;
         private Button button1;
     }
 }

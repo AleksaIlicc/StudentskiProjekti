@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Predmeti));
-            ObrisiPredmetBtn = new Button();
+            ObrisiPredmet_Btn = new Button();
             PredmetiGB = new GroupBox();
             Predmeti_ListV = new ListView();
             columnHeader1 = new ColumnHeader();
@@ -37,32 +37,32 @@
             columnHeader3 = new ColumnHeader();
             columnHeader4 = new ColumnHeader();
             Podaci_o_predmetimaGB = new GroupBox();
-            IzmeniPredmetBtn = new Button();
-            DodajPredmetBtn = new Button();
+            IzmeniPredmet_Btn = new Button();
+            DodajPredmet_Btn = new Button();
             PrikazPredmeta_GB = new GroupBox();
-            Sortiraj = new Button();
+            Sortiraj_Btn = new Button();
             label2 = new Label();
             label1 = new Label();
             textBox2 = new TextBox();
             textBox1 = new TextBox();
             label3 = new Label();
-            button1 = new Button();
+            Prikazi_Btn = new Button();
             PredmetiGB.SuspendLayout();
             Podaci_o_predmetimaGB.SuspendLayout();
             PrikazPredmeta_GB.SuspendLayout();
             SuspendLayout();
             // 
-            // ObrisiPredmetBtn
+            // ObrisiPredmet_Btn
             // 
-            ObrisiPredmetBtn.BackColor = System.Drawing.Color.AntiqueWhite;
-            ObrisiPredmetBtn.Font = new System.Drawing.Font("Georgia", 9F);
-            ObrisiPredmetBtn.Location = new System.Drawing.Point(34, 112);
-            ObrisiPredmetBtn.Name = "ObrisiPredmetBtn";
-            ObrisiPredmetBtn.Size = new System.Drawing.Size(132, 33);
-            ObrisiPredmetBtn.TabIndex = 1;
-            ObrisiPredmetBtn.Text = "Obrisi Predmet";
-            ObrisiPredmetBtn.UseVisualStyleBackColor = false;
-            ObrisiPredmetBtn.Click += ObrisiPredmetBtn_Click;
+            ObrisiPredmet_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
+            ObrisiPredmet_Btn.Font = new System.Drawing.Font("Georgia", 9F);
+            ObrisiPredmet_Btn.Location = new System.Drawing.Point(34, 112);
+            ObrisiPredmet_Btn.Name = "ObrisiPredmet_Btn";
+            ObrisiPredmet_Btn.Size = new System.Drawing.Size(132, 33);
+            ObrisiPredmet_Btn.TabIndex = 1;
+            ObrisiPredmet_Btn.Text = "Obrisi Predmet";
+            ObrisiPredmet_Btn.UseVisualStyleBackColor = false;
+            ObrisiPredmet_Btn.Click += ObrisiPredmet_Btn_Click;
             // 
             // PredmetiGB
             // 
@@ -112,9 +112,9 @@
             // 
             // Podaci_o_predmetimaGB
             // 
-            Podaci_o_predmetimaGB.Controls.Add(IzmeniPredmetBtn);
-            Podaci_o_predmetimaGB.Controls.Add(DodajPredmetBtn);
-            Podaci_o_predmetimaGB.Controls.Add(ObrisiPredmetBtn);
+            Podaci_o_predmetimaGB.Controls.Add(IzmeniPredmet_Btn);
+            Podaci_o_predmetimaGB.Controls.Add(DodajPredmet_Btn);
+            Podaci_o_predmetimaGB.Controls.Add(ObrisiPredmet_Btn);
             Podaci_o_predmetimaGB.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             Podaci_o_predmetimaGB.Location = new System.Drawing.Point(30, 356);
             Podaci_o_predmetimaGB.Name = "Podaci_o_predmetimaGB";
@@ -123,33 +123,33 @@
             Podaci_o_predmetimaGB.TabStop = false;
             Podaci_o_predmetimaGB.Text = "Izmeni";
             // 
-            // IzmeniPredmetBtn
+            // IzmeniPredmet_Btn
             // 
-            IzmeniPredmetBtn.BackColor = System.Drawing.Color.AntiqueWhite;
-            IzmeniPredmetBtn.Font = new System.Drawing.Font("Georgia", 9F);
-            IzmeniPredmetBtn.Location = new System.Drawing.Point(34, 67);
-            IzmeniPredmetBtn.Name = "IzmeniPredmetBtn";
-            IzmeniPredmetBtn.Size = new System.Drawing.Size(132, 33);
-            IzmeniPredmetBtn.TabIndex = 3;
-            IzmeniPredmetBtn.Text = "Izmeni Predmet";
-            IzmeniPredmetBtn.UseVisualStyleBackColor = false;
-            IzmeniPredmetBtn.Click += IzmeniPredmetBtn_Click;
+            IzmeniPredmet_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
+            IzmeniPredmet_Btn.Font = new System.Drawing.Font("Georgia", 9F);
+            IzmeniPredmet_Btn.Location = new System.Drawing.Point(34, 69);
+            IzmeniPredmet_Btn.Name = "IzmeniPredmet_Btn";
+            IzmeniPredmet_Btn.Size = new System.Drawing.Size(132, 33);
+            IzmeniPredmet_Btn.TabIndex = 3;
+            IzmeniPredmet_Btn.Text = "Izmeni Predmet";
+            IzmeniPredmet_Btn.UseVisualStyleBackColor = false;
+            IzmeniPredmet_Btn.Click += IzmeniPredmet_Btn_Click;
             // 
-            // DodajPredmetBtn
+            // DodajPredmet_Btn
             // 
-            DodajPredmetBtn.BackColor = System.Drawing.Color.AntiqueWhite;
-            DodajPredmetBtn.Font = new System.Drawing.Font("Georgia", 9F);
-            DodajPredmetBtn.Location = new System.Drawing.Point(34, 26);
-            DodajPredmetBtn.Name = "DodajPredmetBtn";
-            DodajPredmetBtn.Size = new System.Drawing.Size(132, 33);
-            DodajPredmetBtn.TabIndex = 2;
-            DodajPredmetBtn.Text = "Dodaj Predmet";
-            DodajPredmetBtn.UseVisualStyleBackColor = false;
-            DodajPredmetBtn.Click += DodajPredmet_Btn_Click;
+            DodajPredmet_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
+            DodajPredmet_Btn.Font = new System.Drawing.Font("Georgia", 9F);
+            DodajPredmet_Btn.Location = new System.Drawing.Point(34, 26);
+            DodajPredmet_Btn.Name = "DodajPredmet_Btn";
+            DodajPredmet_Btn.Size = new System.Drawing.Size(132, 33);
+            DodajPredmet_Btn.TabIndex = 2;
+            DodajPredmet_Btn.Text = "Dodaj Predmet";
+            DodajPredmet_Btn.UseVisualStyleBackColor = false;
+            DodajPredmet_Btn.Click += DodajPredmet_Btn_Click;
             // 
             // PrikazPredmeta_GB
             // 
-            PrikazPredmeta_GB.Controls.Add(Sortiraj);
+            PrikazPredmeta_GB.Controls.Add(Sortiraj_Btn);
             PrikazPredmeta_GB.Controls.Add(label2);
             PrikazPredmeta_GB.Controls.Add(label1);
             PrikazPredmeta_GB.Controls.Add(textBox2);
@@ -161,23 +161,23 @@
             PrikazPredmeta_GB.TabStop = false;
             PrikazPredmeta_GB.Text = "Prikaz";
             // 
-            // Sortiraj
+            // Sortiraj_Btn
             // 
-            Sortiraj.BackColor = System.Drawing.Color.AntiqueWhite;
-            Sortiraj.Font = new System.Drawing.Font("Georgia", 9F);
-            Sortiraj.Location = new System.Drawing.Point(208, 121);
-            Sortiraj.Name = "Sortiraj";
-            Sortiraj.Size = new System.Drawing.Size(60, 23);
-            Sortiraj.TabIndex = 6;
-            Sortiraj.Text = "Sortiraj";
-            Sortiraj.UseVisualStyleBackColor = false;
+            Sortiraj_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
+            Sortiraj_Btn.Font = new System.Drawing.Font("Georgia", 9F);
+            Sortiraj_Btn.Location = new System.Drawing.Point(208, 121);
+            Sortiraj_Btn.Name = "Sortiraj_Btn";
+            Sortiraj_Btn.Size = new System.Drawing.Size(60, 23);
+            Sortiraj_Btn.TabIndex = 6;
+            Sortiraj_Btn.Text = "Sortiraj";
+            Sortiraj_Btn.UseVisualStyleBackColor = false;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Location = new System.Drawing.Point(18, 85);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(156, 18);
+            label2.Size = new System.Drawing.Size(136, 15);
             label2.TabIndex = 3;
             label2.Text = "Unesite naziv katedre:";
             // 
@@ -186,7 +186,7 @@
             label1.AutoSize = true;
             label1.Location = new System.Drawing.Point(18, 35);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(126, 18);
+            label1.Size = new System.Drawing.Size(109, 15);
             label1.TabIndex = 2;
             label1.Text = "Unesite semestar:";
             // 
@@ -194,14 +194,14 @@
             // 
             textBox2.Location = new System.Drawing.Point(160, 32);
             textBox2.Name = "textBox2";
-            textBox2.Size = new System.Drawing.Size(108, 25);
+            textBox2.Size = new System.Drawing.Size(108, 21);
             textBox2.TabIndex = 1;
             // 
             // textBox1
             // 
             textBox1.Location = new System.Drawing.Point(160, 82);
             textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(108, 25);
+            textBox1.Size = new System.Drawing.Size(108, 21);
             textBox1.TabIndex = 0;
             // 
             // label3
@@ -210,28 +210,28 @@
             label3.Font = new System.Drawing.Font("Georgia", 8F);
             label3.Location = new System.Drawing.Point(576, 449);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(156, 17);
+            label3.Size = new System.Drawing.Size(145, 14);
             label3.TabIndex = 5;
             label3.Text = "Vise detalja za predmet:";
             // 
-            // button1
+            // Prikazi_Btn
             // 
-            button1.BackColor = System.Drawing.Color.AntiqueWhite;
-            button1.Font = new System.Drawing.Font("Georgia", 14F);
-            button1.ForeColor = System.Drawing.SystemColors.ControlText;
-            button1.Location = new System.Drawing.Point(578, 466);
-            button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(141, 54);
-            button1.TabIndex = 6;
-            button1.Text = "Prikazi";
-            button1.UseVisualStyleBackColor = false;
+            Prikazi_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
+            Prikazi_Btn.Font = new System.Drawing.Font("Georgia", 14F);
+            Prikazi_Btn.ForeColor = System.Drawing.SystemColors.ControlText;
+            Prikazi_Btn.Location = new System.Drawing.Point(578, 466);
+            Prikazi_Btn.Name = "Prikazi_Btn";
+            Prikazi_Btn.Size = new System.Drawing.Size(141, 54);
+            Prikazi_Btn.TabIndex = 6;
+            Prikazi_Btn.Text = "Prikazi";
+            Prikazi_Btn.UseVisualStyleBackColor = false;
             // 
             // Predmeti
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = System.Drawing.Color.Linen;
-            ClientSize = new System.Drawing.Size(754, 552);
-            Controls.Add(button1);
+            ClientSize = new System.Drawing.Size(756, 560);
+            Controls.Add(Prikazi_Btn);
             Controls.Add(label3);
             Controls.Add(PrikazPredmeta_GB);
             Controls.Add(Podaci_o_predmetimaGB);
@@ -254,20 +254,20 @@
         }
 
         #endregion
-        private Button ObrisiPredmetBtn;
+        private Button ObrisiPredmet_Btn;
         private GroupBox PredmetiGB;
         private GroupBox Podaci_o_predmetimaGB;
-        private Button IzmeniPredmetBtn;
-        private Button DodajPredmetBtn;
+        private Button IzmeniPredmet_Btn;
+        private Button DodajPredmet_Btn;
         private ListView Predmeti_ListV;
 		private GroupBox PrikazPredmeta_GB;
 		private Label label2;
 		private Label label1;
 		private TextBox textBox2;
 		private TextBox textBox1;
-		private Button Sortiraj;
+		private Button Sortiraj_Btn;
 		private Label label3;
-		private Button button1;
+		private Button Prikazi_Btn;
         private ColumnHeader columnHeader1;
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader3;
