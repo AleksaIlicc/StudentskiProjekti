@@ -75,7 +75,7 @@ public partial class Predmeti : Form
 
         if (result == DialogResult.OK)
         {
-			DTOManager.ObrisiPredmet(idPredmeta);
+            DTOManager.ObrisiPredmet(idPredmeta);
             MessageBox.Show("Brisanje predmeta je uspesno obavljeno!");
             this.PopuniPodacima();
         }
@@ -85,5 +85,53 @@ public partial class Predmeti : Form
         }
     }
 
+    private void Sortiraj_Btn_Click(object sender, EventArgs e)
+    {
+        string semestarFilter = SemestarPrikaz_TB.Text;
+        string katedraFilter = UnesiteNazivKatedre_TB.Text;
+
+        if (string.IsNullOrEmpty(semestarFilter) && string.IsNullOrEmpty(katedraFilter))
+        {
+            MessageBox.Show("Morate uneti vrednost za semestar ili katedru prema kojoj sortirate");
+            return;
+        }
+
+        List<PredmetPregled> filtriraniPredmeti = DTOManager.VratiSvePredmete().Where(p =>
+            (p.Semestar.ToString() == semestarFilter) &&
+            (p.Katedra.StartsWith(katedraFilter, StringComparison.OrdinalIgnoreCase))
+        ).ToList();
+
+        Predmeti_ListV.Items.Clear();
+
+        foreach (PredmetPregled p in filtriraniPredmeti)
+        {
+            ListViewItem item = new ListViewItem(new string[] { p.Id.ToString(), p.Naziv, p.Semestar.ToString(), p.Katedra });
+            Predmeti_ListV.Items.Add(item);
+        }
+    }
+
+    private void Ocisti_Btn_Click(object sender, EventArgs e)
+    {
+        SemestarPrikaz_TB.Clear();
+        UnesiteNazivKatedre_TB.Clear();
+        PopuniPodacima();
+    }
+
+    private void SemestarPrikaz_TB_KeyPress(object sender, KeyPressEventArgs e)
+    {
+        if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+        {
+            e.Handled = true;
+        }
+    }
+
+    private void Prikazi_Btn_Click(object sender, EventArgs e)
+    {
+        Projekti projekti = new Projekti()
+        {
+            StartPosition = FormStartPosition.CenterParent
+        };
+        projekti.ShowDialog();
+    }
 }
 

@@ -9,6 +9,6 @@ public class PProjektiWebStraniceMapiranja : ClassMap<PProjektiWebStranice>
 
 		Map(x => x.PreporucenaWebStrana, "PREP_WEB_STRANA");
 
-		References(x => x.PProjekat).Column("PREP_WEB_STRANA");
+		References(x => x.PProjekat).Column("PPROJ_ID");
 	}
 }
