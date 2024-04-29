@@ -7,10 +7,9 @@ public class ProjekatMapiranja : ClassMap<Projekat>
 
         Id(x => x.Id, "ID").GeneratedBy.SequenceIdentity("PROJEKAT_ID_SEQ");
 
-        DiscriminateSubClassesOnColumn("VRSTA_PROJEKTA");
-
         Map(x => x.TipProjekta, "TIP_PROJEKTA");
-        Map(x => x.Naziv, "NAZIV");
+		Map(x => x.VrstaProjekta, "VRSTA_PROJEKTA");
+		Map(x => x.Naziv, "NAZIV");
         Map(x => x.SkolskaGodinaZadavanja, "SKOLSKA_GODINA_ZADAVANJA");
 
         References(x => x.PripadaPredmetu).Column("S_PREDMETA").LazyLoad();

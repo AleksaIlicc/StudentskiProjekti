@@ -5,7 +5,7 @@ public class PrakticniProjekatMapiranja : SubclassMap<PrakticniProjekat>
     {
         Table("PRAKTICNI_PROJEKAT");
 
-        DiscriminatorValue("prakticni");
+        KeyColumn("ID");
 
         Map(x => x.KratakOpis, "KRATAK_OPIS");
         Map(x => x.PreporuceniProgramskiJezik, "PREPORUCENI_PROGRAMSKI_JEZIK");
