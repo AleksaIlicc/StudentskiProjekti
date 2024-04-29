@@ -15,4 +15,13 @@ public partial class StudentskiProjekti : Form
 		};
 		predmeti.ShowDialog(this);
 	}
+
+	private void Studenti_Btn_Click(object sender, EventArgs e)
+	{
+		Studenti studenti = new Studenti
+		{
+			StartPosition = FormStartPosition.CenterParent,
+		};
+		studenti.ShowDialog(this);
+	}
 }

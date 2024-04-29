@@ -6,8 +6,9 @@ public abstract class Projekat
     public required virtual string TipProjekta { get; set; }
     public required virtual string Naziv { get; set; }
     public required virtual string SkolskaGodinaZadavanja { get; set; }
+	public required virtual string VrstaProjekta { get; set; }
 
-    public required virtual Predmet PripadaPredmetu { get; set; }
+	public required virtual Predmet PripadaPredmetu { get; set; }
 	public virtual IList<Ucestvuje> UcestvujeStudenti { get; set; }
     public virtual IList<Predao> PredaoIzvestaji { get; set; }
 

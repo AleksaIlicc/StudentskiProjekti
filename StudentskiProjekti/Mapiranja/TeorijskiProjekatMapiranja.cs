@@ -5,8 +5,8 @@ public class TeorijskiProjekatMapiranja : SubclassMap<TeorijskiProjekat>
     {
         Table("TEORIJSKI_PROJEKAT");
 
-		DiscriminatorValue("teorijski");
+		KeyColumn("ID");
 
-        Map(x => x.MaksBrojStrana, "MAKS_BROJ_STRANA");
+		Map(x => x.MaksBrojStrana, "MAKS_BROJ_STRANA");
     }
 }
