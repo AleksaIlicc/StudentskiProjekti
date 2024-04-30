@@ -1,4 +1,6 @@
-﻿using static StudentskiProjekti.DTOs;
+﻿using NHibernate.Linq;
+using StudentskiProjekti.Entiteti;
+using static StudentskiProjekti.DTOs;
 
 namespace StudentskiProjekti;
 public class DTOManager
@@ -332,7 +334,38 @@ public class DTOManager
 
         return projekti;
     }
+    public static IList<ProjekatPregled> VratiProjekteZaPredmetSorted(string idPredmeta , string vrstaProjekta , string tipProjekta , string skolskaGodina)
+    {
+        IList<ProjekatPregled> projektiFinal = new List<ProjekatPregled>();
+        try
+        {
+            ISession s = DataLayer.GetSession();
 
+
+            IList<Projekat> projekti = s.Query<Predmet>()
+                .Where(p => p.Id == idPredmeta)
+                .SelectMany(p => p.Projekti)
+                .Where(pr => (string.IsNullOrEmpty(vrstaProjekta) || pr.VrstaProjekta == vrstaProjekta) &&
+                                 (string.IsNullOrEmpty(tipProjekta) || pr.TipProjekta == tipProjekta) &&
+                                 (string.IsNullOrEmpty(skolskaGodina) || pr.SkolskaGodinaZadavanja == skolskaGodina))
+                .OrderBy(pr => pr.SkolskaGodinaZadavanja)
+                .ToList();
+
+
+            foreach (Projekat p in projekti)
+            {
+                projektiFinal.Add(new ProjekatPregled(p.Naziv, p.SkolskaGodinaZadavanja, p.VrstaProjekta, p.TipProjekta));
+            }
+
+            s.Close();
+        }
+        catch (Exception ec)
+        {
+            Console.WriteLine(ec);
+        }
+
+        return projektiFinal;
+    }
 
 
     #endregion
