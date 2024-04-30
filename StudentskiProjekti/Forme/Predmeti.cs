@@ -122,7 +122,16 @@ public partial class Predmeti : Form
 
     private void Prikazi_Btn_Click(object sender, EventArgs e)
     {
-        Projekti projekti = new Projekti()
+        if (Predmeti_ListV.SelectedItems.Count == 0)
+        {
+            MessageBox.Show("Izaberite predmet za koji zelite da vidite vise detalja!");
+            return;
+        }
+
+        string idPredmeta = Predmeti_ListV.SelectedItems[0].SubItems[0].Text;
+        PredmetPregled izabraniPredmet = DTOManager.VratiPredmet(idPredmeta);
+
+        Projekti projekti = new Projekti(izabraniPredmet)
         {
             StartPosition = FormStartPosition.CenterParent
         };

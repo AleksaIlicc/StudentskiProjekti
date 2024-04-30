@@ -82,6 +82,7 @@
             Predmeti_ListV.FullRowSelect = true;
             Predmeti_ListV.GridLines = true;
             Predmeti_ListV.Location = new System.Drawing.Point(7, 48);
+            Predmeti_ListV.MultiSelect = false;
             Predmeti_ListV.Name = "Predmeti_ListV";
             Predmeti_ListV.Size = new System.Drawing.Size(723, 269);
             Predmeti_ListV.TabIndex = 0;
@@ -192,7 +193,7 @@
             label2.AutoSize = true;
             label2.Location = new System.Drawing.Point(18, 85);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(136, 15);
+            label2.Size = new System.Drawing.Size(156, 18);
             label2.TabIndex = 3;
             label2.Text = "Unesite naziv katedre:";
             // 
@@ -201,7 +202,7 @@
             label1.AutoSize = true;
             label1.Location = new System.Drawing.Point(18, 35);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(109, 15);
+            label1.Size = new System.Drawing.Size(126, 18);
             label1.TabIndex = 4;
             label1.Text = "Unesite semestar:";
             // 
@@ -209,7 +210,7 @@
             // 
             SemestarPrikaz_TB.Location = new System.Drawing.Point(160, 32);
             SemestarPrikaz_TB.Name = "SemestarPrikaz_TB";
-            SemestarPrikaz_TB.Size = new System.Drawing.Size(108, 21);
+            SemestarPrikaz_TB.Size = new System.Drawing.Size(108, 25);
             SemestarPrikaz_TB.TabIndex = 1;
             SemestarPrikaz_TB.KeyPress += SemestarPrikaz_TB_KeyPress;
             // 
@@ -217,7 +218,7 @@
             // 
             UnesiteNazivKatedre_TB.Location = new System.Drawing.Point(160, 82);
             UnesiteNazivKatedre_TB.Name = "UnesiteNazivKatedre_TB";
-            UnesiteNazivKatedre_TB.Size = new System.Drawing.Size(108, 21);
+            UnesiteNazivKatedre_TB.Size = new System.Drawing.Size(108, 25);
             UnesiteNazivKatedre_TB.TabIndex = 2;
             // 
             // label3
@@ -226,7 +227,7 @@
             label3.Font = new System.Drawing.Font("Georgia", 8F);
             label3.Location = new System.Drawing.Point(576, 449);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(145, 14);
+            label3.Size = new System.Drawing.Size(156, 17);
             label3.TabIndex = 5;
             label3.Text = "Vise detalja za predmet:";
             // 
@@ -247,7 +248,7 @@
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = System.Drawing.Color.Linen;
-            ClientSize = new System.Drawing.Size(756, 560);
+            ClientSize = new System.Drawing.Size(754, 552);
             Controls.Add(Prikazi_Btn);
             Controls.Add(label3);
             Controls.Add(PrikazPredmeta_GB);
