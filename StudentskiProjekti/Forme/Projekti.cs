@@ -49,12 +49,7 @@ public partial class Projekti : Form
         string tipProjekta = Grupni_RB.Checked ? "grupni" : Pojedinacni_RB.Checked ? "pojedinacni" : "";
         string skolskaGodina = SkoslkaGodZad_TB.Text;
 
-        IList<ProjekatPregled> projekti = DTOManager.VratiProjekteZaPredmet(izabraniPredmet.Id)
-            .Where(p => (string.IsNullOrEmpty(vrstaProjekta) || p.VrstaProjekta == vrstaProjekta) &&
-                        (string.IsNullOrEmpty(tipProjekta) || p.TipProjekta == tipProjekta) &&
-                        (string.IsNullOrEmpty(skolskaGodina) || p.SkolskaGodinaZadavanja == skolskaGodina))
-            .OrderBy(p => p.SkolskaGodinaZadavanja)
-            .ToList();
+         IList<ProjekatPregled> projekti = DTOManager.VratiProjekteZaPredmetSorted(izabraniPredmet.Id, vrstaProjekta , tipProjekta , skolskaGodina);
 
         Projekti_ListV.Items.Clear();
         foreach (ProjekatPregled p in projekti)
@@ -75,5 +70,23 @@ public partial class Projekti : Form
         Pojedinacni_RB.Checked = false;
         SkoslkaGodZad_TB.Text = "";
         PopuniPodacima();
+    }
+
+    private void PrikazPrakticni_Btn_Click(object sender, EventArgs e)
+    {
+        PrakticniProjekti prakticniProjekti = new PrakticniProjekti()
+        {
+            StartPosition = FormStartPosition.CenterParent
+        };
+        prakticniProjekti.ShowDialog();
+    }
+
+    private void PrikazTeorijski_Btn_Click(object sender, EventArgs e)
+    {
+        TeorijskiProjekti teorijskiProjekti = new TeorijskiProjekti()
+        {
+            StartPosition = FormStartPosition.CenterParent
+        };
+        teorijskiProjekti.ShowDialog();
     }
 }

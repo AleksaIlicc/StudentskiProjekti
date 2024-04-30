@@ -187,6 +187,7 @@
             PrikazPrakticni_Btn.TabIndex = 16;
             PrikazPrakticni_Btn.Text = "Prikazi prakticne projekte";
             PrikazPrakticni_Btn.UseVisualStyleBackColor = false;
+            PrikazPrakticni_Btn.Click += PrikazPrakticni_Btn_Click;
             // 
             // PrikazTeorijski_Btn
             // 
@@ -198,6 +199,7 @@
             PrikazTeorijski_Btn.TabIndex = 15;
             PrikazTeorijski_Btn.Text = "Prikazi teorijske projekte";
             PrikazTeorijski_Btn.UseVisualStyleBackColor = false;
+            PrikazTeorijski_Btn.Click += PrikazTeorijski_Btn_Click;
             // 
             // PrikazProjekta_GB
             // 
