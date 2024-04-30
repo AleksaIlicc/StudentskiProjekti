@@ -7,7 +7,7 @@ public class StudentMapiranja : ClassMap<Student>
 
         Id(x => x.BrIndeksa, "BR_INDEKSA").GeneratedBy.Assigned();
 
-        Map(x => x.LIme, "IME"); 
+        Map(x => x.LIme, "LIME"); 
         Map(x => x.ImeRoditelja, "IME_RODITELJA");
         Map(x => x.Prezime, "PREZIME");
         Map(x => x.Smer, "SMER");

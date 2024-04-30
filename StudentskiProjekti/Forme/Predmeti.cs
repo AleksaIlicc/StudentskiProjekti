@@ -14,7 +14,6 @@ public partial class Predmeti : Form
 
     public void PopuniPodacima()
     {
-
         Predmeti_ListV.Items.Clear();
         List<PredmetPregled> predmeti = DTOManager.VratiSvePredmete();
         predmeti = predmeti.OrderBy(p => p.Naziv).ToList();
@@ -34,7 +33,7 @@ public partial class Predmeti : Form
             StartPosition = FormStartPosition.CenterParent
         };
         dodajPredmet.ShowDialog();
-        this.PopuniPodacima();
+        PopuniPodacima();
     }
     private void IzmeniPredmet_Btn_Click(object sender, EventArgs e)
     {
@@ -55,7 +54,7 @@ public partial class Predmeti : Form
 
             formaUpdate.ShowDialog();
 
-            this.PopuniPodacima();
+            PopuniPodacima();
         }
     }
 
@@ -77,11 +76,7 @@ public partial class Predmeti : Form
         {
             DTOManager.ObrisiPredmet(idPredmeta);
             MessageBox.Show("Brisanje predmeta je uspesno obavljeno!");
-            this.PopuniPodacima();
-        }
-        else
-        {
-
+            PopuniPodacima();
         }
     }
 

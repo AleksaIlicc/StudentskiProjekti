@@ -38,9 +38,9 @@ namespace StudentskiProjekti.Forme
 			columnHeader4 = new ColumnHeader();
 			columnHeader5 = new ColumnHeader();
 			Podaci_o_predmetimaGB = new GroupBox();
-			IzmeniPredmet_Btn = new Button();
+			IzmeniStudenta_Btn = new Button();
 			DodajStudenta_Btn = new Button();
-			ObrisiPredmet_Btn = new Button();
+			ObrisiStudenta_Btn = new Button();
 			Studenti_GB.SuspendLayout();
 			Podaci_o_predmetimaGB.SuspendLayout();
 			SuspendLayout();
@@ -99,9 +99,9 @@ namespace StudentskiProjekti.Forme
 			// 
 			// Podaci_o_predmetimaGB
 			// 
-			Podaci_o_predmetimaGB.Controls.Add(IzmeniPredmet_Btn);
+			Podaci_o_predmetimaGB.Controls.Add(IzmeniStudenta_Btn);
 			Podaci_o_predmetimaGB.Controls.Add(DodajStudenta_Btn);
-			Podaci_o_predmetimaGB.Controls.Add(ObrisiPredmet_Btn);
+			Podaci_o_predmetimaGB.Controls.Add(ObrisiStudenta_Btn);
 			Podaci_o_predmetimaGB.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
 			Podaci_o_predmetimaGB.Location = new System.Drawing.Point(30, 364);
 			Podaci_o_predmetimaGB.Name = "Podaci_o_predmetimaGB";
@@ -110,17 +110,17 @@ namespace StudentskiProjekti.Forme
 			Podaci_o_predmetimaGB.TabStop = false;
 			Podaci_o_predmetimaGB.Text = "Izmeni";
 			// 
-			// IzmeniPredmet_Btn
+			// IzmeniStudenta_Btn
 			// 
-			IzmeniPredmet_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
-			IzmeniPredmet_Btn.Font = new System.Drawing.Font("Georgia", 9F);
-			IzmeniPredmet_Btn.Location = new System.Drawing.Point(34, 69);
-			IzmeniPredmet_Btn.Name = "IzmeniPredmet_Btn";
-			IzmeniPredmet_Btn.Size = new System.Drawing.Size(132, 33);
-			IzmeniPredmet_Btn.TabIndex = 3;
-			IzmeniPredmet_Btn.Text = "Izmeni studenta";
-			IzmeniPredmet_Btn.UseVisualStyleBackColor = false;
-			IzmeniPredmet_Btn.Click += IzmeniPredmet_Btn_Click;
+			IzmeniStudenta_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
+			IzmeniStudenta_Btn.Font = new System.Drawing.Font("Georgia", 9F);
+			IzmeniStudenta_Btn.Location = new System.Drawing.Point(34, 69);
+			IzmeniStudenta_Btn.Name = "IzmeniStudenta_Btn";
+			IzmeniStudenta_Btn.Size = new System.Drawing.Size(132, 33);
+			IzmeniStudenta_Btn.TabIndex = 3;
+			IzmeniStudenta_Btn.Text = "Izmeni studenta";
+			IzmeniStudenta_Btn.UseVisualStyleBackColor = false;
+			IzmeniStudenta_Btn.Click += IzmeniStudenta_Btn_Click;
 			// 
 			// DodajStudenta_Btn
 			// 
@@ -134,16 +134,17 @@ namespace StudentskiProjekti.Forme
 			DodajStudenta_Btn.UseVisualStyleBackColor = false;
 			DodajStudenta_Btn.Click += DodajStudenta_Btn_Click;
 			// 
-			// ObrisiPredmet_Btn
+			// ObrisiStudenta_Btn
 			// 
-			ObrisiPredmet_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
-			ObrisiPredmet_Btn.Font = new System.Drawing.Font("Georgia", 9F);
-			ObrisiPredmet_Btn.Location = new System.Drawing.Point(34, 112);
-			ObrisiPredmet_Btn.Name = "ObrisiPredmet_Btn";
-			ObrisiPredmet_Btn.Size = new System.Drawing.Size(132, 33);
-			ObrisiPredmet_Btn.TabIndex = 1;
-			ObrisiPredmet_Btn.Text = "Obrisi studenta";
-			ObrisiPredmet_Btn.UseVisualStyleBackColor = false;
+			ObrisiStudenta_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
+			ObrisiStudenta_Btn.Font = new System.Drawing.Font("Georgia", 9F);
+			ObrisiStudenta_Btn.Location = new System.Drawing.Point(34, 112);
+			ObrisiStudenta_Btn.Name = "ObrisiStudenta_Btn";
+			ObrisiStudenta_Btn.Size = new System.Drawing.Size(132, 33);
+			ObrisiStudenta_Btn.TabIndex = 1;
+			ObrisiStudenta_Btn.Text = "Obrisi studenta";
+			ObrisiStudenta_Btn.UseVisualStyleBackColor = false;
+			ObrisiStudenta_Btn.Click += ObrisiStudenta_Btn_Click_1;
 			// 
 			// Studenti
 			// 
@@ -159,6 +160,7 @@ namespace StudentskiProjekti.Forme
 			MinimumSize = new System.Drawing.Size(772, 599);
 			Name = "Studenti";
 			Text = "Studenti";
+			Load += Studenti_Load;
 			Studenti_GB.ResumeLayout(false);
 			Podaci_o_predmetimaGB.ResumeLayout(false);
 			ResumeLayout(false);
@@ -174,8 +176,8 @@ namespace StudentskiProjekti.Forme
 		private ColumnHeader columnHeader4;
 		private ColumnHeader columnHeader5;
 		private GroupBox Podaci_o_predmetimaGB;
-		private Button IzmeniPredmet_Btn;
+		private Button IzmeniStudenta_Btn;
 		private Button DodajStudenta_Btn;
-		private Button ObrisiPredmet_Btn;
+		private Button ObrisiStudenta_Btn;
 	}
 }

@@ -29,29 +29,29 @@
 		private void InitializeComponent()
 		{
 			OsnovnipodaciopredmetuGB = new GroupBox();
+			Smer_TB = new TextBox();
+			label5 = new Label();
 			Dodaj_Btn = new Button();
-			Katedra_TB = new TextBox();
-			Naziv_TB = new TextBox();
-			Sifra_TB = new TextBox();
-			Semestar_TB = new TextBox();
+			Prezime_TB = new TextBox();
+			Ime_TB = new TextBox();
+			BrIndeksa_TB = new TextBox();
+			ImeRoditelja_TB = new TextBox();
 			label4 = new Label();
 			label3 = new Label();
 			label2 = new Label();
 			label1 = new Label();
-			textBox1 = new TextBox();
-			label5 = new Label();
 			OsnovnipodaciopredmetuGB.SuspendLayout();
 			SuspendLayout();
 			// 
 			// OsnovnipodaciopredmetuGB
 			// 
-			OsnovnipodaciopredmetuGB.Controls.Add(textBox1);
+			OsnovnipodaciopredmetuGB.Controls.Add(Smer_TB);
 			OsnovnipodaciopredmetuGB.Controls.Add(label5);
 			OsnovnipodaciopredmetuGB.Controls.Add(Dodaj_Btn);
-			OsnovnipodaciopredmetuGB.Controls.Add(Katedra_TB);
-			OsnovnipodaciopredmetuGB.Controls.Add(Naziv_TB);
-			OsnovnipodaciopredmetuGB.Controls.Add(Sifra_TB);
-			OsnovnipodaciopredmetuGB.Controls.Add(Semestar_TB);
+			OsnovnipodaciopredmetuGB.Controls.Add(Prezime_TB);
+			OsnovnipodaciopredmetuGB.Controls.Add(Ime_TB);
+			OsnovnipodaciopredmetuGB.Controls.Add(BrIndeksa_TB);
+			OsnovnipodaciopredmetuGB.Controls.Add(ImeRoditelja_TB);
 			OsnovnipodaciopredmetuGB.Controls.Add(label4);
 			OsnovnipodaciopredmetuGB.Controls.Add(label3);
 			OsnovnipodaciopredmetuGB.Controls.Add(label2);
@@ -64,43 +64,64 @@
 			OsnovnipodaciopredmetuGB.TabStop = false;
 			OsnovnipodaciopredmetuGB.Text = "Podaci o studentu";
 			// 
+			// Smer_TB
+			// 
+			Smer_TB.Location = new System.Drawing.Point(96, 165);
+			Smer_TB.Name = "Smer_TB";
+			Smer_TB.Size = new System.Drawing.Size(209, 21);
+			Smer_TB.TabIndex = 4;
+			// 
+			// label5
+			// 
+			label5.AutoSize = true;
+			label5.Font = new System.Drawing.Font("Georgia", 9F);
+			label5.Location = new System.Drawing.Point(8, 168);
+			label5.Name = "label5";
+			label5.Size = new System.Drawing.Size(42, 15);
+			label5.TabIndex = 9;
+			label5.Text = "Smer:";
+			// 
 			// Dodaj_Btn
 			// 
 			Dodaj_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
 			Dodaj_Btn.Location = new System.Drawing.Point(184, 198);
 			Dodaj_Btn.Name = "Dodaj_Btn";
 			Dodaj_Btn.Size = new System.Drawing.Size(121, 29);
-			Dodaj_Btn.TabIndex = 8;
+			Dodaj_Btn.TabIndex = 5;
 			Dodaj_Btn.Text = "Dodaj";
 			Dodaj_Btn.UseVisualStyleBackColor = false;
+			Dodaj_Btn.Click += Dodaj_Btn_Click;
 			// 
-			// Katedra_TB
+			// Prezime_TB
 			// 
-			Katedra_TB.Location = new System.Drawing.Point(96, 134);
-			Katedra_TB.Name = "Katedra_TB";
-			Katedra_TB.Size = new System.Drawing.Size(209, 21);
-			Katedra_TB.TabIndex = 7;
+			Prezime_TB.Location = new System.Drawing.Point(96, 134);
+			Prezime_TB.Name = "Prezime_TB";
+			Prezime_TB.Size = new System.Drawing.Size(209, 21);
+			Prezime_TB.TabIndex = 3;
+			Prezime_TB.KeyPress += Prezime_TB_KeyPress;
 			// 
-			// Naziv_TB
+			// Ime_TB
 			// 
-			Naziv_TB.Location = new System.Drawing.Point(96, 68);
-			Naziv_TB.Name = "Naziv_TB";
-			Naziv_TB.Size = new System.Drawing.Size(209, 21);
-			Naziv_TB.TabIndex = 6;
+			Ime_TB.Location = new System.Drawing.Point(96, 68);
+			Ime_TB.Name = "Ime_TB";
+			Ime_TB.Size = new System.Drawing.Size(209, 21);
+			Ime_TB.TabIndex = 1;
+			Ime_TB.KeyPress += Ime_TB_KeyPress;
 			// 
-			// Sifra_TB
+			// BrIndeksa_TB
 			// 
-			Sifra_TB.Location = new System.Drawing.Point(96, 37);
-			Sifra_TB.Name = "Sifra_TB";
-			Sifra_TB.Size = new System.Drawing.Size(209, 21);
-			Sifra_TB.TabIndex = 5;
+			BrIndeksa_TB.Location = new System.Drawing.Point(96, 37);
+			BrIndeksa_TB.Name = "BrIndeksa_TB";
+			BrIndeksa_TB.Size = new System.Drawing.Size(209, 21);
+			BrIndeksa_TB.TabIndex = 0;
 			// 
-			// Semestar_TB
+			// ImeRoditelja_TB
 			// 
-			Semestar_TB.Location = new System.Drawing.Point(96, 99);
-			Semestar_TB.Name = "Semestar_TB";
-			Semestar_TB.Size = new System.Drawing.Size(209, 21);
-			Semestar_TB.TabIndex = 4;
+			ImeRoditelja_TB.Location = new System.Drawing.Point(96, 99);
+			ImeRoditelja_TB.Name = "ImeRoditelja_TB";
+			ImeRoditelja_TB.Size = new System.Drawing.Size(209, 21);
+			ImeRoditelja_TB.TabIndex = 2;
+			ImeRoditelja_TB.KeyPress += ImeRoditelja_TB_KeyPress;
 			// 
 			// label4
 			// 
@@ -142,23 +163,6 @@
 			label1.TabIndex = 0;
 			label1.Text = "Broj indeksa:";
 			// 
-			// textBox1
-			// 
-			textBox1.Location = new System.Drawing.Point(96, 165);
-			textBox1.Name = "textBox1";
-			textBox1.Size = new System.Drawing.Size(209, 21);
-			textBox1.TabIndex = 10;
-			// 
-			// label5
-			// 
-			label5.AutoSize = true;
-			label5.Font = new System.Drawing.Font("Georgia", 9F);
-			label5.Location = new System.Drawing.Point(8, 168);
-			label5.Name = "label5";
-			label5.Size = new System.Drawing.Size(42, 15);
-			label5.TabIndex = 9;
-			label5.Text = "Smer:";
-			// 
 			// DodajStudenta
 			// 
 			AutoScaleMode = AutoScaleMode.None;
@@ -183,12 +187,12 @@
 		private Label label3;
 		private Label label2;
 		private Label label1;
-		private TextBox Katedra_TB;
-		private TextBox Naziv_TB;
-		private TextBox Sifra_TB;
-		private TextBox Semestar_TB;
+		private TextBox Prezime_TB;
+		private TextBox Ime_TB;
+		private TextBox BrIndeksa_TB;
+		private TextBox ImeRoditelja_TB;
 		private Button Dodaj_Btn;
-		private TextBox textBox1;
+		private TextBox Smer_TB;
 		private Label label5;
 	}
 }

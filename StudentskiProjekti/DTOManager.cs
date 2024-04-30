@@ -3,16 +3,17 @@
 namespace StudentskiProjekti;
 public class DTOManager
 {
-    public static List<PredmetPregled> VratiSvePredmete()
+	#region Predmet
+	public static List<PredmetPregled> VratiSvePredmete()
     {
         List<PredmetPregled> predmeti = new List<PredmetPregled>();
         try
         {
             ISession s = DataLayer.GetSession();
 
-            IEnumerable<Predmet> sviPredmeti = from o in s.Query<Predmet>() select o;
+			IList<Predmet> sviPredmeti = s.Query<Predmet>().ToList() ;
 
-            foreach (Predmet p in sviPredmeti)
+			foreach (Predmet p in sviPredmeti)
             {
                 predmeti.Add(new PredmetPregled(p.Id, p.Naziv, p.Semestar, p.Katedra));
             }
@@ -41,15 +42,15 @@ public class DTOManager
 			    Semestar = p.Semestar
 		    };
 
-            s.SaveOrUpdate(o);
+            s.Save(o);
 
             s.Flush();
 
             s.Close();
         }
-        catch (Exception ec)
+        catch (Exception e)
         {
-            Console.WriteLine(ec.Message);
+            Console.WriteLine(e.Message);
         }
     }
     public static void ObrisiPredmet(string id)
@@ -61,16 +62,17 @@ public class DTOManager
             Predmet o = s.Load<Predmet>(id);
 
             s.Delete(o);
+
             s.Flush();
 
             s.Close();
         }
-        catch (Exception ec)
+        catch (Exception e)
         {
-            Console.WriteLine(ec.Message);
+            Console.WriteLine(e.Message);
         }
     }
-    public static PredmetPregled AzurirajPredmet(PredmetPregled p)
+    public static void AzurirajPredmet(PredmetPregled p)
     {
         try
         {
@@ -83,22 +85,20 @@ public class DTOManager
             o.Semestar = p.Semestar;
             
 
-            s.Update(o);
+            s.SaveOrUpdate(o);
             s.Flush();
 
             s.Close();
         }
-        catch (Exception ec)
+        catch (Exception e)
         {
-            Console.WriteLine(ec.Message);
+            Console.WriteLine(e.Message);
         }
-
-        return p;
     }
 
     public static PredmetPregled VratiPredmet(string id)
     {
-        PredmetPregled pb = new PredmetPregled();
+        PredmetPregled pb = null;
         try
         {
             ISession s = DataLayer.GetSession();
@@ -115,5 +115,129 @@ public class DTOManager
 
         return pb;
     }
+	#endregion
+	#region Student
 
+	public static List<StudentPregled> VratiSveStudente()
+	{
+		List<StudentPregled> studenti = new List<StudentPregled>();
+		try
+		{
+			ISession session = DataLayer.GetSession();
+
+			IList<Student> sviStudenti = session.Query<Student>().ToList();
+
+			foreach (Student s in sviStudenti)
+			{
+				studenti.Add(new StudentPregled(s.BrIndeksa,s.LIme,s.ImeRoditelja,s.Prezime,s.Smer));
+			}
+
+			session.Close();
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e);
+		}
+
+		return studenti;
+	}
+
+    public static void DodajStudenta(StudentPregled sp)
+    {
+		try
+		{
+			ISession s = DataLayer.GetSession();
+
+			Student student = new Student()
+			{
+                BrIndeksa = sp.BrIndeksa,
+                LIme = sp.LIme,
+                Prezime = sp.Prezime,
+                ImeRoditelja = sp.ImeRoditelja,
+                Smer = sp.Smer
+			};
+
+			s.Save(student);
+
+			s.Flush();
+
+			s.Close();
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e.Message);
+		}
+	}
+
+    public static void ObrisiStudenta(string brIndeksa)
+    {
+		try
+		{
+			ISession s = DataLayer.GetSession();
+
+			Student student = s.Load<Student>(brIndeksa);
+
+			s.Delete(student);
+
+			s.Flush();
+
+			s.Close();
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e.Message);
+		}
+	}
+
+    public static StudentPregled VratiStudenta(string brIndeksa) 
+    {
+		StudentPregled sp = null;
+		try
+		{
+			ISession s = DataLayer.GetSession();
+
+			Student student = s.Load<Student>(brIndeksa);
+
+            sp = new StudentPregled()
+            {
+                BrIndeksa = student.BrIndeksa,
+                ImeRoditelja = student.ImeRoditelja,
+                LIme = student.LIme,
+                Prezime = student.Prezime,
+                Smer = student.Smer
+            };
+
+			s.Close();
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e.Message);
+		}
+        return sp;
+	}
+
+	public static void AzurirajStudenta(StudentPregled sp)
+	{
+		try
+		{
+			ISession s = DataLayer.GetSession();
+
+			Student o = s.Load<Student>(sp.BrIndeksa);
+            o.LIme = sp.LIme;
+            o.ImeRoditelja= sp.ImeRoditelja;
+            o.Prezime = sp.Prezime;
+            o.Smer = sp.Smer;
+
+			s.SaveOrUpdate(o);
+			s.Flush();
+
+			s.Close();
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e.Message);
+		}
+	}
+
+	#endregion
 }
