@@ -41,8 +41,22 @@ namespace StudentskiProjekti.Forme
 			IzmeniStudenta_Btn = new Button();
 			DodajStudenta_Btn = new Button();
 			ObrisiStudenta_Btn = new Button();
+			Prikaz_GB = new GroupBox();
+			Smer_TB = new TextBox();
+			label4 = new Label();
+			Prezime_TB = new TextBox();
+			label3 = new Label();
+			Ocisti_Btn = new Button();
+			Sortiraj_Btn = new Button();
+			label2 = new Label();
+			label1 = new Label();
+			BrojIndeksa_TB = new TextBox();
+			Ime_TB = new TextBox();
+			Prikazi_Btn = new Button();
+			label5 = new Label();
 			Studenti_GB.SuspendLayout();
 			Podaci_o_predmetimaGB.SuspendLayout();
+			Prikaz_GB.SuspendLayout();
 			SuspendLayout();
 			// 
 			// Studenti_GB
@@ -105,7 +119,7 @@ namespace StudentskiProjekti.Forme
 			Podaci_o_predmetimaGB.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
 			Podaci_o_predmetimaGB.Location = new System.Drawing.Point(30, 364);
 			Podaci_o_predmetimaGB.Name = "Podaci_o_predmetimaGB";
-			Podaci_o_predmetimaGB.Size = new System.Drawing.Size(202, 164);
+			Podaci_o_predmetimaGB.Size = new System.Drawing.Size(202, 206);
 			Podaci_o_predmetimaGB.TabIndex = 4;
 			Podaci_o_predmetimaGB.TabStop = false;
 			Podaci_o_predmetimaGB.Text = "Izmeni";
@@ -114,9 +128,9 @@ namespace StudentskiProjekti.Forme
 			// 
 			IzmeniStudenta_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
 			IzmeniStudenta_Btn.Font = new System.Drawing.Font("Georgia", 9F);
-			IzmeniStudenta_Btn.Location = new System.Drawing.Point(34, 69);
+			IzmeniStudenta_Btn.Location = new System.Drawing.Point(34, 138);
 			IzmeniStudenta_Btn.Name = "IzmeniStudenta_Btn";
-			IzmeniStudenta_Btn.Size = new System.Drawing.Size(132, 33);
+			IzmeniStudenta_Btn.Size = new System.Drawing.Size(132, 38);
 			IzmeniStudenta_Btn.TabIndex = 3;
 			IzmeniStudenta_Btn.Text = "Izmeni studenta";
 			IzmeniStudenta_Btn.UseVisualStyleBackColor = false;
@@ -126,9 +140,9 @@ namespace StudentskiProjekti.Forme
 			// 
 			DodajStudenta_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
 			DodajStudenta_Btn.Font = new System.Drawing.Font("Georgia", 9F);
-			DodajStudenta_Btn.Location = new System.Drawing.Point(34, 26);
+			DodajStudenta_Btn.Location = new System.Drawing.Point(34, 81);
 			DodajStudenta_Btn.Name = "DodajStudenta_Btn";
-			DodajStudenta_Btn.Size = new System.Drawing.Size(132, 33);
+			DodajStudenta_Btn.Size = new System.Drawing.Size(132, 38);
 			DodajStudenta_Btn.TabIndex = 2;
 			DodajStudenta_Btn.Text = "Dodaj studenta";
 			DodajStudenta_Btn.UseVisualStyleBackColor = false;
@@ -138,32 +152,168 @@ namespace StudentskiProjekti.Forme
 			// 
 			ObrisiStudenta_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
 			ObrisiStudenta_Btn.Font = new System.Drawing.Font("Georgia", 9F);
-			ObrisiStudenta_Btn.Location = new System.Drawing.Point(34, 112);
+			ObrisiStudenta_Btn.Location = new System.Drawing.Point(34, 26);
 			ObrisiStudenta_Btn.Name = "ObrisiStudenta_Btn";
-			ObrisiStudenta_Btn.Size = new System.Drawing.Size(132, 33);
+			ObrisiStudenta_Btn.Size = new System.Drawing.Size(132, 38);
 			ObrisiStudenta_Btn.TabIndex = 1;
 			ObrisiStudenta_Btn.Text = "Obrisi studenta";
 			ObrisiStudenta_Btn.UseVisualStyleBackColor = false;
 			ObrisiStudenta_Btn.Click += ObrisiStudenta_Btn_Click_1;
 			// 
+			// Prikaz_GB
+			// 
+			Prikaz_GB.Controls.Add(Smer_TB);
+			Prikaz_GB.Controls.Add(label4);
+			Prikaz_GB.Controls.Add(Prezime_TB);
+			Prikaz_GB.Controls.Add(label3);
+			Prikaz_GB.Controls.Add(Ocisti_Btn);
+			Prikaz_GB.Controls.Add(Sortiraj_Btn);
+			Prikaz_GB.Controls.Add(label2);
+			Prikaz_GB.Controls.Add(label1);
+			Prikaz_GB.Controls.Add(BrojIndeksa_TB);
+			Prikaz_GB.Controls.Add(Ime_TB);
+			Prikaz_GB.Location = new System.Drawing.Point(256, 366);
+			Prikaz_GB.Name = "Prikaz_GB";
+			Prikaz_GB.Size = new System.Drawing.Size(296, 204);
+			Prikaz_GB.TabIndex = 5;
+			Prikaz_GB.TabStop = false;
+			Prikaz_GB.Text = "Prikaz";
+			// 
+			// Smer_TB
+			// 
+			Smer_TB.Location = new System.Drawing.Point(164, 136);
+			Smer_TB.Name = "Smer_TB";
+			Smer_TB.Size = new System.Drawing.Size(108, 21);
+			Smer_TB.TabIndex = 14;
+			// 
+			// label4
+			// 
+			label4.AutoSize = true;
+			label4.Location = new System.Drawing.Point(16, 139);
+			label4.Name = "label4";
+			label4.Size = new System.Drawing.Size(86, 15);
+			label4.TabIndex = 13;
+			label4.Text = "Unesite smer:";
+			// 
+			// Prezime_TB
+			// 
+			Prezime_TB.Location = new System.Drawing.Point(164, 99);
+			Prezime_TB.Name = "Prezime_TB";
+			Prezime_TB.Size = new System.Drawing.Size(108, 21);
+			Prezime_TB.TabIndex = 12;
+			// 
+			// label3
+			// 
+			label3.AutoSize = true;
+			label3.Location = new System.Drawing.Point(16, 102);
+			label3.Name = "label3";
+			label3.Size = new System.Drawing.Size(103, 15);
+			label3.TabIndex = 11;
+			label3.Text = "Unesite prezime:";
+			// 
+			// Ocisti_Btn
+			// 
+			Ocisti_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
+			Ocisti_Btn.Font = new System.Drawing.Font("Georgia", 9F);
+			Ocisti_Btn.Location = new System.Drawing.Point(145, 170);
+			Ocisti_Btn.Name = "Ocisti_Btn";
+			Ocisti_Btn.Size = new System.Drawing.Size(61, 23);
+			Ocisti_Btn.TabIndex = 7;
+			Ocisti_Btn.Text = "Ocisti";
+			Ocisti_Btn.UseVisualStyleBackColor = false;
+			Ocisti_Btn.Click += Ocisti_Btn_Click;
+			// 
+			// Sortiraj_Btn
+			// 
+			Sortiraj_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
+			Sortiraj_Btn.Font = new System.Drawing.Font("Georgia", 9F);
+			Sortiraj_Btn.Location = new System.Drawing.Point(211, 170);
+			Sortiraj_Btn.Name = "Sortiraj_Btn";
+			Sortiraj_Btn.Size = new System.Drawing.Size(61, 23);
+			Sortiraj_Btn.TabIndex = 9;
+			Sortiraj_Btn.Text = "Sortiraj";
+			Sortiraj_Btn.UseVisualStyleBackColor = false;
+			Sortiraj_Btn.Click += Sortiraj_Btn_Click;
+			// 
+			// label2
+			// 
+			label2.AutoSize = true;
+			label2.Location = new System.Drawing.Point(16, 65);
+			label2.Name = "label2";
+			label2.Size = new System.Drawing.Size(79, 15);
+			label2.TabIndex = 8;
+			label2.Text = "Unesite ime:";
+			// 
+			// label1
+			// 
+			label1.AutoSize = true;
+			label1.Location = new System.Drawing.Point(16, 27);
+			label1.Name = "label1";
+			label1.Size = new System.Drawing.Size(127, 15);
+			label1.TabIndex = 10;
+			label1.Text = "Unesite broj indeksa:";
+			// 
+			// BrojIndeksa_TB
+			// 
+			BrojIndeksa_TB.Location = new System.Drawing.Point(164, 24);
+			BrojIndeksa_TB.Name = "BrojIndeksa_TB";
+			BrojIndeksa_TB.Size = new System.Drawing.Size(108, 21);
+			BrojIndeksa_TB.TabIndex = 5;
+			// 
+			// Ime_TB
+			// 
+			Ime_TB.Location = new System.Drawing.Point(164, 62);
+			Ime_TB.Name = "Ime_TB";
+			Ime_TB.Size = new System.Drawing.Size(108, 21);
+			Ime_TB.TabIndex = 6;
+			// 
+			// Prikazi_Btn
+			// 
+			Prikazi_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
+			Prikazi_Btn.Font = new System.Drawing.Font("Georgia", 14F);
+			Prikazi_Btn.ForeColor = System.Drawing.SystemColors.ControlText;
+			Prikazi_Btn.Location = new System.Drawing.Point(588, 516);
+			Prikazi_Btn.Name = "Prikazi_Btn";
+			Prikazi_Btn.Size = new System.Drawing.Size(141, 54);
+			Prikazi_Btn.TabIndex = 15;
+			Prikazi_Btn.Text = "Prikazi";
+			Prikazi_Btn.UseVisualStyleBackColor = false;
+			Prikazi_Btn.Click += Prikazi_Btn_Click;
+			// 
+			// label5
+			// 
+			label5.AutoSize = true;
+			label5.Font = new System.Drawing.Font("Georgia", 8F);
+			label5.Location = new System.Drawing.Point(586, 499);
+			label5.Name = "label5";
+			label5.Size = new System.Drawing.Size(147, 14);
+			label5.TabIndex = 16;
+			label5.Text = "Vise detalja za studenta:";
+			// 
 			// Studenti
 			// 
 			AutoScaleMode = AutoScaleMode.None;
 			BackColor = System.Drawing.Color.Linen;
-			ClientSize = new System.Drawing.Size(756, 560);
+			ClientSize = new System.Drawing.Size(756, 601);
+			Controls.Add(Prikazi_Btn);
+			Controls.Add(Prikaz_GB);
+			Controls.Add(label5);
 			Controls.Add(Podaci_o_predmetimaGB);
 			Controls.Add(Studenti_GB);
 			Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
 			MaximizeBox = false;
-			MaximumSize = new System.Drawing.Size(772, 599);
+			MaximumSize = new System.Drawing.Size(772, 640);
 			MinimizeBox = false;
-			MinimumSize = new System.Drawing.Size(772, 599);
+			MinimumSize = new System.Drawing.Size(772, 640);
 			Name = "Studenti";
 			Text = "Studenti";
 			Load += Studenti_Load;
 			Studenti_GB.ResumeLayout(false);
 			Podaci_o_predmetimaGB.ResumeLayout(false);
+			Prikaz_GB.ResumeLayout(false);
+			Prikaz_GB.PerformLayout();
 			ResumeLayout(false);
+			PerformLayout();
 		}
 
 		#endregion
@@ -179,5 +329,18 @@ namespace StudentskiProjekti.Forme
 		private Button IzmeniStudenta_Btn;
 		private Button DodajStudenta_Btn;
 		private Button ObrisiStudenta_Btn;
+		private GroupBox Prikaz_GB;
+		private Button Ocisti_Btn;
+		private Button Sortiraj_Btn;
+		private Label label2;
+		private Label label1;
+		private TextBox BrojIndeksa_TB;
+		private TextBox Ime_TB;
+		private TextBox Smer_TB;
+		private Label label4;
+		private TextBox Prezime_TB;
+		private Label label3;
+		private Button Prikazi_Btn;
+		private Label label5;
 	}
 }

@@ -82,13 +82,10 @@ public partial class Predmeti : Form
 
     private void Sortiraj_Btn_Click(object sender, EventArgs e)
     {
-        string semestarFilter = SemestarPrikaz_TB.Text;
-        string katedraFilter = UnesiteNazivKatedre_TB.Text;
+        string semestarFilter = Semestar_TB.Text;
+        string katedraFilter = NazivKatedre_TB.Text;
 
-        List<PredmetPregled> filtriraniPredmeti = DTOManager.VratiSvePredmete().Where(p =>
-            (string.IsNullOrEmpty(semestarFilter) || p.Semestar.ToString() == semestarFilter) &&
-            (string.IsNullOrEmpty(katedraFilter) || p.Katedra.StartsWith(katedraFilter, StringComparison.OrdinalIgnoreCase))
-        ).ToList();
+        List<PredmetPregled> filtriraniPredmeti = DTOManager.VratiSortiranePredmete(semestarFilter,katedraFilter);
 
         Predmeti_ListV.Items.Clear();
 
@@ -101,8 +98,8 @@ public partial class Predmeti : Form
 
     private void Ocisti_Btn_Click(object sender, EventArgs e)
     {
-        SemestarPrikaz_TB.Clear();
-        UnesiteNazivKatedre_TB.Clear();
+        Semestar_TB.Clear();
+        NazivKatedre_TB.Clear();
         PopuniPodacima();
     }
 

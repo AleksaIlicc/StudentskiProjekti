@@ -28,6 +28,33 @@ public class DTOManager
         return predmeti;
     }
 
+    public static List<PredmetPregled> VratiSortiranePredmete(string semestarFilter, string katedraFilter)
+    {
+		List<PredmetPregled> predmeti = new List<PredmetPregled>();
+		try
+		{
+			ISession s = DataLayer.GetSession();
+
+			IList<Predmet> sviPredmeti = s.Query<Predmet>().Where(p =>
+			    (string.IsNullOrEmpty(semestarFilter) || p.Semestar.ToString() == semestarFilter) &&
+			    (string.IsNullOrEmpty(katedraFilter) || p.Katedra.StartsWith(katedraFilter, StringComparison.OrdinalIgnoreCase))
+		    ).ToList();
+
+			foreach (Predmet p in sviPredmeti)
+			{
+				predmeti.Add(new PredmetPregled(p.Id, p.Naziv, p.Semestar, p.Katedra));
+			}
+
+			s.Close();
+		}
+		catch (Exception ec)
+		{
+			Console.WriteLine(ec);
+		}
+
+		return predmeti;
+	}
+
     public static void DodajPredmet(PredmetPregled p)
     {
         try
@@ -130,7 +157,7 @@ public class DTOManager
 
 			foreach (Student s in sviStudenti)
 			{
-				studenti.Add(new StudentPregled(s.BrIndeksa,s.LIme,s.ImeRoditelja,s.Prezime,s.Smer));
+				studenti.Add(new StudentPregled(s.BrIndeksa, s.LIme, s.ImeRoditelja, s.Prezime, s.Smer));
 			}
 
 			session.Close();
@@ -143,7 +170,35 @@ public class DTOManager
 		return studenti;
 	}
 
-    public static void DodajStudenta(StudentPregled sp)
+	public static List<StudentPregled> VratiSortiraneStudente(string brIndeksa, string ime, string prezime, string smer)
+	{
+		List<StudentPregled> studenti = new List<StudentPregled>();
+		try
+		{
+			ISession session = DataLayer.GetSession();
+
+			IList<Student> sviStudenti = session.Query<Student>()
+				.Where(s => (string.IsNullOrEmpty(brIndeksa) || s.BrIndeksa.StartsWith(brIndeksa)) &&
+							(string.IsNullOrEmpty(ime) || s.LIme.StartsWith(ime)) &&
+							(string.IsNullOrEmpty(prezime) || s.Prezime.StartsWith(prezime)) &&
+							(string.IsNullOrEmpty(smer) || s.Smer.StartsWith(smer)))
+				.ToList();
+
+			foreach (Student s in sviStudenti)
+			{
+				studenti.Add(new StudentPregled(s.BrIndeksa, s.LIme, s.ImeRoditelja, s.Prezime, s.Smer));
+			}
+
+			session.Close();
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e);
+		}
+		return studenti;
+	}
+
+	public static void DodajStudenta(StudentPregled sp)
     {
 		try
 		{
