@@ -229,7 +229,7 @@
             // Pojedinacni_RB
             // 
             Pojedinacni_RB.AutoSize = true;
-            Pojedinacni_RB.Location = new System.Drawing.Point(87, 9);
+            Pojedinacni_RB.Location = new System.Drawing.Point(86, 9);
             Pojedinacni_RB.Name = "Pojedinacni_RB";
             Pojedinacni_RB.Size = new System.Drawing.Size(92, 19);
             Pojedinacni_RB.TabIndex = 8;
@@ -267,6 +267,7 @@
             Ocisti_Btn.TabIndex = 3;
             Ocisti_Btn.Text = "Ocisti";
             Ocisti_Btn.UseVisualStyleBackColor = false;
+            Ocisti_Btn.Click += Ocisti_Btn_Click;
             // 
             // Vrsta_GB
             // 
@@ -281,7 +282,7 @@
             // Prakticni_RB
             // 
             Prakticni_RB.AutoSize = true;
-            Prakticni_RB.Location = new System.Drawing.Point(88, 9);
+            Prakticni_RB.Location = new System.Drawing.Point(87, 9);
             Prakticni_RB.Name = "Prakticni_RB";
             Prakticni_RB.Size = new System.Drawing.Size(79, 19);
             Prakticni_RB.TabIndex = 8;
@@ -310,6 +311,7 @@
             Sortiraj_Btn.TabIndex = 4;
             Sortiraj_Btn.Text = "Sortiraj";
             Sortiraj_Btn.UseVisualStyleBackColor = false;
+            Sortiraj_Btn.Click += Sortiraj_Btn_Click;
             // 
             // label5
             // 
@@ -403,10 +405,8 @@
         private GroupBox Vrsta_GB;
         private RadioButton Prakticni_RB;
         private RadioButton Teorijski_RB;
-        private GroupBox groupBox2;
         private RadioButton Pojedinacni_RB;
         private RadioButton Grupni_RB;
         private GroupBox Tip_GB;
-        private RadioButton radioButton1;
     }
 }
