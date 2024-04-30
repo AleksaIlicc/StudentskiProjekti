@@ -85,15 +85,9 @@ public partial class Predmeti : Form
         string semestarFilter = SemestarPrikaz_TB.Text;
         string katedraFilter = UnesiteNazivKatedre_TB.Text;
 
-        if (string.IsNullOrEmpty(semestarFilter) && string.IsNullOrEmpty(katedraFilter))
-        {
-            MessageBox.Show("Morate uneti vrednost za semestar ili katedru prema kojoj sortirate");
-            return;
-        }
-
         List<PredmetPregled> filtriraniPredmeti = DTOManager.VratiSvePredmete().Where(p =>
-            (p.Semestar.ToString() == semestarFilter) &&
-            (p.Katedra.StartsWith(katedraFilter, StringComparison.OrdinalIgnoreCase))
+            (string.IsNullOrEmpty(semestarFilter) || p.Semestar.ToString() == semestarFilter) &&
+            (string.IsNullOrEmpty(katedraFilter) || p.Katedra.StartsWith(katedraFilter, StringComparison.OrdinalIgnoreCase))
         ).ToList();
 
         Predmeti_ListV.Items.Clear();

@@ -116,6 +116,7 @@ public class DTOManager
         return pb;
     }
 	#endregion
+
 	#region Student
 
 	public static List<StudentPregled> VratiSveStudente()
@@ -280,5 +281,4 @@ public class DTOManager
 
 
     #endregion
-
 }

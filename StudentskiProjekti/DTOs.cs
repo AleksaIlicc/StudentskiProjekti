@@ -26,7 +26,6 @@ public class DTOs
     }
     #endregion
 
-
     #region Projekat
     public class ProjekatPregled
     {
@@ -63,7 +62,6 @@ public class DTOs
     }
     #endregion
 
-
     #region PrakticniProjekat
     public class PrakticniProjekatPregled : ProjekatPregled
     {
@@ -81,8 +79,6 @@ public class DTOs
         public PrakticniProjekatPregled() : base() { }
     }
     #endregion
-
-	#endregion
 
 	#region Student
 
