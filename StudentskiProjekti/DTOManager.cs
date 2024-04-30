@@ -116,4 +116,45 @@ public class DTOManager
         return pb;
     }
 
+
+    #region Projekti
+
+    public static List<ProjekatPregled> VratiProjekteZaPredmet(string idPredmeta)
+    {
+        List<ProjekatPregled> projekti = new List<ProjekatPregled>();
+        try
+        {
+            ISession s = DataLayer.GetSession();
+
+   
+            Predmet predmet = s.Query<Predmet>().FirstOrDefault(p => p.Id == idPredmeta);
+
+            if (predmet != null)
+            {
+                IList<Projekat> projektiZaPredmet = predmet.Projekti;
+
+                foreach (Projekat p in projektiZaPredmet)
+                {
+                    projekti.Add(new ProjekatPregled(p.Naziv, p.SkolskaGodinaZadavanja,  p.VrstaProjekta, p.TipProjekta));
+                }
+            }
+            else
+            {
+                Console.WriteLine("Predmet nije pronađen.");
+            }
+
+            s.Close();
+        }
+        catch (Exception ec)
+        {
+            Console.WriteLine(ec);
+        }
+
+        return projekti;
+    }
+
+
+
+    #endregion
+
 }

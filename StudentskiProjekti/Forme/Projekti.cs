@@ -1,40 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using static StudentskiProjekti.DTOs;
 
-namespace StudentskiProjekti.Forme
+namespace StudentskiProjekti.Forme;
+
+public partial class Projekti : Form
 {
-    public partial class Projekti : Form
+
+    private PredmetPregled izabraniPredmet;
+    public Projekti(PredmetPregled izabraniPredmet)
     {
-        public Projekti()
+        InitializeComponent();
+        this.izabraniPredmet = izabraniPredmet;
+    }
+
+    private void Projekti_Load(object sender, EventArgs e)
+    {
+        PopuniPodacima();
+        Naziv_Lbl.Text = izabraniPredmet.Naziv;
+        Sifra_Lbl.Text = izabraniPredmet.Id;
+        Katedra_Lbl.Text = izabraniPredmet.Katedra;
+        Semestar_Lbl.Text = izabraniPredmet.Semestar.ToString() + ".";
+    }
+
+    public void PopuniPodacima()
+    {
+
+        Projekti_ListV.Items.Clear();
+        List<ProjekatPregled> projekti = DTOManager.VratiProjekteZaPredmet(izabraniPredmet.Id);
+        projekti = projekti.OrderBy(p => p.Naziv).ToList();
+
+        foreach (ProjekatPregled p in projekti)
         {
-            InitializeComponent();
+            ListViewItem item = new ListViewItem(new string[] { p.Naziv, p.SkolskaGodinaZadavanja, p.VrstaProjekta, p.TipProjekta });
+            Projekti_ListV.Items.Add(item);
         }
 
-        private void DodajPredmet_Btn_Click(object sender, EventArgs e)
-        {
-
-            DodajProjekat dodajProjekat = new DodajProjekat()
-            {
-                StartPosition = FormStartPosition.CenterParent
-            };
-            dodajProjekat.ShowDialog();
-
-        }
-
-        private void IzmeniPredmet_Btn_Click(object sender, EventArgs e)
-        {
-            IzmeniProjekat izmeniProjekat = new IzmeniProjekat()
-            {
-                StartPosition = FormStartPosition.CenterParent
-            };
-            izmeniProjekat.ShowDialog();
-        }
+        Projekti_ListV.Refresh();
     }
 }

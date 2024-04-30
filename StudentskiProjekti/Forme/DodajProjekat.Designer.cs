@@ -32,16 +32,16 @@
             label2 = new Label();
             label3 = new Label();
             Semestar_TB = new TextBox();
-            Sifra_TB = new TextBox();
             Naziv_TB = new TextBox();
+            SkoslaGodIzdavanja_TB = new TextBox();
             Dodaj_Btn = new Button();
-            radioButton1 = new RadioButton();
+            Teorijski_RB = new RadioButton();
             OsnovnipodaciopredmetuGB = new GroupBox();
             groupBox2 = new GroupBox();
-            radioButton4 = new RadioButton();
-            radioButton3 = new RadioButton();
+            Pojedinacni_RB = new RadioButton();
+            Grupni_RB = new RadioButton();
             Tip = new GroupBox();
-            radioButton2 = new RadioButton();
+            Prakticni_RB = new RadioButton();
             OsnovnipodaciopredmetuGB.SuspendLayout();
             groupBox2.SuspendLayout();
             Tip.SuspendLayout();
@@ -51,7 +51,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new System.Drawing.Font("Georgia", 9F);
-            label1.Location = new System.Drawing.Point(8, 54);
+            label1.Location = new System.Drawing.Point(8, 42);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(45, 15);
             label1.TabIndex = 0;
@@ -61,7 +61,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new System.Drawing.Font("Georgia", 9F);
-            label2.Location = new System.Drawing.Point(8, 86);
+            label2.Location = new System.Drawing.Point(8, 74);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(144, 15);
             label2.TabIndex = 1;
@@ -71,7 +71,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new System.Drawing.Font("Georgia", 9F);
-            label3.Location = new System.Drawing.Point(8, 121);
+            label3.Location = new System.Drawing.Point(8, 109);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(65, 15);
             label3.TabIndex = 2;
@@ -79,53 +79,53 @@
             // 
             // Semestar_TB
             // 
-            Semestar_TB.Location = new System.Drawing.Point(158, 118);
+            Semestar_TB.Location = new System.Drawing.Point(158, 106);
             Semestar_TB.Name = "Semestar_TB";
             Semestar_TB.Size = new System.Drawing.Size(217, 21);
             Semestar_TB.TabIndex = 2;
             // 
-            // Sifra_TB
-            // 
-            Sifra_TB.Location = new System.Drawing.Point(158, 51);
-            Sifra_TB.Name = "Sifra_TB";
-            Sifra_TB.Size = new System.Drawing.Size(217, 21);
-            Sifra_TB.TabIndex = 0;
-            // 
             // Naziv_TB
             // 
-            Naziv_TB.Location = new System.Drawing.Point(158, 83);
+            Naziv_TB.Location = new System.Drawing.Point(158, 39);
             Naziv_TB.Name = "Naziv_TB";
             Naziv_TB.Size = new System.Drawing.Size(217, 21);
-            Naziv_TB.TabIndex = 1;
+            Naziv_TB.TabIndex = 0;
+            // 
+            // SkoslaGodIzdavanja_TB
+            // 
+            SkoslaGodIzdavanja_TB.Location = new System.Drawing.Point(158, 71);
+            SkoslaGodIzdavanja_TB.Name = "SkoslaGodIzdavanja_TB";
+            SkoslaGodIzdavanja_TB.Size = new System.Drawing.Size(217, 21);
+            SkoslaGodIzdavanja_TB.TabIndex = 1;
             // 
             // Dodaj_Btn
             // 
             Dodaj_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
-            Dodaj_Btn.Location = new System.Drawing.Point(260, 292);
+            Dodaj_Btn.Location = new System.Drawing.Point(218, 281);
             Dodaj_Btn.Name = "Dodaj_Btn";
-            Dodaj_Btn.Size = new System.Drawing.Size(115, 29);
+            Dodaj_Btn.Size = new System.Drawing.Size(157, 29);
             Dodaj_Btn.TabIndex = 4;
             Dodaj_Btn.Text = "Dodaj";
             Dodaj_Btn.UseVisualStyleBackColor = false;
             // 
-            // radioButton1
+            // Teorijski_RB
             // 
-            radioButton1.AutoSize = true;
-            radioButton1.Location = new System.Drawing.Point(6, 38);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new System.Drawing.Size(75, 19);
-            radioButton1.TabIndex = 7;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "Teorijski";
-            radioButton1.UseVisualStyleBackColor = true;
+            Teorijski_RB.AutoSize = true;
+            Teorijski_RB.Location = new System.Drawing.Point(14, 30);
+            Teorijski_RB.Name = "Teorijski_RB";
+            Teorijski_RB.Size = new System.Drawing.Size(126, 19);
+            Teorijski_RB.TabIndex = 7;
+            Teorijski_RB.TabStop = true;
+            Teorijski_RB.Text = "Teorijski projekat";
+            Teorijski_RB.UseVisualStyleBackColor = true;
             // 
             // OsnovnipodaciopredmetuGB
             // 
             OsnovnipodaciopredmetuGB.Controls.Add(groupBox2);
             OsnovnipodaciopredmetuGB.Controls.Add(Tip);
             OsnovnipodaciopredmetuGB.Controls.Add(Dodaj_Btn);
+            OsnovnipodaciopredmetuGB.Controls.Add(SkoslaGodIzdavanja_TB);
             OsnovnipodaciopredmetuGB.Controls.Add(Naziv_TB);
-            OsnovnipodaciopredmetuGB.Controls.Add(Sifra_TB);
             OsnovnipodaciopredmetuGB.Controls.Add(Semestar_TB);
             OsnovnipodaciopredmetuGB.Controls.Add(label3);
             OsnovnipodaciopredmetuGB.Controls.Add(label2);
@@ -133,77 +133,79 @@
             OsnovnipodaciopredmetuGB.Font = new System.Drawing.Font("Georgia", 9F);
             OsnovnipodaciopredmetuGB.Location = new System.Drawing.Point(12, 12);
             OsnovnipodaciopredmetuGB.Name = "OsnovnipodaciopredmetuGB";
-            OsnovnipodaciopredmetuGB.Size = new System.Drawing.Size(384, 337);
+            OsnovnipodaciopredmetuGB.Size = new System.Drawing.Size(384, 318);
             OsnovnipodaciopredmetuGB.TabIndex = 0;
             OsnovnipodaciopredmetuGB.TabStop = false;
             OsnovnipodaciopredmetuGB.Text = "Osnovni podaci o projektu";
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(radioButton4);
-            groupBox2.Controls.Add(radioButton3);
-            groupBox2.Location = new System.Drawing.Point(139, 162);
+            groupBox2.Controls.Add(Pojedinacni_RB);
+            groupBox2.Controls.Add(Grupni_RB);
+            groupBox2.Location = new System.Drawing.Point(8, 203);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new System.Drawing.Size(101, 118);
+            groupBox2.Size = new System.Drawing.Size(367, 57);
             groupBox2.TabIndex = 12;
             groupBox2.TabStop = false;
             groupBox2.Text = "Tip";
             // 
-            // radioButton4
+            // Pojedinacni_RB
             // 
-            radioButton4.AutoSize = true;
-            radioButton4.Location = new System.Drawing.Point(6, 74);
-            radioButton4.Name = "radioButton4";
-            radioButton4.Size = new System.Drawing.Size(92, 19);
-            radioButton4.TabIndex = 10;
-            radioButton4.TabStop = true;
-            radioButton4.Text = "Pojedinacni";
-            radioButton4.UseVisualStyleBackColor = true;
+            Pojedinacni_RB.AutoSize = true;
+            Pojedinacni_RB.Location = new System.Drawing.Point(210, 30);
+            Pojedinacni_RB.Name = "Pojedinacni_RB";
+            Pojedinacni_RB.Size = new System.Drawing.Size(143, 19);
+            Pojedinacni_RB.TabIndex = 10;
+            Pojedinacni_RB.TabStop = true;
+            Pojedinacni_RB.Text = "Pojedinacni projekat";
+            Pojedinacni_RB.UseVisualStyleBackColor = true;
             // 
-            // radioButton3
+            // Grupni_RB
             // 
-            radioButton3.AutoSize = true;
-            radioButton3.Location = new System.Drawing.Point(6, 38);
-            radioButton3.Name = "radioButton3";
-            radioButton3.Size = new System.Drawing.Size(67, 19);
-            radioButton3.TabIndex = 9;
-            radioButton3.TabStop = true;
-            radioButton3.Text = "Grupni";
-            radioButton3.UseVisualStyleBackColor = true;
+            Grupni_RB.AutoSize = true;
+            Grupni_RB.Location = new System.Drawing.Point(14, 30);
+            Grupni_RB.Name = "Grupni_RB";
+            Grupni_RB.Size = new System.Drawing.Size(118, 19);
+            Grupni_RB.TabIndex = 9;
+            Grupni_RB.TabStop = true;
+            Grupni_RB.Text = "Grupni projekat";
+            Grupni_RB.UseVisualStyleBackColor = true;
             // 
             // Tip
             // 
-            Tip.Controls.Add(radioButton2);
-            Tip.Controls.Add(radioButton1);
-            Tip.Location = new System.Drawing.Point(8, 162);
+            Tip.Controls.Add(Prakticni_RB);
+            Tip.Controls.Add(Teorijski_RB);
+            Tip.Location = new System.Drawing.Point(8, 140);
             Tip.Name = "Tip";
-            Tip.Size = new System.Drawing.Size(98, 118);
+            Tip.Size = new System.Drawing.Size(367, 57);
             Tip.TabIndex = 11;
             Tip.TabStop = false;
             Tip.Text = "Vrsta";
             // 
-            // radioButton2
+            // Prakticni_RB
             // 
-            radioButton2.AutoSize = true;
-            radioButton2.Location = new System.Drawing.Point(6, 74);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new System.Drawing.Size(79, 19);
-            radioButton2.TabIndex = 8;
-            radioButton2.TabStop = true;
-            radioButton2.Text = "Prakticni";
-            radioButton2.UseVisualStyleBackColor = true;
+            Prakticni_RB.AutoSize = true;
+            Prakticni_RB.Location = new System.Drawing.Point(210, 30);
+            Prakticni_RB.Name = "Prakticni_RB";
+            Prakticni_RB.Size = new System.Drawing.Size(130, 19);
+            Prakticni_RB.TabIndex = 8;
+            Prakticni_RB.TabStop = true;
+            Prakticni_RB.Text = "Prakticni projekat";
+            Prakticni_RB.UseVisualStyleBackColor = true;
             // 
             // DodajProjekat
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = System.Drawing.Color.AntiqueWhite;
-            ClientSize = new System.Drawing.Size(406, 354);
+            ClientSize = new System.Drawing.Size(406, 339);
             Controls.Add(OsnovnipodaciopredmetuGB);
             Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             MaximizeBox = false;
+            MaximumSize = new System.Drawing.Size(422, 378);
             MinimizeBox = false;
+            MinimumSize = new System.Drawing.Size(422, 378);
             Name = "DodajProjekat";
-            Text = "Dodaj predmet";
+            Text = "Dodaj projekat";
             OsnovnipodaciopredmetuGB.ResumeLayout(false);
             OsnovnipodaciopredmetuGB.PerformLayout();
             groupBox2.ResumeLayout(false);
@@ -219,15 +221,15 @@
         private Label label2;
         private Label label3;
         private TextBox Semestar_TB;
-        private TextBox Sifra_TB;
         private TextBox Naziv_TB;
+        private TextBox SkoslaGodIzdavanja_TB;
         private Button Dodaj_Btn;
-        private RadioButton radioButton1;
+        private RadioButton Teorijski_RB;
         private GroupBox OsnovnipodaciopredmetuGB;
         private GroupBox groupBox2;
-        private RadioButton radioButton4;
-        private RadioButton radioButton3;
+        private RadioButton Pojedinacni_RB;
+        private RadioButton Grupni_RB;
         private GroupBox Tip;
-        private RadioButton radioButton2;
+        private RadioButton Prakticni_RB;
     }
 }
