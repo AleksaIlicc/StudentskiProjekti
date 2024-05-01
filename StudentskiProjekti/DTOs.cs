@@ -76,6 +76,10 @@ public class DTOs
             PreporuceneWebStranice = preporuceneWebStranice;
         }
 
+        public PrakticniProjekatPregled(string naziv, string skolskaGodinaZadavanja, string vrstaProjekta, string tipProjekta, string preporuceniProgramskiJezik) : base(naziv, skolskaGodinaZadavanja, vrstaProjekta, tipProjekta)
+        {
+            PreporuceniProgramskiJezik = preporuceniProgramskiJezik;
+        }
         public PrakticniProjekatPregled() : base() { }
     }
     #endregion

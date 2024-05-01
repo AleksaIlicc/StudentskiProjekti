@@ -57,6 +57,7 @@
             label5 = new Label();
             label6 = new Label();
             SkoslkaGodZad_TB = new TextBox();
+            Excel_Btn = new Button();
             Projekti_GB.SuspendLayout();
             PrikazProjekta_GB.SuspendLayout();
             Tip_GB.SuspendLayout();
@@ -180,10 +181,10 @@
             // PrikazPrakticni_Btn
             // 
             PrikazPrakticni_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
-            PrikazPrakticni_Btn.Font = new System.Drawing.Font("Georgia", 14.25F);
-            PrikazPrakticni_Btn.Location = new System.Drawing.Point(523, 465);
+            PrikazPrakticni_Btn.Font = new System.Drawing.Font("Georgia", 10F, System.Drawing.FontStyle.Bold);
+            PrikazPrakticni_Btn.Location = new System.Drawing.Point(551, 417);
             PrikazPrakticni_Btn.Name = "PrikazPrakticni_Btn";
-            PrikazPrakticni_Btn.Size = new System.Drawing.Size(264, 61);
+            PrikazPrakticni_Btn.Size = new System.Drawing.Size(236, 53);
             PrikazPrakticni_Btn.TabIndex = 16;
             PrikazPrakticni_Btn.Text = "Prikazi prakticne projekte";
             PrikazPrakticni_Btn.UseVisualStyleBackColor = false;
@@ -192,10 +193,10 @@
             // PrikazTeorijski_Btn
             // 
             PrikazTeorijski_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
-            PrikazTeorijski_Btn.Font = new System.Drawing.Font("Georgia", 14.25F);
-            PrikazTeorijski_Btn.Location = new System.Drawing.Point(523, 532);
+            PrikazTeorijski_Btn.Font = new System.Drawing.Font("Georgia", 10F, System.Drawing.FontStyle.Bold);
+            PrikazTeorijski_Btn.Location = new System.Drawing.Point(551, 480);
             PrikazTeorijski_Btn.Name = "PrikazTeorijski_Btn";
-            PrikazTeorijski_Btn.Size = new System.Drawing.Size(264, 61);
+            PrikazTeorijski_Btn.Size = new System.Drawing.Size(236, 54);
             PrikazTeorijski_Btn.TabIndex = 15;
             PrikazTeorijski_Btn.Text = "Prikazi teorijske projekte";
             PrikazTeorijski_Btn.UseVisualStyleBackColor = false;
@@ -211,7 +212,7 @@
             PrikazProjekta_GB.Controls.Add(label5);
             PrikazProjekta_GB.Controls.Add(label6);
             PrikazProjekta_GB.Controls.Add(SkoslkaGodZad_TB);
-            PrikazProjekta_GB.Location = new System.Drawing.Point(8, 417);
+            PrikazProjekta_GB.Location = new System.Drawing.Point(15, 417);
             PrikazProjekta_GB.Name = "PrikazProjekta_GB";
             PrikazProjekta_GB.Size = new System.Drawing.Size(426, 176);
             PrikazProjekta_GB.TabIndex = 17;
@@ -340,12 +341,26 @@
             SkoslkaGodZad_TB.Size = new System.Drawing.Size(182, 21);
             SkoslkaGodZad_TB.TabIndex = 1;
             // 
+            // Excel_Btn
+            // 
+            Excel_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
+            Excel_Btn.Font = new System.Drawing.Font("Georgia", 9F);
+            Excel_Btn.ForeColor = System.Drawing.SystemColors.ControlText;
+            Excel_Btn.Location = new System.Drawing.Point(551, 540);
+            Excel_Btn.Name = "Excel_Btn";
+            Excel_Btn.Size = new System.Drawing.Size(236, 53);
+            Excel_Btn.TabIndex = 18;
+            Excel_Btn.Text = "Snimi projekte u \r\nExcel tabelu";
+            Excel_Btn.UseVisualStyleBackColor = false;
+            Excel_Btn.Click += Excel_Btn_Click;
+            // 
             // Projekti
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = System.Drawing.Color.Linen;
             ClientSize = new System.Drawing.Size(805, 624);
+            Controls.Add(Excel_Btn);
             Controls.Add(PrikazProjekta_GB);
             Controls.Add(PrikazPrakticni_Btn);
             Controls.Add(PrikazTeorijski_Btn);
@@ -410,5 +425,6 @@
         private RadioButton Pojedinacni_RB;
         private RadioButton Grupni_RB;
         private GroupBox Tip_GB;
+        private Button Excel_Btn;
     }
 }

@@ -1,21 +1,22 @@
 ﻿using NHibernate.Linq;
 using StudentskiProjekti.Entiteti;
+using StudentskiProjekti.Forme;
 using static StudentskiProjekti.DTOs;
 
 namespace StudentskiProjekti;
 public class DTOManager
 {
-	#region Predmet
-	public static List<PredmetPregled> VratiSvePredmete()
+    #region Predmet
+    public static List<PredmetPregled> VratiSvePredmete()
     {
         List<PredmetPregled> predmeti = new List<PredmetPregled>();
         try
         {
             ISession s = DataLayer.GetSession();
 
-			IList<Predmet> sviPredmeti = s.Query<Predmet>().ToList() ;
+            IList<Predmet> sviPredmeti = s.Query<Predmet>().ToList();
 
-			foreach (Predmet p in sviPredmeti)
+            foreach (Predmet p in sviPredmeti)
             {
                 predmeti.Add(new PredmetPregled(p.Id, p.Naziv, p.Semestar, p.Katedra));
             }
@@ -32,30 +33,32 @@ public class DTOManager
 
     public static List<PredmetPregled> VratiSortiranePredmete(string semestarFilter, string katedraFilter)
     {
-		List<PredmetPregled> predmeti = new List<PredmetPregled>();
-		try
-		{
-			ISession s = DataLayer.GetSession();
+        List<PredmetPregled> predmeti = new List<PredmetPregled>();
+        try
+        {
+            ISession s = DataLayer.GetSession();
 
-			IList<Predmet> sviPredmeti = s.Query<Predmet>().Where(p =>
-			    (string.IsNullOrEmpty(semestarFilter) || p.Semestar.ToString() == semestarFilter) &&
-			    (string.IsNullOrEmpty(katedraFilter) || p.Katedra.StartsWith(katedraFilter, StringComparison.OrdinalIgnoreCase))
-		    ).ToList();
+            IList<Predmet> sviPredmeti = s.Query<Predmet>().Where(p =>
+                (string.IsNullOrEmpty(semestarFilter) || p.Semestar.ToString() == semestarFilter) &&
+                (string.IsNullOrEmpty(katedraFilter) || p.Katedra.StartsWith(katedraFilter, StringComparison.OrdinalIgnoreCase))
+            )
+            .OrderBy(p => p.Naziv)
+            .ToList();
 
-			foreach (Predmet p in sviPredmeti)
-			{
-				predmeti.Add(new PredmetPregled(p.Id, p.Naziv, p.Semestar, p.Katedra));
-			}
+            foreach (Predmet p in sviPredmeti)
+            {
+                predmeti.Add(new PredmetPregled(p.Id, p.Naziv, p.Semestar, p.Katedra));
+            }
 
-			s.Close();
-		}
-		catch (Exception ec)
-		{
-			Console.WriteLine(ec);
-		}
+            s.Close();
+        }
+        catch (Exception ec)
+        {
+            Console.WriteLine(ec);
+        }
 
-		return predmeti;
-	}
+        return predmeti;
+    }
 
     public static void DodajPredmet(PredmetPregled p)
     {
@@ -65,11 +68,11 @@ public class DTOManager
 
             Predmet o = new Predmet()
             {
-				Id = p.Id,
-			    Naziv = p.Naziv,
-			    Katedra = p.Katedra,
-			    Semestar = p.Semestar
-		    };
+                Id = p.Id,
+                Naziv = p.Naziv,
+                Katedra = p.Katedra,
+                Semestar = p.Semestar
+            };
 
             s.Save(o);
 
@@ -112,7 +115,7 @@ public class DTOManager
             o.Naziv = p.Naziv;
             o.Katedra = p.Katedra;
             o.Semestar = p.Semestar;
-            
+
 
             s.SaveOrUpdate(o);
             s.Flush();
@@ -144,117 +147,117 @@ public class DTOManager
 
         return pb;
     }
-	#endregion
+    #endregion
 
-	#region Student
+    #region Student
 
-	public static List<StudentPregled> VratiSveStudente()
-	{
-		List<StudentPregled> studenti = new List<StudentPregled>();
-		try
-		{
-			ISession session = DataLayer.GetSession();
-
-			IList<Student> sviStudenti = session.Query<Student>().ToList();
-
-			foreach (Student s in sviStudenti)
-			{
-				studenti.Add(new StudentPregled(s.BrIndeksa, s.LIme, s.ImeRoditelja, s.Prezime, s.Smer));
-			}
-
-			session.Close();
-		}
-		catch (Exception e)
-		{
-			Console.WriteLine(e);
-		}
-
-		return studenti;
-	}
-
-	public static List<StudentPregled> VratiSortiraneStudente(string brIndeksa, string ime, string prezime, string smer)
-	{
-		List<StudentPregled> studenti = new List<StudentPregled>();
-		try
-		{
-			ISession session = DataLayer.GetSession();
-
-			IList<Student> sviStudenti = session.Query<Student>()
-				.Where(s => (string.IsNullOrEmpty(brIndeksa) || s.BrIndeksa.StartsWith(brIndeksa)) &&
-							(string.IsNullOrEmpty(ime) || s.LIme.StartsWith(ime)) &&
-							(string.IsNullOrEmpty(prezime) || s.Prezime.StartsWith(prezime)) &&
-							(string.IsNullOrEmpty(smer) || s.Smer.StartsWith(smer)))
-				.ToList();
-
-			foreach (Student s in sviStudenti)
-			{
-				studenti.Add(new StudentPregled(s.BrIndeksa, s.LIme, s.ImeRoditelja, s.Prezime, s.Smer));
-			}
-
-			session.Close();
-		}
-		catch (Exception e)
-		{
-			Console.WriteLine(e);
-		}
-		return studenti;
-	}
-
-	public static void DodajStudenta(StudentPregled sp)
+    public static List<StudentPregled> VratiSveStudente()
     {
-		try
-		{
-			ISession s = DataLayer.GetSession();
+        List<StudentPregled> studenti = new List<StudentPregled>();
+        try
+        {
+            ISession session = DataLayer.GetSession();
 
-			Student student = new Student()
-			{
+            IList<Student> sviStudenti = session.Query<Student>().ToList();
+
+            foreach (Student s in sviStudenti)
+            {
+                studenti.Add(new StudentPregled(s.BrIndeksa, s.LIme, s.ImeRoditelja, s.Prezime, s.Smer));
+            }
+
+            session.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+
+        return studenti;
+    }
+
+    public static List<StudentPregled> VratiSortiraneStudente(string brIndeksa, string ime, string prezime, string smer)
+    {
+        List<StudentPregled> studenti = new List<StudentPregled>();
+        try
+        {
+            ISession session = DataLayer.GetSession();
+
+            IList<Student> sviStudenti = session.Query<Student>()
+                .Where(s => (string.IsNullOrEmpty(brIndeksa) || s.BrIndeksa.StartsWith(brIndeksa)) &&
+                            (string.IsNullOrEmpty(ime) || s.LIme.StartsWith(ime)) &&
+                            (string.IsNullOrEmpty(prezime) || s.Prezime.StartsWith(prezime)) &&
+                            (string.IsNullOrEmpty(smer) || s.Smer.StartsWith(smer)))
+                .ToList();
+
+            foreach (Student s in sviStudenti)
+            {
+                studenti.Add(new StudentPregled(s.BrIndeksa, s.LIme, s.ImeRoditelja, s.Prezime, s.Smer));
+            }
+
+            session.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        return studenti;
+    }
+
+    public static void DodajStudenta(StudentPregled sp)
+    {
+        try
+        {
+            ISession s = DataLayer.GetSession();
+
+            Student student = new Student()
+            {
                 BrIndeksa = sp.BrIndeksa,
                 LIme = sp.LIme,
                 Prezime = sp.Prezime,
                 ImeRoditelja = sp.ImeRoditelja,
                 Smer = sp.Smer
-			};
+            };
 
-			s.Save(student);
+            s.Save(student);
 
-			s.Flush();
+            s.Flush();
 
-			s.Close();
-		}
-		catch (Exception e)
-		{
-			Console.WriteLine(e.Message);
-		}
-	}
+            s.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
 
     public static void ObrisiStudenta(string brIndeksa)
     {
-		try
-		{
-			ISession s = DataLayer.GetSession();
+        try
+        {
+            ISession s = DataLayer.GetSession();
 
-			Student student = s.Load<Student>(brIndeksa);
+            Student student = s.Load<Student>(brIndeksa);
 
-			s.Delete(student);
+            s.Delete(student);
 
-			s.Flush();
+            s.Flush();
 
-			s.Close();
-		}
-		catch (Exception e)
-		{
-			Console.WriteLine(e.Message);
-		}
-	}
+            s.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
 
-    public static StudentPregled VratiStudenta(string brIndeksa) 
+    public static StudentPregled VratiStudenta(string brIndeksa)
     {
-		StudentPregled sp = null;
-		try
-		{
-			ISession s = DataLayer.GetSession();
+        StudentPregled sp = null;
+        try
+        {
+            ISession s = DataLayer.GetSession();
 
-			Student student = s.Load<Student>(brIndeksa);
+            Student student = s.Load<Student>(brIndeksa);
 
             sp = new StudentPregled()
             {
@@ -265,64 +268,56 @@ public class DTOManager
                 Smer = student.Smer
             };
 
-			s.Close();
-		}
-		catch (Exception e)
-		{
-			Console.WriteLine(e.Message);
-		}
+            s.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
         return sp;
-	}
+    }
 
-	public static void AzurirajStudenta(StudentPregled sp)
-	{
-		try
-		{
-			ISession s = DataLayer.GetSession();
+    public static void AzurirajStudenta(StudentPregled sp)
+    {
+        try
+        {
+            ISession s = DataLayer.GetSession();
 
-			Student o = s.Load<Student>(sp.BrIndeksa);
+            Student o = s.Load<Student>(sp.BrIndeksa);
             o.LIme = sp.LIme;
-            o.ImeRoditelja= sp.ImeRoditelja;
+            o.ImeRoditelja = sp.ImeRoditelja;
             o.Prezime = sp.Prezime;
             o.Smer = sp.Smer;
 
-			s.SaveOrUpdate(o);
-			s.Flush();
+            s.SaveOrUpdate(o);
+            s.Flush();
 
-			s.Close();
-		}
-		catch (Exception e)
-		{
-			Console.WriteLine(e.Message);
-		}
-	}
+            s.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
 
-	#endregion
+    #endregion
 
     #region Projekti
 
     public static List<ProjekatPregled> VratiProjekteZaPredmet(string idPredmeta)
     {
-        List<ProjekatPregled> projekti = new List<ProjekatPregled>();
+        List<ProjekatPregled> projektiPregled = new List<ProjekatPregled>();
         try
         {
             ISession s = DataLayer.GetSession();
 
-   
-            Predmet predmet = s.Query<Predmet>().FirstOrDefault(p => p.Id == idPredmeta);
 
-            if (predmet != null)
-            {
-                IList<Projekat> projektiZaPredmet = predmet.Projekti;
+            IList<Projekat> projekti = s.Query<Projekat>().Where(p => p.PripadaPredmetu.Id == idPredmeta).ToList();
 
-                foreach (Projekat p in projektiZaPredmet)
-                {
-                    projekti.Add(new ProjekatPregled(p.Naziv, p.SkolskaGodinaZadavanja,  p.VrstaProjekta, p.TipProjekta));
-                }
-            }
-            else
+
+            foreach (Projekat p in projekti)
             {
-                Console.WriteLine("Predmet nije pronađen.");
+                projektiPregled.Add(new ProjekatPregled(p.Naziv, p.SkolskaGodinaZadavanja, p.VrstaProjekta, p.TipProjekta));
             }
 
             s.Close();
@@ -332,9 +327,9 @@ public class DTOManager
             Console.WriteLine(ec);
         }
 
-        return projekti;
+        return projektiPregled;
     }
-    public static IList<ProjekatPregled> VratiProjekteZaPredmetSorted(string idPredmeta , string vrstaProjekta , string tipProjekta , string skolskaGodina)
+    public static IList<ProjekatPregled> VratiSortiraneProjekteZaPredmet(string idPredmeta, string vrstaProjekta, string tipProjekta, string skolskaGodina)
     {
         IList<ProjekatPregled> projektiFinal = new List<ProjekatPregled>();
         try
@@ -367,6 +362,66 @@ public class DTOManager
         return projektiFinal;
     }
 
+
+    #endregion
+
+    #region TeorijskiProjekti
+
+    public static List<TeorijskiProjekatPregled> VratiTeorijskeProjekteZaPredmet(string idPredmeta)
+    {
+        List<TeorijskiProjekatPregled> projekti = new List<TeorijskiProjekatPregled>();
+        try
+        {
+            ISession s = DataLayer.GetSession();
+
+            var teorijskiProjekti = s.Query<TeorijskiProjekat>()
+                                      .Where(p => p.PripadaPredmetu.Id == idPredmeta)
+                                      .ToList();
+
+            foreach (TeorijskiProjekat p in teorijskiProjekti)
+            {
+
+                projekti.Add(new TeorijskiProjekatPregled(p.Naziv, p.SkolskaGodinaZadavanja, p.VrstaProjekta, p.TipProjekta, p.MaksBrojStrana));
+            }
+
+            s.Close();
+        }
+        catch (Exception ec)
+        {
+            Console.WriteLine(ec);
+        }
+
+        return projekti;
+    }
+    #endregion
+
+    #region PrakticniProjekti
+    public static List<PrakticniProjekatPregled> VratiPrakticneProjekteZaPredmet(string idPredmeta)
+    {
+        List<PrakticniProjekatPregled> projekti = new List<PrakticniProjekatPregled>();
+        try
+        {
+            ISession s = DataLayer.GetSession();
+
+            var prakticniProjekti = s.Query<PrakticniProjekat>()
+                                      .Where(p => p.PripadaPredmetu.Id == idPredmeta)
+                                      .ToList();
+
+            foreach (PrakticniProjekat p in prakticniProjekti)
+            {
+
+                projekti.Add(new PrakticniProjekatPregled(p.Naziv, p.SkolskaGodinaZadavanja, p.VrstaProjekta, p.TipProjekta, p.PreporuceniProgramskiJezik));
+            }
+
+            s.Close();
+        }
+        catch (Exception ec)
+        {
+            Console.WriteLine(ec);
+        }
+
+        return projekti;
+    }
 
     #endregion
 }

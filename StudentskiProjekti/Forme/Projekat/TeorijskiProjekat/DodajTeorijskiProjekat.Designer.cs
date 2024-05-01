@@ -1,6 +1,6 @@
 ﻿namespace StudentskiProjekti.Forme
 {
-    partial class DodajProjekat
+    partial class DodajTeorijskiProjekat
     {
         /// <summary>
         /// Required designer variable.
@@ -35,16 +35,14 @@
             Naziv_TB = new TextBox();
             SkoslaGodIzdavanja_TB = new TextBox();
             Dodaj_Btn = new Button();
-            Teorijski_RB = new RadioButton();
             OsnovnipodaciopredmetuGB = new GroupBox();
+            textBox1 = new TextBox();
+            label4 = new Label();
             groupBox2 = new GroupBox();
             Pojedinacni_RB = new RadioButton();
             Grupni_RB = new RadioButton();
-            Tip = new GroupBox();
-            Prakticni_RB = new RadioButton();
             OsnovnipodaciopredmetuGB.SuspendLayout();
             groupBox2.SuspendLayout();
-            Tip.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -101,28 +99,18 @@
             // Dodaj_Btn
             // 
             Dodaj_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
-            Dodaj_Btn.Location = new System.Drawing.Point(218, 281);
+            Dodaj_Btn.Location = new System.Drawing.Point(218, 260);
             Dodaj_Btn.Name = "Dodaj_Btn";
             Dodaj_Btn.Size = new System.Drawing.Size(157, 29);
             Dodaj_Btn.TabIndex = 4;
             Dodaj_Btn.Text = "Dodaj";
             Dodaj_Btn.UseVisualStyleBackColor = false;
             // 
-            // Teorijski_RB
-            // 
-            Teorijski_RB.AutoSize = true;
-            Teorijski_RB.Location = new System.Drawing.Point(14, 30);
-            Teorijski_RB.Name = "Teorijski_RB";
-            Teorijski_RB.Size = new System.Drawing.Size(126, 19);
-            Teorijski_RB.TabIndex = 7;
-            Teorijski_RB.TabStop = true;
-            Teorijski_RB.Text = "Teorijski projekat";
-            Teorijski_RB.UseVisualStyleBackColor = true;
-            // 
             // OsnovnipodaciopredmetuGB
             // 
+            OsnovnipodaciopredmetuGB.Controls.Add(textBox1);
+            OsnovnipodaciopredmetuGB.Controls.Add(label4);
             OsnovnipodaciopredmetuGB.Controls.Add(groupBox2);
-            OsnovnipodaciopredmetuGB.Controls.Add(Tip);
             OsnovnipodaciopredmetuGB.Controls.Add(Dodaj_Btn);
             OsnovnipodaciopredmetuGB.Controls.Add(SkoslaGodIzdavanja_TB);
             OsnovnipodaciopredmetuGB.Controls.Add(Naziv_TB);
@@ -133,16 +121,33 @@
             OsnovnipodaciopredmetuGB.Font = new System.Drawing.Font("Georgia", 9F);
             OsnovnipodaciopredmetuGB.Location = new System.Drawing.Point(12, 12);
             OsnovnipodaciopredmetuGB.Name = "OsnovnipodaciopredmetuGB";
-            OsnovnipodaciopredmetuGB.Size = new System.Drawing.Size(384, 318);
+            OsnovnipodaciopredmetuGB.Size = new System.Drawing.Size(384, 306);
             OsnovnipodaciopredmetuGB.TabIndex = 0;
             OsnovnipodaciopredmetuGB.TabStop = false;
             OsnovnipodaciopredmetuGB.Text = "Osnovni podaci o projektu";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new System.Drawing.Point(158, 142);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new System.Drawing.Size(217, 21);
+            textBox1.TabIndex = 13;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new System.Drawing.Font("Georgia", 9F);
+            label4.Location = new System.Drawing.Point(8, 145);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(150, 15);
+            label4.TabIndex = 14;
+            label4.Text = "Maksimalan broj strana:";
             // 
             // groupBox2
             // 
             groupBox2.Controls.Add(Pojedinacni_RB);
             groupBox2.Controls.Add(Grupni_RB);
-            groupBox2.Location = new System.Drawing.Point(8, 203);
+            groupBox2.Location = new System.Drawing.Point(8, 181);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new System.Drawing.Size(367, 57);
             groupBox2.TabIndex = 12;
@@ -171,47 +176,23 @@
             Grupni_RB.Text = "Grupni projekat";
             Grupni_RB.UseVisualStyleBackColor = true;
             // 
-            // Tip
-            // 
-            Tip.Controls.Add(Prakticni_RB);
-            Tip.Controls.Add(Teorijski_RB);
-            Tip.Location = new System.Drawing.Point(8, 140);
-            Tip.Name = "Tip";
-            Tip.Size = new System.Drawing.Size(367, 57);
-            Tip.TabIndex = 11;
-            Tip.TabStop = false;
-            Tip.Text = "Vrsta";
-            // 
-            // Prakticni_RB
-            // 
-            Prakticni_RB.AutoSize = true;
-            Prakticni_RB.Location = new System.Drawing.Point(210, 30);
-            Prakticni_RB.Name = "Prakticni_RB";
-            Prakticni_RB.Size = new System.Drawing.Size(130, 19);
-            Prakticni_RB.TabIndex = 8;
-            Prakticni_RB.TabStop = true;
-            Prakticni_RB.Text = "Prakticni projekat";
-            Prakticni_RB.UseVisualStyleBackColor = true;
-            // 
             // DodajProjekat
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = System.Drawing.Color.AntiqueWhite;
-            ClientSize = new System.Drawing.Size(406, 339);
+            ClientSize = new System.Drawing.Size(406, 327);
             Controls.Add(OsnovnipodaciopredmetuGB);
             Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             MaximizeBox = false;
-            MaximumSize = new System.Drawing.Size(422, 378);
+            MaximumSize = new System.Drawing.Size(422, 366);
             MinimizeBox = false;
-            MinimumSize = new System.Drawing.Size(422, 378);
+            MinimumSize = new System.Drawing.Size(422, 366);
             Name = "DodajProjekat";
             Text = "Dodaj projekat";
             OsnovnipodaciopredmetuGB.ResumeLayout(false);
             OsnovnipodaciopredmetuGB.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
-            Tip.ResumeLayout(false);
-            Tip.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -224,12 +205,11 @@
         private TextBox Naziv_TB;
         private TextBox SkoslaGodIzdavanja_TB;
         private Button Dodaj_Btn;
-        private RadioButton Teorijski_RB;
         private GroupBox OsnovnipodaciopredmetuGB;
         private GroupBox groupBox2;
         private RadioButton Pojedinacni_RB;
         private RadioButton Grupni_RB;
-        private GroupBox Tip;
-        private RadioButton Prakticni_RB;
+        private TextBox textBox1;
+        private Label label4;
     }
 }

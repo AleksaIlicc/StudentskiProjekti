@@ -1,12 +1,11 @@
 ﻿using static StudentskiProjekti.DTOs;
+
 namespace StudentskiProjekti.Forme;
-
-
-public partial class DodajProjekat : Form
+public partial class DodajTeorijskiProjekat : Form
 {
 
     ProjekatPregled projekat = new ProjekatPregled();
-    public DodajProjekat()
+    public DodajTeorijskiProjekat()
     {
         InitializeComponent();
     }
@@ -28,15 +27,6 @@ public partial class DodajProjekat : Form
             else if(Grupni_RB.Checked)
             {
                 this.projekat.TipProjekta = "grupni";
-            }
-
-            if (Teorijski_RB.Checked)
-            {
-                this.projekat.VrstaProjekta = "teorijski";
-            }
-            else if (Prakticni_RB.Checked)
-            {
-                this.projekat.VrstaProjekta = "prakticni";
             }
 
             //treba funkcija
