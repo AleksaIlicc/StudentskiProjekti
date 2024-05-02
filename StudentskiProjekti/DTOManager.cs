@@ -381,7 +381,7 @@ public class DTOManager
             foreach (TeorijskiProjekat p in teorijskiProjekti)
             {
 
-                projekti.Add(new TeorijskiProjekatPregled(p.Naziv, p.SkolskaGodinaZadavanja, p.VrstaProjekta, p.TipProjekta, p.MaksBrojStrana));
+                projekti.Add(new TeorijskiProjekatPregled(p.Id.ToString() , p.Naziv, p.SkolskaGodinaZadavanja, p.TipProjekta, p.MaksBrojStrana));
             }
 
             s.Close();
@@ -411,7 +411,7 @@ public class DTOManager
             foreach (PrakticniProjekat p in prakticniProjekti)
             {
 
-                projekti.Add(new PrakticniProjekatPregled(p.Naziv, p.SkolskaGodinaZadavanja, p.VrstaProjekta, p.TipProjekta, p.PreporuceniProgramskiJezik));
+                projekti.Add(new PrakticniProjekatPregled(p.Id.ToString() ,p.Naziv, p.SkolskaGodinaZadavanja, p.TipProjekta, p.PreporuceniProgramskiJezik));
             }
 
             s.Close();

@@ -15,11 +15,11 @@ public partial class PrakticniProjekti : Form
 		PrakticniProjekti_ListV.Items.Clear();
 		IList<PrakticniProjekatPregled> prakticniProjekat = DTOManager.VratiPrakticneProjekteZaPredmet(izabraniPredmet.Id);
 
-		foreach (PrakticniProjekatPregled p in prakticniProjekat)
-		{
-			ListViewItem item = new ListViewItem(new string[] { p.Naziv, p.SkolskaGodinaZadavanja, p.VrstaProjekta, p.TipProjekta, p.PreporuceniProgramskiJezik });
-			PrakticniProjekti_ListV.Items.Add(item);
-		}
+        foreach (PrakticniProjekatPregled p in prakticniProjekat)
+        {
+            ListViewItem item = new ListViewItem(new string[] { p.Id ,p.Naziv, p.SkolskaGodinaZadavanja, p.TipProjekta, p.PreporuceniProgramskiJezik });
+            PrakticniProjekti_ListV.Items.Add(item);
+        }
 
 		PrakticniProjekti_ListV.Refresh();
 	}
