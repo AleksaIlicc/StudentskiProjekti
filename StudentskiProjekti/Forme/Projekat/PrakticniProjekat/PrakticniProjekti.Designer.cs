@@ -34,13 +34,13 @@
             PrakticniProjekti_ListV = new ListView();
             columnHeader1 = new ColumnHeader();
             columnHeader2 = new ColumnHeader();
-            columnHeader3 = new ColumnHeader();
             columnHeader4 = new ColumnHeader();
             columnHeader5 = new ColumnHeader();
             IzmeniProjekte_GB = new GroupBox();
             IzmeniProjekatP_Btn = new Button();
             DodajProjekatP_Btn = new Button();
             ObrisiProjekatP_Btn = new Button();
+            columnHeader3 = new ColumnHeader();
             PrakticniProjekti_GB.SuspendLayout();
             IzmeniProjekte_GB.SuspendLayout();
             SuspendLayout();
@@ -82,7 +82,7 @@
             // 
             // PrakticniProjekti_ListV
             // 
-            PrakticniProjekti_ListV.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4, columnHeader5 });
+            PrakticniProjekti_ListV.Columns.AddRange(new ColumnHeader[] { columnHeader3, columnHeader1, columnHeader2, columnHeader4, columnHeader5 });
             PrakticniProjekti_ListV.FullRowSelect = true;
             PrakticniProjekti_ListV.GridLines = true;
             PrakticniProjekti_ListV.Location = new System.Drawing.Point(7, 48);
@@ -102,12 +102,6 @@
             columnHeader2.Text = "Skolska god. zadavanja";
             columnHeader2.TextAlign = HorizontalAlignment.Center;
             columnHeader2.Width = 145;
-            // 
-            // columnHeader3
-            // 
-            columnHeader3.Text = "Vrsta projekta";
-            columnHeader3.TextAlign = HorizontalAlignment.Center;
-            columnHeader3.Width = 100;
             // 
             // columnHeader4
             // 
@@ -168,12 +162,16 @@
             ObrisiProjekatP_Btn.Text = "Obrisi projekat";
             ObrisiProjekatP_Btn.UseVisualStyleBackColor = false;
             // 
+            // columnHeader3
+            // 
+            columnHeader3.Text = "Id";
+            // 
             // PrakticniProjekti
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = System.Drawing.Color.Linen;
-            ClientSize = new System.Drawing.Size(805, 624);
+            ClientSize = new System.Drawing.Size(803, 616);
             Controls.Add(IzmeniProjekte_GB);
             Controls.Add(PrakticniProjekti_GB);
             Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
@@ -197,7 +195,6 @@
         private ListView PrakticniProjekti_ListV;
         private ColumnHeader columnHeader1;
         private ColumnHeader columnHeader2;
-        private ColumnHeader columnHeader3;
         private ColumnHeader columnHeader4;
         private ColumnHeader columnHeader5;
         private GroupBox IzmeniProjekte_GB;
@@ -206,5 +203,6 @@
         private Button ObrisiProjekatP_Btn;
         private Button KratakOpis_Btn;
         private Button PreporuceneWebStrane_Btn;
+        private ColumnHeader columnHeader3;
     }
 }

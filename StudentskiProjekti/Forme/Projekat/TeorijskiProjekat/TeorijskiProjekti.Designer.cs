@@ -33,13 +33,13 @@
             TeorijskiProjekti_ListV = new ListView();
             columnHeader1 = new ColumnHeader();
             columnHeader2 = new ColumnHeader();
-            columnHeader3 = new ColumnHeader();
             columnHeader4 = new ColumnHeader();
             columnHeader5 = new ColumnHeader();
             IzmeniTeorijski_GB = new GroupBox();
             IzmeniProjekatT_Btn = new Button();
             DodajProjekatT_Btn = new Button();
             ObrisiProjekatT_Btn = new Button();
+            columnHeader3 = new ColumnHeader();
             TeorijskiProjekti_GB.SuspendLayout();
             IzmeniTeorijski_GB.SuspendLayout();
             SuspendLayout();
@@ -69,7 +69,7 @@
             // 
             // TeorijskiProjekti_ListV
             // 
-            TeorijskiProjekti_ListV.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4, columnHeader5 });
+            TeorijskiProjekti_ListV.Columns.AddRange(new ColumnHeader[] { columnHeader3, columnHeader1, columnHeader2, columnHeader4, columnHeader5 });
             TeorijskiProjekti_ListV.FullRowSelect = true;
             TeorijskiProjekti_ListV.GridLines = true;
             TeorijskiProjekti_ListV.Location = new System.Drawing.Point(6, 37);
@@ -89,12 +89,6 @@
             columnHeader2.Text = "Skolska god. zadavanja";
             columnHeader2.TextAlign = HorizontalAlignment.Center;
             columnHeader2.Width = 145;
-            // 
-            // columnHeader3
-            // 
-            columnHeader3.Text = "Vrsta projekta";
-            columnHeader3.TextAlign = HorizontalAlignment.Center;
-            columnHeader3.Width = 100;
             // 
             // columnHeader4
             // 
@@ -155,12 +149,16 @@
             ObrisiProjekatT_Btn.Text = "Obrisi projekat";
             ObrisiProjekatT_Btn.UseVisualStyleBackColor = false;
             // 
+            // columnHeader3
+            // 
+            columnHeader3.Text = "Id";
+            // 
             // TeorijskiProjekti
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = System.Drawing.Color.Linen;
-            ClientSize = new System.Drawing.Size(805, 624);
+            ClientSize = new System.Drawing.Size(803, 616);
             Controls.Add(IzmeniTeorijski_GB);
             Controls.Add(TeorijskiProjekti_GB);
             Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
@@ -184,7 +182,6 @@
         private ListView TeorijskiProjekti_ListV;
         private ColumnHeader columnHeader1;
         private ColumnHeader columnHeader2;
-        private ColumnHeader columnHeader3;
         private ColumnHeader columnHeader4;
         private ColumnHeader columnHeader5;
         private GroupBox IzmeniTeorijski_GB;
@@ -192,5 +189,6 @@
         private Button DodajProjekatT_Btn;
         private Button ObrisiProjekatT_Btn;
         private Button Literatura;
+        private ColumnHeader columnHeader3;
     }
 }

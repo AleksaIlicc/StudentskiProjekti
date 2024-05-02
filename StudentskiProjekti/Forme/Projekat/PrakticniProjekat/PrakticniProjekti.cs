@@ -19,7 +19,7 @@ public partial class PrakticniProjekti : Form
 
         foreach (PrakticniProjekatPregled p in prakticniProjekat)
         {
-            ListViewItem item = new ListViewItem(new string[] { p.Naziv, p.SkolskaGodinaZadavanja, p.VrstaProjekta, p.TipProjekta, p.PreporuceniProgramskiJezik });
+            ListViewItem item = new ListViewItem(new string[] { p.Id ,p.Naziv, p.SkolskaGodinaZadavanja, p.TipProjekta, p.PreporuceniProgramskiJezik });
             PrakticniProjekti_ListV.Items.Add(item);
         }
 

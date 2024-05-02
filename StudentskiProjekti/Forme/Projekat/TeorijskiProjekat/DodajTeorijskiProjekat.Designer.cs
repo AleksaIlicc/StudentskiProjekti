@@ -51,7 +51,7 @@
             label1.Font = new System.Drawing.Font("Georgia", 9F);
             label1.Location = new System.Drawing.Point(8, 42);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(45, 15);
+            label1.Size = new System.Drawing.Size(52, 18);
             label1.TabIndex = 0;
             label1.Text = "Naziv:";
             // 
@@ -61,7 +61,7 @@
             label2.Font = new System.Drawing.Font("Georgia", 9F);
             label2.Location = new System.Drawing.Point(8, 74);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(144, 15);
+            label2.Size = new System.Drawing.Size(167, 18);
             label2.TabIndex = 1;
             label2.Text = "Skolska god. zadavanja:";
             // 
@@ -71,7 +71,7 @@
             label3.Font = new System.Drawing.Font("Georgia", 9F);
             label3.Location = new System.Drawing.Point(8, 109);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(65, 15);
+            label3.Size = new System.Drawing.Size(74, 18);
             label3.TabIndex = 2;
             label3.Text = "Semestar:";
             // 
@@ -79,21 +79,21 @@
             // 
             Semestar_TB.Location = new System.Drawing.Point(158, 106);
             Semestar_TB.Name = "Semestar_TB";
-            Semestar_TB.Size = new System.Drawing.Size(217, 21);
+            Semestar_TB.Size = new System.Drawing.Size(217, 25);
             Semestar_TB.TabIndex = 2;
             // 
             // Naziv_TB
             // 
             Naziv_TB.Location = new System.Drawing.Point(158, 39);
             Naziv_TB.Name = "Naziv_TB";
-            Naziv_TB.Size = new System.Drawing.Size(217, 21);
+            Naziv_TB.Size = new System.Drawing.Size(217, 25);
             Naziv_TB.TabIndex = 0;
             // 
             // SkoslaGodIzdavanja_TB
             // 
             SkoslaGodIzdavanja_TB.Location = new System.Drawing.Point(158, 71);
             SkoslaGodIzdavanja_TB.Name = "SkoslaGodIzdavanja_TB";
-            SkoslaGodIzdavanja_TB.Size = new System.Drawing.Size(217, 21);
+            SkoslaGodIzdavanja_TB.Size = new System.Drawing.Size(217, 25);
             SkoslaGodIzdavanja_TB.TabIndex = 1;
             // 
             // Dodaj_Btn
@@ -130,7 +130,7 @@
             // 
             textBox1.Location = new System.Drawing.Point(158, 142);
             textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(217, 21);
+            textBox1.Size = new System.Drawing.Size(217, 25);
             textBox1.TabIndex = 13;
             // 
             // label4
@@ -139,7 +139,7 @@
             label4.Font = new System.Drawing.Font("Georgia", 9F);
             label4.Location = new System.Drawing.Point(8, 145);
             label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(150, 15);
+            label4.Size = new System.Drawing.Size(172, 18);
             label4.TabIndex = 14;
             label4.Text = "Maksimalan broj strana:";
             // 
@@ -159,7 +159,7 @@
             Pojedinacni_RB.AutoSize = true;
             Pojedinacni_RB.Location = new System.Drawing.Point(210, 30);
             Pojedinacni_RB.Name = "Pojedinacni_RB";
-            Pojedinacni_RB.Size = new System.Drawing.Size(143, 19);
+            Pojedinacni_RB.Size = new System.Drawing.Size(164, 22);
             Pojedinacni_RB.TabIndex = 10;
             Pojedinacni_RB.TabStop = true;
             Pojedinacni_RB.Text = "Pojedinacni projekat";
@@ -170,24 +170,24 @@
             Grupni_RB.AutoSize = true;
             Grupni_RB.Location = new System.Drawing.Point(14, 30);
             Grupni_RB.Name = "Grupni_RB";
-            Grupni_RB.Size = new System.Drawing.Size(118, 19);
+            Grupni_RB.Size = new System.Drawing.Size(135, 22);
             Grupni_RB.TabIndex = 9;
             Grupni_RB.TabStop = true;
             Grupni_RB.Text = "Grupni projekat";
             Grupni_RB.UseVisualStyleBackColor = true;
             // 
-            // DodajProjekat
+            // DodajTeorijskiProjekat
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = System.Drawing.Color.AntiqueWhite;
-            ClientSize = new System.Drawing.Size(406, 327);
+            ClientSize = new System.Drawing.Size(404, 319);
             Controls.Add(OsnovnipodaciopredmetuGB);
             Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             MaximizeBox = false;
             MaximumSize = new System.Drawing.Size(422, 366);
             MinimizeBox = false;
             MinimumSize = new System.Drawing.Size(422, 366);
-            Name = "DodajProjekat";
+            Name = "DodajTeorijskiProjekat";
             Text = "Dodaj projekat";
             OsnovnipodaciopredmetuGB.ResumeLayout(false);
             OsnovnipodaciopredmetuGB.PerformLayout();
