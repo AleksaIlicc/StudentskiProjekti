@@ -77,9 +77,9 @@ public class DTOs
     #region PrakticniProjekat
     public class PrakticniProjekatPregled : ProjekatPregled
     {
-        public virtual string KratakOpis { get; set; }
-        public virtual string PreporuceniProgramskiJezik { get; set; }
-        public virtual IList<PProjektiWebStranice> PreporuceneWebStranice { get; set; }
+        public string KratakOpis { get; set; }
+        public string PreporuceniProgramskiJezik { get; set; }
+        public IList<PProjektiWebStranice> PreporuceneWebStranice { get; set; }
 
         public PrakticniProjekatPregled(string id, string naziv, string skolskaGodinaZadavanja, string vrstaProjekta, string tipProjekta, string kratakOpis, string preporuceniProgramskiJezik, IList<PProjektiWebStranice> preporuceneWebStranice) : base(id, naziv, skolskaGodinaZadavanja, vrstaProjekta, tipProjekta)
         {
@@ -94,7 +94,17 @@ public class DTOs
         }
         public PrakticniProjekatPregled() : base() { }
     }
-    #endregion
+
+    public class PreporucenaWebStranicaPregled
+    {
+        public string Naziv { get; set; }
+        public PreporucenaWebStranicaPregled(string naziv)
+        {
+            this.Naziv = naziv;
+        }
+    }
+
+	#endregion
 
 	#region Student
 

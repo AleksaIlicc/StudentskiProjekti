@@ -443,5 +443,32 @@ public class DTOManager
 		return kratakOpis;
 	}
 
+	public static IList<PreporucenaWebStranicaPregled> VratiPreporuceneWebStranicePProjekta(int idProjekta)
+    {
+		List<PreporucenaWebStranicaPregled> finalStranice = new List<PreporucenaWebStranicaPregled>();
+		try
+		{
+			ISession s = DataLayer.GetSession();
+
+			var webStranice = s.Query<PProjektiWebStranice>()
+									  .Where(p => p.PProjekat.Id == idProjekta)
+									  .OrderBy(p => p.PreporucenaWebStrana)
+									  .ToList();
+
+			foreach (var ws in webStranice)
+            {
+				finalStranice.Add(new PreporucenaWebStranicaPregled(ws.PreporucenaWebStrana));
+			}
+
+			s.Close();
+		}
+		catch (Exception ec)
+		{
+			Console.WriteLine(ec);
+		}
+
+		return finalStranice;
+	}
+
 	#endregion
 }

@@ -47,7 +47,7 @@ public partial class PrakticniProjekti : Form
 	{
 		if (PrakticniProjekti_ListV.SelectedItems.Count == 0)
 		{
-			MessageBox.Show("Izaberite predmet koji zelite da izmenite!");
+			MessageBox.Show("Izaberite predmet za koji zelite da prikazete opis!");
 		}
 		else
 		{
@@ -55,5 +55,23 @@ public partial class PrakticniProjekti : Form
 			string opisProjekta = DTOManager.VratiOpisPrakticnogProjekta(idProjekta);
 			MessageBox.Show(opisProjekta, "Kratak opis projekta");
 		}
+	}
+
+	private void PreporuceneWebStrane_Btn_Click(object sender, EventArgs e)
+	{
+		if (PrakticniProjekti_ListV.SelectedItems.Count == 0)
+		{
+			MessageBox.Show("Izaberite predmet za koji zelite da prikazete web stranice!");
+		}
+		else
+		{
+			int.TryParse(PrakticniProjekti_ListV.SelectedItems[0].Tag.ToString(), out int idProjekta);
+			PreporuceneWebStranice izmeniPproj = new PreporuceneWebStranice(idProjekta)
+			{
+				StartPosition = FormStartPosition.CenterParent
+			};
+			izmeniPproj.ShowDialog();
+		}
+		
 	}
 }

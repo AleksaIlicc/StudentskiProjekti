@@ -85,6 +85,7 @@
 			PreporuceneWebStrane_Btn.TabIndex = 2;
 			PreporuceneWebStrane_Btn.Text = "Prikazi preporucene web stranice projekta";
 			PreporuceneWebStrane_Btn.UseVisualStyleBackColor = false;
+			PreporuceneWebStrane_Btn.Click += PreporuceneWebStrane_Btn_Click;
 			// 
 			// PrakticniProjekti_ListV
 			// 
