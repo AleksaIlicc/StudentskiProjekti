@@ -29,13 +29,22 @@ public class DTOs
     #region Projekat
     public class ProjekatPregled
     {
-        public string Id { get; protected set;}
+        public int Id { get; protected set;}
         public string TipProjekta { get; set; }
         public string Naziv { get; set; }
         public string SkolskaGodinaZadavanja { get; set; }
         public string VrstaProjekta { get; set; }
-
-        public ProjekatPregled(string id , string naziv, string skolskaGodinaZadavanja, string vrstaProjekta, string tipProjekta)
+        public Predmet PripadaPredmetu { get; set; }
+        public ProjekatPregled(int id, string naziv, string skolskaGodinaZadavanja, string vrstaProjekta, string tipProjekta, Predmet predmet)
+        {
+            this.Id = id;
+            this.TipProjekta = tipProjekta;
+            this.Naziv = naziv;
+            this.SkolskaGodinaZadavanja = skolskaGodinaZadavanja;
+            this.VrstaProjekta = vrstaProjekta;
+            this.PripadaPredmetu = predmet;
+        }
+        public ProjekatPregled(int id, string naziv, string skolskaGodinaZadavanja, string vrstaProjekta, string tipProjekta)
         {
             this.Id = id;
             this.TipProjekta = tipProjekta;
@@ -43,7 +52,7 @@ public class DTOs
             this.SkolskaGodinaZadavanja = skolskaGodinaZadavanja;
             this.VrstaProjekta = vrstaProjekta;
         }
-        public ProjekatPregled(string id ,string naziv, string skolskaGodinaZadavanja, string tipProjekta)
+        public ProjekatPregled(int id ,string naziv, string skolskaGodinaZadavanja, string tipProjekta)
         {
             this.Id= id;
             this.TipProjekta = tipProjekta;
@@ -61,12 +70,14 @@ public class DTOs
     {
         public virtual int MaksBrojStrana { get; set; }
 
-        public TeorijskiProjekatPregled(string id, string naziv, string skolskaGodinaZadavanja, string vrstaProjekta, string tipProjekta, int maksBrojStrana) : base(id ,naziv, skolskaGodinaZadavanja, vrstaProjekta, tipProjekta)
+
+
+        public TeorijskiProjekatPregled(int id, string naziv, string skolskaGodinaZadavanja, string vrstaProjekta, string tipProjekta, int maksBrojStrana, Predmet predmet) : base(id ,naziv, skolskaGodinaZadavanja, vrstaProjekta, tipProjekta, predmet)
         {
             MaksBrojStrana = maksBrojStrana;
         }
 
-        public TeorijskiProjekatPregled(string id, string naziv, string skolskaGodinaZadavanja, string tipProjekta, int maksBrojStrana) : base(id ,naziv, skolskaGodinaZadavanja, tipProjekta)
+        public TeorijskiProjekatPregled(int id, string naziv, string skolskaGodinaZadavanja, string tipProjekta, int maksBrojStrana) : base(id ,naziv, skolskaGodinaZadavanja, tipProjekta)
         {
             MaksBrojStrana = maksBrojStrana;
         }
@@ -81,14 +92,14 @@ public class DTOs
         public virtual string PreporuceniProgramskiJezik { get; set; }
         public virtual IList<PProjektiWebStranice> PreporuceneWebStranice { get; set; }
 
-        public PrakticniProjekatPregled(string id, string naziv, string skolskaGodinaZadavanja, string vrstaProjekta, string tipProjekta, string kratakOpis, string preporuceniProgramskiJezik, IList<PProjektiWebStranice> preporuceneWebStranice) : base(id, naziv, skolskaGodinaZadavanja, vrstaProjekta, tipProjekta)
+        public PrakticniProjekatPregled(int id, string naziv, string skolskaGodinaZadavanja, string vrstaProjekta, string tipProjekta, string kratakOpis, string preporuceniProgramskiJezik, IList<PProjektiWebStranice> preporuceneWebStranice , Predmet predmet) : base(id, naziv, skolskaGodinaZadavanja, vrstaProjekta, tipProjekta, predmet)
         {
             KratakOpis = kratakOpis;
             PreporuceniProgramskiJezik = preporuceniProgramskiJezik;
             PreporuceneWebStranice = preporuceneWebStranice;
         }
 
-        public PrakticniProjekatPregled(string id, string naziv, string skolskaGodinaZadavanja, string tipProjekta, string preporuceniProgramskiJezik) : base(id, naziv, skolskaGodinaZadavanja, tipProjekta)
+        public PrakticniProjekatPregled(int id, string naziv, string skolskaGodinaZadavanja, string tipProjekta, string preporuceniProgramskiJezik) : base(id, naziv, skolskaGodinaZadavanja, tipProjekta)
         {
             PreporuceniProgramskiJezik = preporuceniProgramskiJezik;
         }

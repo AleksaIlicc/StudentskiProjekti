@@ -314,7 +314,7 @@ public class DTOManager
 
             foreach (Projekat p in projekti)
             {
-                projektiPregled.Add(new ProjekatPregled(p.Naziv, p.SkolskaGodinaZadavanja, p.VrstaProjekta, p.TipProjekta));
+                projektiPregled.Add(new ProjekatPregled(p.Id ,p.Naziv, p.SkolskaGodinaZadavanja, p.VrstaProjekta, p.TipProjekta));
             }
 
             s.Close();
@@ -346,7 +346,7 @@ public class DTOManager
 
             foreach (Projekat p in projekti)
             {
-                projektiFinal.Add(new ProjekatPregled(p.Naziv, p.SkolskaGodinaZadavanja, p.VrstaProjekta, p.TipProjekta));
+                projektiFinal.Add(new ProjekatPregled(p.Id , p.Naziv, p.SkolskaGodinaZadavanja, p.VrstaProjekta, p.TipProjekta));
             }
 
             s.Close();
@@ -378,7 +378,7 @@ public class DTOManager
             foreach (TeorijskiProjekat p in teorijskiProjekti)
             {
 
-                projekti.Add(new TeorijskiProjekatPregled(p.Id.ToString() , p.Naziv, p.SkolskaGodinaZadavanja, p.TipProjekta, p.MaksBrojStrana));
+                projekti.Add(new TeorijskiProjekatPregled(p.Id, p.Naziv, p.SkolskaGodinaZadavanja, p.TipProjekta, p.MaksBrojStrana));
             }
 
             s.Close();
@@ -389,6 +389,84 @@ public class DTOManager
         }
 
         return projekti;
+    }
+
+    public static void DodajTeorijskiProjekat(string id , string naziv , int semestar, string katedra , TeorijskiProjekatPregled p)
+    {
+        try
+        {
+            ISession s = DataLayer.GetSession();
+
+            Predmet pred = new Predmet
+            {
+                Id = id,
+                Naziv = naziv,
+                Semestar = semestar,
+                Katedra = katedra,
+            };
+
+            TeorijskiProjekat o = new TeorijskiProjekat()
+            {
+
+                Naziv = p.Naziv,
+                SkolskaGodinaZadavanja = p.SkolskaGodinaZadavanja,
+                MaksBrojStrana = p.MaksBrojStrana,
+                VrstaProjekta = p.VrstaProjekta,
+                TipProjekta = p.TipProjekta,
+                PripadaPredmetu = pred,
+            };
+            s.Save(o);
+
+            s.Flush();
+
+            s.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
+    public static void ObrisiTeorijskiProjekat(string id)
+    {
+        try
+        {
+            ISession s = DataLayer.GetSession();
+
+            TeorijskiProjekat o = s.Load<TeorijskiProjekat>(id);
+
+            s.Delete(o);
+
+            s.Flush();
+
+            s.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
+    public static void AzurirajTeorijskiProjekat(TeorijskiProjekat p)
+    {
+        try
+        {
+            ISession s = DataLayer.GetSession();
+
+            TeorijskiProjekat o = s.Load<TeorijskiProjekat>(p.Id);
+            o.Naziv = p.Naziv;
+            o.SkolskaGodinaZadavanja = p.SkolskaGodinaZadavanja;
+            o.MaksBrojStrana = p.MaksBrojStrana;
+            o.TipProjekta = p.TipProjekta;
+
+
+            s.SaveOrUpdate(o);
+            s.Flush();
+
+            s.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
     }
     #endregion
 
@@ -408,7 +486,7 @@ public class DTOManager
             foreach (PrakticniProjekat p in prakticniProjekti)
             {
 
-                projekti.Add(new PrakticniProjekatPregled(p.Id.ToString() ,p.Naziv, p.SkolskaGodinaZadavanja, p.TipProjekta, p.PreporuceniProgramskiJezik));
+                projekti.Add(new PrakticniProjekatPregled(p.Id ,p.Naziv, p.SkolskaGodinaZadavanja, p.TipProjekta, p.PreporuceniProgramskiJezik));
             }
 
             s.Close();

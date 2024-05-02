@@ -89,6 +89,7 @@ public partial class Projekti : Form
             StartPosition = FormStartPosition.CenterParent
         };
         teorijskiProjekti.ShowDialog();
+        
     }
 
     private void Excel_Btn_Click(object sender, EventArgs e)

@@ -30,13 +30,11 @@
         {
             label1 = new Label();
             label2 = new Label();
-            label3 = new Label();
-            Semestar_TB = new TextBox();
             Naziv_TB = new TextBox();
             SkoslaGodIzdavanja_TB = new TextBox();
             Dodaj_Btn = new Button();
             OsnovnipodaciopredmetuGB = new GroupBox();
-            textBox1 = new TextBox();
+            MaxBrStranica_TB = new TextBox();
             label4 = new Label();
             groupBox2 = new GroupBox();
             Pojedinacni_RB = new RadioButton();
@@ -65,23 +63,6 @@
             label2.TabIndex = 1;
             label2.Text = "Skolska god. zadavanja:";
             // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new System.Drawing.Font("Georgia", 9F);
-            label3.Location = new System.Drawing.Point(8, 109);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(74, 18);
-            label3.TabIndex = 2;
-            label3.Text = "Semestar:";
-            // 
-            // Semestar_TB
-            // 
-            Semestar_TB.Location = new System.Drawing.Point(158, 106);
-            Semestar_TB.Name = "Semestar_TB";
-            Semestar_TB.Size = new System.Drawing.Size(217, 25);
-            Semestar_TB.TabIndex = 2;
-            // 
             // Naziv_TB
             // 
             Naziv_TB.Location = new System.Drawing.Point(158, 39);
@@ -99,45 +80,46 @@
             // Dodaj_Btn
             // 
             Dodaj_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
-            Dodaj_Btn.Location = new System.Drawing.Point(218, 260);
+            Dodaj_Btn.Location = new System.Drawing.Point(218, 222);
             Dodaj_Btn.Name = "Dodaj_Btn";
             Dodaj_Btn.Size = new System.Drawing.Size(157, 29);
             Dodaj_Btn.TabIndex = 4;
             Dodaj_Btn.Text = "Dodaj";
             Dodaj_Btn.UseVisualStyleBackColor = false;
+            Dodaj_Btn.Click += Dodaj_Btn_Click;
             // 
             // OsnovnipodaciopredmetuGB
             // 
-            OsnovnipodaciopredmetuGB.Controls.Add(textBox1);
+            OsnovnipodaciopredmetuGB.Controls.Add(MaxBrStranica_TB);
             OsnovnipodaciopredmetuGB.Controls.Add(label4);
             OsnovnipodaciopredmetuGB.Controls.Add(groupBox2);
             OsnovnipodaciopredmetuGB.Controls.Add(Dodaj_Btn);
             OsnovnipodaciopredmetuGB.Controls.Add(SkoslaGodIzdavanja_TB);
             OsnovnipodaciopredmetuGB.Controls.Add(Naziv_TB);
-            OsnovnipodaciopredmetuGB.Controls.Add(Semestar_TB);
-            OsnovnipodaciopredmetuGB.Controls.Add(label3);
             OsnovnipodaciopredmetuGB.Controls.Add(label2);
             OsnovnipodaciopredmetuGB.Controls.Add(label1);
             OsnovnipodaciopredmetuGB.Font = new System.Drawing.Font("Georgia", 9F);
-            OsnovnipodaciopredmetuGB.Location = new System.Drawing.Point(12, 12);
+            OsnovnipodaciopredmetuGB.Location = new System.Drawing.Point(12, 11);
+            OsnovnipodaciopredmetuGB.MaximumSize = new System.Drawing.Size(384, 261);
+            OsnovnipodaciopredmetuGB.MinimumSize = new System.Drawing.Size(384, 261);
             OsnovnipodaciopredmetuGB.Name = "OsnovnipodaciopredmetuGB";
-            OsnovnipodaciopredmetuGB.Size = new System.Drawing.Size(384, 306);
+            OsnovnipodaciopredmetuGB.Size = new System.Drawing.Size(384, 261);
             OsnovnipodaciopredmetuGB.TabIndex = 0;
             OsnovnipodaciopredmetuGB.TabStop = false;
             OsnovnipodaciopredmetuGB.Text = "Osnovni podaci o projektu";
             // 
-            // textBox1
+            // MaxBrStranica_TB
             // 
-            textBox1.Location = new System.Drawing.Point(158, 142);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(217, 25);
-            textBox1.TabIndex = 13;
+            MaxBrStranica_TB.Location = new System.Drawing.Point(158, 103);
+            MaxBrStranica_TB.Name = "MaxBrStranica_TB";
+            MaxBrStranica_TB.Size = new System.Drawing.Size(217, 25);
+            MaxBrStranica_TB.TabIndex = 13;
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new System.Drawing.Font("Georgia", 9F);
-            label4.Location = new System.Drawing.Point(8, 145);
+            label4.Location = new System.Drawing.Point(8, 106);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(172, 18);
             label4.TabIndex = 14;
@@ -147,7 +129,7 @@
             // 
             groupBox2.Controls.Add(Pojedinacni_RB);
             groupBox2.Controls.Add(Grupni_RB);
-            groupBox2.Location = new System.Drawing.Point(8, 181);
+            groupBox2.Location = new System.Drawing.Point(8, 143);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new System.Drawing.Size(367, 57);
             groupBox2.TabIndex = 12;
@@ -180,13 +162,11 @@
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = System.Drawing.Color.AntiqueWhite;
-            ClientSize = new System.Drawing.Size(404, 319);
+            ClientSize = new System.Drawing.Size(404, 278);
             Controls.Add(OsnovnipodaciopredmetuGB);
             Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             MaximizeBox = false;
-            MaximumSize = new System.Drawing.Size(422, 366);
             MinimizeBox = false;
-            MinimumSize = new System.Drawing.Size(422, 366);
             Name = "DodajTeorijskiProjekat";
             Text = "Dodaj projekat";
             OsnovnipodaciopredmetuGB.ResumeLayout(false);
@@ -200,8 +180,6 @@
 
         private Label label1;
         private Label label2;
-        private Label label3;
-        private TextBox Semestar_TB;
         private TextBox Naziv_TB;
         private TextBox SkoslaGodIzdavanja_TB;
         private Button Dodaj_Btn;
@@ -209,7 +187,7 @@
         private GroupBox groupBox2;
         private RadioButton Pojedinacni_RB;
         private RadioButton Grupni_RB;
-        private TextBox textBox1;
+        private TextBox MaxBrStranica_TB;
         private Label label4;
     }
 }
