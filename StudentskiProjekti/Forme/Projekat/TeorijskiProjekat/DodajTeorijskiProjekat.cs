@@ -1,13 +1,16 @@
-﻿using static StudentskiProjekti.DTOs;
+﻿using DocumentFormat.OpenXml.Drawing;
+using static StudentskiProjekti.DTOs;
 
 namespace StudentskiProjekti.Forme;
 public partial class DodajTeorijskiProjekat : Form
 {
 
     TeorijskiProjekatPregled projekat = new TeorijskiProjekatPregled();
-    public DodajTeorijskiProjekat()
+    PredmetPregled izabranipremet = new PredmetPregled();
+    public DodajTeorijskiProjekat(PredmetPregled predmet)
     {
         InitializeComponent();
+        izabranipremet = predmet;
     }
     private void Dodaj_Btn_Click(object sender, EventArgs e)
     {
@@ -18,7 +21,7 @@ public partial class DodajTeorijskiProjekat : Form
 
         if (result == DialogResult.OK)
         {
-            this.projekat.Naziv = SkoslaGodIzdavanja_TB.Text;
+            this.projekat.Naziv = Naziv_TB.Text;
             this.projekat.SkolskaGodinaZadavanja = SkoslaGodIzdavanja_TB.Text;
             if (Pojedinacni_RB.Checked)
             {
@@ -28,7 +31,10 @@ public partial class DodajTeorijskiProjekat : Form
             {
                 this.projekat.TipProjekta = "grupni";
             }
+            this.projekat.MaksBrojStrana = int.TryParse(MaxBrStranica_TB.Text, out int maksBrojStranica) ? maksBrojStranica : default(int);
+            this.projekat.VrstaProjekta = "teorijski";
 
+            DTOManager.DodajTeorijskiProjekat(izabranipremet.Id , izabranipremet.Naziv ,izabranipremet.Semestar, izabranipremet.Katedra , projekat);
             MessageBox.Show("Uspesno ste dodali novi predmet!");
             this.Close();
         }

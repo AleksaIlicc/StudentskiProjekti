@@ -35,11 +35,12 @@ public partial class TeorijskiProjekti : Form
 
     private void DodajProjekatT_Btn_Click(object sender, EventArgs e)
     {
-        DodajTeorijskiProjekat dodajTproj = new DodajTeorijskiProjekat()
+        DodajTeorijskiProjekat dodajTproj = new DodajTeorijskiProjekat(izabraniPredmet)
         {
             StartPosition = FormStartPosition.CenterParent
         };
         dodajTproj.ShowDialog();
+        PopuniPodacima();
     }
 
     private void IzmeniProjekatT_Btn_Click(object sender, EventArgs e)
