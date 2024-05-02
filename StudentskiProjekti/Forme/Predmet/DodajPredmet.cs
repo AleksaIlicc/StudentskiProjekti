@@ -36,11 +36,11 @@ public partial class DodajPredmet : Form
 				MessageBox.Show("Morate uneti ispravan broj za semestar (celobrojna vrednost veća od 0)!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
+
 			this.predmet.Id = Sifra_TB.Text;
             this.predmet.Naziv = Naziv_TB.Text;
             this.predmet.Semestar = int.TryParse(Semestar_TB.Text, out semestar) ? semestar : 0;
             this.predmet.Katedra = Katedra_TB.Text;
-
 
             DTOManager.DodajPredmet(this.predmet);
             MessageBox.Show("Uspesno ste dodali novi predmet!");

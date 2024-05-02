@@ -16,7 +16,6 @@ public partial class Predmeti : Form
     {
         Predmeti_ListV.Items.Clear();
         List<PredmetPregled> predmeti = DTOManager.VratiSvePredmete();
-        predmeti = predmeti.OrderBy(p => p.Naziv).ToList();
 
         foreach (PredmetPregled p in predmeti)
         {
@@ -37,25 +36,23 @@ public partial class Predmeti : Form
     }
     private void IzmeniPredmet_Btn_Click(object sender, EventArgs e)
     {
-
         if (Predmeti_ListV.SelectedItems.Count == 0)
         {
             MessageBox.Show("Izaberite predmet koji zelite da izmenite!");
-        }
-        else
+			return;
+		}
+
+        string idPredmeta = Predmeti_ListV.SelectedItems[0].SubItems[0].Text;
+        PredmetPregled ob = DTOManager.VratiPredmet(idPredmeta);
+
+        IzmeniPredmet formaUpdate = new IzmeniPredmet(ob)
         {
-            string idPredmeta = Predmeti_ListV.SelectedItems[0].SubItems[0].Text;
-            PredmetPregled ob = DTOManager.VratiPredmet(idPredmeta);
+            StartPosition = FormStartPosition.CenterParent
+        };
 
-            IzmeniPredmet formaUpdate = new IzmeniPredmet(ob)
-            {
-                StartPosition = FormStartPosition.CenterParent
-            };
+        formaUpdate.ShowDialog();
 
-            formaUpdate.ShowDialog();
-
-            PopuniPodacima();
-        }
+        PopuniPodacima();
     }
 
     private void ObrisiPredmet_Btn_Click(object sender, EventArgs e)
@@ -85,7 +82,7 @@ public partial class Predmeti : Form
         string semestarFilter = Semestar_TB.Text;
         string katedraFilter = NazivKatedre_TB.Text;
 
-        List<PredmetPregled> filtriraniPredmeti = DTOManager.VratiSortiranePredmete(semestarFilter,katedraFilter);
+        List<PredmetPregled> filtriraniPredmeti = DTOManager.VratiSortiranePredmete(semestarFilter, katedraFilter);
 
         Predmeti_ListV.Items.Clear();
 

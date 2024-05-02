@@ -33,7 +33,7 @@ public partial class DodajTeorijskiProjekat : Form
             }
             this.projekat.MaksBrojStrana = int.TryParse(MaxBrStranica_TB.Text, out int maksBrojStranica) ? maksBrojStranica : default(int);
             this.projekat.VrstaProjekta = "teorijski";
-
+            //projekat.PripadaPredmetu = izabranipremet;
             DTOManager.DodajTeorijskiProjekat(izabranipremet.Id , izabranipremet.Naziv ,izabranipremet.Semestar, izabranipremet.Katedra , projekat);
             MessageBox.Show("Uspesno ste dodali novi predmet!");
             this.Close();

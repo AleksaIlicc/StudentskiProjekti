@@ -15,7 +15,6 @@ public partial class Studenti : Form
     {
         Studenti_ListV.Items.Clear();
         List<StudentPregled> studenti = DTOManager.VratiSveStudente();
-        studenti = studenti.OrderBy(s => s.BrIndeksa).ToList();
 
         foreach (StudentPregled s in studenti)
         {
@@ -41,7 +40,7 @@ public partial class Studenti : Form
         PopuniPodacima();
     }
 
-    private void ObrisiStudenta_Btn_Click_1(object sender, EventArgs e)
+    private void ObrisiStudenta_Btn_Click(object sender, EventArgs e)
     {
         if (Studenti_ListV.SelectedItems.Count == 0)
         {
@@ -68,21 +67,18 @@ public partial class Studenti : Form
         if (Studenti_ListV.SelectedItems.Count == 0)
         {
             MessageBox.Show("Izaberite studenta kojeg zelite da izmenite!");
+            return;
         }
-        else
+
+        string brIndeksaStudenta = Studenti_ListV.SelectedItems[0].SubItems[0].Text;
+        StudentPregled sp = DTOManager.VratiStudenta(brIndeksaStudenta);
+
+        IzmeniStudenta formaUpdate = new IzmeniStudenta(sp)
         {
-            string brIndeksaStudenta = Studenti_ListV.SelectedItems[0].SubItems[0].Text;
-            StudentPregled sp = DTOManager.VratiStudenta(brIndeksaStudenta);
-
-            IzmeniStudenta formaUpdate = new IzmeniStudenta(sp)
-            {
-                StartPosition = FormStartPosition.CenterParent
-            };
-
-            formaUpdate.ShowDialog();
-
-            PopuniPodacima();
-        }
+            StartPosition = FormStartPosition.CenterParent
+        };
+        formaUpdate.ShowDialog();
+        PopuniPodacima();
     }
 
     private void Ocisti_Btn_Click(object sender, EventArgs e)

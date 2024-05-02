@@ -49,12 +49,9 @@ public partial class PrakticniProjekti : Form
 		{
 			MessageBox.Show("Izaberite predmet za koji zelite da prikazete opis!");
 		}
-		else
-		{
-			int.TryParse(PrakticniProjekti_ListV.SelectedItems[0].Tag.ToString(), out int idProjekta);
-			string opisProjekta = DTOManager.VratiOpisPrakticnogProjekta(idProjekta);
-			MessageBox.Show(opisProjekta, "Kratak opis projekta");
-		}
+		int idProjekta = (int)PrakticniProjekti_ListV.SelectedItems[0].Tag;
+		string opisProjekta = DTOManager.VratiOpisPrakticnogProjekta(idProjekta);
+		MessageBox.Show(opisProjekta, "Kratak opis projekta");
 	}
 
 	private void PreporuceneWebStrane_Btn_Click(object sender, EventArgs e)

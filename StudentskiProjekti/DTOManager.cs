@@ -11,7 +11,7 @@ public class DTOManager
         {
             ISession s = DataLayer.GetSession();
 
-            IList<Predmet> sviPredmeti = s.Query<Predmet>().ToList();
+            IList<Predmet> sviPredmeti = s.Query<Predmet>().OrderBy(p => p.Naziv).ToList();
 
             foreach (Predmet p in sviPredmeti)
             {
@@ -82,6 +82,7 @@ public class DTOManager
             Console.WriteLine(e.Message);
         }
     }
+
     public static void ObrisiPredmet(string id)
     {
         try
@@ -101,6 +102,7 @@ public class DTOManager
             Console.WriteLine(e.Message);
         }
     }
+
     public static void AzurirajPredmet(PredmetPregled p)
     {
         try
@@ -112,7 +114,6 @@ public class DTOManager
             o.Naziv = p.Naziv;
             o.Katedra = p.Katedra;
             o.Semestar = p.Semestar;
-
 
             s.SaveOrUpdate(o);
             s.Flush();
@@ -155,7 +156,7 @@ public class DTOManager
         {
             ISession session = DataLayer.GetSession();
 
-            IList<Student> sviStudenti = session.Query<Student>().ToList();
+            IList<Student> sviStudenti = session.Query<Student>().OrderBy(s => s.BrIndeksa).ToList();
 
             foreach (Student s in sviStudenti)
             {
@@ -309,12 +310,15 @@ public class DTOManager
             ISession s = DataLayer.GetSession();
 
 
-            IList<Projekat> projekti = s.Query<Projekat>().Where(p => p.PripadaPredmetu.Id == idPredmeta).OrderBy(p=>p.SkolskaGodinaZadavanja).ToList();
+            IList<Projekat> projekti = s.Query<Projekat>()
+                .Where(p => p.PripadaPredmetu.Id == idPredmeta)
+                .OrderBy(p=>p.SkolskaGodinaZadavanja)
+                .ToList();
 
 
             foreach (Projekat p in projekti)
             {
-                projektiPregled.Add(new ProjekatPregled(p.Id ,p.Naziv, p.SkolskaGodinaZadavanja, p.VrstaProjekta, p.TipProjekta));
+                projektiPregled.Add(new ProjekatPregled(p.Id, p.Naziv, p.SkolskaGodinaZadavanja, p.VrstaProjekta, p.TipProjekta));
             }
 
             s.Close();
@@ -328,11 +332,10 @@ public class DTOManager
     }
     public static IList<ProjekatPregled> VratiSortiraneProjekteZaPredmet(string idPredmeta, string vrstaProjekta, string tipProjekta, string skolskaGodina)
     {
-        IList<ProjekatPregled> projektiFinal = new List<ProjekatPregled>();
+        IList<ProjekatPregled> projektiPregled = new List<ProjekatPregled>();
         try
         {
             ISession s = DataLayer.GetSession();
-
 
             IList<Projekat> projekti = s.Query<Predmet>()
                 .Where(p => p.Id == idPredmeta)
@@ -346,7 +349,7 @@ public class DTOManager
 
             foreach (Projekat p in projekti)
             {
-                projektiFinal.Add(new ProjekatPregled(p.Id , p.Naziv, p.SkolskaGodinaZadavanja, p.VrstaProjekta, p.TipProjekta));
+				projektiPregled.Add(new ProjekatPregled(p.Id , p.Naziv, p.SkolskaGodinaZadavanja, p.VrstaProjekta, p.TipProjekta));
             }
 
             s.Close();
@@ -356,7 +359,7 @@ public class DTOManager
             Console.WriteLine(ec);
         }
 
-        return projektiFinal;
+        return projektiPregled;
     }
 
 

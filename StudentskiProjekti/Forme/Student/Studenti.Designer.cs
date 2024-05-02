@@ -158,7 +158,7 @@ namespace StudentskiProjekti.Forme
             ObrisiStudenta_Btn.TabIndex = 0;
             ObrisiStudenta_Btn.Text = "Obrisi studenta";
             ObrisiStudenta_Btn.UseVisualStyleBackColor = false;
-            ObrisiStudenta_Btn.Click += ObrisiStudenta_Btn_Click_1;
+            ObrisiStudenta_Btn.Click += ObrisiStudenta_Btn_Click;
             // 
             // Prikaz_GB
             // 

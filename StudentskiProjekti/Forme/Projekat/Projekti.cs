@@ -5,8 +5,7 @@ using static StudentskiProjekti.DTOs;
 
 namespace StudentskiProjekti.Forme;
 public partial class Projekti : Form
-{
-
+{ 
     private PredmetPregled izabraniPredmet;
     public Projekti(PredmetPregled izabraniPredmet)
     {
@@ -25,7 +24,6 @@ public partial class Projekti : Form
 
     public void PopuniPodacima()
     {
-
         Projekti_ListV.Items.Clear();
         IList<ProjekatPregled> projekti = DTOManager.VratiProjekteZaPredmet(izabraniPredmet.Id);
 
@@ -64,7 +62,6 @@ public partial class Projekti : Form
 
     private void Ocisti_Btn_Click(object sender, EventArgs e)
     {
-
         Prakticni_RB.Checked = false;
         Teorijski_RB.Checked = false;
         Grupni_RB.Checked = false;
@@ -80,19 +77,20 @@ public partial class Projekti : Form
             StartPosition = FormStartPosition.CenterParent
         };
         prakticniProjekti.ShowDialog();
-    }
+		PopuniPodacima();
+	}
 
-    private void PrikazTeorijski_Btn_Click(object sender, EventArgs e)
+	private void PrikazTeorijski_Btn_Click(object sender, EventArgs e)
     {
         TeorijskiProjekti teorijskiProjekti = new TeorijskiProjekti(izabraniPredmet)
         {
             StartPosition = FormStartPosition.CenterParent
         };
         teorijskiProjekti.ShowDialog();
-        
-    }
+		PopuniPodacima();
+	}
 
-    private void Excel_Btn_Click(object sender, EventArgs e)
+	private void Excel_Btn_Click(object sender, EventArgs e)
     {
         SaveFileDialog saveFileDialog = new SaveFileDialog();
         saveFileDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";

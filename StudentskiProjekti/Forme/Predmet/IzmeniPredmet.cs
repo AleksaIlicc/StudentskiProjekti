@@ -28,7 +28,6 @@ public partial class IzmeniPredmet : Form
         Naziv_TB.Text = this.predmet.Naziv;
         Katedra_TB.Text = this.predmet.Katedra;
         Semestar_TB.Text = this.predmet.Semestar.ToString();
-
     }
     private void Izmeni_Btn_Click(object sender, EventArgs e)
     {
@@ -72,10 +71,6 @@ public partial class IzmeniPredmet : Form
             {
                 MessageBox.Show("Azuriranje predmeta nije uspesno, sifra predmeta vec postoji!");
             }
-        }
-        else
-        {
-
         }
     }
 }
