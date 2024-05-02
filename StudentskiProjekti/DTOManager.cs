@@ -1,7 +1,4 @@
-﻿using NHibernate.Linq;
-using StudentskiProjekti.Entiteti;
-using StudentskiProjekti.Forme;
-using static StudentskiProjekti.DTOs;
+﻿using static StudentskiProjekti.DTOs;
 
 namespace StudentskiProjekti;
 public class DTOManager

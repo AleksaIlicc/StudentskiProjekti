@@ -15,11 +15,12 @@ public partial class PrakticniProjekti : Form
 		PrakticniProjekti_ListV.Items.Clear();
 		IList<PrakticniProjekatPregled> prakticniProjekat = DTOManager.VratiPrakticneProjekteZaPredmet(izabraniPredmet.Id);
 
-        foreach (PrakticniProjekatPregled p in prakticniProjekat)
-        {
-            ListViewItem item = new ListViewItem(new string[] { p.Id ,p.Naziv, p.SkolskaGodinaZadavanja, p.TipProjekta, p.PreporuceniProgramskiJezik });
-            PrakticniProjekti_ListV.Items.Add(item);
-        }
+		foreach (PrakticniProjekatPregled p in prakticniProjekat)
+		{
+			ListViewItem item = new ListViewItem(new string[] { p.Naziv, p.SkolskaGodinaZadavanja, p.TipProjekta, p.PreporuceniProgramskiJezik });
+			item.Tag = p.Id;
+			PrakticniProjekti_ListV.Items.Add(item);
+		}
 
 		PrakticniProjekti_ListV.Refresh();
 	}
@@ -50,7 +51,7 @@ public partial class PrakticniProjekti : Form
 		}
 		else
 		{
-			int.TryParse(PrakticniProjekti_ListV.SelectedItems[0].SubItems[0].Text, out int idProjekta);
+			int.TryParse(PrakticniProjekti_ListV.SelectedItems[0].Tag.ToString(), out int idProjekta);
 			string opisProjekta = DTOManager.VratiOpisPrakticnogProjekta(idProjekta);
 			MessageBox.Show(opisProjekta, "Kratak opis projekta");
 		}
