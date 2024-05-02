@@ -429,7 +429,7 @@ public class DTOManager
             Console.WriteLine(e.Message);
         }
     }
-    public static void ObrisiTeorijskiProjekat(string id)
+    public static void ObrisiTeorijskiProjekat(int id)
     {
         try
         {
@@ -448,7 +448,7 @@ public class DTOManager
             Console.WriteLine(e.Message);
         }
     }
-    public static void AzurirajTeorijskiProjekat(TeorijskiProjekat p)
+    public static void AzurirajTeorijskiProjekat(TeorijskiProjekatPregled p)
     {
         try
         {
@@ -470,6 +470,26 @@ public class DTOManager
         {
             Console.WriteLine(e.Message);
         }
+    }
+
+    public static TeorijskiProjekatPregled VratiTeorijskiProjekat(int id)
+    {
+        TeorijskiProjekatPregled p = null;
+        try
+        {
+            ISession s = DataLayer.GetSession();
+
+            TeorijskiProjekat o = s.Load<TeorijskiProjekat>(id);
+            p = new TeorijskiProjekatPregled(o.Id, o.Naziv, o.SkolskaGodinaZadavanja, o.TipProjekta, o.MaksBrojStrana);
+
+            s.Close();
+        }
+        catch (Exception ec)
+        {
+            Console.WriteLine(ec.Message);
+        }
+
+        return p;
     }
     #endregion
 

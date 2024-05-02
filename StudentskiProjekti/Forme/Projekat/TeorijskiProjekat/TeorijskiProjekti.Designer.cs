@@ -31,14 +31,14 @@
             TeorijskiProjekti_GB = new GroupBox();
             Literatura = new Button();
             TeorijskiProjekti_ListV = new ListView();
-            IzmeniTeorijski_GB = new GroupBox();
-            IzmeniProjekatT_Btn = new Button();
-            DodajProjekatT_Btn = new Button();
-            ObrisiProjekatT_Btn = new Button();
             columnHeader3 = new ColumnHeader();
             columnHeader6 = new ColumnHeader();
             columnHeader7 = new ColumnHeader();
             columnHeader8 = new ColumnHeader();
+            IzmeniTeorijski_GB = new GroupBox();
+            IzmeniProjekatT_Btn = new Button();
+            DodajProjekatT_Btn = new Button();
+            ObrisiProjekatT_Btn = new Button();
             TeorijskiProjekti_GB.SuspendLayout();
             IzmeniTeorijski_GB.SuspendLayout();
             SuspendLayout();
@@ -77,6 +77,29 @@
             TeorijskiProjekti_ListV.TabIndex = 0;
             TeorijskiProjekti_ListV.UseCompatibleStateImageBehavior = false;
             TeorijskiProjekti_ListV.View = View.Details;
+            // 
+            // columnHeader3
+            // 
+            columnHeader3.Text = "Naziv";
+            columnHeader3.Width = 430;
+            // 
+            // columnHeader6
+            // 
+            columnHeader6.Text = "Skolska god. zadavanja";
+            columnHeader6.TextAlign = HorizontalAlignment.Center;
+            columnHeader6.Width = 145;
+            // 
+            // columnHeader7
+            // 
+            columnHeader7.Text = "Tip";
+            columnHeader7.TextAlign = HorizontalAlignment.Center;
+            columnHeader7.Width = 100;
+            // 
+            // columnHeader8
+            // 
+            columnHeader8.Text = "Maksimlani br. strana";
+            columnHeader8.TextAlign = HorizontalAlignment.Center;
+            columnHeader8.Width = 120;
             // 
             // IzmeniTeorijski_GB
             // 
@@ -125,29 +148,7 @@
             ObrisiProjekatT_Btn.TabIndex = 2;
             ObrisiProjekatT_Btn.Text = "Obrisi projekat";
             ObrisiProjekatT_Btn.UseVisualStyleBackColor = false;
-            // 
-            // columnHeader3
-            // 
-            columnHeader3.Text = "Naziv";
-            columnHeader3.Width = 430;
-            // 
-            // columnHeader6
-            // 
-            columnHeader6.Text = "Skolska god. zadavanja";
-            columnHeader6.TextAlign = HorizontalAlignment.Center;
-            columnHeader6.Width = 145;
-            // 
-            // columnHeader7
-            // 
-            columnHeader7.Text = "Tip";
-            columnHeader7.TextAlign = HorizontalAlignment.Center;
-            columnHeader7.Width = 100;
-            // 
-            // columnHeader8
-            // 
-            columnHeader8.Text = "Maksimlani br. strana";
-            columnHeader8.TextAlign = HorizontalAlignment.Center;
-            columnHeader8.Width = 120;
+            ObrisiProjekatT_Btn.Click += ObrisiProjekatT_Btn_Click;
             // 
             // TeorijskiProjekti
             // 
