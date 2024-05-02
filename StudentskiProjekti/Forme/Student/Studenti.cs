@@ -167,8 +167,10 @@ public partial class Studenti : Form
                     row.Append(
                         new Cell() { CellValue = new CellValue(item.SubItems[0].Text), DataType = CellValues.String }, 
                         new Cell() { CellValue = new CellValue(item.SubItems[1].Text), DataType = CellValues.String },
-                        new Cell() { CellValue = new CellValue(item.SubItems[2].Text), DataType = CellValues.String } 
-                    );
+                        new Cell() { CellValue = new CellValue(item.SubItems[2].Text), DataType = CellValues.String },
+						new Cell() { CellValue = new CellValue(item.SubItems[3].Text), DataType = CellValues.String },
+						new Cell() { CellValue = new CellValue(item.SubItems[4].Text), DataType = CellValues.String }
+					);
                     sheetData.Append(row);
                 }
 

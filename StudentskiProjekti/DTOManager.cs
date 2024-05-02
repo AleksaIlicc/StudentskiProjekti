@@ -312,7 +312,7 @@ public class DTOManager
             ISession s = DataLayer.GetSession();
 
 
-            IList<Projekat> projekti = s.Query<Projekat>().Where(p => p.PripadaPredmetu.Id == idPredmeta).ToList();
+            IList<Projekat> projekti = s.Query<Projekat>().Where(p => p.PripadaPredmetu.Id == idPredmeta).OrderBy(p=>p.SkolskaGodinaZadavanja).ToList();
 
 
             foreach (Projekat p in projekti)
@@ -405,7 +405,8 @@ public class DTOManager
 
             var prakticniProjekti = s.Query<PrakticniProjekat>()
                                       .Where(p => p.PripadaPredmetu.Id == idPredmeta)
-                                      .ToList();
+									  .OrderBy(p => p.SkolskaGodinaZadavanja)
+									  .ToList();
 
             foreach (PrakticniProjekat p in prakticniProjekti)
             {
@@ -423,5 +424,27 @@ public class DTOManager
         return projekti;
     }
 
-    #endregion
+	public static string VratiOpisPrakticnogProjekta(int idProjekta)
+    {
+        string kratakOpis = null;
+		try
+		{
+			ISession s = DataLayer.GetSession();
+
+            var prakticniProjekat = s.Query<PrakticniProjekat>()
+                                      .Where(p => p.Id == idProjekta)
+                                      .FirstOrDefault();
+            kratakOpis = prakticniProjekat.KratakOpis;
+
+			s.Close();
+		}
+		catch (Exception ec)
+		{
+			Console.WriteLine(ec);
+		}
+
+		return kratakOpis;
+	}
+
+	#endregion
 }

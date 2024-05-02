@@ -28,7 +28,6 @@ public partial class Projekti : Form
 
         Projekti_ListV.Items.Clear();
         IList<ProjekatPregled> projekti = DTOManager.VratiProjekteZaPredmet(izabraniPredmet.Id);
-        projekti = projekti.OrderBy(p => p.SkolskaGodinaZadavanja).ToList();
 
         foreach (ProjekatPregled p in projekti)
         {
