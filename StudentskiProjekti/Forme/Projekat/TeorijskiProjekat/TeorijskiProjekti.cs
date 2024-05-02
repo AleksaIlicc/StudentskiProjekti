@@ -45,10 +45,40 @@ public partial class TeorijskiProjekti : Form
 
     private void IzmeniProjekatT_Btn_Click(object sender, EventArgs e)
     {
-        IzmeniTeorijskiProjekat izmeniTproj = new IzmeniTeorijskiProjekat()
+        if (TeorijskiProjekti_ListV.SelectedItems.Count == 0)
+        {
+            MessageBox.Show("Izaberite projekat koji zelite da izmenite!");
+            return;
+        }
+        int idprojekta = (int)TeorijskiProjekti_ListV.SelectedItems[0].Tag;
+        TeorijskiProjekatPregled ob = DTOManager.VratiTeorijskiProjekat(idprojekta);
+        IzmeniTeorijskiProjekat izmeniTproj = new IzmeniTeorijskiProjekat(ob)
         {
             StartPosition = FormStartPosition.CenterParent
         };
         izmeniTproj.ShowDialog();
+        PopuniPodacima();
+    }
+
+    private void ObrisiProjekatT_Btn_Click(object sender, EventArgs e)
+    {
+        if (TeorijskiProjekti_ListV.SelectedItems.Count == 0)
+        {
+            MessageBox.Show("Izaberite projekat koji zelite da obrisete!");
+            return;
+        }
+
+        int idProjekta = (int)TeorijskiProjekti_ListV.SelectedItems[0].Tag;
+        string poruka = "Da li zelite da obrisete izabrani projekat?";
+        string title = "Pitanje";
+        MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+        DialogResult result = MessageBox.Show(poruka, title, buttons);
+
+        if (result == DialogResult.OK)
+        {
+            DTOManager.ObrisiTeorijskiProjekat(idProjekta);
+            MessageBox.Show("Brisanje projekta je uspesno obavljeno!");
+            PopuniPodacima();
+        }
     }
 }
