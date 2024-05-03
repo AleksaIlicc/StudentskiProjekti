@@ -99,6 +99,7 @@
 			Semestar_TB.Name = "Semestar_TB";
 			Semestar_TB.Size = new System.Drawing.Size(217, 21);
 			Semestar_TB.TabIndex = 2;
+			Semestar_TB.KeyPress += Semestar_TB_KeyPress;
 			// 
 			// label4
 			// 

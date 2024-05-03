@@ -1,11 +1,10 @@
 ﻿using static StudentskiProjekti.DTOs;
 
 namespace StudentskiProjekti.Forme;
-
 public partial class TeorijskiProjekti : Form
 {
-    DTOs.PredmetPregled izabraniPredmet;
-    public TeorijskiProjekti(DTOs.PredmetPregled predmet)
+    PredmetPregled izabraniPredmet;
+    public TeorijskiProjekti(PredmetPregled predmet)
     {
         izabraniPredmet = predmet;
         InitializeComponent();
@@ -18,10 +17,8 @@ public partial class TeorijskiProjekti : Form
 
     public void PopuniPodacima()
     {
-
         TeorijskiProjekti_ListV.Items.Clear();
         IList<TeorijskiProjekatPregled> teorijskiprojekti = DTOManager.VratiTeorijskeProjekteZaPredmet(izabraniPredmet.Id);
-        teorijskiprojekti = teorijskiprojekti.OrderBy(p => p.SkolskaGodinaZadavanja).ToList();
 
         foreach (TeorijskiProjekatPregled p in teorijskiprojekti)
         {

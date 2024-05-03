@@ -35,19 +35,19 @@ public class DTOs
         public string Naziv { get; set; }
         public string SkolskaGodinaZadavanja { get; set; }
         public string VrstaProjekta { get; set; }
-        //public PredmetPregled PripadaPredmetu { get; set; }
+        public PredmetPregled PripadaPredmetu { get; set; }
 
-        public ProjekatPregled(int id, string naziv, string skolskaGodinaZadavanja, string vrstaProjekta, string tipProjekta)
+		public ProjekatPregled(int id, string naziv, string skolskaGodinaZadavanja, string tipProjekta, string vrstaProjekta)
+		{
+			this.Id = id;
+			this.TipProjekta = tipProjekta;
+			this.Naziv = naziv;
+			this.SkolskaGodinaZadavanja = skolskaGodinaZadavanja;
+            this.VrstaProjekta = vrstaProjekta;
+		}
+		public ProjekatPregled(int id, string naziv, string skolskaGodinaZadavanja, string tipProjekta)
         {
             this.Id = id;
-            this.TipProjekta = tipProjekta;
-            this.Naziv = naziv;
-            this.SkolskaGodinaZadavanja = skolskaGodinaZadavanja;
-            this.VrstaProjekta = vrstaProjekta;
-        }
-        public ProjekatPregled(int id ,string naziv, string skolskaGodinaZadavanja, string tipProjekta)
-        {
-            this.Id= id;
             this.TipProjekta = tipProjekta;
             this.Naziv = naziv;
             this.SkolskaGodinaZadavanja = skolskaGodinaZadavanja;
@@ -61,13 +61,15 @@ public class DTOs
     #region TeorijskiProjekat
     public class TeorijskiProjekatPregled : ProjekatPregled
     {
-        public virtual int MaksBrojStrana { get; set; }
+        public int MaksBrojStrana { get; set; }
 
-        public TeorijskiProjekatPregled(int id, string naziv, string skolskaGodinaZadavanja, string tipProjekta, int maksBrojStrana) : base(id ,naziv, skolskaGodinaZadavanja, tipProjekta)
-        {
-            MaksBrojStrana = maksBrojStrana;
-        }
-        public TeorijskiProjekatPregled() : base() { }
+		public TeorijskiProjekatPregled(int id, string naziv, string skolskaGodinaZadavanja, string tipProjekta, int maksBrojStrana) : base(id, naziv, skolskaGodinaZadavanja, tipProjekta)
+		{
+			base.VrstaProjekta = "teorijski";
+			MaksBrojStrana = maksBrojStrana;
+		}
+
+		public TeorijskiProjekatPregled() : base() { }
     }
     #endregion
 
@@ -76,13 +78,12 @@ public class DTOs
     {
         public string KratakOpis { get; set; }
         public string PreporuceniProgramskiJezik { get; set; }
-        public IList<PProjektiWebStranice> PreporuceneWebStranice { get; set; }
 
-        public PrakticniProjekatPregled(int id, string naziv, string skolskaGodinaZadavanja, string tipProjekta, string preporuceniProgramskiJezik) : base(id, naziv, skolskaGodinaZadavanja, tipProjekta)
-        {
-            PreporuceniProgramskiJezik = preporuceniProgramskiJezik;
-        }
-        public PrakticniProjekatPregled() : base() { }
+		public PrakticniProjekatPregled(int id, string naziv, string skolskaGodinaZadavanja, string tipProjekta, string preporuceniProgramskiJezik) : base(id, naziv, skolskaGodinaZadavanja, tipProjekta)
+		{
+			PreporuceniProgramskiJezik = preporuceniProgramskiJezik;
+		}
+		public PrakticniProjekatPregled() : base() { }
     }
 
     public class PreporucenaWebStranicaPregled

@@ -71,7 +71,7 @@
 			Projekti_GB.Location = new System.Drawing.Point(8, 77);
 			Projekti_GB.Name = "Projekti_GB";
 			Projekti_GB.Size = new System.Drawing.Size(785, 323);
-			Projekti_GB.TabIndex = 3;
+			Projekti_GB.TabIndex = 4;
 			Projekti_GB.TabStop = false;
 			Projekti_GB.Text = "Projekti";
 			// 
@@ -81,6 +81,7 @@
 			Projekti_ListV.FullRowSelect = true;
 			Projekti_ListV.GridLines = true;
 			Projekti_ListV.Location = new System.Drawing.Point(7, 48);
+			Projekti_ListV.MultiSelect = false;
 			Projekti_ListV.Name = "Projekti_ListV";
 			Projekti_ListV.Size = new System.Drawing.Size(772, 269);
 			Projekti_ListV.TabIndex = 0;
@@ -185,7 +186,7 @@
 			PrikazPrakticni_Btn.Location = new System.Drawing.Point(551, 417);
 			PrikazPrakticni_Btn.Name = "PrikazPrakticni_Btn";
 			PrikazPrakticni_Btn.Size = new System.Drawing.Size(236, 53);
-			PrikazPrakticni_Btn.TabIndex = 16;
+			PrikazPrakticni_Btn.TabIndex = 1;
 			PrikazPrakticni_Btn.Text = "Prikazi prakticne projekte";
 			PrikazPrakticni_Btn.UseVisualStyleBackColor = false;
 			PrikazPrakticni_Btn.Click += PrikazPrakticni_Btn_Click;
@@ -197,7 +198,7 @@
 			PrikazTeorijski_Btn.Location = new System.Drawing.Point(551, 480);
 			PrikazTeorijski_Btn.Name = "PrikazTeorijski_Btn";
 			PrikazTeorijski_Btn.Size = new System.Drawing.Size(236, 54);
-			PrikazTeorijski_Btn.TabIndex = 15;
+			PrikazTeorijski_Btn.TabIndex = 2;
 			PrikazTeorijski_Btn.Text = "Prikazi teorijske projekte";
 			PrikazTeorijski_Btn.UseVisualStyleBackColor = false;
 			PrikazTeorijski_Btn.Click += PrikazTeorijski_Btn_Click;
@@ -215,7 +216,7 @@
 			PrikazProjekta_GB.Location = new System.Drawing.Point(15, 417);
 			PrikazProjekta_GB.Name = "PrikazProjekta_GB";
 			PrikazProjekta_GB.Size = new System.Drawing.Size(426, 176);
-			PrikazProjekta_GB.TabIndex = 17;
+			PrikazProjekta_GB.TabIndex = 0;
 			PrikazProjekta_GB.TabStop = false;
 			PrikazProjekta_GB.Text = "Prikaz";
 			// 
@@ -226,7 +227,7 @@
 			Tip_GB.Location = new System.Drawing.Point(221, 17);
 			Tip_GB.Name = "Tip_GB";
 			Tip_GB.Size = new System.Drawing.Size(181, 30);
-			Tip_GB.TabIndex = 14;
+			Tip_GB.TabIndex = 4;
 			Tip_GB.TabStop = false;
 			// 
 			// Pojedinacni_RB
@@ -235,8 +236,7 @@
 			Pojedinacni_RB.Location = new System.Drawing.Point(86, 9);
 			Pojedinacni_RB.Name = "Pojedinacni_RB";
 			Pojedinacni_RB.Size = new System.Drawing.Size(92, 19);
-			Pojedinacni_RB.TabIndex = 8;
-			Pojedinacni_RB.TabStop = true;
+			Pojedinacni_RB.TabIndex = 0;
 			Pojedinacni_RB.Text = "Pojedinacni";
 			Pojedinacni_RB.UseVisualStyleBackColor = true;
 			// 
@@ -246,8 +246,7 @@
 			Grupni_RB.Location = new System.Drawing.Point(4, 9);
 			Grupni_RB.Name = "Grupni_RB";
 			Grupni_RB.Size = new System.Drawing.Size(67, 19);
-			Grupni_RB.TabIndex = 7;
-			Grupni_RB.TabStop = true;
+			Grupni_RB.TabIndex = 1;
 			Grupni_RB.Text = "Grupni";
 			Grupni_RB.UseVisualStyleBackColor = true;
 			// 
@@ -267,7 +266,7 @@
 			Ocisti_Btn.Location = new System.Drawing.Point(276, 137);
 			Ocisti_Btn.Name = "Ocisti_Btn";
 			Ocisti_Btn.Size = new System.Drawing.Size(60, 23);
-			Ocisti_Btn.TabIndex = 3;
+			Ocisti_Btn.TabIndex = 1;
 			Ocisti_Btn.Text = "Ocisti";
 			Ocisti_Btn.UseVisualStyleBackColor = false;
 			Ocisti_Btn.Click += Ocisti_Btn_Click;
@@ -279,7 +278,7 @@
 			Vrsta_GB.Location = new System.Drawing.Point(220, 54);
 			Vrsta_GB.Name = "Vrsta_GB";
 			Vrsta_GB.Size = new System.Drawing.Size(182, 30);
-			Vrsta_GB.TabIndex = 13;
+			Vrsta_GB.TabIndex = 7;
 			Vrsta_GB.TabStop = false;
 			// 
 			// Prakticni_RB
@@ -288,8 +287,7 @@
 			Prakticni_RB.Location = new System.Drawing.Point(87, 9);
 			Prakticni_RB.Name = "Prakticni_RB";
 			Prakticni_RB.Size = new System.Drawing.Size(79, 19);
-			Prakticni_RB.TabIndex = 8;
-			Prakticni_RB.TabStop = true;
+			Prakticni_RB.TabIndex = 0;
 			Prakticni_RB.Text = "Prakticni";
 			Prakticni_RB.UseVisualStyleBackColor = true;
 			// 
@@ -299,8 +297,7 @@
 			Teorijski_RB.Location = new System.Drawing.Point(5, 9);
 			Teorijski_RB.Name = "Teorijski_RB";
 			Teorijski_RB.Size = new System.Drawing.Size(75, 19);
-			Teorijski_RB.TabIndex = 7;
-			Teorijski_RB.TabStop = true;
+			Teorijski_RB.TabIndex = 1;
 			Teorijski_RB.Text = "Teorijski";
 			Teorijski_RB.UseVisualStyleBackColor = true;
 			// 
@@ -311,7 +308,7 @@
 			Sortiraj_Btn.Location = new System.Drawing.Point(342, 137);
 			Sortiraj_Btn.Name = "Sortiraj_Btn";
 			Sortiraj_Btn.Size = new System.Drawing.Size(60, 23);
-			Sortiraj_Btn.TabIndex = 4;
+			Sortiraj_Btn.TabIndex = 8;
 			Sortiraj_Btn.Text = "Sortiraj";
 			Sortiraj_Btn.UseVisualStyleBackColor = false;
 			Sortiraj_Btn.Click += Sortiraj_Btn_Click;
@@ -339,7 +336,8 @@
 			SkoslkaGodZad_TB.Location = new System.Drawing.Point(220, 105);
 			SkoslkaGodZad_TB.Name = "SkoslkaGodZad_TB";
 			SkoslkaGodZad_TB.Size = new System.Drawing.Size(182, 21);
-			SkoslkaGodZad_TB.TabIndex = 1;
+			SkoslkaGodZad_TB.TabIndex = 0;
+			SkoslkaGodZad_TB.KeyPress += SkoslkaGodZad_TB_KeyPress;
 			// 
 			// Excel_Btn
 			// 
@@ -349,7 +347,7 @@
 			Excel_Btn.Location = new System.Drawing.Point(551, 540);
 			Excel_Btn.Name = "Excel_Btn";
 			Excel_Btn.Size = new System.Drawing.Size(236, 53);
-			Excel_Btn.TabIndex = 18;
+			Excel_Btn.TabIndex = 3;
 			Excel_Btn.Text = "Snimi projekte u \r\nExcel tabelu";
 			Excel_Btn.UseVisualStyleBackColor = false;
 			Excel_Btn.Click += Excel_Btn_Click;

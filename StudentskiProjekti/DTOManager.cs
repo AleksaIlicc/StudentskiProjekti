@@ -4,6 +4,7 @@ namespace StudentskiProjekti;
 public class DTOManager
 {
     #region Predmet
+
     public static List<PredmetPregled> VratiSvePredmete()
     {
         List<PredmetPregled> predmeti = new List<PredmetPregled>();
@@ -145,6 +146,7 @@ public class DTOManager
 
         return pb;
     }
+
     #endregion
 
     #region Student
@@ -330,6 +332,7 @@ public class DTOManager
 
         return projektiPregled;
     }
+
     public static IList<ProjekatPregled> VratiSortiraneProjekteZaPredmet(string idPredmeta, string vrstaProjekta, string tipProjekta, string skolskaGodina)
     {
         IList<ProjekatPregled> projektiPregled = new List<ProjekatPregled>();
@@ -362,7 +365,6 @@ public class DTOManager
         return projektiPregled;
     }
 
-
     #endregion
 
     #region TeorijskiProjekti
@@ -376,7 +378,8 @@ public class DTOManager
 
             var teorijskiProjekti = s.Query<TeorijskiProjekat>()
                                       .Where(p => p.PripadaPredmetu.Id == idPredmeta)
-                                      .ToList();
+									  .OrderBy(p => p.SkolskaGodinaZadavanja)
+									  .ToList();
 
             foreach (TeorijskiProjekat p in teorijskiProjekti)
             {
@@ -394,7 +397,7 @@ public class DTOManager
         return projekti;
     }
 
-    public static void DodajTeorijskiProjekat(string id , string naziv , int semestar, string katedra , TeorijskiProjekatPregled p)
+    public static void DodajTeorijskiProjekat(TeorijskiProjekatPregled p)
     {
         try
         {
@@ -402,15 +405,14 @@ public class DTOManager
 
             Predmet pred = new Predmet
             {
-                Id = id,
-                Naziv = naziv,
-                Semestar = semestar,
-                Katedra = katedra,
+                Id = p.PripadaPredmetu.Id,
+                Naziv = p.PripadaPredmetu.Naziv,
+                Semestar = p.PripadaPredmetu.Semestar,
+                Katedra = p.PripadaPredmetu.Katedra,
             };
 
             TeorijskiProjekat o = new TeorijskiProjekat()
             {
-
                 Naziv = p.Naziv,
                 SkolskaGodinaZadavanja = p.SkolskaGodinaZadavanja,
                 MaksBrojStrana = p.MaksBrojStrana,
@@ -429,6 +431,7 @@ public class DTOManager
             Console.WriteLine(e.Message);
         }
     }
+
     public static void ObrisiTeorijskiProjekat(int id)
     {
         try
@@ -448,6 +451,7 @@ public class DTOManager
             Console.WriteLine(e.Message);
         }
     }
+
     public static void AzurirajTeorijskiProjekat(TeorijskiProjekatPregled p)
     {
         try
@@ -491,9 +495,11 @@ public class DTOManager
 
         return p;
     }
+
     #endregion
 
     #region PrakticniProjekti
+
     public static List<PrakticniProjekatPregled> VratiPrakticneProjekteZaPredmet(string idPredmeta)
     {
         List<PrakticniProjekatPregled> projekti = new List<PrakticniProjekatPregled>();
@@ -508,7 +514,6 @@ public class DTOManager
 
             foreach (PrakticniProjekat p in prakticniProjekti)
             {
-
                 projekti.Add(new PrakticniProjekatPregled(p.Id ,p.Naziv, p.SkolskaGodinaZadavanja, p.TipProjekta, p.PreporuceniProgramskiJezik));
             }
 

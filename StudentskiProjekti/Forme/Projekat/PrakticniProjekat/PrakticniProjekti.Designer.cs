@@ -93,6 +93,7 @@
 			PrakticniProjekti_ListV.FullRowSelect = true;
 			PrakticniProjekti_ListV.GridLines = true;
 			PrakticniProjekti_ListV.Location = new System.Drawing.Point(7, 48);
+			PrakticniProjekti_ListV.MultiSelect = false;
 			PrakticniProjekti_ListV.Name = "PrakticniProjekti_ListV";
 			PrakticniProjekti_ListV.Size = new System.Drawing.Size(772, 269);
 			PrakticniProjekti_ListV.TabIndex = 0;
@@ -191,7 +192,6 @@
 
 		private GroupBox PrakticniProjekti_GB;
         private ListView PrakticniProjekti_ListV;
-        private ColumnHeader columnHeader1;
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader4;
         private ColumnHeader columnHeader5;
