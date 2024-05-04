@@ -39,7 +39,7 @@
             Dodaj_Btn.Location = new System.Drawing.Point(208, 97);
             Dodaj_Btn.Name = "Dodaj_Btn";
             Dodaj_Btn.Size = new System.Drawing.Size(140, 39);
-            Dodaj_Btn.TabIndex = 5;
+            Dodaj_Btn.TabIndex = 1;
             Dodaj_Btn.Text = "Dodaj";
             Dodaj_Btn.UseVisualStyleBackColor = false;
             Dodaj_Btn.Click += Dodaj_Btn_Click;
@@ -49,7 +49,7 @@
             Naziv_TB.Location = new System.Drawing.Point(92, 44);
             Naziv_TB.Name = "Naziv_TB";
             Naziv_TB.Size = new System.Drawing.Size(256, 27);
-            Naziv_TB.TabIndex = 6;
+            Naziv_TB.TabIndex = 0;
             // 
             // label1
             // 

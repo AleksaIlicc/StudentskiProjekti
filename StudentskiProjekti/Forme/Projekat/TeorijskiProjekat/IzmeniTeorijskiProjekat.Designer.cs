@@ -84,7 +84,7 @@
             Izmeni_Btn.Location = new System.Drawing.Point(218, 222);
             Izmeni_Btn.Name = "Izmeni_Btn";
             Izmeni_Btn.Size = new System.Drawing.Size(157, 29);
-            Izmeni_Btn.TabIndex = 4;
+            Izmeni_Btn.TabIndex = 5;
             Izmeni_Btn.Text = "Izmeni";
             Izmeni_Btn.UseVisualStyleBackColor = false;
             Izmeni_Btn.Click += Izmeni_Btn_Click;
@@ -112,7 +112,7 @@
             MaxBrStrana_TB.Location = new System.Drawing.Point(158, 104);
             MaxBrStrana_TB.Name = "MaxBrStrana_TB";
             MaxBrStrana_TB.Size = new System.Drawing.Size(217, 25);
-            MaxBrStrana_TB.TabIndex = 13;
+            MaxBrStrana_TB.TabIndex = 2;
             MaxBrStrana_TB.KeyPress += MaxBrStrana_TB_KeyPress;
             // 
             // label4
@@ -142,7 +142,7 @@
             Pojedinacni_RB.Location = new System.Drawing.Point(210, 30);
             Pojedinacni_RB.Name = "Pojedinacni_RB";
             Pojedinacni_RB.Size = new System.Drawing.Size(164, 22);
-            Pojedinacni_RB.TabIndex = 10;
+            Pojedinacni_RB.TabIndex = 4;
             Pojedinacni_RB.TabStop = true;
             Pojedinacni_RB.Text = "Pojedinacni projekat";
             Pojedinacni_RB.UseVisualStyleBackColor = true;
@@ -153,7 +153,7 @@
             Grupni_RB.Location = new System.Drawing.Point(14, 30);
             Grupni_RB.Name = "Grupni_RB";
             Grupni_RB.Size = new System.Drawing.Size(135, 22);
-            Grupni_RB.TabIndex = 9;
+            Grupni_RB.TabIndex = 3;
             Grupni_RB.TabStop = true;
             Grupni_RB.Text = "Grupni projekat";
             Grupni_RB.UseVisualStyleBackColor = true;

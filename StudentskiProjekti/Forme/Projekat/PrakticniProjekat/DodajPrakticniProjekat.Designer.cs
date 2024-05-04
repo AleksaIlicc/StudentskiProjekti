@@ -88,7 +88,7 @@ partial class DodajPrakticniProjekat
         Dodaj_Btn.Location = new System.Drawing.Point(218, 227);
         Dodaj_Btn.Name = "Dodaj_Btn";
         Dodaj_Btn.Size = new System.Drawing.Size(157, 29);
-        Dodaj_Btn.TabIndex = 4;
+        Dodaj_Btn.TabIndex = 5;
         Dodaj_Btn.Text = "Dodaj";
         Dodaj_Btn.UseVisualStyleBackColor = false;
         Dodaj_Btn.Click += Dodaj_Btn_Click;
@@ -116,7 +116,7 @@ partial class DodajPrakticniProjekat
         PreporuceniProgJezik_TB.Location = new System.Drawing.Point(157, 103);
         PreporuceniProgJezik_TB.Name = "PreporuceniProgJezik_TB";
         PreporuceniProgJezik_TB.Size = new System.Drawing.Size(217, 25);
-        PreporuceniProgJezik_TB.TabIndex = 13;
+        PreporuceniProgJezik_TB.TabIndex = 2;
         // 
         // label4
         // 
@@ -145,7 +145,7 @@ partial class DodajPrakticniProjekat
         Pojedinacni_RB.Location = new System.Drawing.Point(210, 30);
         Pojedinacni_RB.Name = "Pojedinacni_RB";
         Pojedinacni_RB.Size = new System.Drawing.Size(164, 22);
-        Pojedinacni_RB.TabIndex = 10;
+        Pojedinacni_RB.TabIndex = 4;
         Pojedinacni_RB.TabStop = true;
         Pojedinacni_RB.Text = "Pojedinacni projekat";
         Pojedinacni_RB.UseVisualStyleBackColor = true;
@@ -156,7 +156,7 @@ partial class DodajPrakticniProjekat
         Grupni_RB.Location = new System.Drawing.Point(14, 30);
         Grupni_RB.Name = "Grupni_RB";
         Grupni_RB.Size = new System.Drawing.Size(135, 22);
-        Grupni_RB.TabIndex = 9;
+        Grupni_RB.TabIndex = 3;
         Grupni_RB.TabStop = true;
         Grupni_RB.Text = "Grupni projekat";
         Grupni_RB.UseVisualStyleBackColor = true;

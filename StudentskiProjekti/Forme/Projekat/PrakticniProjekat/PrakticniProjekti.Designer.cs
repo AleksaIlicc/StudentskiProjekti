@@ -70,7 +70,7 @@
             KratakOpis_Btn.Location = new System.Drawing.Point(613, 323);
             KratakOpis_Btn.Name = "KratakOpis_Btn";
             KratakOpis_Btn.Size = new System.Drawing.Size(167, 48);
-            KratakOpis_Btn.TabIndex = 3;
+            KratakOpis_Btn.TabIndex = 2;
             KratakOpis_Btn.Text = "Prikazi kratak opis projekta";
             KratakOpis_Btn.UseVisualStyleBackColor = false;
             KratakOpis_Btn.Click += KratakOpis_Btn_Click;
@@ -82,7 +82,7 @@
             PreporuceneWebStrane_Btn.Location = new System.Drawing.Point(440, 323);
             PreporuceneWebStrane_Btn.Name = "PreporuceneWebStrane_Btn";
             PreporuceneWebStrane_Btn.Size = new System.Drawing.Size(167, 48);
-            PreporuceneWebStrane_Btn.TabIndex = 2;
+            PreporuceneWebStrane_Btn.TabIndex = 1;
             PreporuceneWebStrane_Btn.Text = "Prikazi preporucene web stranice projekta";
             PreporuceneWebStrane_Btn.UseVisualStyleBackColor = false;
             PreporuceneWebStrane_Btn.Click += PreporuceneWebStrane_Btn_Click;
@@ -137,7 +137,7 @@
             IzmeniProjekatP_Btn.Location = new System.Drawing.Point(34, 69);
             IzmeniProjekatP_Btn.Name = "IzmeniProjekatP_Btn";
             IzmeniProjekatP_Btn.Size = new System.Drawing.Size(132, 33);
-            IzmeniProjekatP_Btn.TabIndex = 1;
+            IzmeniProjekatP_Btn.TabIndex = 4;
             IzmeniProjekatP_Btn.Text = "Izmeni projekat";
             IzmeniProjekatP_Btn.UseVisualStyleBackColor = false;
             IzmeniProjekatP_Btn.Click += IzmeniProjekatP_Btn_Click;
@@ -149,7 +149,7 @@
             DodajProjekatP_Btn.Location = new System.Drawing.Point(34, 26);
             DodajProjekatP_Btn.Name = "DodajProjekatP_Btn";
             DodajProjekatP_Btn.Size = new System.Drawing.Size(132, 33);
-            DodajProjekatP_Btn.TabIndex = 0;
+            DodajProjekatP_Btn.TabIndex = 3;
             DodajProjekatP_Btn.Text = "Dodaj projekat";
             DodajProjekatP_Btn.UseVisualStyleBackColor = false;
             DodajProjekatP_Btn.Click += DodajProjekatP_Btn_Click;
@@ -161,7 +161,7 @@
             ObrisiProjekatP_Btn.Location = new System.Drawing.Point(34, 112);
             ObrisiProjekatP_Btn.Name = "ObrisiProjekatP_Btn";
             ObrisiProjekatP_Btn.Size = new System.Drawing.Size(132, 33);
-            ObrisiProjekatP_Btn.TabIndex = 2;
+            ObrisiProjekatP_Btn.TabIndex = 5;
             ObrisiProjekatP_Btn.Text = "Obrisi projekat";
             ObrisiProjekatP_Btn.UseVisualStyleBackColor = false;
             ObrisiProjekatP_Btn.Click += ObrisiProjekatP_Btn_Click;

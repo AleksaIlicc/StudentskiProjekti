@@ -84,7 +84,7 @@
             Dodaj_Btn.Location = new System.Drawing.Point(218, 222);
             Dodaj_Btn.Name = "Dodaj_Btn";
             Dodaj_Btn.Size = new System.Drawing.Size(157, 29);
-            Dodaj_Btn.TabIndex = 4;
+            Dodaj_Btn.TabIndex = 5;
             Dodaj_Btn.Text = "Dodaj";
             Dodaj_Btn.UseVisualStyleBackColor = false;
             Dodaj_Btn.Click += Dodaj_Btn_Click;
@@ -114,7 +114,7 @@
             MaxBrStranica_TB.Location = new System.Drawing.Point(158, 103);
             MaxBrStranica_TB.Name = "MaxBrStranica_TB";
             MaxBrStranica_TB.Size = new System.Drawing.Size(217, 25);
-            MaxBrStranica_TB.TabIndex = 13;
+            MaxBrStranica_TB.TabIndex = 2;
             MaxBrStranica_TB.KeyPress += MaxBrStranica_TB_KeyPress;
             // 
             // label4
@@ -144,7 +144,7 @@
             Pojedinacni_RB.Location = new System.Drawing.Point(210, 30);
             Pojedinacni_RB.Name = "Pojedinacni_RB";
             Pojedinacni_RB.Size = new System.Drawing.Size(164, 22);
-            Pojedinacni_RB.TabIndex = 10;
+            Pojedinacni_RB.TabIndex = 4;
             Pojedinacni_RB.TabStop = true;
             Pojedinacni_RB.Text = "Pojedinacni projekat";
             Pojedinacni_RB.UseVisualStyleBackColor = true;
@@ -155,7 +155,7 @@
             Grupni_RB.Location = new System.Drawing.Point(14, 30);
             Grupni_RB.Name = "Grupni_RB";
             Grupni_RB.Size = new System.Drawing.Size(135, 22);
-            Grupni_RB.TabIndex = 9;
+            Grupni_RB.TabIndex = 3;
             Grupni_RB.TabStop = true;
             Grupni_RB.Text = "Grupni projekat";
             Grupni_RB.UseVisualStyleBackColor = true;
