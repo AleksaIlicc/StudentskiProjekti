@@ -32,8 +32,24 @@ public partial class DodajTeorijskiProjekat : Form
             this.projekat.VrstaProjekta = "teorijski";
 
             DTOManager.DodajTeorijskiProjekat(projekat);
-            MessageBox.Show("Uspesno ste dodali novi predmet!");
+            MessageBox.Show("Uspesno ste dodali novi projekat!");
             this.Close();
+        }
+    }
+
+    private void SkoslaGodIzdavanja_TB_KeyPress(object sender, KeyPressEventArgs e)
+    {
+        if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '/')
+        {
+            e.Handled = true;
+        }
+    }
+
+    private void MaxBrStranica_TB_KeyPress(object sender, KeyPressEventArgs e)
+    {
+        if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+        {
+            e.Handled = true;
         }
     }
 }

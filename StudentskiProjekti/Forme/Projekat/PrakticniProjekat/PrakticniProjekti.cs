@@ -3,72 +3,106 @@
 namespace StudentskiProjekti.Forme;
 public partial class PrakticniProjekti : Form
 {
-	PredmetPregled izabraniPredmet;
-	public PrakticniProjekti(DTOs.PredmetPregled predmet)
-	{
-		izabraniPredmet = predmet;
-		InitializeComponent();
-	}
+    PredmetPregled izabraniPredmet;
+    public PrakticniProjekti(DTOs.PredmetPregled predmet)
+    {
+        izabraniPredmet = predmet;
+        InitializeComponent();
+    }
 
-	private void PrakticniProjekti_Load(object sender, EventArgs e)
-	{
-		PrakticniProjekti_ListV.Items.Clear();
-		IList<PrakticniProjekatPregled> prakticniProjekat = DTOManager.VratiPrakticneProjekteZaPredmet(izabraniPredmet.Id);
+    private void PrakticniProjekti_Load(object sender, EventArgs e)
+    {
+        PopuniPodacima();
+    }
 
-		foreach (PrakticniProjekatPregled p in prakticniProjekat)
-		{
-			ListViewItem item = new ListViewItem(new string[] { p.Naziv, p.SkolskaGodinaZadavanja, p.TipProjekta, p.PreporuceniProgramskiJezik });
-			item.Tag = p.Id;
-			PrakticniProjekti_ListV.Items.Add(item);
-		}
+    private void PopuniPodacima()
+    {
+        PrakticniProjekti_ListV.Items.Clear();
+        IList<PrakticniProjekatPregled> prakticniProjekat = DTOManager.VratiPrakticneProjekteZaPredmet(izabraniPredmet.Id);
 
-		PrakticniProjekti_ListV.Refresh();
-	}
+        foreach (PrakticniProjekatPregled p in prakticniProjekat)
+        {
+            ListViewItem item = new ListViewItem(new string[] { p.Naziv, p.SkolskaGodinaZadavanja, p.TipProjekta, p.PreporuceniProgramskiJezik });
+            item.Tag = p.Id;
+            PrakticniProjekti_ListV.Items.Add(item);
+        }
 
-	private void DodajProjekatP_Btn_Click(object sender, EventArgs e)
-	{
-		DodajPrakticniProjekat dodajPproj = new DodajPrakticniProjekat()
-		{
-			StartPosition = FormStartPosition.CenterParent
-		};
-		dodajPproj.ShowDialog();
-	}
+        PrakticniProjekti_ListV.Refresh();
+    }
 
-	private void IzmeniProjekatP_Btn_Click(object sender, EventArgs e)
-	{
-		IzmeniPrakticniProjekat izmeniPproj = new IzmeniPrakticniProjekat()
-		{
-			StartPosition = FormStartPosition.CenterParent
-		};
-		izmeniPproj.ShowDialog();
-	}
+    private void DodajProjekatP_Btn_Click(object sender, EventArgs e)
+    {
+        DodajPrakticniProjekat dodajPproj = new DodajPrakticniProjekat(izabraniPredmet)
+        {
+            StartPosition = FormStartPosition.CenterParent
+        };
+        dodajPproj.ShowDialog();
+        PopuniPodacima();
+    }
 
-	private void KratakOpis_Btn_Click(object sender, EventArgs e)
-	{
-		if (PrakticniProjekti_ListV.SelectedItems.Count == 0)
-		{
-			MessageBox.Show("Izaberite predmet za koji zelite da prikazete opis!");
-		}
-		int idProjekta = (int)PrakticniProjekti_ListV.SelectedItems[0].Tag;
-		string opisProjekta = DTOManager.VratiOpisPrakticnogProjekta(idProjekta);
-		MessageBox.Show(opisProjekta, "Kratak opis projekta");
-	}
+    private void IzmeniProjekatP_Btn_Click(object sender, EventArgs e)
+    {
+        if (PrakticniProjekti_ListV.SelectedItems.Count == 0)
+        {
+            MessageBox.Show("Izaberite projekat koji zelite da izmenite!");
+            return;
+        }
+        int idprojekta = (int)PrakticniProjekti_ListV.SelectedItems[0].Tag;
+        PrakticniProjekatPregled ob = DTOManager.VratiPrakticniProjekat(idprojekta);
+        IzmeniPrakticniProjekat izmeniPproj = new IzmeniPrakticniProjekat(ob)
+        {
+            StartPosition = FormStartPosition.CenterParent
+        };
+        izmeniPproj.ShowDialog();
+        PopuniPodacima();
+    }
 
-	private void PreporuceneWebStrane_Btn_Click(object sender, EventArgs e)
-	{
-		if (PrakticniProjekti_ListV.SelectedItems.Count == 0)
-		{
-			MessageBox.Show("Izaberite predmet za koji zelite da prikazete web stranice!");
-		}
-		else
-		{
-			int.TryParse(PrakticniProjekti_ListV.SelectedItems[0].Tag.ToString(), out int idProjekta);
-			PreporuceneWebStranice izmeniPproj = new PreporuceneWebStranice(idProjekta)
-			{
-				StartPosition = FormStartPosition.CenterParent
-			};
-			izmeniPproj.ShowDialog();
-		}
-		
-	}
+    private void ObrisiProjekatP_Btn_Click(object sender, EventArgs e)
+    {
+        if (PrakticniProjekti_ListV.SelectedItems.Count == 0)
+        {
+            MessageBox.Show("Izaberite projekat koji zelite da obrisete!");
+            return;
+        }
+
+        int idProjekta = (int)PrakticniProjekti_ListV.SelectedItems[0].Tag;
+        string poruka = "Da li zelite da obrisete izabrani projekat?";
+        string title = "Pitanje";
+        MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+        DialogResult result = MessageBox.Show(poruka, title, buttons);
+
+        if (result == DialogResult.OK)
+        {
+            DTOManager.ObrisiPrakticniProjekat(idProjekta);
+            MessageBox.Show("Brisanje projekta je uspesno obavljeno!");
+            PopuniPodacima();
+        }
+    }
+    private void KratakOpis_Btn_Click(object sender, EventArgs e)
+    {
+        if (PrakticniProjekti_ListV.SelectedItems.Count == 0)
+        {
+            MessageBox.Show("Izaberite predmet za koji zelite da prikazete opis!");
+        }
+        int idProjekta = (int)PrakticniProjekti_ListV.SelectedItems[0].Tag;
+        string opisProjekta = DTOManager.VratiOpisPrakticnogProjekta(idProjekta);
+        MessageBox.Show(opisProjekta, "Kratak opis projekta");
+    }
+
+    private void PreporuceneWebStrane_Btn_Click(object sender, EventArgs e)
+    {
+        if (PrakticniProjekti_ListV.SelectedItems.Count == 0)
+        {
+            MessageBox.Show("Izaberite predmet za koji zelite da prikazete web stranice!");
+        }
+        else
+        {
+            int.TryParse(PrakticniProjekti_ListV.SelectedItems[0].Tag.ToString(), out int idProjekta);
+            PreporuceneWebStranice izmeniPproj = new PreporuceneWebStranice(idProjekta)
+            {
+                StartPosition = FormStartPosition.CenterParent
+            };
+            izmeniPproj.ShowDialog();
+        }
+    }
 }

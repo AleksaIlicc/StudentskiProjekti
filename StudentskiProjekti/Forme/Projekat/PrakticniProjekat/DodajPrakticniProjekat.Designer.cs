@@ -38,7 +38,7 @@ partial class DodajPrakticniProjekat
         SkoslaGodIzdavanja_TB = new TextBox();
         Dodaj_Btn = new Button();
         OsnovnipodaciopredmetuGB = new GroupBox();
-        textBox1 = new TextBox();
+        PreporuceniProgJezik_TB = new TextBox();
         label4 = new Label();
         groupBox2 = new GroupBox();
         Pojedinacni_RB = new RadioButton();
@@ -80,6 +80,7 @@ partial class DodajPrakticniProjekat
         SkoslaGodIzdavanja_TB.Name = "SkoslaGodIzdavanja_TB";
         SkoslaGodIzdavanja_TB.Size = new System.Drawing.Size(217, 25);
         SkoslaGodIzdavanja_TB.TabIndex = 1;
+        SkoslaGodIzdavanja_TB.KeyPress += SkoslaGodIzdavanja_TB_KeyPress;
         // 
         // Dodaj_Btn
         // 
@@ -90,10 +91,11 @@ partial class DodajPrakticniProjekat
         Dodaj_Btn.TabIndex = 4;
         Dodaj_Btn.Text = "Dodaj";
         Dodaj_Btn.UseVisualStyleBackColor = false;
+        Dodaj_Btn.Click += Dodaj_Btn_Click;
         // 
         // OsnovnipodaciopredmetuGB
         // 
-        OsnovnipodaciopredmetuGB.Controls.Add(textBox1);
+        OsnovnipodaciopredmetuGB.Controls.Add(PreporuceniProgJezik_TB);
         OsnovnipodaciopredmetuGB.Controls.Add(label4);
         OsnovnipodaciopredmetuGB.Controls.Add(groupBox2);
         OsnovnipodaciopredmetuGB.Controls.Add(Dodaj_Btn);
@@ -109,12 +111,12 @@ partial class DodajPrakticniProjekat
         OsnovnipodaciopredmetuGB.TabStop = false;
         OsnovnipodaciopredmetuGB.Text = "Osnovni podaci o projektu";
         // 
-        // textBox1
+        // PreporuceniProgJezik_TB
         // 
-        textBox1.Location = new System.Drawing.Point(157, 103);
-        textBox1.Name = "textBox1";
-        textBox1.Size = new System.Drawing.Size(217, 25);
-        textBox1.TabIndex = 13;
+        PreporuceniProgJezik_TB.Location = new System.Drawing.Point(157, 103);
+        PreporuceniProgJezik_TB.Name = "PreporuceniProgJezik_TB";
+        PreporuceniProgJezik_TB.Size = new System.Drawing.Size(217, 25);
+        PreporuceniProgJezik_TB.TabIndex = 13;
         // 
         // label4
         // 
@@ -190,6 +192,6 @@ partial class DodajPrakticniProjekat
     private GroupBox groupBox2;
     private RadioButton Pojedinacni_RB;
     private RadioButton Grupni_RB;
-    private TextBox textBox1;
+    private TextBox PreporuceniProgJezik_TB;
     private Label label4;
 }

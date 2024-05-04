@@ -76,6 +76,7 @@
             SkoslaGodIzdavanja_TB.Name = "SkoslaGodIzdavanja_TB";
             SkoslaGodIzdavanja_TB.Size = new System.Drawing.Size(217, 25);
             SkoslaGodIzdavanja_TB.TabIndex = 1;
+            SkoslaGodIzdavanja_TB.KeyPress += SkoslaGodIzdavanja_TB_KeyPress;
             // 
             // Dodaj_Btn
             // 
@@ -114,6 +115,7 @@
             MaxBrStranica_TB.Name = "MaxBrStranica_TB";
             MaxBrStranica_TB.Size = new System.Drawing.Size(217, 25);
             MaxBrStranica_TB.TabIndex = 13;
+            MaxBrStranica_TB.KeyPress += MaxBrStranica_TB_KeyPress;
             // 
             // label4
             // 

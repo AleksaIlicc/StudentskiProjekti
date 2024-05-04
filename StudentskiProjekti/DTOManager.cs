@@ -314,7 +314,7 @@ public class DTOManager
 
             IList<Projekat> projekti = s.Query<Projekat>()
                 .Where(p => p.PripadaPredmetu.Id == idPredmeta)
-                .OrderBy(p=>p.SkolskaGodinaZadavanja)
+                .OrderBy(p => p.SkolskaGodinaZadavanja)
                 .ToList();
 
 
@@ -352,7 +352,7 @@ public class DTOManager
 
             foreach (Projekat p in projekti)
             {
-				projektiPregled.Add(new ProjekatPregled(p.Id , p.Naziv, p.SkolskaGodinaZadavanja, p.VrstaProjekta, p.TipProjekta));
+                projektiPregled.Add(new ProjekatPregled(p.Id, p.Naziv, p.SkolskaGodinaZadavanja, p.VrstaProjekta, p.TipProjekta));
             }
 
             s.Close();
@@ -378,8 +378,8 @@ public class DTOManager
 
             var teorijskiProjekti = s.Query<TeorijskiProjekat>()
                                       .Where(p => p.PripadaPredmetu.Id == idPredmeta)
-									  .OrderBy(p => p.SkolskaGodinaZadavanja)
-									  .ToList();
+                                      .OrderBy(p => p.SkolskaGodinaZadavanja)
+                                      .ToList();
 
             foreach (TeorijskiProjekat p in teorijskiProjekti)
             {
@@ -509,12 +509,12 @@ public class DTOManager
 
             var prakticniProjekti = s.Query<PrakticniProjekat>()
                                       .Where(p => p.PripadaPredmetu.Id == idPredmeta)
-									  .OrderBy(p => p.SkolskaGodinaZadavanja)
-									  .ToList();
+                                      .OrderBy(p => p.SkolskaGodinaZadavanja)
+                                      .ToList();
 
             foreach (PrakticniProjekat p in prakticniProjekti)
             {
-                projekti.Add(new PrakticniProjekatPregled(p.Id ,p.Naziv, p.SkolskaGodinaZadavanja, p.TipProjekta, p.PreporuceniProgramskiJezik));
+                projekti.Add(new PrakticniProjekatPregled(p.Id, p.Naziv, p.SkolskaGodinaZadavanja, p.TipProjekta, p.PreporuceniProgramskiJezik));
             }
 
             s.Close();
@@ -527,54 +527,176 @@ public class DTOManager
         return projekti;
     }
 
-	public static string VratiOpisPrakticnogProjekta(int idProjekta)
+    public static string VratiOpisPrakticnogProjekta(int idProjekta)
     {
         string kratakOpis = null;
-		try
-		{
-			ISession s = DataLayer.GetSession();
+        try
+        {
+            ISession s = DataLayer.GetSession();
 
             var prakticniProjekat = s.Query<PrakticniProjekat>()
                                       .Where(p => p.Id == idProjekta)
                                       .FirstOrDefault();
             kratakOpis = prakticniProjekat.KratakOpis;
 
-			s.Close();
-		}
-		catch (Exception ec)
-		{
-			Console.WriteLine(ec);
-		}
+            s.Close();
+        }
+        catch (Exception ec)
+        {
+            Console.WriteLine(ec);
+        }
 
-		return kratakOpis;
-	}
+        return kratakOpis;
+    }
 
-	public static IList<PreporucenaWebStranicaPregled> VratiPreporuceneWebStranicePProjekta(int idProjekta)
+    public static IList<PreporucenaWebStranicaPregled> VratiPreporuceneWebStranicePProjekta(int idProjekta)
     {
-		List<PreporucenaWebStranicaPregled> finalStranice = new List<PreporucenaWebStranicaPregled>();
-		try
-		{
-			ISession s = DataLayer.GetSession();
+        List<PreporucenaWebStranicaPregled> finalStranice = new List<PreporucenaWebStranicaPregled>();
+        try
+        {
+            ISession s = DataLayer.GetSession();
 
-			var webStranice = s.Query<PProjektiWebStranice>()
-									  .Where(p => p.PProjekat.Id == idProjekta)
-									  .OrderBy(p => p.PreporucenaWebStrana)
-									  .ToList();
+            var webStranice = s.Query<PProjektiWebStranice>()
+                                      .Where(p => p.PProjekat.Id == idProjekta)
+                                      .OrderBy(p => p.PreporucenaWebStrana)
+                                      .ToList();
 
-			foreach (var ws in webStranice)
+            foreach (var ws in webStranice)
             {
-				finalStranice.Add(new PreporucenaWebStranicaPregled(ws.PreporucenaWebStrana));
-			}
+                finalStranice.Add(new PreporucenaWebStranicaPregled(ws.PreporucenaWebStrana));
+            }
 
-			s.Close();
-		}
-		catch (Exception ec)
-		{
-			Console.WriteLine(ec);
-		}
+            s.Close();
+        }
+        catch (Exception ec)
+        {
+            Console.WriteLine(ec);
+        }
 
-		return finalStranice;
-	}
+        return finalStranice;
+    }
+    public static void DodajPrakticniProjekat(PrakticniProjekatPregled p)
+    {
+        try
+        {
+            ISession s = DataLayer.GetSession();
 
-	#endregion
+            Predmet pred = new Predmet
+            {
+                Id = p.PripadaPredmetu.Id,
+                Naziv = p.PripadaPredmetu.Naziv,
+                Semestar = p.PripadaPredmetu.Semestar,
+                Katedra = p.PripadaPredmetu.Katedra,
+            };
+
+            PrakticniProjekat o = new PrakticniProjekat()
+            {
+                Naziv = p.Naziv,
+                SkolskaGodinaZadavanja = p.SkolskaGodinaZadavanja,
+                PreporuceniProgramskiJezik = p.PreporuceniProgramskiJezik,
+                VrstaProjekta = p.VrstaProjekta,
+                TipProjekta = p.TipProjekta,
+                PripadaPredmetu = pred,
+            };
+            s.Save(o);
+
+            s.Flush();
+
+            s.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
+
+    public static void ObrisiPrakticniProjekat(int id)
+    {
+        try
+        {
+            ISession s = DataLayer.GetSession();
+
+            PrakticniProjekat o = s.Load<PrakticniProjekat>(id);
+
+            s.Delete(o);
+
+            s.Flush();
+
+            s.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
+
+    public static void AzurirajPrakticniProjekat(PrakticniProjekatPregled p)
+    {
+        try
+        {
+            ISession s = DataLayer.GetSession();
+
+            PrakticniProjekat o = s.Load<PrakticniProjekat>(p.Id);
+            o.Naziv = p.Naziv;
+            o.SkolskaGodinaZadavanja = p.SkolskaGodinaZadavanja;
+            o.PreporuceniProgramskiJezik = p.PreporuceniProgramskiJezik;
+            o.TipProjekta = p.TipProjekta;
+
+
+            s.SaveOrUpdate(o);
+            s.Flush();
+
+            s.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
+
+    public static PrakticniProjekatPregled VratiPrakticniProjekat(int id)
+    {
+        PrakticniProjekatPregled p = null;
+        try
+        {
+            ISession s = DataLayer.GetSession();
+
+            PrakticniProjekat o = s.Load<PrakticniProjekat>(id);
+            p = new PrakticniProjekatPregled(o.Id, o.Naziv, o.SkolskaGodinaZadavanja, o.TipProjekta, o.PreporuceniProgramskiJezik);
+
+            s.Close();
+        }
+        catch (Exception ec)
+        {
+            Console.WriteLine(ec.Message);
+        }
+
+        return p;
+    }
+    public static void DodajPreporucenuWebStranicuZaProjekat(int idProjekta, string nazivWebStranice)
+    {
+        try
+        {
+            ISession s = DataLayer.GetSession();
+
+            PrakticniProjekat pProjekat = s.Load<PrakticniProjekat>(idProjekta);
+
+            PProjektiWebStranice novaWebStranica = new PProjektiWebStranice()
+            {
+                PreporucenaWebStrana = nazivWebStranice,
+                PProjekat = pProjekat
+            };
+
+            s.Save(novaWebStranica);
+
+            s.Flush();
+
+            s.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
+    #endregion
 }
