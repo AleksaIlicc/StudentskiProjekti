@@ -698,5 +698,26 @@ public class DTOManager
             Console.WriteLine(e.Message);
         }
     }
-    #endregion
+
+	public static void ObrisiPreporucenuWebStranicuZaProjekat(int idProjekta, string nazivWebStranice)
+	{
+		try
+		{
+			ISession s = DataLayer.GetSession();
+
+			PProjektiWebStranice stranica = s.Query<PProjektiWebStranice>()
+										.FirstOrDefault(p => p.PProjekat.Id == idProjekta && p.PreporucenaWebStrana == nazivWebStranice);
+
+			s.Delete(stranica);
+
+			s.Flush();
+
+			s.Close();
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e.Message);
+		}
+	}
+	#endregion
 }

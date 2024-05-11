@@ -83,6 +83,7 @@ public partial class PrakticniProjekti : Form
         if (PrakticniProjekti_ListV.SelectedItems.Count == 0)
         {
             MessageBox.Show("Izaberite predmet za koji zelite da prikazete opis!");
+            return;
         }
         int idProjekta = (int)PrakticniProjekti_ListV.SelectedItems[0].Tag;
         string opisProjekta = DTOManager.VratiOpisPrakticnogProjekta(idProjekta);
