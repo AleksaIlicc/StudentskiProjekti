@@ -1,5 +1,4 @@
 ﻿namespace StudentskiProjekti.Entiteti;
-
 public abstract class Projekat
 {
     public virtual int Id { get; protected set; }   
