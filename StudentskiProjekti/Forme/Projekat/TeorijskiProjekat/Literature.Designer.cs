@@ -1,24 +1,24 @@
 ﻿namespace StudentskiProjekti.Forme
 {
-    partial class TeorijskiProjekti
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class Literature
+	{
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
 		#region Windows Form Designer generated code
 
@@ -29,7 +29,6 @@
 		private void InitializeComponent()
 		{
 			TeorijskiProjekti_GB = new GroupBox();
-			Literatura_Btn = new Button();
 			TeorijskiProjekti_ListV = new ListView();
 			columnHeader3 = new ColumnHeader();
 			columnHeader6 = new ColumnHeader();
@@ -45,7 +44,6 @@
 			// 
 			// TeorijskiProjekti_GB
 			// 
-			TeorijskiProjekti_GB.Controls.Add(Literatura_Btn);
 			TeorijskiProjekti_GB.Controls.Add(TeorijskiProjekti_ListV);
 			TeorijskiProjekti_GB.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
 			TeorijskiProjekti_GB.Location = new System.Drawing.Point(8, 12);
@@ -54,18 +52,6 @@
 			TeorijskiProjekti_GB.TabIndex = 3;
 			TeorijskiProjekti_GB.TabStop = false;
 			TeorijskiProjekti_GB.Text = "Teorijski Projekti";
-			// 
-			// Literatura_Btn
-			// 
-			Literatura_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
-			Literatura_Btn.Font = new System.Drawing.Font("Georgia", 9F);
-			Literatura_Btn.Location = new System.Drawing.Point(632, 312);
-			Literatura_Btn.Name = "Literatura_Btn";
-			Literatura_Btn.Size = new System.Drawing.Size(147, 48);
-			Literatura_Btn.TabIndex = 1;
-			Literatura_Btn.Text = "Prikazi literaturu na projektu";
-			Literatura_Btn.UseVisualStyleBackColor = false;
-			Literatura_Btn.Click += Literatura_Btn_Click;
 			// 
 			// TeorijskiProjekti_ListV
 			// 
@@ -126,7 +112,6 @@
 			IzmeniProjekatT_Btn.TabIndex = 3;
 			IzmeniProjekatT_Btn.Text = "Izmeni projekat";
 			IzmeniProjekatT_Btn.UseVisualStyleBackColor = false;
-			IzmeniProjekatT_Btn.Click += IzmeniProjekatT_Btn_Click;
 			// 
 			// DodajProjekatT_Btn
 			// 
@@ -138,7 +123,6 @@
 			DodajProjekatT_Btn.TabIndex = 2;
 			DodajProjekatT_Btn.Text = "Dodaj projekat";
 			DodajProjekatT_Btn.UseVisualStyleBackColor = false;
-			DodajProjekatT_Btn.Click += DodajProjekatT_Btn_Click;
 			// 
 			// ObrisiProjekatT_Btn
 			// 
@@ -150,9 +134,8 @@
 			ObrisiProjekatT_Btn.TabIndex = 4;
 			ObrisiProjekatT_Btn.Text = "Obrisi projekat";
 			ObrisiProjekatT_Btn.UseVisualStyleBackColor = false;
-			ObrisiProjekatT_Btn.Click += ObrisiProjekatT_Btn_Click;
 			// 
-			// TeorijskiProjekti
+			// Literature
 			// 
 			AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
@@ -167,9 +150,8 @@
 			MdiChildrenMinimizedAnchorBottom = false;
 			MinimizeBox = false;
 			MinimumSize = new System.Drawing.Size(821, 663);
-			Name = "TeorijskiProjekti";
-			Text = "Teorijski projekti";
-			Load += TeorijskiProjekti_Load;
+			Name = "Literature";
+			Text = "Preporucena literatura";
 			TeorijskiProjekti_GB.ResumeLayout(false);
 			IzmeniTeorijski_GB.ResumeLayout(false);
 			ResumeLayout(false);
@@ -178,15 +160,14 @@
 		#endregion
 
 		private GroupBox TeorijskiProjekti_GB;
-        private ListView TeorijskiProjekti_ListV;
-        private GroupBox IzmeniTeorijski_GB;
-        private Button IzmeniProjekatT_Btn;
-        private Button DodajProjekatT_Btn;
-        private Button ObrisiProjekatT_Btn;
-        private Button Literatura_Btn;
-        private ColumnHeader columnHeader3;
-        private ColumnHeader columnHeader6;
-        private ColumnHeader columnHeader7;
-        private ColumnHeader columnHeader8;
-    }
+		private ListView TeorijskiProjekti_ListV;
+		private GroupBox IzmeniTeorijski_GB;
+		private Button IzmeniProjekatT_Btn;
+		private Button DodajProjekatT_Btn;
+		private Button ObrisiProjekatT_Btn;
+		private ColumnHeader columnHeader3;
+		private ColumnHeader columnHeader6;
+		private ColumnHeader columnHeader7;
+		private ColumnHeader columnHeader8;
+	}
 }

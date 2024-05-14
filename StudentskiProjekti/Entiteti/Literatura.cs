@@ -1,7 +1,7 @@
 ﻿namespace StudentskiProjekti.Entiteti;
 public abstract class Literatura
 {
-    public virtual string Id { get; protected set; }
+    public virtual int Id { get; protected set; }
     public virtual required string Naziv { get; set; }
 	public virtual IList<Knjiga> Knjige { get; set; }
 	public virtual IList<ClanakUCasopisu> ClanciUCasopisu { get; set; }
