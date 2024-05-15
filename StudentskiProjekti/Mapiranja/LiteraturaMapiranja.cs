@@ -11,5 +11,7 @@ public class LiteraturaMapiranja : ClassMap<Literatura>
 		HasMany(x => x.Radovi).KeyColumn("LIT_ID").Cascade.All().Inverse();
 		HasMany(x => x.ClanciUCasopisu).KeyColumn("LIT_ID").Cascade.All().Inverse();
 		HasMany(x => x.Knjige).KeyColumn("LIT_ID").Cascade.All().Inverse();
+		HasMany(x => x.PripadaProjektu).KeyColumn("LIT_ID").Cascade.All().Inverse();
+		HasMany(x => x.Autori).KeyColumn("LIT_ID").Cascade.All().Inverse();
 	}
 }

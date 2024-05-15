@@ -8,5 +8,7 @@ public class TeorijskiProjekatMapiranja : SubclassMap<TeorijskiProjekat>
 		KeyColumn("ID");
 
 		Map(x => x.MaksBrojStrana, "MAKS_BROJ_STRANA");
+
+        HasMany(p => p.PreporucenaLiteratura).KeyColumn("TPROJ_ID").Cascade.All().Inverse();
     }
 }

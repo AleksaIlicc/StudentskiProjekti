@@ -1,5 +1,4 @@
 ﻿namespace StudentskiProjekti.Entiteti;
-
 public class Ucestvuje
 {
 	public virtual int Id {  get; protected set; }
@@ -18,6 +17,5 @@ public class Ucestvuje
 	{
 
 	}
-
 }
 

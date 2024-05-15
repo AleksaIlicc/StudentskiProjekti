@@ -1,5 +1,4 @@
 ﻿namespace StudentskiProjekti.Entiteti;
-
 public class Student
 {
     public required virtual string BrIndeksa { get; set; }

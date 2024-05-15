@@ -1,5 +1,4 @@
 ﻿namespace StudentskiProjekti.Entiteti;
-
 public class PrakticniProjekat : Projekat
 {
     public virtual string KratakOpis { get; set; }

@@ -6,7 +6,6 @@ public class ProjekatMapiranja : ClassMap<Projekat>
         Table("PROJEKAT");
 
         Id(x => x.Id, "ID").GeneratedBy.SequenceIdentity("PROJEKAT_ID_SEQ");
-
         Map(x => x.TipProjekta, "TIP_PROJEKTA");
 		Map(x => x.VrstaProjekta, "VRSTA_PROJEKTA");
 		Map(x => x.Naziv, "NAZIV");

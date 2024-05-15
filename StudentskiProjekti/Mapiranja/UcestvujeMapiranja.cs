@@ -6,7 +6,6 @@ public class UcestvujeMapiranja : ClassMap<Ucestvuje>
 		Table("UCESTVUJE");
 
 		Id(x => x.Id, "ID").GeneratedBy.SequenceIdentity("UCESTVUJE_ID_SEQ");
-
 		Map(x => x.DatumPocetkaIzrade, "DATUM_POCETKA_IZRADE");
 		Map(x => x.DatumZavrsetka, "DATUM_ZAVRSETKA");
 		Map(x => x.RokZaZavrsetak, "ROK_ZA_ZAVRSETAK");

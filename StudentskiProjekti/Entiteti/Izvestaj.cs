@@ -1,5 +1,4 @@
 ﻿namespace StudentskiProjekti.Entiteti;
-
 public class Izvestaj
 {
     public virtual int Id { get; protected set; } 
