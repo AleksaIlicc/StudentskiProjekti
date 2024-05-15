@@ -496,11 +496,64 @@ public class DTOManager
         return p;
     }
 
-    #endregion
+	#region Literatura
+	public static void ObrisiRad(int id)
+	{
+		try
+		{
+			ISession s = DataLayer.GetSession();
 
-    #region PrakticniProjekti
+			Rad o = s.Load<Rad>(id);
 
-    public static List<PrakticniProjekatPregled> VratiPrakticneProjekteZaPredmet(string idPredmeta)
+			s.Delete(o);
+
+			s.Flush();
+
+			s.Close();
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e.Message);
+		}
+	}
+
+	public static void DodajRad(RadPregled p)
+	{
+        try
+        {
+            ISession s = DataLayer.GetSession();
+
+            Literatura lit = new Literatura { Naziv = p.Naziv };
+
+			Rad r = new Rad()
+			{
+				Url = p.Url,
+                Format = p.Format,
+                KonferencijaObjavljivanja = p.KonferencijaObjavljivanja,
+                Literatura = lit
+			};
+
+            lit.Radovi.Add(r);
+
+			s.Save(lit);
+
+			s.Flush();
+
+			s.Close();
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e.Message);
+		}
+	}
+
+	#endregion
+
+	#endregion
+
+	#region PrakticniProjekti
+
+	public static List<PrakticniProjekatPregled> VratiPrakticneProjekteZaPredmet(string idPredmeta)
     {
         List<PrakticniProjekatPregled> projekti = new List<PrakticniProjekatPregled>();
         try

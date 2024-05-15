@@ -71,10 +71,48 @@ public class DTOs
 
         public TeorijskiProjekatPregled() : base() { }
     }
-    #endregion
+	
+	#region Literatura
 
-    #region PrakticniProjekat
-    public class PrakticniProjekatPregled : ProjekatPregled
+	public abstract class LiteraturaPregled 
+    {
+        public string Naziv { get; set; }
+
+        public LiteraturaPregled(string naziv)
+        { 
+            this.Naziv = naziv;
+        }
+	}
+
+	#region Rad
+    public class RadPregled : LiteraturaPregled
+    {
+		public string Url { get; set; }
+		public string KonferencijaObjavljivanja { get; set; }
+		public string Format { get; set; }
+
+		public RadPregled(string naziv, string url, string konferencijaObjavljivanja, string format) : base(naziv)
+		{
+            this.Url = url;
+            this.Naziv = naziv;
+            this.KonferencijaObjavljivanja = konferencijaObjavljivanja;
+            this.Format = format;
+		}
+	}
+	#endregion
+
+	#region ClanakUCasopisu
+	#endregion
+
+	#region Knjiga
+	#endregion
+
+	#endregion
+
+	#endregion
+
+	#region PrakticniProjekat
+	public class PrakticniProjekatPregled : ProjekatPregled
     {
         public string KratakOpis { get; set; }
         public string PreporuceniProgramskiJezik { get; set; }

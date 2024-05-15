@@ -5,7 +5,7 @@ public class LiteraturaMapiranja : ClassMap<Literatura>
     {
         Table("LITERATURA");
 
-        Id(x => x.Id, "LIT_ID").GeneratedBy.SequenceIdentity("LITERATURA_ID_SEQ");
+        Id(x => x.LitId, "LIT_ID").GeneratedBy.SequenceIdentity("LITERATURA_ID_SEQ");
         Map(x => x.Naziv, "NAZIV");
 
 		HasMany(x => x.Radovi).KeyColumn("LIT_ID").Cascade.All().Inverse();
