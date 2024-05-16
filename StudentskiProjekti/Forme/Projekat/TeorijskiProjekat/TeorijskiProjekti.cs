@@ -81,7 +81,16 @@ public partial class TeorijskiProjekti : Form
 
 	private void Literatura_Btn_Click(object sender, EventArgs e)
 	{
-		Literature literature = new Literature()
+
+        if (TeorijskiProjekti_ListV.SelectedItems.Count == 0)
+        {
+            MessageBox.Show("Izaberite projekat za koji zelite da vidite vise detalja!");
+            return;
+        }
+
+        int idProjekta = int.TryParse(TeorijskiProjekti_ListV.SelectedItems[0].Tag.ToString(), out int result) ? result : -1;
+        TeorijskiProjekatPregled izabraniProjekat = DTOManager.VratiTeorijskiProjekat(idProjekta);
+        Literature literature = new Literature(izabraniProjekat)
 		{
 			StartPosition = FormStartPosition.CenterParent
 		};
