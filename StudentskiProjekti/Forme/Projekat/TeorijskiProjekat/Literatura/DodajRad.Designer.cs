@@ -20,153 +20,183 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
-            OsnovnipodaciopredmetuGB = new GroupBox();
-            Dodaj_Btn = new Button();
-            Godina_TB = new TextBox();
-            Naziv_TB = new TextBox();
-            NazivCasopisa_TB = new TextBox();
-            Broj_TB = new TextBox();
-            label4 = new Label();
-            label3 = new Label();
-            label2 = new Label();
-            label1 = new Label();
-            OsnovnipodaciopredmetuGB.SuspendLayout();
-            SuspendLayout();
-            // 
-            // OsnovnipodaciopredmetuGB
-            // 
-            OsnovnipodaciopredmetuGB.Controls.Add(Dodaj_Btn);
-            OsnovnipodaciopredmetuGB.Controls.Add(Godina_TB);
-            OsnovnipodaciopredmetuGB.Controls.Add(Naziv_TB);
-            OsnovnipodaciopredmetuGB.Controls.Add(NazivCasopisa_TB);
-            OsnovnipodaciopredmetuGB.Controls.Add(Broj_TB);
-            OsnovnipodaciopredmetuGB.Controls.Add(label4);
-            OsnovnipodaciopredmetuGB.Controls.Add(label3);
-            OsnovnipodaciopredmetuGB.Controls.Add(label2);
-            OsnovnipodaciopredmetuGB.Controls.Add(label1);
-            OsnovnipodaciopredmetuGB.Font = new System.Drawing.Font("Georgia", 9F);
-            OsnovnipodaciopredmetuGB.Location = new System.Drawing.Point(12, 12);
-            OsnovnipodaciopredmetuGB.Name = "OsnovnipodaciopredmetuGB";
-            OsnovnipodaciopredmetuGB.Size = new System.Drawing.Size(383, 204);
-            OsnovnipodaciopredmetuGB.TabIndex = 0;
-            OsnovnipodaciopredmetuGB.TabStop = false;
-            OsnovnipodaciopredmetuGB.Text = "Osnovni podaci o predmetu";
-            // 
-            // Dodaj_Btn
-            // 
-            Dodaj_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
-            Dodaj_Btn.Location = new System.Drawing.Point(241, 164);
-            Dodaj_Btn.Name = "Dodaj_Btn";
-            Dodaj_Btn.Size = new System.Drawing.Size(124, 29);
-            Dodaj_Btn.TabIndex = 4;
-            Dodaj_Btn.Text = "Dodaj";
-            Dodaj_Btn.UseVisualStyleBackColor = false;
-            // 
-            // Godina_TB
-            // 
-            Godina_TB.Location = new System.Drawing.Point(148, 124);
-            Godina_TB.Name = "Godina_TB";
-            Godina_TB.Size = new System.Drawing.Size(217, 21);
-            Godina_TB.TabIndex = 3;
-            // 
-            // Naziv_TB
-            // 
-            Naziv_TB.Location = new System.Drawing.Point(148, 42);
-            Naziv_TB.Name = "Naziv_TB";
-            Naziv_TB.Size = new System.Drawing.Size(217, 21);
-            Naziv_TB.TabIndex = 1;
-            // 
-            // NazivCasopisa_TB
-            // 
-            NazivCasopisa_TB.Location = new System.Drawing.Point(148, 69);
-            NazivCasopisa_TB.Name = "NazivCasopisa_TB";
-            NazivCasopisa_TB.Size = new System.Drawing.Size(217, 21);
-            NazivCasopisa_TB.TabIndex = 0;
-            // 
-            // Broj_TB
-            // 
-            Broj_TB.Location = new System.Drawing.Point(148, 97);
-            Broj_TB.Name = "Broj_TB";
-            Broj_TB.Size = new System.Drawing.Size(217, 21);
-            Broj_TB.TabIndex = 2;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new System.Drawing.Font("Georgia", 9F);
-            label4.Location = new System.Drawing.Point(20, 130);
-            label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(122, 15);
-            label4.TabIndex = 3;
-            label4.Text = "Konf. objavljivanja:";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new System.Drawing.Font("Georgia", 9F);
-            label3.Location = new System.Drawing.Point(20, 103);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(54, 15);
-            label3.TabIndex = 2;
-            label3.Text = "Format:";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new System.Drawing.Font("Georgia", 9F);
-            label2.Location = new System.Drawing.Point(20, 45);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(45, 15);
-            label2.TabIndex = 1;
-            label2.Text = "Naziv:";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new System.Drawing.Font("Georgia", 9F);
-            label1.Location = new System.Drawing.Point(20, 76);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(35, 15);
-            label1.TabIndex = 0;
-            label1.Text = "URL:";
-            // 
-            // DodajRad
-            // 
-            AutoScaleMode = AutoScaleMode.None;
-            BackColor = System.Drawing.Color.AntiqueWhite;
-            ClientSize = new System.Drawing.Size(403, 223);
-            Controls.Add(OsnovnipodaciopredmetuGB);
-            MaximizeBox = false;
-            MaximumSize = new System.Drawing.Size(419, 262);
-            MinimizeBox = false;
-            MinimumSize = new System.Drawing.Size(419, 262);
-            Name = "DodajRad";
-            Text = "Dodaj rad";
-            OsnovnipodaciopredmetuGB.ResumeLayout(false);
-            OsnovnipodaciopredmetuGB.PerformLayout();
-            ResumeLayout(false);
-        }
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
+			OsnovnipodaciopredmetuGB = new GroupBox();
+			Autori_TB = new TextBox();
+			label6 = new Label();
+			Format_CB = new ComboBox();
+			Dodaj_Btn = new Button();
+			KonfObjavljivanja_TB = new TextBox();
+			Naziv_TB = new TextBox();
+			URL_TB = new TextBox();
+			label4 = new Label();
+			label3 = new Label();
+			label2 = new Label();
+			label1 = new Label();
+			OsnovnipodaciopredmetuGB.SuspendLayout();
+			SuspendLayout();
+			// 
+			// OsnovnipodaciopredmetuGB
+			// 
+			OsnovnipodaciopredmetuGB.Controls.Add(Autori_TB);
+			OsnovnipodaciopredmetuGB.Controls.Add(label6);
+			OsnovnipodaciopredmetuGB.Controls.Add(Format_CB);
+			OsnovnipodaciopredmetuGB.Controls.Add(Dodaj_Btn);
+			OsnovnipodaciopredmetuGB.Controls.Add(KonfObjavljivanja_TB);
+			OsnovnipodaciopredmetuGB.Controls.Add(Naziv_TB);
+			OsnovnipodaciopredmetuGB.Controls.Add(URL_TB);
+			OsnovnipodaciopredmetuGB.Controls.Add(label4);
+			OsnovnipodaciopredmetuGB.Controls.Add(label3);
+			OsnovnipodaciopredmetuGB.Controls.Add(label2);
+			OsnovnipodaciopredmetuGB.Controls.Add(label1);
+			OsnovnipodaciopredmetuGB.Font = new System.Drawing.Font("Georgia", 9F);
+			OsnovnipodaciopredmetuGB.Location = new System.Drawing.Point(12, 12);
+			OsnovnipodaciopredmetuGB.Name = "OsnovnipodaciopredmetuGB";
+			OsnovnipodaciopredmetuGB.Size = new System.Drawing.Size(383, 257);
+			OsnovnipodaciopredmetuGB.TabIndex = 0;
+			OsnovnipodaciopredmetuGB.TabStop = false;
+			OsnovnipodaciopredmetuGB.Text = "Podaci o radu";
+			// 
+			// Autori_TB
+			// 
+			Autori_TB.Location = new System.Drawing.Point(148, 72);
+			Autori_TB.Multiline = true;
+			Autori_TB.Name = "Autori_TB";
+			Autori_TB.Size = new System.Drawing.Size(217, 42);
+			Autori_TB.TabIndex = 13;
+			// 
+			// label6
+			// 
+			label6.AutoSize = true;
+			label6.Font = new System.Drawing.Font("Georgia", 9F);
+			label6.Location = new System.Drawing.Point(20, 75);
+			label6.Name = "label6";
+			label6.Size = new System.Drawing.Size(55, 15);
+			label6.TabIndex = 12;
+			label6.Text = "Autor/i:";
+			// 
+			// Format_CB
+			// 
+			Format_CB.BackColor = System.Drawing.Color.White;
+			Format_CB.DropDownStyle = ComboBoxStyle.DropDownList;
+			Format_CB.ForeColor = System.Drawing.SystemColors.WindowText;
+			Format_CB.FormattingEnabled = true;
+			Format_CB.Location = new System.Drawing.Point(148, 151);
+			Format_CB.Name = "Format_CB";
+			Format_CB.Size = new System.Drawing.Size(217, 23);
+			Format_CB.TabIndex = 6;
+			// 
+			// Dodaj_Btn
+			// 
+			Dodaj_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
+			Dodaj_Btn.Location = new System.Drawing.Point(241, 217);
+			Dodaj_Btn.Name = "Dodaj_Btn";
+			Dodaj_Btn.Size = new System.Drawing.Size(124, 29);
+			Dodaj_Btn.TabIndex = 4;
+			Dodaj_Btn.Text = "Dodaj";
+			Dodaj_Btn.UseVisualStyleBackColor = false;
+			Dodaj_Btn.Click += Dodaj_Btn_Click;
+			// 
+			// KonfObjavljivanja_TB
+			// 
+			KonfObjavljivanja_TB.Location = new System.Drawing.Point(148, 182);
+			KonfObjavljivanja_TB.Name = "KonfObjavljivanja_TB";
+			KonfObjavljivanja_TB.Size = new System.Drawing.Size(217, 21);
+			KonfObjavljivanja_TB.TabIndex = 3;
+			// 
+			// Naziv_TB
+			// 
+			Naziv_TB.Location = new System.Drawing.Point(148, 42);
+			Naziv_TB.Name = "Naziv_TB";
+			Naziv_TB.Size = new System.Drawing.Size(217, 21);
+			Naziv_TB.TabIndex = 1;
+			// 
+			// URL_TB
+			// 
+			URL_TB.Location = new System.Drawing.Point(148, 122);
+			URL_TB.Name = "URL_TB";
+			URL_TB.Size = new System.Drawing.Size(217, 21);
+			URL_TB.TabIndex = 0;
+			// 
+			// label4
+			// 
+			label4.AutoSize = true;
+			label4.Font = new System.Drawing.Font("Georgia", 9F);
+			label4.Location = new System.Drawing.Point(20, 185);
+			label4.Name = "label4";
+			label4.Size = new System.Drawing.Size(122, 15);
+			label4.TabIndex = 3;
+			label4.Text = "Konf. objavljivanja:";
+			// 
+			// label3
+			// 
+			label3.AutoSize = true;
+			label3.Font = new System.Drawing.Font("Georgia", 9F);
+			label3.Location = new System.Drawing.Point(20, 154);
+			label3.Name = "label3";
+			label3.Size = new System.Drawing.Size(54, 15);
+			label3.TabIndex = 2;
+			label3.Text = "Format:";
+			// 
+			// label2
+			// 
+			label2.AutoSize = true;
+			label2.Font = new System.Drawing.Font("Georgia", 9F);
+			label2.Location = new System.Drawing.Point(20, 45);
+			label2.Name = "label2";
+			label2.Size = new System.Drawing.Size(45, 15);
+			label2.TabIndex = 1;
+			label2.Text = "Naziv:";
+			// 
+			// label1
+			// 
+			label1.AutoSize = true;
+			label1.Font = new System.Drawing.Font("Georgia", 9F);
+			label1.Location = new System.Drawing.Point(20, 125);
+			label1.Name = "label1";
+			label1.Size = new System.Drawing.Size(35, 15);
+			label1.TabIndex = 0;
+			label1.Text = "URL:";
+			// 
+			// DodajRad
+			// 
+			AutoScaleMode = AutoScaleMode.None;
+			BackColor = System.Drawing.Color.AntiqueWhite;
+			ClientSize = new System.Drawing.Size(403, 281);
+			Controls.Add(OsnovnipodaciopredmetuGB);
+			MaximizeBox = false;
+			MaximumSize = new System.Drawing.Size(419, 320);
+			MinimizeBox = false;
+			MinimumSize = new System.Drawing.Size(419, 320);
+			Name = "DodajRad";
+			Text = "Dodaj rad";
+			Load += DodajRad_Load;
+			OsnovnipodaciopredmetuGB.ResumeLayout(false);
+			OsnovnipodaciopredmetuGB.PerformLayout();
+			ResumeLayout(false);
+		}
 
-        #endregion
+		#endregion
 
-        private GroupBox OsnovnipodaciopredmetuGB;
+		private GroupBox OsnovnipodaciopredmetuGB;
         private Label label3;
         private Label label2;
         private Label label1;
         private TextBox Katedra_TB;
         private TextBox Naziv_TB;
-        private TextBox NazivCasopisa_TB;
-        private TextBox Broj_TB;
+        private TextBox URL_TB;
         private Button Dodaj_Btn;
-        private TextBox Godina_TB;
+        private TextBox KonfObjavljivanja_TB;
         private Label label4;
-    }
+		private ComboBox Format_CB;
+		private TextBox Autori_TB;
+		private Label label6;
+	}
 }

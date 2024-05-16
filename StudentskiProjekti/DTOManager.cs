@@ -1,6 +1,4 @@
-﻿using NHibernate.Criterion;
-using StudentskiProjekti.Entiteti;
-using static StudentskiProjekti.DTOs;
+﻿using static StudentskiProjekti.DTOs;
 
 namespace StudentskiProjekti;
 public class DTOManager
@@ -500,6 +498,7 @@ public class DTOManager
     #region Literatura
 
     #region Knjiga
+
     public static List<KnjigaPregled> VratiSveKnjigeZaTeorijskiProjekat(int teorijskiProjekatId)
     {
         List<KnjigaPregled> knjige = new List<KnjigaPregled>();
@@ -531,13 +530,13 @@ public class DTOManager
         return knjige;
     }
 
-    public static void ObrisiKnjigu(int id)
+    public static void ObrisiKnjigu(string isbn)
     {
         try
         {
             ISession s = DataLayer.GetSession();
 
-            Knjiga o = s.Load<Knjiga>(id);
+            Knjiga o = s.Load<Knjiga>(isbn);
 
             s.Delete(o);
 
@@ -551,7 +550,7 @@ public class DTOManager
         }
     }
 
-    public static void DodajKnjigu(KnjigaPregled p)
+    public static void DodajKnjigu(int tProjekatId, KnjigaPregled p, List<AutorPregled> autori)
     {
         try
         {
@@ -559,28 +558,44 @@ public class DTOManager
 
             Literatura lit = new Literatura { Naziv = p.Naziv };
 
-            Knjiga r = new Knjiga()
+			List<LitAutor> listaAutora = new List<LitAutor>();
+			foreach (AutorPregled ap in autori)
+			{
+				listaAutora.Add(new LitAutor() { Autor = ap.Autor, Literatura = lit });
+			}
+			lit.Autori = listaAutora;
+
+			Knjiga r = new Knjiga()
             {
                 ISBN = p.ISBN,
                 Izdavac =p.Izdavac,
                 GodinaIzdanja = p.GodinaIzdanja,
-                Literatura = p.Literatura
+                Literatura = lit
             };
 
             lit.Knjige.Add(r);
 
             s.Save(lit);
 
-            s.Flush();
+			Sadrzi sadrzi = new Sadrzi()
+			{
+				Literatura = lit,
+				TProjekat = s.Load<TeorijskiProjekat>(tProjekatId)
+			};
 
-            s.Close();
-        }
+			s.Save(sadrzi);
+
+			s.Flush();
+
+			s.Close();
+		}
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
         }
     }
-    public static KnjigaPregled VratiKnjiguPoISBN(string isbn)
+
+    public static KnjigaPregled VratiKnjigu(string isbn)
     {
         KnjigaPregled knjiga = null;
         try
@@ -604,6 +619,7 @@ public class DTOManager
 
         return knjiga;
     }
+
     #endregion
 
     #region Rad
@@ -624,8 +640,7 @@ public class DTOManager
                                      .Where(k => literaturaIds.Contains(k.Literatura.LitId))
                                      .ToList();
 
-
-            foreach (Rad r in sviRadovi)
+			foreach (Rad r in sviRadovi)
             {
                 radovi.Add(new RadPregled(r.Id, r.Literatura.Naziv, r.Url , r.KonferencijaObjavljivanja, r.Format, r.Literatura));
             }
@@ -639,6 +654,7 @@ public class DTOManager
 
         return radovi;
     }
+
     public static void ObrisiRad(int id)
 	{
 		try
@@ -659,13 +675,20 @@ public class DTOManager
 		}
 	}
 
-	public static void DodajRad(RadPregled p)
+	public static void DodajRad(int tProjekatId, RadPregled p, List<AutorPregled> autori)
 	{
         try
         {
             ISession s = DataLayer.GetSession();
 
             Literatura lit = new Literatura { Naziv = p.Naziv };
+
+			List<LitAutor> listaAutora = new List<LitAutor>();
+			foreach (AutorPregled ap in autori)
+			{
+				listaAutora.Add(new LitAutor() { Autor = ap.Autor, Literatura = lit });
+			}
+			lit.Autori = listaAutora;
 
 			Rad r = new Rad()
 			{
@@ -679,6 +702,14 @@ public class DTOManager
 
 			s.Save(lit);
 
+			Sadrzi sadrzi = new Sadrzi()
+			{
+				Literatura = lit,
+				TProjekat = s.Load<TeorijskiProjekat>(tProjekatId)
+			};
+
+			s.Save(sadrzi);
+
 			s.Flush();
 
 			s.Close();
@@ -688,7 +719,8 @@ public class DTOManager
 			Console.WriteLine(e.Message);
 		}
 	}
-    public static RadPregled VratiRadPoID(int id)
+
+    public static RadPregled VratiRad(int id)
     {
         RadPregled rad = null;
         try
@@ -711,10 +743,12 @@ public class DTOManager
 
         return rad;
     }
+
     #endregion
 
     #region ClanakUCaspisu
-    public static List<ClanakUCasopisuPregled> VratiSveCasopiseZaTeorijskiProjekat(int teorijskiProjekatId)
+
+    public static List<ClanakUCasopisuPregled> VratiSveClankeZaTeorijskiProjekat(int teorijskiProjekatId)
     {
         List<ClanakUCasopisuPregled> clanci = new List<ClanakUCasopisuPregled>();
         try
@@ -745,13 +779,14 @@ public class DTOManager
 
         return clanci;
     }
-    public static void ObrisiClanak(int id)
+
+    public static void ObrisiClanak(string issn)
     {
         try
         {
             ISession s = DataLayer.GetSession();
 
-            ClanakUCasopisu o = s.Load<ClanakUCasopisu>(id);
+            ClanakUCasopisu o = s.Load<ClanakUCasopisu>(issn);
 
             s.Delete(o);
 
@@ -765,7 +800,7 @@ public class DTOManager
         }
     }
 
-    public static void DodajClanak(ClanakUCasopisuPregled p)
+    public static void DodajClanak(int tProjekatId, ClanakUCasopisuPregled p, List<AutorPregled> autori)
     {
         try
         {
@@ -773,19 +808,32 @@ public class DTOManager
 
             Literatura lit = new Literatura { Naziv = p.Naziv };
 
-            ClanakUCasopisu r = new ClanakUCasopisu()
-            {
+			List<LitAutor> listaAutora = new List<LitAutor>();
+			foreach (AutorPregled ap in autori)
+			{
+                listaAutora.Add(new LitAutor() { Autor = ap.Autor, Literatura = lit });
+			}
+            lit.Autori = listaAutora;
 
+			ClanakUCasopisu r = new ClanakUCasopisu()
+            {
                 ImeCasopisa = p.ImeCasopisa,
                 ISSN = p.ISSN,
                 Broj = p.Broj,
                 Godina = p.Godina,
-                Literatura = p.Literatura
+                Literatura = lit
             };
 
             lit.ClanciUCasopisu.Add(r);
-
             s.Save(lit);
+
+            Sadrzi sadrzi = new Sadrzi()
+            {
+                Literatura = lit,
+                TProjekat = s.Load<TeorijskiProjekat>(tProjekatId)
+            };
+
+            s.Save(sadrzi);
 
             s.Flush();
 
@@ -796,7 +844,8 @@ public class DTOManager
             Console.WriteLine(e.Message);
         }
     }
-    public static ClanakUCasopisuPregled VratiClanakPoISSN(string issn)
+
+    public static ClanakUCasopisuPregled VratiClanak(string issn)
     {
         ClanakUCasopisuPregled clanak = null;
         try
@@ -820,8 +869,8 @@ public class DTOManager
 
         return clanak;
     }
-    #endregion
 
+    #endregion
 
     #endregion
 
@@ -904,6 +953,7 @@ public class DTOManager
 
         return finalStranice;
     }
+
     public static void DodajPrakticniProjekat(PrakticniProjekatPregled p)
     {
         try
@@ -1002,6 +1052,7 @@ public class DTOManager
 
         return p;
     }
+
     public static void DodajPreporucenuWebStranicuZaProjekat(int idProjekta, string nazivWebStranice)
     {
         try
@@ -1048,5 +1099,6 @@ public class DTOManager
 			Console.WriteLine(e.Message);
 		}
 	}
+
 	#endregion
 }
