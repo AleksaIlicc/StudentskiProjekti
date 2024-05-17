@@ -301,6 +301,47 @@ public class DTOManager
             Console.WriteLine(e.Message);
         }
     }
+    public class ProjekatDetalji
+    {
+        public string NazivProjekta { get; set; }
+        public DateTime DatumPocetkaIzrade { get; set; }
+        public DateTime? DatumZavrsetkaIzrade { get; set; }
+        public DateTime RokZaZavrsetak { get; set; }
+        public string ProjekatZavrsen { get; set; }
+    }
+    public static List<ProjekatDetalji> VratiProjekteZaStudenta(string studentId)
+    {
+        List<ProjekatDetalji> projektiInfo = new List<ProjekatDetalji>();
+        try
+        {
+            ISession s = DataLayer.GetSession();
+
+            projektiInfo = s.Query<Ucestvuje>()
+                            .Where(ucestvuje => ucestvuje.Student.BrIndeksa == studentId)
+                            .Join(s.Query<Projekat>(),
+                                  ucestvuje => ucestvuje.Projekat.Id,
+                                  projekat => projekat.Id,
+                                  (ucestvuje, projekat) => new ProjekatDetalji
+                                  {
+                                      NazivProjekta = projekat.Naziv,
+                                      DatumPocetkaIzrade = ucestvuje.DatumPocetkaIzrade,
+                                      DatumZavrsetkaIzrade = ucestvuje.DatumZavrsetka,
+                                      RokZaZavrsetak = ucestvuje.RokZaZavrsetak,
+                                      ProjekatZavrsen = ucestvuje.ProjekatZavrsen
+                                  })
+                            .ToList();
+
+            s.Close();
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        return projektiInfo;
+    }
+
+
 
     #endregion
 
