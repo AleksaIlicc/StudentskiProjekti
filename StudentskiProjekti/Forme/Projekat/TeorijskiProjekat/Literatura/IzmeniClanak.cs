@@ -1,4 +1,5 @@
-﻿using static StudentskiProjekti.DTOs;
+﻿using StudentskiProjekti.Entiteti;
+using static StudentskiProjekti.DTOs;
 namespace StudentskiProjekti.Forme;
 public partial class IzmeniClanak : Form
 {
@@ -22,7 +23,21 @@ public partial class IzmeniClanak : Form
 
 	private void Izmeni_Btn_Click(object sender, EventArgs e)
 	{
+		string poruka = "Da li zelite da izvrsite izmene clanka?";
+		string title = "Pitanje";
+		MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+		DialogResult result = MessageBox.Show(poruka, title, buttons);
+		if (result == DialogResult.OK)
+		{
+			clanak.Naziv = Naziv_TB.Text.Trim();
+			clanak.ImeCasopisa = ImeCasopisa_TB.Text.Trim();
+			clanak.Broj = int.Parse(Broj_TB.Text.Trim());
+			clanak.Godina = int.Parse(Godina_TB.Text.Trim());
 
+			DTOManager.AzurirajClanak(clanak);
+			MessageBox.Show("Azuriranje clanka u casopisu je uspesno izvrseno!");
+			this.Close();
+		}
 	}
 }
 

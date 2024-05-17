@@ -2,6 +2,7 @@
 using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml;
 using static StudentskiProjekti.DTOs;
+using System.Windows.Forms;
 
 namespace StudentskiProjekti.Forme;
 public partial class Projekti : Form
@@ -138,6 +139,14 @@ public partial class Projekti : Form
 		if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '/')
 		{
 			e.Handled = true;
+		}
+	}
+
+	private void Projekti_ListV_SelectedIndexChanged(object sender, EventArgs e)
+	{
+		if (Projekti_ListV.SelectedItems.Count>0)
+		{
+			Projekti_ListV.SelectedItems.Clear();
 		}
 	}
 }

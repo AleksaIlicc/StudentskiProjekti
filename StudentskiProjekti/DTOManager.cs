@@ -870,15 +870,38 @@ public class DTOManager
         return clanak;
     }
 
-    #endregion
+	public static void AzurirajClanak(ClanakUCasopisuPregled clanakPregled)
+	{
+		try
+		{
+			ISession s = DataLayer.GetSession();
 
-    #endregion
+			ClanakUCasopisu clanak = s.Load<ClanakUCasopisu>(clanakPregled.ISSN);
+            clanak.Broj = clanakPregled.Broj;
+            clanak.ImeCasopisa = clanakPregled.ImeCasopisa;
+            clanak.Literatura.Naziv = clanakPregled.Naziv;
+            clanak.Godina = clanakPregled.Godina;
 
-    #endregion
+			s.SaveOrUpdate(clanak);
+			s.Flush();
 
-    #region PrakticniProjekti
+			s.Close();
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e.Message);
+		}
+	}
 
-    public static List<PrakticniProjekatPregled> VratiPrakticneProjekteZaPredmet(string idPredmeta)
+	#endregion
+
+	#endregion
+
+	#endregion
+
+	#region PrakticniProjekti
+
+	public static List<PrakticniProjekatPregled> VratiPrakticneProjekteZaPredmet(string idPredmeta)
     {
         List<PrakticniProjekatPregled> projekti = new List<PrakticniProjekatPregled>();
         try

@@ -96,6 +96,7 @@ public class DTOs
 	#endregion
 
 	#region Rad
+
 	public class RadPregled : LiteraturaPregled
     {
         public int Id { get; set; }
@@ -113,6 +114,7 @@ public class DTOs
             this.Format = format;
             this.Literatura = literatura;
 		}
+
         public RadPregled(int id, string naziv, string url, string konferencijaObjavljivanja, string format, Literatura literatura) : base(naziv)
         {
             this.Id = id;
@@ -122,11 +124,14 @@ public class DTOs
             this.Format = format;
             this.Literatura = literatura;
         }
+
         public RadPregled() { }
     }
+
     #endregion
 
     #region ClanakUCasopisu
+
     public class ClanakUCasopisuPregled : LiteraturaPregled
     {
         public string ISSN { get; set; }
@@ -150,6 +155,7 @@ public class DTOs
     #endregion
 
     #region Knjiga
+
     public class KnjigaPregled : LiteraturaPregled
     {
         public string ISBN { get; set; }
@@ -167,6 +173,7 @@ public class DTOs
 
         public KnjigaPregled() { }
     }
+
     #endregion
 
     #endregion
