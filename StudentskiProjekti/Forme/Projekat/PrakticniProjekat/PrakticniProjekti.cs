@@ -4,7 +4,7 @@ namespace StudentskiProjekti.Forme;
 public partial class PrakticniProjekti : Form
 {
     PredmetPregled izabraniPredmet;
-    public PrakticniProjekti(DTOs.PredmetPregled predmet)
+    public PrakticniProjekti(PredmetPregled predmet)
     {
         izabraniPredmet = predmet;
         InitializeComponent();

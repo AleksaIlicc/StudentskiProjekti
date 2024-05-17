@@ -87,6 +87,7 @@
 			Projekti_ListV.TabIndex = 1;
 			Projekti_ListV.UseCompatibleStateImageBehavior = false;
 			Projekti_ListV.View = View.Details;
+			Projekti_ListV.SelectedIndexChanged += Projekti_ListV_SelectedIndexChanged;
 			// 
 			// columnHeader1
 			// 

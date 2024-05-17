@@ -59,6 +59,7 @@ public class DTOs
     #endregion
 
     #region TeorijskiProjekat
+
     public class TeorijskiProjekatPregled : ProjekatPregled
     {
         public int MaksBrojStrana { get; set; }
@@ -71,7 +72,6 @@ public class DTOs
 
         public TeorijskiProjekatPregled() : base() { }
     }
-
 
     #region Literatura
 
@@ -86,10 +86,20 @@ public class DTOs
         public LiteraturaPregled() { }
 	}
 
-	#region Rad
-    public class RadPregled : LiteraturaPregled
+	#region Autor
+
+    public class AutorPregled
     {
-        public int id;
+		public string Autor { get; set; }
+	}
+
+	#endregion
+
+	#region Rad
+
+	public class RadPregled : LiteraturaPregled
+    {
+        public int Id { get; set; }
 		public string Url { get; set; }
 		public string KonferencijaObjavljivanja { get; set; }
 		public string Format { get; set; }
@@ -104,20 +114,24 @@ public class DTOs
             this.Format = format;
             this.Literatura = literatura;
 		}
+
         public RadPregled(int id, string naziv, string url, string konferencijaObjavljivanja, string format, Literatura literatura) : base(naziv)
         {
-            this.id = id;
+            this.Id = id;
             this.Url = url;
             this.Naziv = naziv;
             this.KonferencijaObjavljivanja = konferencijaObjavljivanja;
             this.Format = format;
             this.Literatura = literatura;
         }
+
         public RadPregled() { }
     }
+
     #endregion
 
     #region ClanakUCasopisu
+
     public class ClanakUCasopisuPregled : LiteraturaPregled
     {
         public string ISSN { get; set; }
@@ -141,6 +155,7 @@ public class DTOs
     #endregion
 
     #region Knjiga
+
     public class KnjigaPregled : LiteraturaPregled
     {
         public string ISBN { get; set; }
@@ -158,6 +173,7 @@ public class DTOs
 
         public KnjigaPregled() { }
     }
+
     #endregion
 
     #endregion
