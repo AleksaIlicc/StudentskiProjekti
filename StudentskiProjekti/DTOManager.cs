@@ -299,17 +299,9 @@ public class DTOManager
             Console.WriteLine(e.Message);
         }
     }
-    public class ProjekatDetalji
+    public static List<ProjekatUcesceDetalji> VratiProjekteZaStudenta(string studentId)
     {
-        public string NazivProjekta { get; set; }
-        public DateTime DatumPocetkaIzrade { get; set; }
-        public DateTime? DatumZavrsetkaIzrade { get; set; }
-        public DateTime RokZaZavrsetak { get; set; }
-        public string ProjekatZavrsen { get; set; }
-    }
-    public static List<ProjekatDetalji> VratiProjekteZaStudenta(string studentId)
-    {
-        List<ProjekatDetalji> projektiInfo = new List<ProjekatDetalji>();
+        List<ProjekatUcesceDetalji> projektiInfo = new List<ProjekatUcesceDetalji>();
         try
         {
             ISession s = DataLayer.GetSession();
@@ -319,13 +311,15 @@ public class DTOManager
                             .Join(s.Query<Projekat>(),
                                   ucestvuje => ucestvuje.Projekat.Id,
                                   projekat => projekat.Id,
-                                  (ucestvuje, projekat) => new ProjekatDetalji
+                                  (ucestvuje, projekat) => new ProjekatUcesceDetalji
                                   {
+                                      Id = projekat.Id,
                                       NazivProjekta = projekat.Naziv,
                                       DatumPocetkaIzrade = ucestvuje.DatumPocetkaIzrade,
                                       DatumZavrsetkaIzrade = ucestvuje.DatumZavrsetka,
                                       RokZaZavrsetak = ucestvuje.RokZaZavrsetak,
-                                      ProjekatZavrsen = ucestvuje.ProjekatZavrsen
+                                      ProjekatZavrsen = ucestvuje.ProjekatZavrsen,
+                                      VrstaProjekta = projekat.VrstaProjekta
                                   })
                             .ToList();
 
@@ -338,7 +332,34 @@ public class DTOManager
         }
         return projektiInfo;
     }
+    public static List<StudentPregled> VratiStudNaGrupnomProj(int IdTProj)
+    {
+        List<StudentPregled> studenti = new List<StudentPregled>();
+        try
+        {
+            ISession s = DataLayer.GetSession();
 
+            studenti = s.Query<Ucestvuje>().Where(p=> p.Projekat.Id == IdTProj).Join(s.Query<Student>(),
+                                  ucestvuje => ucestvuje.Student.BrIndeksa,
+                                  student => student.BrIndeksa,
+                                  (ucestvuje, student) => new StudentPregled
+                                  {
+                                      BrIndeksa = student.BrIndeksa,
+                                      LIme = student.LIme,
+                                      Prezime = student.Prezime,
+                                  })
+                .ToList();
+
+
+            s.Close();
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        return studenti;
+    }
 
 
     #endregion
@@ -534,6 +555,25 @@ public class DTOManager
         }
 
         return p;
+    }
+
+    public static string VratiDopunskuLiteraturu(int idproj , string idstud)
+    {
+        string dopunskalit = null;
+        try
+        {
+            ISession s = DataLayer.GetSession();
+
+            dopunskalit = s.Query<Ucestvuje>().Where(p => p.Projekat.Id == idproj && p.Student.BrIndeksa == idstud).Select(p => p.DopunskaLiteratura).FirstOrDefault();
+
+            s.Close();
+        }
+        catch (Exception ec)
+        {
+            Console.WriteLine(ec.Message);
+        }
+
+        return dopunskalit;
     }
 
     #region Literatura
@@ -1163,6 +1203,24 @@ public class DTOManager
 			Console.WriteLine(e.Message);
 		}
 	}
+    public static string VratiOdabraniProgJezik(int idproj, string idstud)
+    {
+        string odabranijezik = null;
+        try
+        {
+            ISession s = DataLayer.GetSession();
 
-	#endregion
+            odabranijezik = s.Query<Ucestvuje>().Where(p => p.Projekat.Id == idproj && p.Student.BrIndeksa == idstud).Select(p => p.OdabranProgramskiJezik).FirstOrDefault();
+
+            s.Close();
+        }
+        catch (Exception ec)
+        {
+            Console.WriteLine(ec.Message);
+        }
+
+        return odabranijezik;
+    }
+
+    #endregion
 }

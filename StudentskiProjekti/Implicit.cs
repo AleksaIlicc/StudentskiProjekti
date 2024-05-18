@@ -13,4 +13,6 @@ global using FluentNHibernate.Cfg;
 global using FluentNHibernate.Cfg.Db;
 global using System.Configuration;
 global using System.Windows.Forms;
+using static StudentskiProjekti.DTOManager;
+using static StudentskiProjekti.DTOs;
 

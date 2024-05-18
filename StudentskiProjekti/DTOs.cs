@@ -1,4 +1,6 @@
-﻿namespace StudentskiProjekti;
+﻿
+
+namespace StudentskiProjekti;
 
 public class DTOs
 {
@@ -56,6 +58,16 @@ public class DTOs
         {
         }
     }
+    public class ProjekatUcesceDetalji
+    {
+        public int Id { get; set; }
+        public string NazivProjekta { get; set; }
+        public DateTime DatumPocetkaIzrade { get; set; }
+        public DateTime? DatumZavrsetkaIzrade { get; set; }
+        public DateTime RokZaZavrsetak { get; set; }
+        public string ProjekatZavrsen { get; set; }
+        public string VrstaProjekta { get; set; }
+    }
     #endregion
 
     #region TeorijskiProjekat
@@ -71,6 +83,8 @@ public class DTOs
         }
 
         public TeorijskiProjekatPregled() : base() { }
+
+
     }
 
     #region Literatura

@@ -1,24 +1,24 @@
 ﻿namespace StudentskiProjekti.Forme
 {
-	partial class StudentDetalji
-	{
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
-		private System.ComponentModel.IContainer components = null;
+    partial class PredatiIzvestaji
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
 
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing && (components != null))
-			{
-				components.Dispose();
-			}
-			base.Dispose(disposing);
-		}
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
         #region Windows Form Designer generated code
 
@@ -123,7 +123,7 @@
             Ucesce_Btn.TabIndex = 1;
             Ucesce_Btn.Text = "Prikazi vise informacija o ucescu";
             Ucesce_Btn.UseVisualStyleBackColor = false;
-            Ucesce_Btn.Click += Ucesce_Btn_Click;
+
             // 
             // Podaci_o_predmetimaGB
             // 
@@ -265,7 +265,7 @@
             MinimumSize = new System.Drawing.Size(821, 637);
             Name = "StudentDetalji";
             Text = "Student detalji";
-            Load += StudentDetalji_Load;
+     
             StudentDetalji_GB.ResumeLayout(false);
             Podaci_o_predmetimaGB.ResumeLayout(false);
             ResumeLayout(false);
@@ -275,12 +275,12 @@
         #endregion
 
         private GroupBox StudentDetalji_GB;
-		private ListView StudentDetalji_ListV;
-		private Button Ucesce_Btn;
-		private ColumnHeader columnHeader3;
-		private ColumnHeader columnHeader6;
-		private ColumnHeader columnHeader7;
-		private ColumnHeader columnHeader8;
+        private ListView StudentDetalji_ListV;
+        private Button Ucesce_Btn;
+        private ColumnHeader columnHeader3;
+        private ColumnHeader columnHeader6;
+        private ColumnHeader columnHeader7;
+        private ColumnHeader columnHeader8;
         private ColumnHeader columnHeader1;
         private GroupBox Podaci_o_predmetimaGB;
         private Button IzmeniUcesce_Btn;
