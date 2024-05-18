@@ -31,12 +31,11 @@ public partial class TeorijskiUcesceDetalji : Form
     private void PopuniPodacimaLabele()
     {
         Naziv_LB.Text = te.Naziv;
-        DatumPocetka_LB.Text = pd.DatumPocetkaIzrade.ToString();
-        DatumZavrsetka_LB.Text = pd.DatumZavrsetkaIzrade.ToString();
-        RokZaZavrsetak_LB.Text = pd.RokZaZavrsetak.ToString();
+        DatumPocetka_LB.Text = pd.DatumPocetkaIzrade.ToString("dd.MM.yyyy");
+        DatumZavrsetka_LB.Text = pd.DatumZavrsetkaIzrade?.ToString("dd.MM.yyyy") ?? "";
+        RokZaZavrsetak_LB.Text = pd.RokZaZavrsetak.ToString("dd.MM.yyyy");
         ProjekatZavrsen_LB.Text = pd.ProjekatZavrsen;
         SkolskaGodinaZad_LB.Text = te.SkolskaGodinaZadavanja.ToString();
-        MaksimalanBrStranica_LB.Text = te.MaksBrojStrana.ToString();
         DopunskaLit_LB.Text = DTOManager.VratiDopunskuLiteraturu(te.Id, sp.BrIndeksa);
     }
 

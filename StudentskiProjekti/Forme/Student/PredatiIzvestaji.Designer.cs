@@ -28,19 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            StudentDetalji_GB = new GroupBox();
-            StudentDetalji_ListV = new ListView();
+            Izvestaji_GB = new GroupBox();
+            label5 = new Label();
+            Izvestaji_ListV = new ListView();
             columnHeader3 = new ColumnHeader();
-            columnHeader6 = new ColumnHeader();
-            columnHeader7 = new ColumnHeader();
-            columnHeader8 = new ColumnHeader();
-            columnHeader1 = new ColumnHeader();
-            columnHeader2 = new ColumnHeader();
-            Ucesce_Btn = new Button();
-            Podaci_o_predmetimaGB = new GroupBox();
-            IzmeniUcesce_Btn = new Button();
-            DodajUcesce_Btn = new Button();
-            ObrisiUcesce_Btn = new Button();
+            columnHeader4 = new ColumnHeader();
+            columnHeader5 = new ColumnHeader();
+            columnHeader9 = new ColumnHeader();
+            OstaliClanovi_Btn = new Button();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -49,202 +44,213 @@
             Smer_LB = new Label();
             Prezime_LB = new Label();
             Ime_LB = new Label();
-            StudentDetalji_GB.SuspendLayout();
+            Podaci_o_predmetimaGB = new GroupBox();
+            IzmeniIzvestaj_Btn = new Button();
+            DodajIzvestaj_Btn = new Button();
+            ObrisiIzvestaj_Btn = new Button();
+            columnHeader1 = new ColumnHeader();
+            Izvestaji_GB.SuspendLayout();
             Podaci_o_predmetimaGB.SuspendLayout();
             SuspendLayout();
             // 
-            // StudentDetalji_GB
+            // Izvestaji_GB
             // 
-            StudentDetalji_GB.Controls.Add(StudentDetalji_ListV);
-            StudentDetalji_GB.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            StudentDetalji_GB.Location = new System.Drawing.Point(8, 12);
-            StudentDetalji_GB.Name = "StudentDetalji_GB";
-            StudentDetalji_GB.Size = new System.Drawing.Size(783, 385);
-            StudentDetalji_GB.TabIndex = 3;
-            StudentDetalji_GB.TabStop = false;
-            StudentDetalji_GB.Text = "Projekti na kojima radi:";
+            Izvestaji_GB.Controls.Add(label5);
+            Izvestaji_GB.Controls.Add(Izvestaji_ListV);
+            Izvestaji_GB.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            Izvestaji_GB.Location = new System.Drawing.Point(8, 12);
+            Izvestaji_GB.Name = "Izvestaji_GB";
+            Izvestaji_GB.Size = new System.Drawing.Size(709, 289);
+            Izvestaji_GB.TabIndex = 3;
+            Izvestaji_GB.TabStop = false;
+            Izvestaji_GB.Text = "Izvestaji:";
             // 
-            // StudentDetalji_ListV
+            // label5
             // 
-            StudentDetalji_ListV.AccessibleRole = AccessibleRole.None;
-            StudentDetalji_ListV.Columns.AddRange(new ColumnHeader[] { columnHeader3, columnHeader6, columnHeader7, columnHeader8, columnHeader1, columnHeader2 });
-            StudentDetalji_ListV.FullRowSelect = true;
-            StudentDetalji_ListV.GridLines = true;
-            StudentDetalji_ListV.Location = new System.Drawing.Point(6, 44);
-            StudentDetalji_ListV.MultiSelect = false;
-            StudentDetalji_ListV.Name = "StudentDetalji_ListV";
-            StudentDetalji_ListV.Size = new System.Drawing.Size(771, 335);
-            StudentDetalji_ListV.TabIndex = 0;
-            StudentDetalji_ListV.UseCompatibleStateImageBehavior = false;
-            StudentDetalji_ListV.View = View.Details;
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(6, 33);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(342, 18);
+            label5.TabIndex = 10;
+            label5.Text = "Duplim klikom na red mozete videti opis izvestaja:";
+            // 
+            // Izvestaji_ListV
+            // 
+            Izvestaji_ListV.AccessibleRole = AccessibleRole.None;
+            Izvestaji_ListV.Columns.AddRange(new ColumnHeader[] { columnHeader3, columnHeader4, columnHeader5, columnHeader9, columnHeader1 });
+            Izvestaji_ListV.FullRowSelect = true;
+            Izvestaji_ListV.GridLines = true;
+            Izvestaji_ListV.Location = new System.Drawing.Point(6, 57);
+            Izvestaji_ListV.MultiSelect = false;
+            Izvestaji_ListV.Name = "Izvestaji_ListV";
+            Izvestaji_ListV.Size = new System.Drawing.Size(697, 226);
+            Izvestaji_ListV.TabIndex = 0;
+            Izvestaji_ListV.UseCompatibleStateImageBehavior = false;
+            Izvestaji_ListV.View = View.Details;
+            Izvestaji_ListV.DoubleClick += Izvestaji_ListV_DoubleClick;
             // 
             // columnHeader3
             // 
             columnHeader3.Text = "Naziv";
             columnHeader3.Width = 240;
             // 
-            // columnHeader6
+            // columnHeader4
             // 
-            columnHeader6.Text = "Datum poc. izrade";
-            columnHeader6.TextAlign = HorizontalAlignment.Center;
-            columnHeader6.Width = 140;
+            columnHeader4.Text = "Datum poc. izrade";
+            columnHeader4.TextAlign = HorizontalAlignment.Center;
+            columnHeader4.Width = 140;
             // 
-            // columnHeader7
+            // columnHeader5
             // 
-            columnHeader7.Text = "Datum zavr. izrade";
-            columnHeader7.TextAlign = HorizontalAlignment.Center;
-            columnHeader7.Width = 140;
+            columnHeader5.Text = "Datum zavr. izrade";
+            columnHeader5.TextAlign = HorizontalAlignment.Center;
+            columnHeader5.Width = 140;
             // 
-            // columnHeader8
+            // columnHeader9
             // 
-            columnHeader8.Text = "Rok za zavrsetak";
-            columnHeader8.TextAlign = HorizontalAlignment.Center;
-            columnHeader8.Width = 130;
+            columnHeader9.Text = "Rok za zavrsetak projekta";
+            columnHeader9.TextAlign = HorizontalAlignment.Center;
+            columnHeader9.Width = 170;
             // 
-            // columnHeader1
+            // OstaliClanovi_Btn
             // 
-            columnHeader1.Text = "Projekat zavrsen";
-            columnHeader1.TextAlign = HorizontalAlignment.Center;
-            columnHeader1.Width = 130;
-            // 
-            // columnHeader2
-            // 
-            columnHeader2.Text = "Vrsta projekta";
-            columnHeader2.TextAlign = HorizontalAlignment.Center;
-            columnHeader2.Width = 100;
-            // 
-            // Ucesce_Btn
-            // 
-            Ucesce_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
-            Ucesce_Btn.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            Ucesce_Btn.Location = new System.Drawing.Point(605, 491);
-            Ucesce_Btn.Name = "Ucesce_Btn";
-            Ucesce_Btn.Size = new System.Drawing.Size(180, 69);
-            Ucesce_Btn.TabIndex = 1;
-            Ucesce_Btn.Text = "Prikazi vise informacija o ucescu";
-            Ucesce_Btn.UseVisualStyleBackColor = false;
-
-            // 
-            // Podaci_o_predmetimaGB
-            // 
-            Podaci_o_predmetimaGB.Controls.Add(IzmeniUcesce_Btn);
-            Podaci_o_predmetimaGB.Controls.Add(DodajUcesce_Btn);
-            Podaci_o_predmetimaGB.Controls.Add(ObrisiUcesce_Btn);
-            Podaci_o_predmetimaGB.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            Podaci_o_predmetimaGB.Location = new System.Drawing.Point(8, 403);
-            Podaci_o_predmetimaGB.Name = "Podaci_o_predmetimaGB";
-            Podaci_o_predmetimaGB.Size = new System.Drawing.Size(177, 182);
-            Podaci_o_predmetimaGB.TabIndex = 8;
-            Podaci_o_predmetimaGB.TabStop = false;
-            Podaci_o_predmetimaGB.Text = "Izmeni ucesce";
-            // 
-            // IzmeniUcesce_Btn
-            // 
-            IzmeniUcesce_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
-            IzmeniUcesce_Btn.Font = new System.Drawing.Font("Georgia", 9F);
-            IzmeniUcesce_Btn.Location = new System.Drawing.Point(15, 85);
-            IzmeniUcesce_Btn.Name = "IzmeniUcesce_Btn";
-            IzmeniUcesce_Btn.Size = new System.Drawing.Size(146, 38);
-            IzmeniUcesce_Btn.TabIndex = 2;
-            IzmeniUcesce_Btn.Text = "Izmeni ucesce";
-            IzmeniUcesce_Btn.UseVisualStyleBackColor = false;
-            // 
-            // DodajUcesce_Btn
-            // 
-            DodajUcesce_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
-            DodajUcesce_Btn.Font = new System.Drawing.Font("Georgia", 9F);
-            DodajUcesce_Btn.Location = new System.Drawing.Point(15, 41);
-            DodajUcesce_Btn.Name = "DodajUcesce_Btn";
-            DodajUcesce_Btn.Size = new System.Drawing.Size(146, 38);
-            DodajUcesce_Btn.TabIndex = 1;
-            DodajUcesce_Btn.Text = "Dodaj novo ucesce";
-            DodajUcesce_Btn.UseVisualStyleBackColor = false;
-            // 
-            // ObrisiUcesce_Btn
-            // 
-            ObrisiUcesce_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
-            ObrisiUcesce_Btn.Font = new System.Drawing.Font("Georgia", 9F);
-            ObrisiUcesce_Btn.Location = new System.Drawing.Point(15, 129);
-            ObrisiUcesce_Btn.Name = "ObrisiUcesce_Btn";
-            ObrisiUcesce_Btn.Size = new System.Drawing.Size(146, 38);
-            ObrisiUcesce_Btn.TabIndex = 0;
-            ObrisiUcesce_Btn.Text = "Obrisi ucesce";
-            ObrisiUcesce_Btn.UseVisualStyleBackColor = false;
+            OstaliClanovi_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
+            OstaliClanovi_Btn.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            OstaliClanovi_Btn.Location = new System.Drawing.Point(528, 422);
+            OstaliClanovi_Btn.Name = "OstaliClanovi_Btn";
+            OstaliClanovi_Btn.Size = new System.Drawing.Size(180, 69);
+            OstaliClanovi_Btn.TabIndex = 1;
+            OstaliClanovi_Btn.Text = "Prikazi izvestaje koji su predali ostali clanovi grupe";
+            OstaliClanovi_Btn.UseVisualStyleBackColor = false;
+            OstaliClanovi_Btn.Click += OstaliClanovi_Btn_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(206, 444);
+            label1.Location = new System.Drawing.Point(212, 375);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(76, 15);
+            label1.Size = new System.Drawing.Size(87, 18);
             label1.TabIndex = 9;
             label1.Text = "Br. indeksa:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(206, 479);
+            label2.Location = new System.Drawing.Point(212, 410);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(33, 15);
+            label2.Size = new System.Drawing.Size(41, 18);
             label2.TabIndex = 10;
             label2.Text = "Ime:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(206, 542);
+            label3.Location = new System.Drawing.Point(212, 473);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(42, 15);
+            label3.Size = new System.Drawing.Size(48, 18);
             label3.TabIndex = 11;
             label3.Text = "Smer:";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(206, 508);
+            label4.Location = new System.Drawing.Point(212, 439);
             label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(57, 15);
+            label4.Size = new System.Drawing.Size(67, 18);
             label4.TabIndex = 12;
             label4.Text = "Prezime:";
             // 
             // BrIndeksa_LB
             // 
             BrIndeksa_LB.AutoSize = true;
-            BrIndeksa_LB.Location = new System.Drawing.Point(313, 444);
+            BrIndeksa_LB.Location = new System.Drawing.Point(319, 375);
             BrIndeksa_LB.Name = "BrIndeksa_LB";
-            BrIndeksa_LB.Size = new System.Drawing.Size(0, 15);
+            BrIndeksa_LB.Size = new System.Drawing.Size(0, 18);
             BrIndeksa_LB.TabIndex = 14;
             // 
             // Smer_LB
             // 
             Smer_LB.AutoSize = true;
-            Smer_LB.Location = new System.Drawing.Point(313, 542);
+            Smer_LB.Location = new System.Drawing.Point(319, 473);
             Smer_LB.Name = "Smer_LB";
-            Smer_LB.Size = new System.Drawing.Size(0, 15);
+            Smer_LB.Size = new System.Drawing.Size(0, 18);
             Smer_LB.TabIndex = 15;
             // 
             // Prezime_LB
             // 
             Prezime_LB.AutoSize = true;
-            Prezime_LB.Location = new System.Drawing.Point(313, 508);
+            Prezime_LB.Location = new System.Drawing.Point(319, 439);
             Prezime_LB.Name = "Prezime_LB";
-            Prezime_LB.Size = new System.Drawing.Size(0, 15);
+            Prezime_LB.Size = new System.Drawing.Size(0, 18);
             Prezime_LB.TabIndex = 16;
             // 
             // Ime_LB
             // 
             Ime_LB.AutoSize = true;
-            Ime_LB.Location = new System.Drawing.Point(313, 479);
+            Ime_LB.Location = new System.Drawing.Point(319, 410);
             Ime_LB.Name = "Ime_LB";
-            Ime_LB.Size = new System.Drawing.Size(0, 15);
+            Ime_LB.Size = new System.Drawing.Size(0, 18);
             Ime_LB.TabIndex = 17;
             // 
-            // StudentDetalji
+            // Podaci_o_predmetimaGB
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            Podaci_o_predmetimaGB.Controls.Add(IzmeniIzvestaj_Btn);
+            Podaci_o_predmetimaGB.Controls.Add(DodajIzvestaj_Btn);
+            Podaci_o_predmetimaGB.Controls.Add(ObrisiIzvestaj_Btn);
+            Podaci_o_predmetimaGB.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            Podaci_o_predmetimaGB.Location = new System.Drawing.Point(14, 319);
+            Podaci_o_predmetimaGB.Name = "Podaci_o_predmetimaGB";
+            Podaci_o_predmetimaGB.Size = new System.Drawing.Size(167, 183);
+            Podaci_o_predmetimaGB.TabIndex = 18;
+            Podaci_o_predmetimaGB.TabStop = false;
+            Podaci_o_predmetimaGB.Text = "Izmeni";
+            // 
+            // IzmeniIzvestaj_Btn
+            // 
+            IzmeniIzvestaj_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
+            IzmeniIzvestaj_Btn.Font = new System.Drawing.Font("Georgia", 9F);
+            IzmeniIzvestaj_Btn.Location = new System.Drawing.Point(19, 90);
+            IzmeniIzvestaj_Btn.Name = "IzmeniIzvestaj_Btn";
+            IzmeniIzvestaj_Btn.Size = new System.Drawing.Size(132, 38);
+            IzmeniIzvestaj_Btn.TabIndex = 2;
+            IzmeniIzvestaj_Btn.Text = "Izmeni izvestaj";
+            IzmeniIzvestaj_Btn.UseVisualStyleBackColor = false;
+            // 
+            // DodajIzvestaj_Btn
+            // 
+            DodajIzvestaj_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
+            DodajIzvestaj_Btn.Font = new System.Drawing.Font("Georgia", 9F);
+            DodajIzvestaj_Btn.Location = new System.Drawing.Point(19, 46);
+            DodajIzvestaj_Btn.Name = "DodajIzvestaj_Btn";
+            DodajIzvestaj_Btn.Size = new System.Drawing.Size(132, 38);
+            DodajIzvestaj_Btn.TabIndex = 1;
+            DodajIzvestaj_Btn.Text = "Dodaj izvestaj";
+            DodajIzvestaj_Btn.UseVisualStyleBackColor = false;
+            // 
+            // ObrisiIzvestaj_Btn
+            // 
+            ObrisiIzvestaj_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
+            ObrisiIzvestaj_Btn.Font = new System.Drawing.Font("Georgia", 9F);
+            ObrisiIzvestaj_Btn.Location = new System.Drawing.Point(19, 134);
+            ObrisiIzvestaj_Btn.Name = "ObrisiIzvestaj_Btn";
+            ObrisiIzvestaj_Btn.Size = new System.Drawing.Size(132, 38);
+            ObrisiIzvestaj_Btn.TabIndex = 0;
+            ObrisiIzvestaj_Btn.Text = "Obrisi izvestaj";
+            ObrisiIzvestaj_Btn.UseVisualStyleBackColor = false;
+            // 
+            // columnHeader1
+            // 
+            columnHeader1.Text = "Datum predaje izvestaja";
+            columnHeader1.TextAlign = HorizontalAlignment.Center;
+            columnHeader1.Width = 160;
+            // 
+            // PredatiIzvestaji
+            // 
+            AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = System.Drawing.Color.Linen;
-            ClientSize = new System.Drawing.Size(805, 598);
+            ClientSize = new System.Drawing.Size(724, 511);
+            Controls.Add(Podaci_o_predmetimaGB);
             Controls.Add(Ime_LB);
             Controls.Add(Prezime_LB);
             Controls.Add(Smer_LB);
@@ -253,20 +259,18 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(Podaci_o_predmetimaGB);
-            Controls.Add(Ucesce_Btn);
-            Controls.Add(StudentDetalji_GB);
+            Controls.Add(OstaliClanovi_Btn);
+            Controls.Add(Izvestaji_GB);
             Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             Margin = new Padding(5, 3, 5, 3);
             MaximizeBox = false;
-            MaximumSize = new System.Drawing.Size(821, 637);
             MdiChildrenMinimizedAnchorBottom = false;
             MinimizeBox = false;
-            MinimumSize = new System.Drawing.Size(821, 637);
-            Name = "StudentDetalji";
-            Text = "Student detalji";
-     
-            StudentDetalji_GB.ResumeLayout(false);
+            Name = "PredatiIzvestaji";
+            Text = "Izvestaji";
+            Load += PredatiIzvestaji_Load;
+            Izvestaji_GB.ResumeLayout(false);
+            Izvestaji_GB.PerformLayout();
             Podaci_o_predmetimaGB.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
@@ -274,18 +278,10 @@
 
         #endregion
 
-        private GroupBox StudentDetalji_GB;
-        private ListView StudentDetalji_ListV;
-        private Button Ucesce_Btn;
+        private GroupBox Izvestaji_GB;
+        private ListView Izvestaji_ListV;
+        private Button OstaliClanovi_Btn;
         private ColumnHeader columnHeader3;
-        private ColumnHeader columnHeader6;
-        private ColumnHeader columnHeader7;
-        private ColumnHeader columnHeader8;
-        private ColumnHeader columnHeader1;
-        private GroupBox Podaci_o_predmetimaGB;
-        private Button IzmeniUcesce_Btn;
-        private Button DodajUcesce_Btn;
-        private Button ObrisiUcesce_Btn;
         private Label label1;
         private Label label2;
         private Label label3;
@@ -294,6 +290,14 @@
         private Label Smer_LB;
         private Label Prezime_LB;
         private Label Ime_LB;
-        private ColumnHeader columnHeader2;
+        private ColumnHeader columnHeader4;
+        private ColumnHeader columnHeader5;
+        private ColumnHeader columnHeader9;
+        private Label label5;
+        private GroupBox Podaci_o_predmetimaGB;
+        private Button IzmeniIzvestaj_Btn;
+        private Button DodajIzvestaj_Btn;
+        private Button ObrisiIzvestaj_Btn;
+        private ColumnHeader columnHeader1;
     }
 }

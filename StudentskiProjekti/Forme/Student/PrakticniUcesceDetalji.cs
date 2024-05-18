@@ -43,12 +43,14 @@ namespace StudentskiProjekti.Forme
         private void PopuniPodacimaLabele()
         {
             Naziv_LB.Text = pp.Naziv;
-            DatumPocetka_LB.Text = pd.DatumPocetkaIzrade.ToString();
-            DatumZavrsetka_LB.Text = pd.DatumZavrsetkaIzrade.ToString();
-            RokZaZavrsetak_LB.Text = pd.RokZaZavrsetak.ToString();
+            DatumPocetka_LB.Text = pd.DatumPocetkaIzrade.ToString("dd.MM.yyyy");
+            DatumZavrsetka_LB.Text = pd.DatumZavrsetkaIzrade?.ToString("dd.MM.yyyy") ?? "";
+            RokZaZavrsetak_LB.Text = pd.RokZaZavrsetak.ToString("dd.MM.yyyy");
             ProjekatZavrsen_LB.Text = pd.ProjekatZavrsen;
             SkolskaGodinaZad_LB.Text = pp.SkolskaGodinaZadavanja.ToString();
             OdabraniProgJezik_LB.Text = DTOManager.VratiOdabraniProgJezik(pp.Id, sp.BrIndeksa);
+
+
         }
 
         private void PopuniPodacimaListView()
@@ -80,7 +82,7 @@ namespace StudentskiProjekti.Forme
 
         private void Izvestaji_Btn_Click(object sender, EventArgs e)
         {
-            PredatiIzvestaji izvestaji = new PredatiIzvestaji()
+            PredatiIzvestaji izvestaji = new PredatiIzvestaji(sp, pp, pd)
             {
                 StartPosition = FormStartPosition.CenterParent
             };
