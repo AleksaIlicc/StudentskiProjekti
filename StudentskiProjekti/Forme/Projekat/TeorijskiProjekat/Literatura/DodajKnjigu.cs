@@ -32,11 +32,8 @@ public partial class DodajKnjigu : Form
 
 			foreach (string unosAutora in unosiAutora)
 			{
-				string detaljiAutora = unosAutora.Trim(); 
-				AutorPregled noviAutor = new AutorPregled()
-				{
-					Autor = detaljiAutora
-				};
+				string detaljiAutora = unosAutora.Trim();
+				AutorPregled noviAutor = new AutorPregled(detaljiAutora);
 				autori.Add(noviAutor);
 			}
 

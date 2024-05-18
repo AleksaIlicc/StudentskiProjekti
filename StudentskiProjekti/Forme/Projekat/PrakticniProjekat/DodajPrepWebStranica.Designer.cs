@@ -1,4 +1,4 @@
-﻿namespace StudentskiProjekti.Forme.Projekat.PrakticniProjekat
+﻿namespace StudentskiProjekti.Forme
 {
     partial class DodajPrepWebStranica
     {

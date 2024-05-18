@@ -44,10 +44,7 @@ public partial class DodajRad : Form
 			foreach (string unosAutora in unosiAutora)
 			{
 				string detaljiAutora = unosAutora.Trim();
-				AutorPregled noviAutor = new AutorPregled()
-				{
-					Autor = detaljiAutora
-				};
+				AutorPregled noviAutor = new AutorPregled(detaljiAutora);
 				autori.Add(noviAutor);
 			}
 

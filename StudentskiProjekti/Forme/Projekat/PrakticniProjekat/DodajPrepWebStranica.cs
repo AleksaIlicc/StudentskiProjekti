@@ -1,7 +1,4 @@
-﻿using static StudentskiProjekti.DTOs;
-
-namespace StudentskiProjekti.Forme.Projekat.PrakticniProjekat;
-
+﻿namespace StudentskiProjekti.Forme;
 public partial class DodajPrepWebStranica : Form
 {
     int projekat_id;

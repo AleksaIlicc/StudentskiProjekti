@@ -105,6 +105,11 @@ public class DTOs
     public class AutorPregled
     {
 		public string Autor { get; set; }
+
+        public AutorPregled(string autor)
+        {
+            this.Autor = autor;
+        }
 	}
 
 	#endregion

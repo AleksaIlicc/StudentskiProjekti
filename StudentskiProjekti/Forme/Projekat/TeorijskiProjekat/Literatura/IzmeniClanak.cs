@@ -4,11 +4,13 @@ namespace StudentskiProjekti.Forme;
 public partial class IzmeniClanak : Form
 {
 	private ClanakUCasopisuPregled clanak;
+	private List<AutorPregled> autori;
 
 	public IzmeniClanak(ClanakUCasopisuPregled clanak)
 	{
 		InitializeComponent();
 		this.clanak = clanak;
+		this.autori = DTOManager.VratiAutoreZaClanak(clanak.ISSN);
 		PopuniPodacima();
 	}
 
@@ -19,6 +21,8 @@ public partial class IzmeniClanak : Form
 		ImeCasopisa_TB.Text = clanak.ImeCasopisa;
 		Broj_TB.Text = clanak.Broj.ToString();
 		Godina_TB.Text = clanak.Godina.ToString();
+		string autoriText = string.Join("\r\n", autori.Select(a => a.Autor));
+		Autori_TB.Text = autoriText;
 	}
 
 	private void Izmeni_Btn_Click(object sender, EventArgs e)
@@ -34,7 +38,17 @@ public partial class IzmeniClanak : Form
 			clanak.Broj = int.Parse(Broj_TB.Text.Trim());
 			clanak.Godina = int.Parse(Godina_TB.Text.Trim());
 
-			DTOManager.AzurirajClanak(clanak);
+			List<AutorPregled> azuriraniAutori = new List<AutorPregled>();
+
+			string[] unosiAutora = Autori_TB.Text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+
+			foreach (string unosAutora in unosiAutora)
+			{
+				string detaljiAutora = unosAutora.Trim();
+				AutorPregled noviAutor = new AutorPregled(detaljiAutora);
+				azuriraniAutori.Add(noviAutor);
+			}
+			DTOManager.AzurirajClanakSaAutorima(clanak, azuriraniAutori);
 			MessageBox.Show("Azuriranje clanka u casopisu je uspesno izvrseno!");
 			this.Close();
 		}

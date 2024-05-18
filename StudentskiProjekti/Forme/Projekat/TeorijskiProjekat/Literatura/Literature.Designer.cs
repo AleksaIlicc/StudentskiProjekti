@@ -29,6 +29,7 @@
 		private void InitializeComponent()
 		{
 			Literature_GB = new GroupBox();
+			PrikaziAutore_Btn = new Button();
 			label3 = new Label();
 			label1 = new Label();
 			Radovi_ListV = new ListView();
@@ -60,7 +61,6 @@
 			IzmeniClanak_Btn = new Button();
 			DodajClanak_Btn = new Button();
 			ObrisiClanak_Btn = new Button();
-			button1 = new Button();
 			Literature_GB.SuspendLayout();
 			IzmeniKnjigu_GB.SuspendLayout();
 			IzmeniRad_GB.SuspendLayout();
@@ -69,7 +69,7 @@
 			// 
 			// Literature_GB
 			// 
-			Literature_GB.Controls.Add(button1);
+			Literature_GB.Controls.Add(PrikaziAutore_Btn);
 			Literature_GB.Controls.Add(label3);
 			Literature_GB.Controls.Add(label1);
 			Literature_GB.Controls.Add(Radovi_ListV);
@@ -83,6 +83,18 @@
 			Literature_GB.TabIndex = 3;
 			Literature_GB.TabStop = false;
 			Literature_GB.Text = "Literatura:";
+			// 
+			// PrikaziAutore_Btn
+			// 
+			PrikaziAutore_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
+			PrikaziAutore_Btn.Font = new System.Drawing.Font("Georgia", 9F);
+			PrikaziAutore_Btn.Location = new System.Drawing.Point(611, 527);
+			PrikaziAutore_Btn.Name = "PrikaziAutore_Btn";
+			PrikaziAutore_Btn.Size = new System.Drawing.Size(168, 33);
+			PrikaziAutore_Btn.TabIndex = 6;
+			PrikaziAutore_Btn.Text = "Prikazi autore literature";
+			PrikaziAutore_Btn.UseVisualStyleBackColor = false;
+			PrikaziAutore_Btn.Click += PrikaziAutore_Btn_Click;
 			// 
 			// label3
 			// 
@@ -114,6 +126,7 @@
 			Radovi_ListV.TabIndex = 1;
 			Radovi_ListV.UseCompatibleStateImageBehavior = false;
 			Radovi_ListV.View = View.Details;
+			Radovi_ListV.SelectedIndexChanged += Radovi_ListV_SelectedIndexChanged;
 			// 
 			// columnHeader10
 			// 
@@ -160,6 +173,7 @@
 			Knjige_ListV.TabIndex = 0;
 			Knjige_ListV.UseCompatibleStateImageBehavior = false;
 			Knjige_ListV.View = View.Details;
+			Knjige_ListV.SelectedIndexChanged += Knjige_ListV_SelectedIndexChanged;
 			// 
 			// columnHeader13
 			// 
@@ -196,6 +210,7 @@
 			Clanci_ListV.TabIndex = 2;
 			Clanci_ListV.UseCompatibleStateImageBehavior = false;
 			Clanci_ListV.View = View.Details;
+			Clanci_ListV.SelectedIndexChanged += Clanci_ListV_SelectedIndexChanged;
 			// 
 			// columnHeader3
 			// 
@@ -373,17 +388,6 @@
 			ObrisiClanak_Btn.UseVisualStyleBackColor = false;
 			ObrisiClanak_Btn.Click += ObrisiClanak_Btn_Click;
 			// 
-			// button1
-			// 
-			button1.BackColor = System.Drawing.Color.AntiqueWhite;
-			button1.Font = new System.Drawing.Font("Georgia", 9F);
-			button1.Location = new System.Drawing.Point(611, 527);
-			button1.Name = "button1";
-			button1.Size = new System.Drawing.Size(168, 33);
-			button1.TabIndex = 6;
-			button1.Text = "Prikazi autore literature";
-			button1.UseVisualStyleBackColor = false;
-			// 
 			// Literature
 			// 
 			AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -446,6 +450,6 @@
         private ColumnHeader columnHeader11;
         private ColumnHeader columnHeader12;
         private ColumnHeader columnHeader15;
-		private Button button1;
+		private Button PrikaziAutore_Btn;
 	}
 }

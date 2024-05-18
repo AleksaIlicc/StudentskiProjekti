@@ -130,6 +130,7 @@
 			// 
 			// ISSN_TB
 			// 
+			ISSN_TB.Enabled = false;
 			ISSN_TB.Location = new System.Drawing.Point(97, 34);
 			ISSN_TB.Name = "ISSN_TB";
 			ISSN_TB.Size = new System.Drawing.Size(217, 21);
