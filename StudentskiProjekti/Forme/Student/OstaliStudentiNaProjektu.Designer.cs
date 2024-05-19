@@ -1,6 +1,6 @@
 ﻿namespace StudentskiProjekti.Forme
 {
-    partial class OstaliStudentiNaPProjektu
+    partial class OstaliStudentiNaProjektu
     {
         /// <summary>
         /// Required designer variable.

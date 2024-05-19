@@ -1,4 +1,6 @@
-﻿using static StudentskiProjekti.DTOs;
+﻿using StudentskiProjekti.Entiteti;
+using StudentskiProjekti.Forme;
+using static StudentskiProjekti.DTOs;
 
 namespace StudentskiProjekti;
 public class DTOManager
@@ -334,7 +336,7 @@ public class DTOManager
         return projektiInfo;
     }
 
-    public static List<StudentPregled> VratiStudNaGrupnomProj(int IdTProj)
+    public static List<StudentPregled> VratiStudenteNaGrupnomProj(int IdTProj)//provereno je da li je projekat grupni vec tamo u kodu ali ako je potrebno nekad moze da se doda join na projekat i da se proveri
     {
         List<StudentPregled> studenti = new List<StudentPregled>();
         try
@@ -363,6 +365,22 @@ public class DTOManager
         return studenti;
     }
 
+    public static int VratiBrPredIzvestajaNaGrupi(int projid)
+    {
+        int brojizv = 0;
+        try
+        {
+            ISession s = DataLayer.GetSession();
+            brojizv = s.Query<Predao>().Where(p => p.Projekat.Id == projid).Count();
+            s.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        return brojizv;
+    }
+
     public static List<IzvestajPregled> VratiIzvestajeZaStudenta(string BrIndkesa , int projekatID)
     {
         List<IzvestajPregled> izvestaji = new List<IzvestajPregled>();
@@ -370,40 +388,17 @@ public class DTOManager
         {
             ISession s = DataLayer.GetSession();
 
-                izvestaji = s.Query<Predao>()
-                                .Where(p => p.Student.BrIndeksa == BrIndkesa && p.Projekat.Id == projekatID)
-                                .Join(s.Query<Student>().Where(p => p.BrIndeksa == BrIndkesa),
-                                    predaje => predaje.Student.BrIndeksa,
-                                    student => student.BrIndeksa,
-                                    (predaje, student) => new { predaje, student })
-                                .Join(s.Query<Projekat>().Where(p => p.Id == projekatID),
-                                    combined => combined.predaje.Projekat.Id,
-                                    projekat => projekat.Id,
-                                    (combined, projekat) => new { combined.predaje, combined.student, projekat })
-                                .Join(s.Query<Izvestaj>(),
-                                    combined => combined.predaje.Izvestaj.Id,
-                                    izvestaj => izvestaj.Id,
-                                    (combined, izvestaj) => new { combined.predaje, combined.student, combined.projekat, izvestaj })
-                                .Join(s.Query<Ucestvuje>().Where(p => p.Projekat.Id == projekatID && p.Student.BrIndeksa == BrIndkesa),
-                                    combined => combined.student.BrIndeksa,
-                                    ucestvuje => ucestvuje.Student.BrIndeksa,
-                                    (combined, ucestvuje) => new IzvestajPregled
-                                    {
-                                      Naziv = combined.projekat.Naziv,
-                                      DatumPocIzrade = ucestvuje.DatumPocetkaIzrade,
-                                      DatumZavrIzrade = ucestvuje.DatumZavrsetka,
-                                      RokZaZavr = ucestvuje.RokZaZavrsetak,
-                                      DatumPred = combined.izvestaj.DatumPredaje,
-                                      OpisIzvest = combined.izvestaj.Opis 
-
-                                    })
-                            .ToList();
-
-
-
-
-
-
+            izvestaji = s.Query<Predao>()
+                         .Where(p => p.Student.BrIndeksa == BrIndkesa && p.Projekat.Id == projekatID)
+                         .Join(s.Query<Izvestaj>(),
+                             predao => predao.Izvestaj.Id,
+                             izvestaj => izvestaj.Id,
+                             (predao, izvestaj) => new IzvestajPregled
+                             {
+                                 OpisIzvest = izvestaj.Opis,
+                                 DatumPred = izvestaj.DatumPredaje
+                             })
+                          .ToList();
             s.Close();
 
         }
@@ -422,35 +417,17 @@ public class DTOManager
             ISession s = DataLayer.GetSession();
 
             izvestaji = s.Query<Predao>()
-                            .Where(p => p.Student.BrIndeksa == BrIndkesa && p.Projekat.Id == projekatID)
-                            .Join(s.Query<Student>().Where(p => p.BrIndeksa == BrIndkesa),
-                                  predaje => predaje.Student.BrIndeksa,
-                                  student => student.BrIndeksa,
-                                  (predaje, student) => new { predaje, student })
-                            .Join(s.Query<Projekat>().Where(p => p.Id == projekatID),
-                                  combined => combined.predaje.Projekat.Id,
-                                  projekat => projekat.Id,
-                                  (combined, projekat) => new { combined.predaje, combined.student, projekat })
-                            .Join(s.Query<Izvestaj>(),
-                                  combined => combined.predaje.Izvestaj.Id,
-                                  izvestaj => izvestaj.Id,
-                                  (combined, izvestaj) => new { combined.predaje, combined.student, combined.projekat, izvestaj })
-                            .Join(s.Query<Ucestvuje>().Where(p => p.Projekat.Id == projekatID && p.Student.BrIndeksa == BrIndkesa),
-                                  combined => combined.student.BrIndeksa,
-                                  ucestvuje => ucestvuje.Student.BrIndeksa,
-                                  (combined, ucestvuje) => new IzvestajPregled
-                                  {
-                                      BrInd = combined.student.BrIndeksa,
-                                      Ime = combined.student.LIme,
-                                      Prezime = combined.student.Prezime,
-                                      DatumPocIzrade = ucestvuje.DatumPocetkaIzrade,
-                                      DatumZavrIzrade = ucestvuje.DatumZavrsetka,
-                                      RokZaZavr = ucestvuje.RokZaZavrsetak,
-                                      DatumPred = combined.izvestaj.DatumPredaje,
-                                      OpisIzvest = combined.izvestaj.Opis
+                .Where(p => p.Student.BrIndeksa == BrIndkesa && p.Projekat.Id == projekatID)
+                .Join(s.Query<Izvestaj>(),
+                    predaje => predaje.Izvestaj.Id,
+                    izvestaj => izvestaj.Id,
+                    (predaje, izvestaj) => new IzvestajPregled
+                    {
+                        DatumPred = izvestaj.DatumPredaje,
+                        OpisIzvest = izvestaj.Opis
+                    })
+                .ToList();
 
-                                  })
-                            .ToList();
             s.Close();
 
         }

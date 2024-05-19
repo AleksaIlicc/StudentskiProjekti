@@ -14,11 +14,13 @@ namespace StudentskiProjekti.Forme
     {
         DTOs.PrakticniProjekatPregled pp = new DTOs.PrakticniProjekatPregled();
         DTOs.StudentPregled sp = new DTOs.StudentPregled();
-        public OstaliIzvestaji(DTOs.PrakticniProjekatPregled pp, DTOs.StudentPregled sp)
+        DTOs.ProjekatUcesceDetalji pd = new DTOs.ProjekatUcesceDetalji();
+        public OstaliIzvestaji(DTOs.PrakticniProjekatPregled pp, DTOs.StudentPregled sp, DTOs.ProjekatUcesceDetalji pd)
         {
             InitializeComponent();
             this.pp = pp;
             this.sp = sp;
+            this.pd = pd;
         }
 
         private void OstaliIzvestaji_Load(object sender, EventArgs e)
@@ -30,7 +32,7 @@ namespace StudentskiProjekti.Forme
         {
             Izvestaji_ListV.Items.Clear();
 
-            List<DTOs.StudentPregled> studenti = DTOManager.VratiStudNaGrupnomProj(pp.Id);
+            List<DTOs.StudentPregled> studenti = DTOManager.VratiStudenteNaGrupnomProj(pp.Id);
 
             foreach (DTOs.StudentPregled student in studenti)
             {
@@ -42,11 +44,7 @@ namespace StudentskiProjekti.Forme
 
                 foreach (DTOs.IzvestajPregled izvestaj in izvestaji)
                 {
-                    ListViewItem item = new ListViewItem(new string[] { student.BrIndeksa, student.LIme, student.Prezime,
-                                                                  izvestaj.DatumPocIzrade.ToString("dd.MM.yyyy"),
-                                                                  izvestaj.DatumZavrIzrade?.ToString("dd.MM.yyyy"),
-                                                                  izvestaj.RokZaZavr.ToString("dd.MM.yyyy") });
-                    item.Tag = izvestaj.OpisIzvest;
+                    ListViewItem item = new ListViewItem(new string[] { student.BrIndeksa, student.LIme, student.Prezime , izvestaj.OpisIzvest , izvestaj.DatumPred?.ToString("dd.MM.yyyy")});
                     Izvestaji_ListV.Items.Add(item);
                 }
             }
@@ -57,7 +55,7 @@ namespace StudentskiProjekti.Forme
         {
             if (Izvestaji_ListV.SelectedItems.Count > 0)
             {
-                string opisIzvestaja = Izvestaji_ListV.SelectedItems[0].Tag as string;
+                string opisIzvestaja = Izvestaji_ListV.SelectedItems[0].SubItems[3].Text;
                 MessageBox.Show(opisIzvestaja, "Opis izveštaja", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }

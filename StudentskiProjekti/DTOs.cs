@@ -253,34 +253,12 @@ public class DTOs
     #region Izvestaj
     public class IzvestajPregled
     {
-        public string Naziv { get; set; }
-        public string BrInd { get; set; }
-        public string Ime { get; set; }
-        public string Prezime { get; set; }
-        public DateTime DatumPocIzrade { get; set; }
-        public DateTime? DatumZavrIzrade { get; set; }
-        public DateTime RokZaZavr { get; set; }
+
         public DateTime? DatumPred { get; set; }
         public string OpisIzvest { get; set; }
 
-        public IzvestajPregled(string brind, string ime, string prezime, DateTime datumPocIzrade, DateTime datumZavrIzrade, DateTime rokZaZavr, DateTime datumPred, string opisIzvest)
+        public IzvestajPregled(DateTime datumPred, string opisIzvest)
         {
-            BrInd = brind;
-            Ime = ime;
-            Prezime = prezime;
-            DatumPocIzrade = datumPocIzrade;
-            DatumZavrIzrade = datumZavrIzrade;
-            RokZaZavr = rokZaZavr;
-            OpisIzvest = opisIzvest;
-            DatumPred = datumPred;
-        }
-
-        public IzvestajPregled(string naziv, DateTime datumPocIzrade, DateTime datumZavrIzrade, DateTime rokZaZavr, DateTime datumPred, string opisIzvest)
-        {
-            Naziv = naziv;
-            DatumPocIzrade = datumPocIzrade;
-            DatumZavrIzrade = datumZavrIzrade;
-            RokZaZavr = rokZaZavr;
             OpisIzvest = opisIzvest;
             DatumPred = datumPred;
         }
