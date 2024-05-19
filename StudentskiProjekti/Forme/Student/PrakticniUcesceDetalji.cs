@@ -30,11 +30,15 @@ namespace StudentskiProjekti.Forme
             PopuniPodacimaLabele();
             if (pp.TipProjekta == "grupni")
             {
+                this.MaximumSize = new System.Drawing.Size(924, 506);
+                this.MinimumSize = new System.Drawing.Size(924, 506);
                 PrikaziStudenteNaIstom_Btn.Visible = false;
                 PopuniPodacimaListView();
             }
             else if (pp.TipProjekta == "pojedinacni")
             {
+                this.MaximumSize = new System.Drawing.Size(583, 600);
+                this.MinimumSize = new System.Drawing.Size(583, 600);
                 OstaliClanovi_GB.Visible = false;
                 OstaliClanovi_ListV.Visible = false;
             }
@@ -49,14 +53,12 @@ namespace StudentskiProjekti.Forme
             ProjekatZavrsen_LB.Text = pd.ProjekatZavrsen;
             SkolskaGodinaZad_LB.Text = pp.SkolskaGodinaZadavanja.ToString();
             OdabraniProgJezik_LB.Text = DTOManager.VratiOdabraniProgJezik(pp.Id, sp.BrIndeksa);
-
-
         }
 
         private void PopuniPodacimaListView()
         {
             OstaliClanovi_ListV.Items.Clear();
-            List<DTOs.StudentPregled> studenti = DTOManager.VratiStudNaGrupnomProj(pp.Id);
+            List<DTOs.StudentPregled> studenti = DTOManager.VratiStudenteNaGrupnomProj(pp.Id);
 
             foreach (DTOs.StudentPregled s in studenti)
             {
@@ -73,7 +75,7 @@ namespace StudentskiProjekti.Forme
 
         private void PrikaziStudenteNaIstom_Btn_Click(object sender, EventArgs e)
         {
-            OstaliStudentiNaPProjektu studenti = new OstaliStudentiNaPProjektu(sp, pp)
+            OstaliStudentiNaProjektu studenti = new OstaliStudentiNaProjektu(sp, pp)
             {
                 StartPosition = FormStartPosition.CenterParent
             };

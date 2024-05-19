@@ -59,7 +59,7 @@
             // 
             PrikaziStudenteNaIstom_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
             PrikaziStudenteNaIstom_Btn.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            PrikaziStudenteNaIstom_Btn.Location = new System.Drawing.Point(713, 330);
+            PrikaziStudenteNaIstom_Btn.Location = new System.Drawing.Point(374, 422);
             PrikaziStudenteNaIstom_Btn.Name = "PrikaziStudenteNaIstom_Btn";
             PrikaziStudenteNaIstom_Btn.Size = new System.Drawing.Size(180, 69);
             PrikaziStudenteNaIstom_Btn.TabIndex = 1;
@@ -283,17 +283,17 @@
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = System.Drawing.Color.Linen;
-            ClientSize = new System.Drawing.Size(905, 424);
+            ClientSize = new System.Drawing.Size(902, 502);
             Controls.Add(PodaciOProjektu_GB);
             Controls.Add(OstaliClanovi_GB);
             Controls.Add(PrikaziStudenteNaIstom_Btn);
             Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             Margin = new Padding(5, 3, 5, 3);
             MaximizeBox = false;
-            MaximumSize = new System.Drawing.Size(921, 463);
+            MaximumSize = new System.Drawing.Size(918, 541);
             MdiChildrenMinimizedAnchorBottom = false;
             MinimizeBox = false;
-            MinimumSize = new System.Drawing.Size(921, 463);
+            MinimumSize = new System.Drawing.Size(918, 541);
             Name = "TeorijskiUcesceDetalji";
             Text = " Detalji za ucesce";
             Load += TeorijskiUcesceDetalji_Load;

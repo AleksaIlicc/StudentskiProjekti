@@ -18,11 +18,15 @@ public partial class TeorijskiUcesceDetalji : Form
         PopuniPodacimaLabele();
         if (te.TipProjekta == "grupni")
         {
+            this.MaximumSize = new System.Drawing.Size(919, 451);
+            this.MinimumSize = new System.Drawing.Size(919, 451);
             PrikaziStudenteNaIstom_Btn.Visible = false;
             PopuniPodacimaListView();
         }
         else if (te.TipProjekta == "pojedinacni")
         {
+            this.MaximumSize = new System.Drawing.Size(585, 541);
+            this.MinimumSize = new System.Drawing.Size(585, 541);
             OstaliClanovi_GB.Visible = false;
             OstaliClanovi_ListV.Visible = false;
         }
@@ -42,7 +46,7 @@ public partial class TeorijskiUcesceDetalji : Form
     private void PopuniPodacimaListView()
     {
         OstaliClanovi_ListV.Items.Clear();
-        List<DTOs.StudentPregled> studenti = DTOManager.VratiStudNaGrupnomProj(te.Id);
+        List<DTOs.StudentPregled> studenti = DTOManager.VratiStudenteNaGrupnomProj(te.Id);
 
         foreach (DTOs.StudentPregled s in studenti)
         {
@@ -59,7 +63,7 @@ public partial class TeorijskiUcesceDetalji : Form
 
     private void PrikaziStudente_Btn_Click(object sender, EventArgs e)
     {
-        OstaliStudentiNaTProjektu studenti = new OstaliStudentiNaTProjektu(sp , te)
+        OstaliStudentiNaProjektu studenti = new OstaliStudentiNaProjektu(sp , te)
         {
             StartPosition = FormStartPosition.CenterParent
         };
