@@ -823,7 +823,7 @@ public class DTOManager
                 Literatura = lit
             };
 
-            lit.Knjige.Add(r);
+            lit.Knjiga = r;
 
             s.Save(lit);
 
@@ -1078,7 +1078,7 @@ public class DTOManager
                 Literatura = lit
 			};
 
-            lit.Radovi.Add(r);
+            lit.Rad = r;
 
 			s.Save(lit);
 
@@ -1334,7 +1334,7 @@ public class DTOManager
 				Literatura = lit
 			};
 
-			lit.ClanciUCasopisu.Add(r);
+            lit.ClanakUCasopisu = r;
 			s.Save(lit);
 
 			Sadrzi sadrzi = new Sadrzi()

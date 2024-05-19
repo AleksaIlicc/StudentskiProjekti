@@ -1,4 +1,5 @@
 ﻿namespace StudentskiProjekti.Mapiranja;
+
 public class ClanakUCasopisuMapiranja : ClassMap<ClanakUCasopisu>
 {
     public ClanakUCasopisuMapiranja()
@@ -10,6 +11,6 @@ public class ClanakUCasopisuMapiranja : ClassMap<ClanakUCasopisu>
         Map(x => x.Broj, "BROJ");
         Map(x => x.Godina, "GODINA");
 
-		References(x => x.Literatura).Column("LIT_ID");
-	}
+        References(x => x.Literatura).Column("LIT_ID").Unique();
+    }
 }

@@ -1,4 +1,5 @@
 ﻿namespace StudentskiProjekti.Mapiranja;
+
 public class RadMapiranja : ClassMap<Rad>
 {
     public RadMapiranja()
@@ -10,6 +11,6 @@ public class RadMapiranja : ClassMap<Rad>
         Map(x => x.KonferencijaObjavljivanja, "KONFERENCIJA_OBJAVLJIVANJA");
         Map(x => x.Format, "FORMAT");
 
-		References(x => x.Literatura).Column("LIT_ID");
-	}
+        References(x => x.Literatura).Column("LIT_ID").Unique();
+    }
 }
