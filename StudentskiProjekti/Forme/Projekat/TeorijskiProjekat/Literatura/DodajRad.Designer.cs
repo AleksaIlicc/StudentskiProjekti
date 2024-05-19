@@ -59,14 +59,14 @@
 			OsnovnipodaciopredmetuGB.Font = new System.Drawing.Font("Georgia", 9F);
 			OsnovnipodaciopredmetuGB.Location = new System.Drawing.Point(12, 12);
 			OsnovnipodaciopredmetuGB.Name = "OsnovnipodaciopredmetuGB";
-			OsnovnipodaciopredmetuGB.Size = new System.Drawing.Size(383, 257);
+			OsnovnipodaciopredmetuGB.Size = new System.Drawing.Size(362, 257);
 			OsnovnipodaciopredmetuGB.TabIndex = 0;
 			OsnovnipodaciopredmetuGB.TabStop = false;
 			OsnovnipodaciopredmetuGB.Text = "Podaci o radu";
 			// 
 			// Autori_TB
 			// 
-			Autori_TB.Location = new System.Drawing.Point(148, 72);
+			Autori_TB.Location = new System.Drawing.Point(136, 72);
 			Autori_TB.Multiline = true;
 			Autori_TB.Name = "Autori_TB";
 			Autori_TB.Size = new System.Drawing.Size(217, 42);
@@ -76,7 +76,7 @@
 			// 
 			label6.AutoSize = true;
 			label6.Font = new System.Drawing.Font("Georgia", 9F);
-			label6.Location = new System.Drawing.Point(20, 75);
+			label6.Location = new System.Drawing.Point(8, 75);
 			label6.Name = "label6";
 			label6.Size = new System.Drawing.Size(55, 15);
 			label6.TabIndex = 12;
@@ -88,7 +88,7 @@
 			Format_CB.DropDownStyle = ComboBoxStyle.DropDownList;
 			Format_CB.ForeColor = System.Drawing.SystemColors.WindowText;
 			Format_CB.FormattingEnabled = true;
-			Format_CB.Location = new System.Drawing.Point(148, 151);
+			Format_CB.Location = new System.Drawing.Point(136, 151);
 			Format_CB.Name = "Format_CB";
 			Format_CB.Size = new System.Drawing.Size(217, 23);
 			Format_CB.TabIndex = 6;
@@ -96,7 +96,7 @@
 			// Dodaj_Btn
 			// 
 			Dodaj_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
-			Dodaj_Btn.Location = new System.Drawing.Point(241, 217);
+			Dodaj_Btn.Location = new System.Drawing.Point(229, 222);
 			Dodaj_Btn.Name = "Dodaj_Btn";
 			Dodaj_Btn.Size = new System.Drawing.Size(124, 29);
 			Dodaj_Btn.TabIndex = 4;
@@ -106,21 +106,21 @@
 			// 
 			// KonfObjavljivanja_TB
 			// 
-			KonfObjavljivanja_TB.Location = new System.Drawing.Point(148, 182);
+			KonfObjavljivanja_TB.Location = new System.Drawing.Point(136, 182);
 			KonfObjavljivanja_TB.Name = "KonfObjavljivanja_TB";
 			KonfObjavljivanja_TB.Size = new System.Drawing.Size(217, 21);
 			KonfObjavljivanja_TB.TabIndex = 3;
 			// 
 			// Naziv_TB
 			// 
-			Naziv_TB.Location = new System.Drawing.Point(148, 42);
+			Naziv_TB.Location = new System.Drawing.Point(136, 42);
 			Naziv_TB.Name = "Naziv_TB";
 			Naziv_TB.Size = new System.Drawing.Size(217, 21);
 			Naziv_TB.TabIndex = 1;
 			// 
 			// URL_TB
 			// 
-			URL_TB.Location = new System.Drawing.Point(148, 122);
+			URL_TB.Location = new System.Drawing.Point(136, 122);
 			URL_TB.Name = "URL_TB";
 			URL_TB.Size = new System.Drawing.Size(217, 21);
 			URL_TB.TabIndex = 0;
@@ -129,7 +129,7 @@
 			// 
 			label4.AutoSize = true;
 			label4.Font = new System.Drawing.Font("Georgia", 9F);
-			label4.Location = new System.Drawing.Point(20, 185);
+			label4.Location = new System.Drawing.Point(8, 185);
 			label4.Name = "label4";
 			label4.Size = new System.Drawing.Size(122, 15);
 			label4.TabIndex = 3;
@@ -139,7 +139,7 @@
 			// 
 			label3.AutoSize = true;
 			label3.Font = new System.Drawing.Font("Georgia", 9F);
-			label3.Location = new System.Drawing.Point(20, 154);
+			label3.Location = new System.Drawing.Point(8, 154);
 			label3.Name = "label3";
 			label3.Size = new System.Drawing.Size(54, 15);
 			label3.TabIndex = 2;
@@ -149,7 +149,7 @@
 			// 
 			label2.AutoSize = true;
 			label2.Font = new System.Drawing.Font("Georgia", 9F);
-			label2.Location = new System.Drawing.Point(20, 45);
+			label2.Location = new System.Drawing.Point(8, 45);
 			label2.Name = "label2";
 			label2.Size = new System.Drawing.Size(45, 15);
 			label2.TabIndex = 1;
@@ -159,7 +159,7 @@
 			// 
 			label1.AutoSize = true;
 			label1.Font = new System.Drawing.Font("Georgia", 9F);
-			label1.Location = new System.Drawing.Point(20, 125);
+			label1.Location = new System.Drawing.Point(8, 125);
 			label1.Name = "label1";
 			label1.Size = new System.Drawing.Size(35, 15);
 			label1.TabIndex = 0;
@@ -169,12 +169,12 @@
 			// 
 			AutoScaleMode = AutoScaleMode.None;
 			BackColor = System.Drawing.Color.AntiqueWhite;
-			ClientSize = new System.Drawing.Size(403, 281);
+			ClientSize = new System.Drawing.Size(385, 271);
 			Controls.Add(OsnovnipodaciopredmetuGB);
 			MaximizeBox = false;
-			MaximumSize = new System.Drawing.Size(419, 320);
+			MaximumSize = new System.Drawing.Size(401, 320);
 			MinimizeBox = false;
-			MinimumSize = new System.Drawing.Size(419, 320);
+			MinimumSize = new System.Drawing.Size(401, 310);
 			Name = "DodajRad";
 			Text = "Dodaj rad";
 			Load += DodajRad_Load;

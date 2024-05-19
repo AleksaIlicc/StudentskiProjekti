@@ -1,7 +1,4 @@
-﻿
-
-namespace StudentskiProjekti;
-
+﻿namespace StudentskiProjekti;
 public class DTOs
 {
     #region Predmet
@@ -123,26 +120,14 @@ public class DTOs
 		public string KonferencijaObjavljivanja { get; set; }
 		public string Format { get; set; }
 
-        public Literatura Literatura { get; set; }
-
-        public RadPregled(string naziv, string url, string konferencijaObjavljivanja, string format, Literatura literatura) : base(naziv)
+        public RadPregled(int id, string naziv, string url, string konferencijaObjavljivanja, string format) : base(naziv)
 		{
-            this.Url = url;
-            this.Naziv = naziv;
-            this.KonferencijaObjavljivanja = konferencijaObjavljivanja;
-            this.Format = format;
-            this.Literatura = literatura;
-		}
-
-        public RadPregled(int id, string naziv, string url, string konferencijaObjavljivanja, string format, Literatura literatura) : base(naziv)
-        {
             this.Id = id;
             this.Url = url;
             this.Naziv = naziv;
             this.KonferencijaObjavljivanja = konferencijaObjavljivanja;
             this.Format = format;
-            this.Literatura = literatura;
-        }
+		}
 
         public RadPregled() { }
     }
@@ -157,16 +142,14 @@ public class DTOs
         public string ImeCasopisa { get; set; }
         public int Broj { get; set; }
         public int Godina { get; set; }
-        public Literatura Literatura { get; set; }
 
-        public ClanakUCasopisuPregled(string naziv, string issn , string imeCasopisa, int Broj, int godina, Literatura literatura) : base(naziv)
+        public ClanakUCasopisuPregled(string naziv, string issn , string imeCasopisa, int Broj, int godina) : base(naziv)
         {
             this.Naziv= naziv;
             this.ImeCasopisa = imeCasopisa;
             this.ISSN = issn;
             this.Broj = Broj;
             this.Godina = godina;
-            this.Literatura= literatura;
         }
         public ClanakUCasopisuPregled() { }
     }
@@ -180,14 +163,12 @@ public class DTOs
         public string ISBN { get; set; }
         public string Izdavac { get; set; }
         public int GodinaIzdanja { get; set; }
-        public Literatura Literatura { get; set; }
 
-        public KnjigaPregled(string naziv, string isbn , string izdavac, int godinaizdanja, Literatura literatura): base(naziv)
+        public KnjigaPregled(string naziv, string isbn , string izdavac, int godinaizdanja): base(naziv)
         {
             this.ISBN= isbn;
             this.Izdavac= izdavac;
             this.GodinaIzdanja = godinaizdanja;
-            this.Literatura = literatura;
         }
 
         public KnjigaPregled() { }

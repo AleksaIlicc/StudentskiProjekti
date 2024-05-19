@@ -29,6 +29,8 @@
 		private void InitializeComponent()
 		{
 			OsnovnipodaciopredmetuGB = new GroupBox();
+			Autori_TB = new TextBox();
+			label6 = new Label();
 			Izmeni_Btn = new Button();
 			GodinaIzdanja_TB = new TextBox();
 			Naziv_TB = new TextBox();
@@ -43,6 +45,8 @@
 			// 
 			// OsnovnipodaciopredmetuGB
 			// 
+			OsnovnipodaciopredmetuGB.Controls.Add(Autori_TB);
+			OsnovnipodaciopredmetuGB.Controls.Add(label6);
 			OsnovnipodaciopredmetuGB.Controls.Add(Izmeni_Btn);
 			OsnovnipodaciopredmetuGB.Controls.Add(GodinaIzdanja_TB);
 			OsnovnipodaciopredmetuGB.Controls.Add(Naziv_TB);
@@ -55,15 +59,33 @@
 			OsnovnipodaciopredmetuGB.Font = new System.Drawing.Font("Georgia", 9F);
 			OsnovnipodaciopredmetuGB.Location = new System.Drawing.Point(12, 12);
 			OsnovnipodaciopredmetuGB.Name = "OsnovnipodaciopredmetuGB";
-			OsnovnipodaciopredmetuGB.Size = new System.Drawing.Size(340, 217);
+			OsnovnipodaciopredmetuGB.Size = new System.Drawing.Size(340, 261);
 			OsnovnipodaciopredmetuGB.TabIndex = 0;
 			OsnovnipodaciopredmetuGB.TabStop = false;
 			OsnovnipodaciopredmetuGB.Text = "Podaci o knjizi";
 			// 
+			// Autori_TB
+			// 
+			Autori_TB.Location = new System.Drawing.Point(109, 100);
+			Autori_TB.Multiline = true;
+			Autori_TB.Name = "Autori_TB";
+			Autori_TB.Size = new System.Drawing.Size(217, 42);
+			Autori_TB.TabIndex = 11;
+			// 
+			// label6
+			// 
+			label6.AutoSize = true;
+			label6.Font = new System.Drawing.Font("Georgia", 9F);
+			label6.Location = new System.Drawing.Point(8, 103);
+			label6.Name = "label6";
+			label6.Size = new System.Drawing.Size(55, 15);
+			label6.TabIndex = 10;
+			label6.Text = "Autor/i:";
+			// 
 			// Izmeni_Btn
 			// 
 			Izmeni_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
-			Izmeni_Btn.Location = new System.Drawing.Point(202, 170);
+			Izmeni_Btn.Location = new System.Drawing.Point(202, 226);
 			Izmeni_Btn.Name = "Izmeni_Btn";
 			Izmeni_Btn.Size = new System.Drawing.Size(124, 29);
 			Izmeni_Btn.TabIndex = 4;
@@ -73,7 +95,7 @@
 			// 
 			// GodinaIzdanja_TB
 			// 
-			GodinaIzdanja_TB.Location = new System.Drawing.Point(109, 131);
+			GodinaIzdanja_TB.Location = new System.Drawing.Point(109, 187);
 			GodinaIzdanja_TB.Name = "GodinaIzdanja_TB";
 			GodinaIzdanja_TB.Size = new System.Drawing.Size(217, 21);
 			GodinaIzdanja_TB.TabIndex = 3;
@@ -89,12 +111,13 @@
 			// 
 			ISBN_TB.Location = new System.Drawing.Point(109, 40);
 			ISBN_TB.Name = "ISBN_TB";
+			ISBN_TB.ReadOnly = true;
 			ISBN_TB.Size = new System.Drawing.Size(217, 21);
 			ISBN_TB.TabIndex = 0;
 			// 
 			// Izdavac_TB
 			// 
-			Izdavac_TB.Location = new System.Drawing.Point(109, 99);
+			Izdavac_TB.Location = new System.Drawing.Point(109, 155);
 			Izdavac_TB.Name = "Izdavac_TB";
 			Izdavac_TB.Size = new System.Drawing.Size(217, 21);
 			Izdavac_TB.TabIndex = 2;
@@ -103,7 +126,7 @@
 			// 
 			label4.AutoSize = true;
 			label4.Font = new System.Drawing.Font("Georgia", 9F);
-			label4.Location = new System.Drawing.Point(6, 137);
+			label4.Location = new System.Drawing.Point(6, 190);
 			label4.Name = "label4";
 			label4.Size = new System.Drawing.Size(97, 15);
 			label4.TabIndex = 3;
@@ -113,7 +136,7 @@
 			// 
 			label3.AutoSize = true;
 			label3.Font = new System.Drawing.Font("Georgia", 9F);
-			label3.Location = new System.Drawing.Point(8, 105);
+			label3.Location = new System.Drawing.Point(8, 158);
 			label3.Name = "label3";
 			label3.Size = new System.Drawing.Size(55, 15);
 			label3.TabIndex = 2;
@@ -143,12 +166,12 @@
 			// 
 			AutoScaleMode = AutoScaleMode.None;
 			BackColor = System.Drawing.Color.AntiqueWhite;
-			ClientSize = new System.Drawing.Size(359, 235);
+			ClientSize = new System.Drawing.Size(359, 285);
 			Controls.Add(OsnovnipodaciopredmetuGB);
 			MaximizeBox = false;
-			MaximumSize = new System.Drawing.Size(375, 274);
+			MaximumSize = new System.Drawing.Size(375, 324);
 			MinimizeBox = false;
-			MinimumSize = new System.Drawing.Size(375, 274);
+			MinimumSize = new System.Drawing.Size(375, 324);
 			Name = "IzmeniKnjigu";
 			Text = "Izmeni knjigu";
 			OsnovnipodaciopredmetuGB.ResumeLayout(false);
@@ -169,5 +192,7 @@
         private Button Izmeni_Btn;
         private TextBox GodinaIzdanja_TB;
         private Label label4;
-    }
+		private TextBox Autori_TB;
+		private Label label6;
+	}
 }

@@ -1,9 +1,11 @@
-﻿using static StudentskiProjekti.DTOs;
-
+﻿using DocumentFormat.OpenXml.Office2010.Excel;
+using NHibernate.Criterion;
+using StudentskiProjekti.Entiteti;
+using static StudentskiProjekti.DTOs;
 namespace StudentskiProjekti;
 public class DTOManager
 {
-    #region Predmet
+    #region Predmeti
 
     public static List<PredmetPregled> VratiSvePredmete()
     {
@@ -149,7 +151,7 @@ public class DTOManager
 
     #endregion
 
-    #region Student
+    #region Studenti
 
     public static List<StudentPregled> VratiSveStudente()
     {
@@ -703,26 +705,26 @@ public class DTOManager
 
 	#region Knjiga
 
-	public static List<KnjigaPregled> VratiSveKnjigeZaTeorijskiProjekat(int teorijskiProjekatId)
+	public static List<KnjigaPregled> VratiSveKnjigeZaTProj(int teorijskiProjekatId)
     {
         List<KnjigaPregled> knjige = new List<KnjigaPregled>();
         try
         {
             ISession s = DataLayer.GetSession();
 
-            IList<Sadrzi> LiteraturaID = s.Query<Sadrzi>().Where(p => p.TProjekat.Id == teorijskiProjekatId).ToList();
-
-            var literaturaIds = LiteraturaID.Select(l => l.Literatura.LitId).ToList();
-
-            IList<Knjiga> sveKnjige = s.Query<Knjiga>()
-                                     .Where(k => literaturaIds.Contains(k.Literatura.LitId))
-                                     .ToList();
-
-
-            foreach (Knjiga k in sveKnjige)
-            {
-                knjige.Add(new KnjigaPregled(k.Literatura.Naziv, k.ISBN, k.Izdavac, k.GodinaIzdanja, k.Literatura));
-            }
+            knjige = s.Query<Sadrzi>()
+                .Where(p => p.TProjekat.Id == teorijskiProjekatId)
+                .Join(s.Query<Knjiga>(),
+                sadrzi => sadrzi.Literatura.LitId,
+                knjiga => knjiga.Literatura.LitId,
+                (sadrzi, knjiga) => new KnjigaPregled
+                {
+                    Naziv = knjiga.Literatura.Naziv,
+                    GodinaIzdanja = knjiga.GodinaIzdanja,
+                    Izdavac = knjiga.Izdavac,
+                    ISBN = knjiga.ISBN
+                }
+                ).ToList();
 
             s.Close();
         }
@@ -781,15 +783,18 @@ public class DTOManager
 		return idLiterature;
 	}
 
-	public static void ObrisiKnjigu(string isbn)
+	public static void ObrisiKnjigu(int projekatId, string isbn)
     {
         try
         {
-            ISession s = DataLayer.GetSession();
+			ISession s = DataLayer.GetSession();
 
-            Knjiga o = s.Load<Knjiga>(isbn);
+			Knjiga o = s.Load<Knjiga>(isbn);
+			var sadrzi = s.Query<Sadrzi>()
+				.Where(x => x.Literatura.LitId == o.Literatura.LitId && projekatId == x.TProjekat.Id)
+				.FirstOrDefault();
 
-            s.Delete(o);
+            s.Delete(sadrzi);
 
             s.Flush();
 
@@ -880,7 +885,7 @@ public class DTOManager
 
             if (knjigaEntity != null)
             {
-                knjiga = new KnjigaPregled(knjigaEntity.Literatura.Naziv, knjigaEntity.ISBN, knjigaEntity.Izdavac, knjigaEntity.GodinaIzdanja, knjigaEntity.Literatura);
+                knjiga = new KnjigaPregled(knjigaEntity.Literatura.Naziv, knjigaEntity.ISBN, knjigaEntity.Izdavac, knjigaEntity.GodinaIzdanja);
             }
 
             s.Close();
@@ -893,30 +898,87 @@ public class DTOManager
         return knjiga;
     }
 
-    #endregion
+	private static void AzurirajKnjigu(KnjigaPregled knjigaPregled, ISession s)
+	{
+		Knjiga knjiga = s.Load<Knjiga>(knjigaPregled.ISBN);
+        knjiga.Izdavac = knjigaPregled.Izdavac;
+        knjiga.GodinaIzdanja = knjigaPregled.GodinaIzdanja;
+        knjiga.Literatura.Naziv = knjigaPregled.Naziv;
 
-    #region Rad
+		s.SaveOrUpdate(knjiga);
+	}
 
-    public static List<RadPregled> VratiSveRadoveZaTeorijskiProjekat(int teorijskiProjekatId)
+	private static void AzurirajAutoreKnjige(string isbn, List<AutorPregled> azuriraniAutori, ISession s)
+	{
+		var knjiga = s.Load<Knjiga>(isbn);
+		var lit = knjiga.Literatura;
+
+		foreach (var postojeciAutori in lit.Autori.ToList())
+		{
+			s.Delete(postojeciAutori);
+		}
+
+		List<LitAutor> autori = new List<LitAutor>();
+		foreach (var autorPregled in azuriraniAutori)
+		{
+			autori.Add(new LitAutor() { Autor = autorPregled.Autor, Literatura = lit });
+		}
+
+		lit.Autori = autori;
+
+		s.Update(lit);
+	}
+
+	public static void AzurirajKnjiguSaAutorima(KnjigaPregled knjigaPregled, List<AutorPregled> azuriraniAutori)
+	{
+		try
+		{
+			using ISession s = DataLayer.GetSession();
+			using ITransaction t = s.BeginTransaction();
+			try
+			{
+				AzurirajKnjigu(knjigaPregled, s);
+				AzurirajAutoreKnjige(knjigaPregled.ISBN, azuriraniAutori, s);
+
+				t.Commit();
+			}
+			catch (Exception ex)
+			{
+				t.Rollback();
+				Console.WriteLine(ex.Message);
+			}
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e.Message);
+		}
+	}
+
+	#endregion
+
+	#region Rad
+
+	public static List<RadPregled> VratiSveRadoveZaTProj(int teorijskiProjekatId)
     {
         List<RadPregled> radovi = new List<RadPregled>();
         try
         {
             ISession s = DataLayer.GetSession();
 
-
-            IList<Sadrzi> LiteraturaID = s.Query<Sadrzi>().Where(p => p.TProjekat.Id == teorijskiProjekatId).ToList();
-
-            var literaturaIds = LiteraturaID.Select(l => l.Literatura.LitId).ToList();
-
-            IList<Rad> sviRadovi = s.Query<Rad>()
-                                     .Where(k => literaturaIds.Contains(k.Literatura.LitId))
-                                     .ToList();
-
-			foreach (Rad r in sviRadovi)
-            {
-                radovi.Add(new RadPregled(r.Id, r.Literatura.Naziv, r.Url , r.KonferencijaObjavljivanja, r.Format, r.Literatura));
-            }
+            radovi = s.Query<Sadrzi>()
+                .Where(p => p.TProjekat.Id == teorijskiProjekatId)
+                .Join(s.Query<Rad>(),
+                sadrzi => sadrzi.Literatura.LitId,
+                rad => rad.Literatura.LitId,
+                (sadrzi, rad) => new RadPregled
+                {
+                    Format = rad.Format,
+                    Naziv = rad.Literatura.Naziv,
+                    Url = rad.Url,
+                    KonferencijaObjavljivanja = rad.KonferencijaObjavljivanja,
+                    Id = rad.Id
+                }
+                ).ToList();
 
             s.Close();
         }
@@ -954,15 +1016,18 @@ public class DTOManager
 		return autori;
 	}
 
-	public static void ObrisiRad(int id)
+	public static void ObrisiRad(int projekatId, int id)
 	{
 		try
 		{
 			ISession s = DataLayer.GetSession();
 
 			Rad o = s.Load<Rad>(id);
+			var sadrzi = s.Query<Sadrzi>()
+				.Where(x => x.Literatura.LitId == o.Literatura.LitId && projekatId == x.TProjekat.Id)
+				.FirstOrDefault();
 
-			s.Delete(o);
+			s.Delete(sadrzi);
 
 			s.Flush();
 
@@ -1065,16 +1130,16 @@ public class DTOManager
 
     public static RadPregled VratiRad(int id)
     {
-        RadPregled rad = null;
+        RadPregled radPregled = null;
         try
         {
             ISession s = DataLayer.GetSession();
 
-            Rad radEntity = s.Load<Rad>(id);
+            Rad rad = s.Load<Rad>(id);
 
-            if (radEntity != null)
+            if (rad != null)
             {
-                rad = new RadPregled(radEntity.Literatura.Naziv, radEntity.Url, radEntity.KonferencijaObjavljivanja, radEntity.Format, radEntity.Literatura);
+                radPregled = new RadPregled(rad.Id, rad.Literatura.Naziv, rad.Url, rad.KonferencijaObjavljivanja, rad.Format);
             }
 
             s.Close();
@@ -1084,34 +1149,90 @@ public class DTOManager
             Console.WriteLine(e.Message);
         }
 
-        return rad;
+        return radPregled;
     }
 
-    #endregion
+	private static void AzurirajRad(RadPregled radPregled, ISession s)
+	{
+		Rad rad = s.Load<Rad>(radPregled.Id);
+        rad.Format = radPregled.Format;
+        rad.KonferencijaObjavljivanja = radPregled.KonferencijaObjavljivanja;
+        rad.Url = radPregled.Url;
+        rad.Literatura.Naziv = radPregled.Naziv;
 
-    #region ClanakUCaspisu
+		s.SaveOrUpdate(rad);
+	}
 
-    public static List<ClanakUCasopisuPregled> VratiSveClankeZaTeorijskiProjekat(int teorijskiProjekatId)
+	private static void AzurirajAutoreRada(int id, List<AutorPregled> azuriraniAutori, ISession s)
+	{
+		var rad = s.Load<Rad>(id);
+		var lit = rad.Literatura;
+
+		foreach (var postojeciAutori in lit.Autori.ToList())
+		{
+			s.Delete(postojeciAutori);
+		}
+
+		List<LitAutor> autori = new List<LitAutor>();
+		foreach (var autorPregled in azuriraniAutori)
+		{
+			autori.Add(new LitAutor() { Autor = autorPregled.Autor, Literatura = lit });
+		}
+
+		lit.Autori = autori;
+
+		s.Update(lit);
+	}
+
+	public static void AzurirajRadSaAutorima(RadPregled radPregled, List<AutorPregled> azuriraniAutori)
+    {
+		try
+		{
+			using ISession s = DataLayer.GetSession();
+			using ITransaction t = s.BeginTransaction();
+			try
+			{
+				AzurirajRad(radPregled, s);
+				AzurirajAutoreRada(radPregled.Id, azuriraniAutori, s);
+
+				t.Commit();
+			}
+			catch (Exception ex)
+			{
+				t.Rollback();
+				Console.WriteLine(ex.Message);
+			}
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e.Message);
+		}
+	}
+
+	#endregion
+
+	#region ClanakUCaspisu
+
+	public static List<ClanakUCasopisuPregled> VratiSveClankeZaTProj(int teorijskiProjekatId)
     {
         List<ClanakUCasopisuPregled> clanci = new List<ClanakUCasopisuPregled>();
         try
         {
             ISession s = DataLayer.GetSession();
 
-
-            IList<Sadrzi> LiteraturaID = s.Query<Sadrzi>().Where(p => p.TProjekat.Id == teorijskiProjekatId).ToList();
-
-            var literaturaIds = LiteraturaID.Select(l => l.Literatura.LitId).ToList();
-
-            IList<ClanakUCasopisu> sviClanci = s.Query<ClanakUCasopisu>()
-                                     .Where(k => literaturaIds.Contains(k.Literatura.LitId))
-                                     .ToList();
-
-
-            foreach (ClanakUCasopisu c in sviClanci)
-            {
-                clanci.Add(new ClanakUCasopisuPregled(c.Literatura.Naziv, c.ISSN, c.ImeCasopisa , c.Broj, c.Godina, c.Literatura));
-            }
+			clanci = s.Query<Sadrzi>()
+	            .Where(p => p.TProjekat.Id == teorijskiProjekatId)
+	            .Join(s.Query<ClanakUCasopisu>(),
+		        sadrzi => sadrzi.Literatura.LitId,
+		        clanak => clanak.Literatura.LitId,
+		        (sadrzi, clanak) => new ClanakUCasopisuPregled{
+			        ISSN = clanak.ISSN,
+                    Broj = clanak.Broj,
+                    Godina = clanak.Godina,
+                    ImeCasopisa = clanak.ImeCasopisa,
+                    Naziv = clanak.Literatura.Naziv,
+		        }
+                ).ToList();
 
             s.Close();
         }
@@ -1123,22 +1244,45 @@ public class DTOManager
         return clanci;
     }
 
-    public static void ObrisiClanak(string issn)
+	//public static void ObrisiClanak(string issn)
+	//{
+	//	try
+	//	{
+	//		ISession s = DataLayer.GetSession();
+
+	//		ClanakUCasopisu o = s.Load<ClanakUCasopisu>(issn);
+
+	//		var sadrziPojavljivanja = s.Query<Sadrzi>().Where(x => x.Literatura.LitId == o.Literatura.LitId).ToList();
+	//		foreach (var pojavljivanje in sadrziPojavljivanja)
+	//		{
+	//			s.Delete(pojavljivanje);
+	//		}
+
+	//		s.Delete(o);
+
+	//		s.Flush();
+
+	//		s.Close();
+	//	}
+	//	catch (Exception e)
+	//	{
+	//		Console.WriteLine(e.Message);
+	//	}
+	//}
+
+	public static void ObrisiClanak(int projekatId, string issn)
     {
-        // TO BE DETERMINED
-        /*try
+        try
         {
             ISession s = DataLayer.GetSession();
 
-			ClanakUCasopisu o = s.Load<ClanakUCasopisu>(issn);
+            ClanakUCasopisu o = s.Load<ClanakUCasopisu>(issn);
 
-			var sadrziPojavljivanja = s.Query<Sadrzi>().Where(x => x.Literatura.LitId == o.Literatura.LitId).ToList();
-			foreach (var pojavljivanje in sadrziPojavljivanja)
-			{
-				s.Delete(pojavljivanje);
-			}
+            var sadrzi = s.Query<Sadrzi>()
+                .Where(x => x.Literatura.LitId == o.Literatura.LitId && projekatId == x.TProjekat.Id)
+                .FirstOrDefault();
 
-            s.Delete(o);
+            s.Delete(sadrzi);
 
             s.Flush();
 
@@ -1147,7 +1291,7 @@ public class DTOManager
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
-        }*/
+        }
     }
 
 	public static void ObrisiAutoraClanka(string issn, string nazivAutora)
@@ -1195,49 +1339,49 @@ public class DTOManager
 	}
 
 	public static void DodajClanak(int tProjekatId, ClanakUCasopisuPregled p, List<AutorPregled> autori)
-    {
-        try
-        {
-            ISession s = DataLayer.GetSession();
+	{
+		try
+		{
+			ISession s = DataLayer.GetSession();
 
-            Literatura lit = new Literatura { Naziv = p.Naziv };
+			Literatura lit = new Literatura { Naziv = p.Naziv };
 
 			List<LitAutor> listaAutora = new List<LitAutor>();
 			foreach (AutorPregled ap in autori)
 			{
-                listaAutora.Add(new LitAutor() { Autor = ap.Autor, Literatura = lit });
+				listaAutora.Add(new LitAutor() { Autor = ap.Autor, Literatura = lit });
 			}
-            lit.Autori = listaAutora;
+			lit.Autori = listaAutora;
 
 			ClanakUCasopisu r = new ClanakUCasopisu()
-            {
-                ImeCasopisa = p.ImeCasopisa,
-                ISSN = p.ISSN,
-                Broj = p.Broj,
-                Godina = p.Godina,
-                Literatura = lit
-            };
+			{
+				ImeCasopisa = p.ImeCasopisa,
+				ISSN = p.ISSN,
+				Broj = p.Broj,
+				Godina = p.Godina,
+				Literatura = lit
+			};
 
-            lit.ClanciUCasopisu.Add(r);
-            s.Save(lit);
+			lit.ClanciUCasopisu.Add(r);
+			s.Save(lit);
 
-            Sadrzi sadrzi = new Sadrzi()
-            {
-                Literatura = lit,
-                TProjekat = s.Load<TeorijskiProjekat>(tProjekatId)
-            };
+			Sadrzi sadrzi = new Sadrzi()
+			{
+				Literatura = lit,
+				TProjekat = s.Load<TeorijskiProjekat>(tProjekatId)
+			};
 
-            s.Save(sadrzi);
+			s.Save(sadrzi);
 
-            s.Flush();
+			s.Flush();
 
-            s.Close();
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.Message);
-        }
-    }
+			s.Close();
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e.Message);
+		}
+	}
 
 	public static List<AutorPregled> VratiAutoreZaClanak(string issn)
 	{
@@ -1277,7 +1421,7 @@ public class DTOManager
 
             if (clanakEntity != null)
             {
-                clanak = new ClanakUCasopisuPregled(clanakEntity.Literatura.Naziv, clanakEntity.ISSN, clanakEntity.ImeCasopisa, clanakEntity.Broj, clanakEntity.Godina, clanakEntity.Literatura);
+                clanak = new ClanakUCasopisuPregled(clanakEntity.Literatura.Naziv, clanakEntity.ISSN, clanakEntity.ImeCasopisa, clanakEntity.Broj, clanakEntity.Godina);
             }
 
             s.Close();
@@ -1303,8 +1447,8 @@ public class DTOManager
 
 	private static void AzurirajAutoreClanka(string issn, List<AutorPregled> azuriraniAutori, ISession s)
 	{
-		var autor = s.Load<ClanakUCasopisu>(issn);
-		var lit = autor.Literatura;
+		var clanak = s.Load<ClanakUCasopisu>(issn);
+		var lit = clanak.Literatura;
 
 		foreach (var postojeciAutori in lit.Autori.ToList())
 		{
@@ -1346,7 +1490,6 @@ public class DTOManager
 			Console.WriteLine(e.Message);
 		}
 	}
-
 
 	#endregion
 

@@ -17,7 +17,7 @@ public partial class Literature : Form
 	public void PopuniPodacima()
 	{
 		Knjige_ListV.Items.Clear();
-		List<KnjigaPregled> knjige = DTOManager.VratiSveKnjigeZaTeorijskiProjekat(projekat.Id);
+		List<KnjigaPregled> knjige = DTOManager.VratiSveKnjigeZaTProj(projekat.Id);
 
 		foreach (KnjigaPregled k in knjige)
 		{
@@ -28,7 +28,7 @@ public partial class Literature : Form
 		Knjige_ListV.Refresh();
 
 		Radovi_ListV.Items.Clear();
-		List<RadPregled> radovi = DTOManager.VratiSveRadoveZaTeorijskiProjekat(projekat.Id);
+		List<RadPregled> radovi = DTOManager.VratiSveRadoveZaTProj(projekat.Id);
 
 		foreach (RadPregled r in radovi)
 		{
@@ -40,7 +40,7 @@ public partial class Literature : Form
 		Radovi_ListV.Refresh();
 
 		Clanci_ListV.Items.Clear();
-		List<ClanakUCasopisuPregled> casopisi = DTOManager.VratiSveClankeZaTeorijskiProjekat(projekat.Id);
+		List<ClanakUCasopisuPregled> casopisi = DTOManager.VratiSveClankeZaTProj(projekat.Id);
 
 		foreach (ClanakUCasopisuPregled c in casopisi)
 		{
@@ -91,7 +91,7 @@ public partial class Literature : Form
 
 		if (result == DialogResult.OK)
 		{
-			DTOManager.ObrisiKnjigu(Knjige_ListV.SelectedItems[0].SubItems[0].Text);
+			DTOManager.ObrisiKnjigu(projekat.Id, Knjige_ListV.SelectedItems[0].SubItems[0].Text);
 			MessageBox.Show("Brisanje knjige je uspesno obavljeno!");
 			PopuniPodacima();
 		}
@@ -137,7 +137,7 @@ public partial class Literature : Form
 
 		if (result == DialogResult.OK)
 		{
-			DTOManager.ObrisiRad((int)Radovi_ListV.SelectedItems[0].Tag);
+			DTOManager.ObrisiRad(projekat.Id, (int)Radovi_ListV.SelectedItems[0].Tag);
 			MessageBox.Show("Brisanje rada je uspesno obavljeno!");
 			PopuniPodacima();
 		}
@@ -183,7 +183,7 @@ public partial class Literature : Form
 
 		if (result == DialogResult.OK)
 		{
-			DTOManager.ObrisiClanak(Clanci_ListV.SelectedItems[0].SubItems[0].Text);
+			DTOManager.ObrisiClanak(projekat.Id,Clanci_ListV.SelectedItems[0].SubItems[0].Text);
 			MessageBox.Show("Brisanje clanka je uspesno obavljeno!");
 			PopuniPodacima();
 		}
