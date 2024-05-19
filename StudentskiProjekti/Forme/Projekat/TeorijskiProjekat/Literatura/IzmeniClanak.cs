@@ -1,5 +1,4 @@
-﻿using StudentskiProjekti.Entiteti;
-using static StudentskiProjekti.DTOs;
+﻿using static StudentskiProjekti.DTOs;
 namespace StudentskiProjekti.Forme;
 public partial class IzmeniClanak : Form
 {

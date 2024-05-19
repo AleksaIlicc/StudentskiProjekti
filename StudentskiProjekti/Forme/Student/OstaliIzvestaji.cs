@@ -38,7 +38,7 @@ namespace StudentskiProjekti.Forme
                 {
                     continue;
                 }
-                List<DTOs.IzvestajPregled> izvestaji = DTOManager.VratiIzvestajeZaStudenta(student.BrIndeksa , pp.Id);
+                List<DTOs.IzvestajPregled> izvestaji = DTOManager.VratiIzvestajeZaGrupu(student.BrIndeksa , pp.Id);
 
                 foreach (DTOs.IzvestajPregled izvestaj in izvestaji)
                 {

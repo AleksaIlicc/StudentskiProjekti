@@ -299,6 +299,7 @@ public class DTOManager
             Console.WriteLine(e.Message);
         }
     }
+
     public static List<ProjekatUcesceDetalji> VratiProjekteZaStudenta(string studentId)
     {
         List<ProjekatUcesceDetalji> projektiInfo = new List<ProjekatUcesceDetalji>();
@@ -332,6 +333,7 @@ public class DTOManager
         }
         return projektiInfo;
     }
+
     public static List<StudentPregled> VratiStudNaGrupnomProj(int IdTProj)
     {
         List<StudentPregled> studenti = new List<StudentPregled>();
@@ -458,7 +460,6 @@ public class DTOManager
         }
         return izvestaji;
     }
-
 
     #endregion
 

@@ -1,11 +1,14 @@
 ﻿using DocumentFormat.OpenXml.Office2010.Excel;
+using System.Globalization;
 
 namespace StudentskiProjekti.Forme;
 public partial class StudentDetalji : Form
 {
     DTOs.StudentPregled sp = new DTOs.StudentPregled();
     DTOs.ProjekatUcesceDetalji pd = new DTOs.ProjekatUcesceDetalji();
-    public StudentDetalji(DTOs.StudentPregled sp)
+    string format = "dd.MM.yyyy";
+
+	public StudentDetalji(DTOs.StudentPregled sp)
     {
         InitializeComponent();
         this.sp = sp;
@@ -27,8 +30,8 @@ public partial class StudentDetalji : Form
 
         foreach (DTOs.ProjekatUcesceDetalji p in detalji)
         {
-            string datumzavizrade = p.DatumZavrsetkaIzrade.HasValue ? p.DatumZavrsetkaIzrade.Value.ToString("dd.MM.yyyy") : string.Empty;
-            ListViewItem item = new ListViewItem(new string[] { p.NazivProjekta, p.DatumPocetkaIzrade.ToString("dd.MM.yyyy"), datumzavizrade, p.RokZaZavrsetak.ToString("dd.MM.yyyy"), p.ProjekatZavrsen, p.VrstaProjekta });
+            string datumzavizrade = p.DatumZavrsetkaIzrade.HasValue ? p.DatumZavrsetkaIzrade.Value.ToString(format) : string.Empty;
+            ListViewItem item = new ListViewItem(new string[] { p.NazivProjekta, p.DatumPocetkaIzrade.ToString(format), datumzavizrade, p.RokZaZavrsetak.ToString("dd.MM.yyyy"), p.ProjekatZavrsen, p.VrstaProjekta });
             item.Tag = p.Id;
 
             StudentDetalji_ListV.Items.Add(item);
@@ -48,13 +51,12 @@ public partial class StudentDetalji : Form
         pd.NazivProjekta = StudentDetalji_ListV.SelectedItems[0].SubItems[0].Text;
         pd.VrstaProjekta = StudentDetalji_ListV.SelectedItems[0].SubItems[5].Text;
         pd.ProjekatZavrsen = StudentDetalji_ListV.SelectedItems[0].SubItems[4].Text;
+        pd.DatumPocetkaIzrade = DateTime.ParseExact(StudentDetalji_ListV.SelectedItems[0].SubItems[1].Text, format, CultureInfo.InvariantCulture);
+		pd.DatumZavrsetkaIzrade = DateTime.TryParse(StudentDetalji_ListV.SelectedItems[0].SubItems[2].Text, out var datumZavrsetka) ? datumZavrsetka : null;
+        pd.RokZaZavrsetak = DateTime.ParseExact(StudentDetalji_ListV.SelectedItems[0].SubItems[3].Text, format, CultureInfo.InvariantCulture);
 
-        pd.DatumPocetkaIzrade = DateTime.Parse(StudentDetalji_ListV.SelectedItems[0].SubItems[1].Text);
-        pd.DatumZavrsetkaIzrade = DateTime.TryParse(StudentDetalji_ListV.SelectedItems[0].SubItems[2].Text, out var datumZavrsetka) ? datumZavrsetka : (DateTime?)null;
-        pd.RokZaZavrsetak = DateTime.Parse(StudentDetalji_ListV.SelectedItems[0].SubItems[3].Text);
- 
 
-        if (StudentDetalji_ListV.SelectedItems[0].SubItems[5].Text == "teorijski")
+		if (StudentDetalji_ListV.SelectedItems[0].SubItems[5].Text == "teorijski")
         {
             DTOs.TeorijskiProjekatPregled tp = DTOManager.VratiTeorijskiProjekat((int)StudentDetalji_ListV.SelectedItems[0].Tag);
             TeorijskiUcesceDetalji teorijskiUcesceDetalji = new TeorijskiUcesceDetalji(sp, tp, pd)
