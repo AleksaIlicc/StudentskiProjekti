@@ -39,8 +39,20 @@
 			IzmeniProjekatT_Btn = new Button();
 			DodajProjekatT_Btn = new Button();
 			ObrisiProjekatT_Btn = new Button();
+			PrikazProjekta_GB = new GroupBox();
+			Tip_GB = new GroupBox();
+			Pojedinacni_RB = new RadioButton();
+			Grupni_RB = new RadioButton();
+			label7 = new Label();
+			Ocisti_Btn = new Button();
+			Sortiraj_Btn = new Button();
+			label6 = new Label();
+			SkoslkaGodZad_TB = new TextBox();
+			button1 = new Button();
 			TeorijskiProjekti_GB.SuspendLayout();
 			IzmeniTeorijski_GB.SuspendLayout();
+			PrikazProjekta_GB.SuspendLayout();
+			Tip_GB.SuspendLayout();
 			SuspendLayout();
 			// 
 			// TeorijskiProjekti_GB
@@ -109,7 +121,7 @@
 			IzmeniTeorijski_GB.Controls.Add(DodajProjekatT_Btn);
 			IzmeniTeorijski_GB.Controls.Add(ObrisiProjekatT_Btn);
 			IzmeniTeorijski_GB.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-			IzmeniTeorijski_GB.Location = new System.Drawing.Point(8, 405);
+			IzmeniTeorijski_GB.Location = new System.Drawing.Point(8, 395);
 			IzmeniTeorijski_GB.Name = "IzmeniTeorijski_GB";
 			IzmeniTeorijski_GB.Size = new System.Drawing.Size(202, 164);
 			IzmeniTeorijski_GB.TabIndex = 4;
@@ -152,26 +164,135 @@
 			ObrisiProjekatT_Btn.UseVisualStyleBackColor = false;
 			ObrisiProjekatT_Btn.Click += ObrisiProjekatT_Btn_Click;
 			// 
+			// PrikazProjekta_GB
+			// 
+			PrikazProjekta_GB.Controls.Add(Tip_GB);
+			PrikazProjekta_GB.Controls.Add(label7);
+			PrikazProjekta_GB.Controls.Add(Ocisti_Btn);
+			PrikazProjekta_GB.Controls.Add(Sortiraj_Btn);
+			PrikazProjekta_GB.Controls.Add(label6);
+			PrikazProjekta_GB.Controls.Add(SkoslkaGodZad_TB);
+			PrikazProjekta_GB.Location = new System.Drawing.Point(229, 395);
+			PrikazProjekta_GB.Name = "PrikazProjekta_GB";
+			PrikazProjekta_GB.Size = new System.Drawing.Size(391, 164);
+			PrikazProjekta_GB.TabIndex = 8;
+			PrikazProjekta_GB.TabStop = false;
+			PrikazProjekta_GB.Text = "Prikaz";
+			// 
+			// Tip_GB
+			// 
+			Tip_GB.Controls.Add(Pojedinacni_RB);
+			Tip_GB.Controls.Add(Grupni_RB);
+			Tip_GB.Location = new System.Drawing.Point(198, 29);
+			Tip_GB.Name = "Tip_GB";
+			Tip_GB.Size = new System.Drawing.Size(181, 30);
+			Tip_GB.TabIndex = 4;
+			Tip_GB.TabStop = false;
+			// 
+			// Pojedinacni_RB
+			// 
+			Pojedinacni_RB.AutoSize = true;
+			Pojedinacni_RB.Location = new System.Drawing.Point(86, 9);
+			Pojedinacni_RB.Name = "Pojedinacni_RB";
+			Pojedinacni_RB.Size = new System.Drawing.Size(92, 19);
+			Pojedinacni_RB.TabIndex = 3;
+			Pojedinacni_RB.Text = "Pojedinacni";
+			Pojedinacni_RB.UseVisualStyleBackColor = true;
+			// 
+			// Grupni_RB
+			// 
+			Grupni_RB.AutoSize = true;
+			Grupni_RB.Location = new System.Drawing.Point(4, 9);
+			Grupni_RB.Name = "Grupni_RB";
+			Grupni_RB.Size = new System.Drawing.Size(67, 19);
+			Grupni_RB.TabIndex = 2;
+			Grupni_RB.Text = "Grupni";
+			Grupni_RB.UseVisualStyleBackColor = true;
+			// 
+			// label7
+			// 
+			label7.AutoSize = true;
+			label7.Location = new System.Drawing.Point(6, 40);
+			label7.Name = "label7";
+			label7.Size = new System.Drawing.Size(124, 15);
+			label7.TabIndex = 6;
+			label7.Text = "Unesite tip projekta:";
+			// 
+			// Ocisti_Btn
+			// 
+			Ocisti_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
+			Ocisti_Btn.Font = new System.Drawing.Font("Georgia", 9F);
+			Ocisti_Btn.Location = new System.Drawing.Point(223, 120);
+			Ocisti_Btn.Name = "Ocisti_Btn";
+			Ocisti_Btn.Size = new System.Drawing.Size(75, 25);
+			Ocisti_Btn.TabIndex = 7;
+			Ocisti_Btn.Text = "Ocisti";
+			Ocisti_Btn.UseVisualStyleBackColor = false;
+			// 
+			// Sortiraj_Btn
+			// 
+			Sortiraj_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
+			Sortiraj_Btn.Font = new System.Drawing.Font("Georgia", 9F);
+			Sortiraj_Btn.Location = new System.Drawing.Point(304, 120);
+			Sortiraj_Btn.Name = "Sortiraj_Btn";
+			Sortiraj_Btn.Size = new System.Drawing.Size(75, 25);
+			Sortiraj_Btn.TabIndex = 8;
+			Sortiraj_Btn.Text = "Sortiraj";
+			Sortiraj_Btn.UseVisualStyleBackColor = false;
+			// 
+			// label6
+			// 
+			label6.AutoSize = true;
+			label6.Location = new System.Drawing.Point(6, 78);
+			label6.Name = "label6";
+			label6.Size = new System.Drawing.Size(189, 15);
+			label6.TabIndex = 4;
+			label6.Text = "Unesite skolsku god. zadavanja:";
+			// 
+			// SkoslkaGodZad_TB
+			// 
+			SkoslkaGodZad_TB.Location = new System.Drawing.Point(198, 75);
+			SkoslkaGodZad_TB.Name = "SkoslkaGodZad_TB";
+			SkoslkaGodZad_TB.Size = new System.Drawing.Size(181, 21);
+			SkoslkaGodZad_TB.TabIndex = 6;
+			// 
+			// button1
+			// 
+			button1.BackColor = System.Drawing.Color.AntiqueWhite;
+			button1.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+			button1.Location = new System.Drawing.Point(626, 504);
+			button1.Name = "button1";
+			button1.Size = new System.Drawing.Size(167, 55);
+			button1.TabIndex = 9;
+			button1.Text = "Prikazi studente koji rade na projektu";
+			button1.UseVisualStyleBackColor = false;
+			// 
 			// TeorijskiProjekti
 			// 
 			AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
 			BackColor = System.Drawing.Color.Linen;
-			ClientSize = new System.Drawing.Size(805, 624);
+			ClientSize = new System.Drawing.Size(801, 571);
+			Controls.Add(button1);
+			Controls.Add(PrikazProjekta_GB);
 			Controls.Add(IzmeniTeorijski_GB);
 			Controls.Add(TeorijskiProjekti_GB);
 			Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
 			Margin = new Padding(5, 3, 5, 3);
 			MaximizeBox = false;
-			MaximumSize = new System.Drawing.Size(821, 663);
+			MaximumSize = new System.Drawing.Size(817, 610);
 			MdiChildrenMinimizedAnchorBottom = false;
 			MinimizeBox = false;
-			MinimumSize = new System.Drawing.Size(821, 663);
+			MinimumSize = new System.Drawing.Size(817, 610);
 			Name = "TeorijskiProjekti";
 			Text = "Teorijski projekti";
 			Load += TeorijskiProjekti_Load;
 			TeorijskiProjekti_GB.ResumeLayout(false);
 			IzmeniTeorijski_GB.ResumeLayout(false);
+			PrikazProjekta_GB.ResumeLayout(false);
+			PrikazProjekta_GB.PerformLayout();
+			Tip_GB.ResumeLayout(false);
+			Tip_GB.PerformLayout();
 			ResumeLayout(false);
 		}
 
@@ -188,5 +309,15 @@
         private ColumnHeader columnHeader6;
         private ColumnHeader columnHeader7;
         private ColumnHeader columnHeader8;
-    }
+		private GroupBox PrikazProjekta_GB;
+		private GroupBox Tip_GB;
+		private RadioButton Pojedinacni_RB;
+		private RadioButton Grupni_RB;
+		private Label label7;
+		private Button Ocisti_Btn;
+		private Button Sortiraj_Btn;
+		private Label label6;
+		private TextBox SkoslkaGodZad_TB;
+		private Button button1;
+	}
 }

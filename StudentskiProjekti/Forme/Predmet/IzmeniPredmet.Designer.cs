@@ -145,13 +145,13 @@
 			// 
 			AutoScaleMode = AutoScaleMode.None;
 			BackColor = System.Drawing.Color.AntiqueWhite;
-			ClientSize = new System.Drawing.Size(348, 229);
+			ClientSize = new System.Drawing.Size(348, 221);
 			Controls.Add(OsnovnipodaciopredmetuGB);
 			ForeColor = System.Drawing.SystemColors.ControlText;
 			MaximizeBox = false;
-			MaximumSize = new System.Drawing.Size(364, 268);
+			MaximumSize = new System.Drawing.Size(364, 260);
 			MinimizeBox = false;
-			MinimumSize = new System.Drawing.Size(364, 268);
+			MinimumSize = new System.Drawing.Size(364, 260);
 			Name = "IzmeniPredmet";
 			Text = "IzmeniPredmet";
 			Load += IzmeniPredmet_Load;

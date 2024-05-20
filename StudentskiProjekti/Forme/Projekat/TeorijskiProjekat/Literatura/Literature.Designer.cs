@@ -393,7 +393,7 @@
 			AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
 			BackColor = System.Drawing.Color.Linen;
-			ClientSize = new System.Drawing.Size(805, 761);
+			ClientSize = new System.Drawing.Size(805, 758);
 			Controls.Add(IzmeniClanak_GB);
 			Controls.Add(IzmeniRad_GB);
 			Controls.Add(IzmeniKnjigu_GB);
@@ -401,10 +401,10 @@
 			Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
 			Margin = new Padding(5, 3, 5, 3);
 			MaximizeBox = false;
-			MaximumSize = new System.Drawing.Size(821, 800);
+			MaximumSize = new System.Drawing.Size(821, 797);
 			MdiChildrenMinimizedAnchorBottom = false;
 			MinimizeBox = false;
-			MinimumSize = new System.Drawing.Size(821, 800);
+			MinimumSize = new System.Drawing.Size(821, 797);
 			Name = "Literature";
 			Text = "Preporucena literatura";
 			Load += Literature_Load;

@@ -132,7 +132,23 @@ public partial class Studenti : Form
         projekti.ShowDialog();
     }
 
-    private void Excel_Btn_Click(object sender, EventArgs e)
+	private void Ime_TB_KeyPress(object sender, KeyPressEventArgs e)
+	{
+		if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
+		{
+			e.Handled = true;
+		}
+	}
+
+	private void Prezime_TB_KeyPress(object sender, KeyPressEventArgs e)
+	{
+		if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
+		{
+			e.Handled = true;
+		}
+	}
+
+	private void Excel_Btn_Click(object sender, EventArgs e)
     {
         SaveFileDialog saveFileDialog = new SaveFileDialog();
         saveFileDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";

@@ -358,7 +358,7 @@
 			AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
 			BackColor = System.Drawing.Color.Linen;
-			ClientSize = new System.Drawing.Size(805, 624);
+			ClientSize = new System.Drawing.Size(801, 604);
 			Controls.Add(Excel_Btn);
 			Controls.Add(PrikazProjekta_GB);
 			Controls.Add(PrikazPrakticni_Btn);
@@ -375,10 +375,10 @@
 			Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
 			Margin = new Padding(5, 3, 5, 3);
 			MaximizeBox = false;
-			MaximumSize = new System.Drawing.Size(821, 663);
+			MaximumSize = new System.Drawing.Size(817, 643);
 			MdiChildrenMinimizedAnchorBottom = false;
 			MinimizeBox = false;
-			MinimumSize = new System.Drawing.Size(821, 663);
+			MinimumSize = new System.Drawing.Size(817, 643);
 			Name = "Projekti";
 			Text = "Projekti na predmetu";
 			Load += Projekti_Load;

@@ -96,7 +96,7 @@
 			// Dodaj_Btn
 			// 
 			Dodaj_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
-			Dodaj_Btn.Location = new System.Drawing.Point(229, 222);
+			Dodaj_Btn.Location = new System.Drawing.Point(229, 218);
 			Dodaj_Btn.Name = "Dodaj_Btn";
 			Dodaj_Btn.Size = new System.Drawing.Size(124, 29);
 			Dodaj_Btn.TabIndex = 4;

@@ -70,7 +70,7 @@
 			// 
 			Obrisi_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
 			Obrisi_Btn.Font = new System.Drawing.Font("Georgia", 9F);
-			Obrisi_Btn.Location = new System.Drawing.Point(210, 298);
+			Obrisi_Btn.Location = new System.Drawing.Point(210, 282);
 			Obrisi_Btn.Name = "Obrisi_Btn";
 			Obrisi_Btn.Size = new System.Drawing.Size(114, 33);
 			Obrisi_Btn.TabIndex = 1;
@@ -82,7 +82,7 @@
 			// 
 			Dodaj_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
 			Dodaj_Btn.Font = new System.Drawing.Font("Georgia", 9F);
-			Dodaj_Btn.Location = new System.Drawing.Point(90, 298);
+			Dodaj_Btn.Location = new System.Drawing.Point(90, 282);
 			Dodaj_Btn.Name = "Dodaj_Btn";
 			Dodaj_Btn.Size = new System.Drawing.Size(114, 33);
 			Dodaj_Btn.TabIndex = 2;
@@ -94,15 +94,15 @@
 			// 
 			AutoScaleMode = AutoScaleMode.None;
 			BackColor = System.Drawing.Color.Linen;
-			ClientSize = new System.Drawing.Size(344, 341);
+			ClientSize = new System.Drawing.Size(339, 326);
 			Controls.Add(Dodaj_Btn);
 			Controls.Add(Obrisi_Btn);
 			Controls.Add(Predmeti_GB);
 			Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
 			MaximizeBox = false;
-			MaximumSize = new System.Drawing.Size(360, 380);
+			MaximumSize = new System.Drawing.Size(355, 365);
 			MinimizeBox = false;
-			MinimumSize = new System.Drawing.Size(360, 380);
+			MinimumSize = new System.Drawing.Size(355, 365);
 			Name = "AutoriLiterature";
 			Text = "Autori literature";
 			Load += AutoriLiterature_Load;

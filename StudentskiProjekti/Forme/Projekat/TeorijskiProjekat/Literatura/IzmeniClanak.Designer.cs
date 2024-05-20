@@ -106,7 +106,7 @@
 			// Izmeni_Btn
 			// 
 			Izmeni_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
-			Izmeni_Btn.Location = new System.Drawing.Point(192, 234);
+			Izmeni_Btn.Location = new System.Drawing.Point(190, 234);
 			Izmeni_Btn.Name = "Izmeni_Btn";
 			Izmeni_Btn.Size = new System.Drawing.Size(124, 29);
 			Izmeni_Btn.TabIndex = 4;
