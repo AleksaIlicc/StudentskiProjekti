@@ -1,4 +1,5 @@
 ﻿namespace StudentskiProjekti.Mapiranja;
+
 public class KnjigaMapiranja : ClassMap<Knjiga>
 {
     public KnjigaMapiranja()
@@ -9,6 +10,6 @@ public class KnjigaMapiranja : ClassMap<Knjiga>
         Map(x => x.Izdavac, "IZDAVAC");
         Map(x => x.GodinaIzdanja, "GODINA_IZDANJA");
 
-		References(x => x.Literatura).Column("LIT_ID");
-	}
+        References(x => x.Literatura).Column("LIT_ID").Unique();
+    }
 }
