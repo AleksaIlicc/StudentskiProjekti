@@ -70,7 +70,8 @@
 			Autori_TB.Multiline = true;
 			Autori_TB.Name = "Autori_TB";
 			Autori_TB.Size = new System.Drawing.Size(217, 42);
-			Autori_TB.TabIndex = 13;
+			Autori_TB.TabIndex = 1;
+			Autori_TB.KeyPress += Autori_TB_KeyPress;
 			// 
 			// label6
 			// 
@@ -91,7 +92,7 @@
 			Format_CB.Location = new System.Drawing.Point(136, 151);
 			Format_CB.Name = "Format_CB";
 			Format_CB.Size = new System.Drawing.Size(217, 23);
-			Format_CB.TabIndex = 6;
+			Format_CB.TabIndex = 3;
 			// 
 			// Dodaj_Btn
 			// 
@@ -99,7 +100,7 @@
 			Dodaj_Btn.Location = new System.Drawing.Point(229, 218);
 			Dodaj_Btn.Name = "Dodaj_Btn";
 			Dodaj_Btn.Size = new System.Drawing.Size(124, 29);
-			Dodaj_Btn.TabIndex = 4;
+			Dodaj_Btn.TabIndex = 5;
 			Dodaj_Btn.Text = "Dodaj";
 			Dodaj_Btn.UseVisualStyleBackColor = false;
 			Dodaj_Btn.Click += Dodaj_Btn_Click;
@@ -109,21 +110,21 @@
 			KonfObjavljivanja_TB.Location = new System.Drawing.Point(136, 182);
 			KonfObjavljivanja_TB.Name = "KonfObjavljivanja_TB";
 			KonfObjavljivanja_TB.Size = new System.Drawing.Size(217, 21);
-			KonfObjavljivanja_TB.TabIndex = 3;
+			KonfObjavljivanja_TB.TabIndex = 4;
 			// 
 			// Naziv_TB
 			// 
 			Naziv_TB.Location = new System.Drawing.Point(136, 42);
 			Naziv_TB.Name = "Naziv_TB";
 			Naziv_TB.Size = new System.Drawing.Size(217, 21);
-			Naziv_TB.TabIndex = 1;
+			Naziv_TB.TabIndex = 0;
 			// 
 			// URL_TB
 			// 
 			URL_TB.Location = new System.Drawing.Point(136, 122);
 			URL_TB.Name = "URL_TB";
 			URL_TB.Size = new System.Drawing.Size(217, 21);
-			URL_TB.TabIndex = 0;
+			URL_TB.TabIndex = 2;
 			// 
 			// label4
 			// 

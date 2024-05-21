@@ -74,7 +74,8 @@
 			Autori_TB.Multiline = true;
 			Autori_TB.Name = "Autori_TB";
 			Autori_TB.Size = new System.Drawing.Size(217, 42);
-			Autori_TB.TabIndex = 9;
+			Autori_TB.TabIndex = 2;
+			Autori_TB.KeyPress += Autori_TB_KeyPress;
 			// 
 			// label6
 			// 
@@ -92,6 +93,7 @@
 			Godina_TB.Name = "Godina_TB";
 			Godina_TB.Size = new System.Drawing.Size(217, 21);
 			Godina_TB.TabIndex = 5;
+			Godina_TB.KeyPress += Godina_TB_KeyPress;
 			// 
 			// label5
 			// 
@@ -109,7 +111,7 @@
 			Izmeni_Btn.Location = new System.Drawing.Point(190, 234);
 			Izmeni_Btn.Name = "Izmeni_Btn";
 			Izmeni_Btn.Size = new System.Drawing.Size(124, 29);
-			Izmeni_Btn.TabIndex = 4;
+			Izmeni_Btn.TabIndex = 6;
 			Izmeni_Btn.Text = "Izmeni";
 			Izmeni_Btn.UseVisualStyleBackColor = false;
 			Izmeni_Btn.Click += Izmeni_Btn_Click;
@@ -119,7 +121,8 @@
 			Broj_TB.Location = new System.Drawing.Point(97, 175);
 			Broj_TB.Name = "Broj_TB";
 			Broj_TB.Size = new System.Drawing.Size(217, 21);
-			Broj_TB.TabIndex = 3;
+			Broj_TB.TabIndex = 4;
+			Broj_TB.KeyPress += Broj_TB_KeyPress;
 			// 
 			// Naziv_TB
 			// 
@@ -141,7 +144,7 @@
 			ImeCasopisa_TB.Location = new System.Drawing.Point(97, 146);
 			ImeCasopisa_TB.Name = "ImeCasopisa_TB";
 			ImeCasopisa_TB.Size = new System.Drawing.Size(217, 21);
-			ImeCasopisa_TB.TabIndex = 2;
+			ImeCasopisa_TB.TabIndex = 3;
 			// 
 			// label4
 			// 

@@ -70,7 +70,8 @@
 			Autori_TB.Multiline = true;
 			Autori_TB.Name = "Autori_TB";
 			Autori_TB.Size = new System.Drawing.Size(217, 42);
-			Autori_TB.TabIndex = 11;
+			Autori_TB.TabIndex = 2;
+			Autori_TB.KeyPress += Autori_TB_KeyPress;
 			// 
 			// label6
 			// 
@@ -88,7 +89,7 @@
 			Izmeni_Btn.Location = new System.Drawing.Point(202, 226);
 			Izmeni_Btn.Name = "Izmeni_Btn";
 			Izmeni_Btn.Size = new System.Drawing.Size(124, 29);
-			Izmeni_Btn.TabIndex = 4;
+			Izmeni_Btn.TabIndex = 5;
 			Izmeni_Btn.Text = "Izmeni";
 			Izmeni_Btn.UseVisualStyleBackColor = false;
 			Izmeni_Btn.Click += Izmeni_Btn_Click;
@@ -98,7 +99,8 @@
 			GodinaIzdanja_TB.Location = new System.Drawing.Point(109, 187);
 			GodinaIzdanja_TB.Name = "GodinaIzdanja_TB";
 			GodinaIzdanja_TB.Size = new System.Drawing.Size(217, 21);
-			GodinaIzdanja_TB.TabIndex = 3;
+			GodinaIzdanja_TB.TabIndex = 4;
+			GodinaIzdanja_TB.KeyPress += Godina_TB_KeyPress;
 			// 
 			// Naziv_TB
 			// 
@@ -120,7 +122,7 @@
 			Izdavac_TB.Location = new System.Drawing.Point(109, 155);
 			Izdavac_TB.Name = "Izdavac_TB";
 			Izdavac_TB.Size = new System.Drawing.Size(217, 21);
-			Izdavac_TB.TabIndex = 2;
+			Izdavac_TB.TabIndex = 3;
 			// 
 			// label4
 			// 

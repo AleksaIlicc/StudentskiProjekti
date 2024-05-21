@@ -33,7 +33,7 @@ public static class DataLayer
 		try
 		{
 			// ShowSql prikazuje SQL koji je generisan, ali u .NET Core aplikacijama se prikazuju u konzoli.
-			// Ako se aplikacija pokrene sa dotnet bin\Debug\net8.0-windows\ProdavnicaIgracaka.dll, mogu da se vide
+			// Ako se aplikacija pokrene sa dotnet "putanja do build verzije", mogu da se vide
 
 			string dataSource = Environment.GetEnvironmentVariable("DATA_SOURCE");
 			string userId = Environment.GetEnvironmentVariable("USER_ID");

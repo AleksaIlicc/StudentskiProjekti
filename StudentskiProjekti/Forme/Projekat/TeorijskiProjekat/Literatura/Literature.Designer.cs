@@ -80,7 +80,7 @@
 			Literature_GB.Location = new System.Drawing.Point(12, 12);
 			Literature_GB.Name = "Literature_GB";
 			Literature_GB.Size = new System.Drawing.Size(785, 567);
-			Literature_GB.TabIndex = 3;
+			Literature_GB.TabIndex = 0;
 			Literature_GB.TabStop = false;
 			Literature_GB.Text = "Literatura:";
 			// 
@@ -91,7 +91,7 @@
 			PrikaziAutore_Btn.Location = new System.Drawing.Point(611, 527);
 			PrikaziAutore_Btn.Name = "PrikaziAutore_Btn";
 			PrikaziAutore_Btn.Size = new System.Drawing.Size(168, 33);
-			PrikaziAutore_Btn.TabIndex = 6;
+			PrikaziAutore_Btn.TabIndex = 4;
 			PrikaziAutore_Btn.Text = "Prikazi autore literature";
 			PrikaziAutore_Btn.UseVisualStyleBackColor = false;
 			PrikaziAutore_Btn.Click += PrikaziAutore_Btn_Click;
@@ -123,7 +123,7 @@
 			Radovi_ListV.MultiSelect = false;
 			Radovi_ListV.Name = "Radovi_ListV";
 			Radovi_ListV.Size = new System.Drawing.Size(773, 139);
-			Radovi_ListV.TabIndex = 1;
+			Radovi_ListV.TabIndex = 3;
 			Radovi_ListV.UseCompatibleStateImageBehavior = false;
 			Radovi_ListV.View = View.Details;
 			Radovi_ListV.SelectedIndexChanged += Radovi_ListV_SelectedIndexChanged;
@@ -170,7 +170,7 @@
 			Knjige_ListV.MultiSelect = false;
 			Knjige_ListV.Name = "Knjige_ListV";
 			Knjige_ListV.Size = new System.Drawing.Size(773, 139);
-			Knjige_ListV.TabIndex = 0;
+			Knjige_ListV.TabIndex = 1;
 			Knjige_ListV.UseCompatibleStateImageBehavior = false;
 			Knjige_ListV.View = View.Details;
 			Knjige_ListV.SelectedIndexChanged += Knjige_ListV_SelectedIndexChanged;
@@ -250,7 +250,7 @@
 			IzmeniKnjigu_GB.Location = new System.Drawing.Point(91, 585);
 			IzmeniKnjigu_GB.Name = "IzmeniKnjigu_GB";
 			IzmeniKnjigu_GB.Size = new System.Drawing.Size(202, 164);
-			IzmeniKnjigu_GB.TabIndex = 4;
+			IzmeniKnjigu_GB.TabIndex = 1;
 			IzmeniKnjigu_GB.TabStop = false;
 			IzmeniKnjigu_GB.Text = "Izmeni - Knjige";
 			// 
@@ -261,7 +261,7 @@
 			IzmeniKnjigu_Btn.Location = new System.Drawing.Point(34, 69);
 			IzmeniKnjigu_Btn.Name = "IzmeniKnjigu_Btn";
 			IzmeniKnjigu_Btn.Size = new System.Drawing.Size(132, 33);
-			IzmeniKnjigu_Btn.TabIndex = 3;
+			IzmeniKnjigu_Btn.TabIndex = 1;
 			IzmeniKnjigu_Btn.Text = "Izmeni knjigu";
 			IzmeniKnjigu_Btn.UseVisualStyleBackColor = false;
 			IzmeniKnjigu_Btn.Click += IzmeniKnjigu_Btn_Click;
@@ -273,7 +273,7 @@
 			DodajKnjigu_Btn.Location = new System.Drawing.Point(34, 26);
 			DodajKnjigu_Btn.Name = "DodajKnjigu_Btn";
 			DodajKnjigu_Btn.Size = new System.Drawing.Size(132, 33);
-			DodajKnjigu_Btn.TabIndex = 2;
+			DodajKnjigu_Btn.TabIndex = 0;
 			DodajKnjigu_Btn.Text = "Dodaj knjigu";
 			DodajKnjigu_Btn.UseVisualStyleBackColor = false;
 			DodajKnjigu_Btn.Click += DodajKnjigu_Btn_Click;
@@ -285,7 +285,7 @@
 			ObrisiKnjigu_Btn.Location = new System.Drawing.Point(34, 112);
 			ObrisiKnjigu_Btn.Name = "ObrisiKnjigu_Btn";
 			ObrisiKnjigu_Btn.Size = new System.Drawing.Size(132, 33);
-			ObrisiKnjigu_Btn.TabIndex = 4;
+			ObrisiKnjigu_Btn.TabIndex = 2;
 			ObrisiKnjigu_Btn.Text = "Obrisi knjigu";
 			ObrisiKnjigu_Btn.UseVisualStyleBackColor = false;
 			ObrisiKnjigu_Btn.Click += ObrisiKnjigu_Btn_Click;
@@ -299,7 +299,7 @@
 			IzmeniRad_GB.Location = new System.Drawing.Point(507, 585);
 			IzmeniRad_GB.Name = "IzmeniRad_GB";
 			IzmeniRad_GB.Size = new System.Drawing.Size(202, 164);
-			IzmeniRad_GB.TabIndex = 5;
+			IzmeniRad_GB.TabIndex = 3;
 			IzmeniRad_GB.TabStop = false;
 			IzmeniRad_GB.Text = "Izmeni - Radovi";
 			// 
@@ -310,7 +310,7 @@
 			IzmeniRad_Btn.Location = new System.Drawing.Point(34, 69);
 			IzmeniRad_Btn.Name = "IzmeniRad_Btn";
 			IzmeniRad_Btn.Size = new System.Drawing.Size(132, 33);
-			IzmeniRad_Btn.TabIndex = 3;
+			IzmeniRad_Btn.TabIndex = 1;
 			IzmeniRad_Btn.Text = "Izmeni rad";
 			IzmeniRad_Btn.UseVisualStyleBackColor = false;
 			IzmeniRad_Btn.Click += IzmeniRad_Btn_Click;
@@ -322,7 +322,7 @@
 			DodajRad_Btn.Location = new System.Drawing.Point(34, 26);
 			DodajRad_Btn.Name = "DodajRad_Btn";
 			DodajRad_Btn.Size = new System.Drawing.Size(132, 33);
-			DodajRad_Btn.TabIndex = 2;
+			DodajRad_Btn.TabIndex = 0;
 			DodajRad_Btn.Text = "Dodaj rad";
 			DodajRad_Btn.UseVisualStyleBackColor = false;
 			DodajRad_Btn.Click += DodajRad_Btn_Click;
@@ -334,7 +334,7 @@
 			ObrisiRad_Btn.Location = new System.Drawing.Point(34, 112);
 			ObrisiRad_Btn.Name = "ObrisiRad_Btn";
 			ObrisiRad_Btn.Size = new System.Drawing.Size(132, 33);
-			ObrisiRad_Btn.TabIndex = 4;
+			ObrisiRad_Btn.TabIndex = 2;
 			ObrisiRad_Btn.Text = "Obrisi rad";
 			ObrisiRad_Btn.UseVisualStyleBackColor = false;
 			ObrisiRad_Btn.Click += ObrisiRad_Btn_Click;
@@ -348,7 +348,7 @@
 			IzmeniClanak_GB.Location = new System.Drawing.Point(299, 585);
 			IzmeniClanak_GB.Name = "IzmeniClanak_GB";
 			IzmeniClanak_GB.Size = new System.Drawing.Size(202, 164);
-			IzmeniClanak_GB.TabIndex = 6;
+			IzmeniClanak_GB.TabIndex = 2;
 			IzmeniClanak_GB.TabStop = false;
 			IzmeniClanak_GB.Text = "Izmeni - Clanci u casopisu";
 			// 
@@ -359,7 +359,7 @@
 			IzmeniClanak_Btn.Location = new System.Drawing.Point(34, 69);
 			IzmeniClanak_Btn.Name = "IzmeniClanak_Btn";
 			IzmeniClanak_Btn.Size = new System.Drawing.Size(132, 33);
-			IzmeniClanak_Btn.TabIndex = 3;
+			IzmeniClanak_Btn.TabIndex = 1;
 			IzmeniClanak_Btn.Text = "Izmeni clanak";
 			IzmeniClanak_Btn.UseVisualStyleBackColor = false;
 			IzmeniClanak_Btn.Click += IzmeniClanak_Btn_Click;
@@ -371,7 +371,7 @@
 			DodajClanak_Btn.Location = new System.Drawing.Point(34, 26);
 			DodajClanak_Btn.Name = "DodajClanak_Btn";
 			DodajClanak_Btn.Size = new System.Drawing.Size(132, 33);
-			DodajClanak_Btn.TabIndex = 2;
+			DodajClanak_Btn.TabIndex = 0;
 			DodajClanak_Btn.Text = "Dodaj clanak";
 			DodajClanak_Btn.UseVisualStyleBackColor = false;
 			DodajClanak_Btn.Click += DodajClanak_Btn_Click;
@@ -383,7 +383,7 @@
 			ObrisiClanak_Btn.Location = new System.Drawing.Point(34, 112);
 			ObrisiClanak_Btn.Name = "ObrisiClanak_Btn";
 			ObrisiClanak_Btn.Size = new System.Drawing.Size(132, 33);
-			ObrisiClanak_Btn.TabIndex = 4;
+			ObrisiClanak_Btn.TabIndex = 2;
 			ObrisiClanak_Btn.Text = "Obrisi clanak";
 			ObrisiClanak_Btn.UseVisualStyleBackColor = false;
 			ObrisiClanak_Btn.Click += ObrisiClanak_Btn_Click;

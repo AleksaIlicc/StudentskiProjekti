@@ -21,7 +21,7 @@ public partial class Literature : Form
 
 		foreach (KnjigaPregled k in knjige)
 		{
-			ListViewItem item = new ListViewItem(new string[] { k.ISBN, k.Naziv, k.Izdavac, k.GodinaIzdanja.ToString() });
+			ListViewItem item = new ListViewItem(new string[] { k.ISBN, k.Naziv, k.Izdavac, k.GodinaIzdanja.ToString() == "0" ? null : k.GodinaIzdanja.ToString() });
 			Knjige_ListV.Items.Add(item);
 		}
 
@@ -44,7 +44,7 @@ public partial class Literature : Form
 
 		foreach (ClanakUCasopisuPregled c in casopisi)
 		{
-			ListViewItem item = new ListViewItem(new string[] { c.ISSN, c.Naziv, c.ImeCasopisa, c.Broj.ToString(), c.Godina.ToString() });
+			ListViewItem item = new ListViewItem(new string[] { c.ISSN, c.Naziv, c.ImeCasopisa, c.Broj.ToString() == "0" ? null : c.Broj.ToString(), c.Godina.ToString() == "0" ? null : c.Godina.ToString() });
 			Clanci_ListV.Items.Add(item);
 		}
 

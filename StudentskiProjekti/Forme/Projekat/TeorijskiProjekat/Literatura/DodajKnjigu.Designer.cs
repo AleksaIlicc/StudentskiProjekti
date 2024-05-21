@@ -29,6 +29,8 @@
 		private void InitializeComponent()
 		{
 			OsnovnipodaciopredmetuGB = new GroupBox();
+			Autori_TB = new TextBox();
+			label6 = new Label();
 			Dodaj_Btn = new Button();
 			GodinaIzdanja_TB = new TextBox();
 			Naziv_TB = new TextBox();
@@ -38,8 +40,6 @@
 			label3 = new Label();
 			label2 = new Label();
 			label1 = new Label();
-			Autori_TB = new TextBox();
-			label6 = new Label();
 			OsnovnipodaciopredmetuGB.SuspendLayout();
 			SuspendLayout();
 			// 
@@ -64,13 +64,32 @@
 			OsnovnipodaciopredmetuGB.TabStop = false;
 			OsnovnipodaciopredmetuGB.Text = "Podaci o knjizi";
 			// 
+			// Autori_TB
+			// 
+			Autori_TB.Location = new System.Drawing.Point(109, 101);
+			Autori_TB.Multiline = true;
+			Autori_TB.Name = "Autori_TB";
+			Autori_TB.Size = new System.Drawing.Size(217, 42);
+			Autori_TB.TabIndex = 2;
+			Autori_TB.KeyPress += Autori_TB_KeyPress;
+			// 
+			// label6
+			// 
+			label6.AutoSize = true;
+			label6.Font = new System.Drawing.Font("Georgia", 9F);
+			label6.Location = new System.Drawing.Point(6, 104);
+			label6.Name = "label6";
+			label6.Size = new System.Drawing.Size(55, 15);
+			label6.TabIndex = 10;
+			label6.Text = "Autor/i:";
+			// 
 			// Dodaj_Btn
 			// 
 			Dodaj_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
 			Dodaj_Btn.Location = new System.Drawing.Point(202, 225);
 			Dodaj_Btn.Name = "Dodaj_Btn";
 			Dodaj_Btn.Size = new System.Drawing.Size(124, 29);
-			Dodaj_Btn.TabIndex = 4;
+			Dodaj_Btn.TabIndex = 5;
 			Dodaj_Btn.Text = "Dodaj";
 			Dodaj_Btn.UseVisualStyleBackColor = false;
 			Dodaj_Btn.Click += Dodaj_Btn_Click;
@@ -80,7 +99,8 @@
 			GodinaIzdanja_TB.Location = new System.Drawing.Point(109, 186);
 			GodinaIzdanja_TB.Name = "GodinaIzdanja_TB";
 			GodinaIzdanja_TB.Size = new System.Drawing.Size(217, 21);
-			GodinaIzdanja_TB.TabIndex = 3;
+			GodinaIzdanja_TB.TabIndex = 4;
+			GodinaIzdanja_TB.KeyPress += Godina_TB_KeyPress;
 			// 
 			// Naziv_TB
 			// 
@@ -95,13 +115,14 @@
 			ISBN_TB.Name = "ISBN_TB";
 			ISBN_TB.Size = new System.Drawing.Size(217, 21);
 			ISBN_TB.TabIndex = 0;
+			ISBN_TB.KeyPress += ISSN_TB_KeyPress;
 			// 
 			// Izdavac_TB
 			// 
 			Izdavac_TB.Location = new System.Drawing.Point(109, 154);
 			Izdavac_TB.Name = "Izdavac_TB";
 			Izdavac_TB.Size = new System.Drawing.Size(217, 21);
-			Izdavac_TB.TabIndex = 2;
+			Izdavac_TB.TabIndex = 3;
 			// 
 			// label4
 			// 
@@ -142,24 +163,6 @@
 			label1.Size = new System.Drawing.Size(40, 15);
 			label1.TabIndex = 0;
 			label1.Text = "ISBN:";
-			// 
-			// Autori_TB
-			// 
-			Autori_TB.Location = new System.Drawing.Point(109, 101);
-			Autori_TB.Multiline = true;
-			Autori_TB.Name = "Autori_TB";
-			Autori_TB.Size = new System.Drawing.Size(217, 42);
-			Autori_TB.TabIndex = 11;
-			// 
-			// label6
-			// 
-			label6.AutoSize = true;
-			label6.Font = new System.Drawing.Font("Georgia", 9F);
-			label6.Location = new System.Drawing.Point(6, 104);
-			label6.Name = "label6";
-			label6.Size = new System.Drawing.Size(55, 15);
-			label6.TabIndex = 10;
-			label6.Text = "Autor/i:";
 			// 
 			// DodajKnjigu
 			// 

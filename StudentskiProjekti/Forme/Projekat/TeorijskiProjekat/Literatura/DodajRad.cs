@@ -1,4 +1,7 @@
-﻿using static StudentskiProjekti.DTOs;
+﻿using System;
+using System.Security.Policy;
+using System.Text.RegularExpressions;
+using static StudentskiProjekti.DTOs;
 namespace StudentskiProjekti.Forme;
 public partial class DodajRad : Form
 {
@@ -31,6 +34,17 @@ public partial class DodajRad : Form
 
 		if (result == DialogResult.OK)
 		{
+			if (string.IsNullOrEmpty(Naziv_TB.Text))
+			{
+				MessageBox.Show("Morate uneti naziv rada!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+			
+			if (!string.IsNullOrEmpty(URL_TB.Text) && !IsValidUrl(URL_TB.Text))
+			{
+				MessageBox.Show("Uneti URL nije validan!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
 
 			rad.Naziv = Naziv_TB.Text;
 			rad.Url = URL_TB.Text;
@@ -49,8 +63,22 @@ public partial class DodajRad : Form
 			}
 
 			DTOManager.DodajRad(projekatId, rad, autori);
-			MessageBox.Show("Uspesno ste dodali novi clanak!");
+			MessageBox.Show("Uspesno ste dodali novi rad!");
 			this.Close();
 		}
+	}
+
+	private void Autori_TB_KeyPress(object sender, KeyPressEventArgs e)
+	{
+		if (!char.IsLetter(e.KeyChar) && e.KeyChar != ' ' && e.KeyChar != (char)Keys.Enter && !char.IsControl(e.KeyChar))
+		{
+			e.Handled = true;
+		}
+	}
+
+	private bool IsValidUrl(string url)
+	{
+		return Uri.TryCreate(url, UriKind.Absolute, out Uri uriResult)
+			   && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
 	}
 }

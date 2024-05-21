@@ -17,8 +17,7 @@ public partial class IzmeniRad : Form
 		Naziv_TB.Text = rad.Naziv;
 		URL_TB.Text = rad.Url;
 		KonfObjavljivanja_TB.Text = rad.KonferencijaObjavljivanja;
-		string autoriText = string.Join("\r\n", autori.Select(a => a.Autor));
-		Autori_TB.Text = autoriText;
+		Autori_TB.Text = string.Join("\r\n", autori.Select(a => a.Autor));
 	}
 
 	private void IzmeniRad_Load(object sender, EventArgs e)
@@ -42,6 +41,18 @@ public partial class IzmeniRad : Form
 		DialogResult result = MessageBox.Show(poruka, title, buttons);
 		if (result == DialogResult.OK)
 		{
+			if (string.IsNullOrEmpty(Naziv_TB.Text))
+			{
+				MessageBox.Show("Morate uneti naziv rada!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			if (!string.IsNullOrEmpty(URL_TB.Text) && !IsValidUrl(URL_TB.Text))
+			{
+				MessageBox.Show("Uneti URL nije validan!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
 			rad.Naziv = Naziv_TB.Text.Trim();
 			rad.Url = URL_TB.Text.Trim();
 			rad.KonferencijaObjavljivanja = KonfObjavljivanja_TB.Text.Trim();
@@ -58,8 +69,22 @@ public partial class IzmeniRad : Form
 				azuriraniAutori.Add(noviAutor);
 			}
 			DTOManager.AzurirajRadSaAutorima(rad, azuriraniAutori);
-			MessageBox.Show("Azuriranje clanka u casopisu je uspesno izvrseno!");
+			MessageBox.Show("Azuriranje rada je uspesno izvrseno!");
 			this.Close();
 		}
+	}
+
+	private void Autori_TB_KeyPress(object sender, KeyPressEventArgs e)
+	{
+		if (!char.IsLetter(e.KeyChar) && e.KeyChar != ' ' && e.KeyChar != (char)Keys.Enter && !char.IsControl(e.KeyChar))
+		{
+			e.Handled = true;
+		}
+	}
+
+	private bool IsValidUrl(string url)
+	{
+		return Uri.TryCreate(url, UriKind.Absolute, out Uri uriResult)
+			   && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
 	}
 }
