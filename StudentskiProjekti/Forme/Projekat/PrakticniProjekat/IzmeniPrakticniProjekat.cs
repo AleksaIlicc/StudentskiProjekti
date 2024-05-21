@@ -2,25 +2,28 @@
 namespace StudentskiProjekti.Forme;
 public partial class IzmeniPrakticniProjekat : Form
 {
-
     PrakticniProjekatPregled projekat;
+    List<PreporucenaWebStranicaPregled> webStranice;
     public IzmeniPrakticniProjekat(PrakticniProjekatPregled p)
     {
         InitializeComponent();
         projekat = p;
+        webStranice = DTOManager.VratiPreporuceneWebStranicePProjekta(projekat.Id);
     }
 
     private void IzmeniPrakticniProjekat_Load(object sender, EventArgs e)
     {
         PopuniPodacima();
     }
+
     public void PopuniPodacima()
     {
         Naziv_TB.Text = projekat.Naziv;
         SkoslaGodIzdavanja_TB.Text = projekat.SkolskaGodinaZadavanja;
         PreporuceniProgJezik_TB.Text = projekat.PreporuceniProgramskiJezik;
-
-        if (projekat.TipProjekta == "grupni")
+        KratakOpis_TB.Text = projekat.KratakOpis;
+		PrepWebStranice_TB.Text = string.Join("\r\n", webStranice.Select(a => a.Naziv));
+		if (projekat.TipProjekta == "grupni")
         {
             Grupni_RB.Checked = true;
         }
@@ -29,6 +32,7 @@ public partial class IzmeniPrakticniProjekat : Form
             Pojedinacni_RB.Checked = true;
         }
     }
+
     private void Izmeni_Btn_Click(object sender, EventArgs e)
     {
         string poruka = "Da li zelite da izvrsite izmene projekta?";
@@ -39,22 +43,17 @@ public partial class IzmeniPrakticniProjekat : Form
         {
             if (string.IsNullOrEmpty(Naziv_TB.Text))
             {
-                MessageBox.Show("Morate uneti naziv prakticnog projekta!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Morate uneti naziv projekta!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             if (string.IsNullOrEmpty(SkoslaGodIzdavanja_TB.Text))
             {
-                MessageBox.Show("Morate uneti skolsku godinu zadavanja prakticnog projekta!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Morate uneti skolsku godinu zadavanja projekta!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (string.IsNullOrEmpty(PreporuceniProgJezik_TB.Text))
-            {
-                MessageBox.Show("Morate uneti preporuceni programski jezik pre zadavanja prakticnog projekta!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (Grupni_RB.Checked == false && Pojedinacni_RB.Checked == false)
+            if (!Grupni_RB.Checked && !Pojedinacni_RB.Checked)
             {
                 MessageBox.Show("Morate izabrati tip projekta!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -72,8 +71,19 @@ public partial class IzmeniPrakticniProjekat : Form
             {
                 projekat.TipProjekta = "pojedinacni";
             }
+			projekat.KratakOpis = KratakOpis_TB.Text.Trim();
 
-            DTOManager.AzurirajPrakticniProjekat(projekat);
+			List<PreporucenaWebStranicaPregled> stranice = new List<PreporucenaWebStranicaPregled>();
+
+			string[] unosiStranica = PrepWebStranice_TB.Text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+
+			foreach (string unosStranice in unosiStranica)
+			{
+				PreporucenaWebStranicaPregled novaStranica = new PreporucenaWebStranicaPregled(unosStranice.Trim());
+				stranice.Add(novaStranica);
+			}
+
+			DTOManager.AzurirajPrakticniProjekatSaStranicama(projekat, stranice);
             MessageBox.Show("Azuriranje prakticnog projekta je uspesno izvrseno!");
             this.Close();
         }

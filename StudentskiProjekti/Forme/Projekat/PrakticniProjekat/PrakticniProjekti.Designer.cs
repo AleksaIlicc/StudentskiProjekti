@@ -73,7 +73,7 @@
 			PrakticniProjekti_GB.Location = new System.Drawing.Point(8, 12);
 			PrakticniProjekti_GB.Name = "PrakticniProjekti_GB";
 			PrakticniProjekti_GB.Size = new System.Drawing.Size(785, 378);
-			PrakticniProjekti_GB.TabIndex = 3;
+			PrakticniProjekti_GB.TabIndex = 0;
 			PrakticniProjekti_GB.TabStop = false;
 			PrakticniProjekti_GB.Text = "Prakticni Projekti";
 			// 
@@ -129,6 +129,7 @@
 			// columnHeader5
 			// 
 			columnHeader5.Text = "Preporuceni prog. jezik";
+			columnHeader5.TextAlign = HorizontalAlignment.Center;
 			columnHeader5.Width = 150;
 			// 
 			// IzmeniProjekte_GB
@@ -140,7 +141,7 @@
 			IzmeniProjekte_GB.Location = new System.Drawing.Point(8, 408);
 			IzmeniProjekte_GB.Name = "IzmeniProjekte_GB";
 			IzmeniProjekte_GB.Size = new System.Drawing.Size(185, 164);
-			IzmeniProjekte_GB.TabIndex = 5;
+			IzmeniProjekte_GB.TabIndex = 1;
 			IzmeniProjekte_GB.TabStop = false;
 			IzmeniProjekte_GB.Text = "Izmeni";
 			// 
@@ -151,7 +152,7 @@
 			IzmeniProjekatP_Btn.Location = new System.Drawing.Point(23, 73);
 			IzmeniProjekatP_Btn.Name = "IzmeniProjekatP_Btn";
 			IzmeniProjekatP_Btn.Size = new System.Drawing.Size(132, 33);
-			IzmeniProjekatP_Btn.TabIndex = 4;
+			IzmeniProjekatP_Btn.TabIndex = 1;
 			IzmeniProjekatP_Btn.Text = "Izmeni projekat";
 			IzmeniProjekatP_Btn.UseVisualStyleBackColor = false;
 			IzmeniProjekatP_Btn.Click += IzmeniProjekatP_Btn_Click;
@@ -163,7 +164,7 @@
 			DodajProjekatP_Btn.Location = new System.Drawing.Point(23, 28);
 			DodajProjekatP_Btn.Name = "DodajProjekatP_Btn";
 			DodajProjekatP_Btn.Size = new System.Drawing.Size(132, 33);
-			DodajProjekatP_Btn.TabIndex = 3;
+			DodajProjekatP_Btn.TabIndex = 0;
 			DodajProjekatP_Btn.Text = "Dodaj projekat";
 			DodajProjekatP_Btn.UseVisualStyleBackColor = false;
 			DodajProjekatP_Btn.Click += DodajProjekatP_Btn_Click;
@@ -175,7 +176,7 @@
 			ObrisiProjekatP_Btn.Location = new System.Drawing.Point(23, 116);
 			ObrisiProjekatP_Btn.Name = "ObrisiProjekatP_Btn";
 			ObrisiProjekatP_Btn.Size = new System.Drawing.Size(132, 33);
-			ObrisiProjekatP_Btn.TabIndex = 5;
+			ObrisiProjekatP_Btn.TabIndex = 2;
 			ObrisiProjekatP_Btn.Text = "Obrisi projekat";
 			ObrisiProjekatP_Btn.UseVisualStyleBackColor = false;
 			ObrisiProjekatP_Btn.Click += ObrisiProjekatP_Btn_Click;
@@ -187,7 +188,7 @@
 			button1.Location = new System.Drawing.Point(621, 517);
 			button1.Name = "button1";
 			button1.Size = new System.Drawing.Size(167, 55);
-			button1.TabIndex = 6;
+			button1.TabIndex = 3;
 			button1.Text = "Prikazi studente koji rade na projektu";
 			button1.UseVisualStyleBackColor = false;
 			// 
@@ -204,7 +205,7 @@
 			PrikazProjekta_GB.Location = new System.Drawing.Point(212, 408);
 			PrikazProjekta_GB.Name = "PrikazProjekta_GB";
 			PrikazProjekta_GB.Size = new System.Drawing.Size(391, 164);
-			PrikazProjekta_GB.TabIndex = 7;
+			PrikazProjekta_GB.TabIndex = 2;
 			PrikazProjekta_GB.TabStop = false;
 			PrikazProjekta_GB.Text = "Prikaz";
 			// 
@@ -222,7 +223,7 @@
 			textBox1.Location = new System.Drawing.Point(198, 92);
 			textBox1.Name = "textBox1";
 			textBox1.Size = new System.Drawing.Size(181, 21);
-			textBox1.TabIndex = 10;
+			textBox1.TabIndex = 2;
 			// 
 			// Tip_GB
 			// 
@@ -231,7 +232,7 @@
 			Tip_GB.Location = new System.Drawing.Point(198, 13);
 			Tip_GB.Name = "Tip_GB";
 			Tip_GB.Size = new System.Drawing.Size(181, 30);
-			Tip_GB.TabIndex = 4;
+			Tip_GB.TabIndex = 0;
 			Tip_GB.TabStop = false;
 			// 
 			// Pojedinacni_RB
@@ -270,7 +271,7 @@
 			Ocisti_Btn.Location = new System.Drawing.Point(253, 124);
 			Ocisti_Btn.Name = "Ocisti_Btn";
 			Ocisti_Btn.Size = new System.Drawing.Size(60, 25);
-			Ocisti_Btn.TabIndex = 7;
+			Ocisti_Btn.TabIndex = 3;
 			Ocisti_Btn.Text = "Ocisti";
 			Ocisti_Btn.UseVisualStyleBackColor = false;
 			// 
@@ -281,7 +282,7 @@
 			Sortiraj_Btn.Location = new System.Drawing.Point(319, 124);
 			Sortiraj_Btn.Name = "Sortiraj_Btn";
 			Sortiraj_Btn.Size = new System.Drawing.Size(60, 25);
-			Sortiraj_Btn.TabIndex = 8;
+			Sortiraj_Btn.TabIndex = 4;
 			Sortiraj_Btn.Text = "Sortiraj";
 			Sortiraj_Btn.UseVisualStyleBackColor = false;
 			// 
@@ -299,7 +300,7 @@
 			SkoslkaGodZad_TB.Location = new System.Drawing.Point(198, 58);
 			SkoslkaGodZad_TB.Name = "SkoslkaGodZad_TB";
 			SkoslkaGodZad_TB.Size = new System.Drawing.Size(181, 21);
-			SkoslkaGodZad_TB.TabIndex = 6;
+			SkoslkaGodZad_TB.TabIndex = 1;
 			// 
 			// PrakticniProjekti
 			// 

@@ -49,7 +49,7 @@ public partial class Projekti : Form
 		string tipProjekta = Grupni_RB.Checked ? "grupni" : Pojedinacni_RB.Checked ? "pojedinacni" : "";
 		string skolskaGodina = SkoslkaGodZad_TB.Text;
 
-		IList<ProjekatPregled> projekti = DTOManager.VratiSortiraneProjekteZaPredmet(izabraniPredmet.Id, vrstaProjekta, tipProjekta, skolskaGodina);
+		List<ProjekatPregled> projekti = DTOManager.VratiSortiraneProjekteZaPredmet(izabraniPredmet.Id, vrstaProjekta, tipProjekta, skolskaGodina);
 
 		Projekti_ListV.Items.Clear();
 		foreach (ProjekatPregled p in projekti)

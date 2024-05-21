@@ -73,7 +73,7 @@
 			Obrisi_Btn.Location = new System.Drawing.Point(304, 353);
 			Obrisi_Btn.Name = "Obrisi_Btn";
 			Obrisi_Btn.Size = new System.Drawing.Size(132, 33);
-			Obrisi_Btn.TabIndex = 1;
+			Obrisi_Btn.TabIndex = 2;
 			Obrisi_Btn.Text = "Obrisi stranicu";
 			Obrisi_Btn.UseVisualStyleBackColor = false;
 			Obrisi_Btn.Click += Obrisi_Btn_Click;
@@ -85,7 +85,7 @@
 			Dodaj_Btn.Location = new System.Drawing.Point(166, 353);
 			Dodaj_Btn.Name = "Dodaj_Btn";
 			Dodaj_Btn.Size = new System.Drawing.Size(132, 33);
-			Dodaj_Btn.TabIndex = 2;
+			Dodaj_Btn.TabIndex = 1;
 			Dodaj_Btn.Text = "Dodaj stranicu";
 			Dodaj_Btn.UseVisualStyleBackColor = false;
 			Dodaj_Btn.Click += Dodaj_Btn_Click;

@@ -468,9 +468,9 @@ public class DTOManager
         return projektiPregled;
     }
 
-    public static IList<ProjekatPregled> VratiSortiraneProjekteZaPredmet(string idPredmeta, string vrstaProjekta, string tipProjekta, string skolskaGodina)
+    public static List<ProjekatPregled> VratiSortiraneProjekteZaPredmet(string idPredmeta, string vrstaProjekta, string tipProjekta, string skolskaGodina)
     {
-        IList<ProjekatPregled> projektiPregled = new List<ProjekatPregled>();
+        List<ProjekatPregled> projektiPregled = new List<ProjekatPregled>();
         try
         {
             ISession s = DataLayer.GetSession();
@@ -1473,7 +1473,7 @@ public class DTOManager
 
 	public static List<PrakticniProjekatPregled> VratiPrakticneProjekteZaPredmet(string idPredmeta)
     {
-        List<PrakticniProjekatPregled> projekti = new List<PrakticniProjekatPregled>();
+        List<PrakticniProjekatPregled> projekti = [];
         try
         {
             ISession s = DataLayer.GetSession();
@@ -1505,10 +1505,9 @@ public class DTOManager
         {
             ISession s = DataLayer.GetSession();
 
-            var prakticniProjekat = s.Query<PrakticniProjekat>()
+            kratakOpis = s.Query<PrakticniProjekat>()
                                       .Where(p => p.Id == idProjekta)
-                                      .FirstOrDefault();
-            kratakOpis = prakticniProjekat.KratakOpis;
+                                      .FirstOrDefault().KratakOpis;
 
             s.Close();
         }
@@ -1520,9 +1519,9 @@ public class DTOManager
         return kratakOpis;
     }
 
-    public static IList<PreporucenaWebStranicaPregled> VratiPreporuceneWebStranicePProjekta(int idProjekta)
+    public static List<PreporucenaWebStranicaPregled> VratiPreporuceneWebStranicePProjekta(int idProjekta)
     {
-        List<PreporucenaWebStranicaPregled> finalStranice = new List<PreporucenaWebStranicaPregled>();
+        List<PreporucenaWebStranicaPregled> finalStranice = [];
         try
         {
             ISession s = DataLayer.GetSession();
@@ -1547,19 +1546,13 @@ public class DTOManager
         return finalStranice;
     }
 
-    public static void DodajPrakticniProjekat(PrakticniProjekatPregled p)
+    public static void DodajPrakticniProjekat(PrakticniProjekatPregled p, List<PreporucenaWebStranicaPregled> stranice)
     {
         try
         {
             ISession s = DataLayer.GetSession();
 
-            Predmet pred = new Predmet
-            {
-                Id = p.PripadaPredmetu.Id,
-                Naziv = p.PripadaPredmetu.Naziv,
-                Semestar = p.PripadaPredmetu.Semestar,
-                Katedra = p.PripadaPredmetu.Katedra,
-            };
+            Predmet pred = s.Load<Predmet>(p.PripadaPredmetu.Id);
 
             PrakticniProjekat o = new PrakticniProjekat()
             {
@@ -1568,9 +1561,20 @@ public class DTOManager
                 PreporuceniProgramskiJezik = p.PreporuceniProgramskiJezik,
                 VrstaProjekta = p.VrstaProjekta,
                 TipProjekta = p.TipProjekta,
-                PripadaPredmetu = pred,
+                KratakOpis = p.KratakOpis,
+                PripadaPredmetu = pred
             };
-            s.Save(o);
+
+			List<PProjektiWebStranice> prepStranice = [];
+
+			foreach (var stranica in stranice)
+			{
+				prepStranice.Add(new PProjektiWebStranice() { PreporucenaWebStrana = stranica.Naziv, PProjekat = o });
+			}
+
+            o.PreporuceneWebStranice = prepStranice;
+
+			s.Save(o);
 
             s.Flush();
 
@@ -1602,31 +1606,64 @@ public class DTOManager
         }
     }
 
-    public static void AzurirajPrakticniProjekat(PrakticniProjekatPregled p)
-    {
-        try
+	private static void AzurirajPrakticniProjekat(PrakticniProjekatPregled p, ISession s)
+	{
+		PrakticniProjekat o = s.Load<PrakticniProjekat>(p.Id);
+		o.Naziv = p.Naziv;
+		o.SkolskaGodinaZadavanja = p.SkolskaGodinaZadavanja;
+		o.PreporuceniProgramskiJezik = p.PreporuceniProgramskiJezik;
+		o.TipProjekta = p.TipProjekta;
+        o.KratakOpis = p.KratakOpis;
+
+		s.SaveOrUpdate(o);
+	}
+
+	private static void AzurirajStranicePrakticnogProjekta(int id, List<PreporucenaWebStranicaPregled> stranice, ISession s)
+	{
+		var projekat = s.Load<PrakticniProjekat>(id);
+
+        foreach (var postojecaStranica in projekat.PreporuceneWebStranice)
         {
-            ISession s = DataLayer.GetSession();
-
-            PrakticniProjekat o = s.Load<PrakticniProjekat>(p.Id);
-            o.Naziv = p.Naziv;
-            o.SkolskaGodinaZadavanja = p.SkolskaGodinaZadavanja;
-            o.PreporuceniProgramskiJezik = p.PreporuceniProgramskiJezik;
-            o.TipProjekta = p.TipProjekta;
-
-
-            s.SaveOrUpdate(o);
-            s.Flush();
-
-            s.Close();
+            s.Delete(postojecaStranica);
         }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.Message);
-        }
-    }
 
-    public static PrakticniProjekatPregled VratiPrakticniProjekat(int id)
+        List<PProjektiWebStranice> noveStranice = [];
+		foreach (var stranica in stranice)
+		{
+			noveStranice.Add(new PProjektiWebStranice() { PreporucenaWebStrana= stranica.Naziv, PProjekat = projekat});
+		}
+
+        projekat.PreporuceneWebStranice = noveStranice;
+
+		s.Update(projekat);
+	}
+
+	public static void AzurirajPrakticniProjekatSaStranicama(PrakticniProjekatPregled p, List<PreporucenaWebStranicaPregled> stranice)
+	{
+		try
+		{
+			using ISession s = DataLayer.GetSession();
+			using ITransaction t = s.BeginTransaction();
+			try
+			{
+				AzurirajPrakticniProjekat(p, s);
+				AzurirajStranicePrakticnogProjekta(p.Id, stranice, s);
+
+				t.Commit();
+			}
+			catch (Exception ex)
+			{
+				t.Rollback();
+				Console.WriteLine(ex.Message);
+			}
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e.Message);
+		}
+	}
+
+	public static PrakticniProjekatPregled VratiPrakticniProjekat(int id)
     {
         PrakticniProjekatPregled p = null;
         try
@@ -1692,6 +1729,7 @@ public class DTOManager
 			Console.WriteLine(e.Message);
 		}
 	}
+
     public static string VratiOdabraniProgJezik(int idproj, string idstud)
     {
         string odabranijezik = null;

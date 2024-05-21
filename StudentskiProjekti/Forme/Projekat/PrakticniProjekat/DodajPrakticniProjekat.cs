@@ -17,20 +17,51 @@ public partial class DodajPrakticniProjekat : Form
 
         if (result == DialogResult.OK)
         {
-            this.projekat.Naziv = Naziv_TB.Text;
-            this.projekat.SkolskaGodinaZadavanja = SkoslaGodIzdavanja_TB.Text;
+			if (string.IsNullOrEmpty(Naziv_TB.Text))
+			{
+				MessageBox.Show("Morate uneti naziv projekta!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			if (string.IsNullOrEmpty(SkolskaGodIzdavanja_TB.Text))
+			{
+				MessageBox.Show("Morate uneti skolsku godinu zadavanja projekta!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			if (!Pojedinacni_RB.Checked && !Grupni_RB.Checked)
+            {
+				MessageBox.Show("Morate odabrati da li je projekat pojedinačni ili grupni!!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			projekat.Naziv = Naziv_TB.Text.Trim();
+            projekat.SkolskaGodinaZadavanja = SkolskaGodIzdavanja_TB.Text.Trim();
+
             if (Pojedinacni_RB.Checked)
             {
-                this.projekat.TipProjekta = "pojedinacni";
+                projekat.TipProjekta = "pojedinacni";
             }
             else if (Grupni_RB.Checked)
             {
-                this.projekat.TipProjekta = "grupni";
+                projekat.TipProjekta = "grupni";
             }
-            this.projekat.PreporuceniProgramskiJezik = PreporuceniProgJezik_TB.Text;
-            this.projekat.VrstaProjekta = "prakticni";
 
-            DTOManager.DodajPrakticniProjekat(projekat);
+            projekat.PreporuceniProgramskiJezik = PreporuceniProgJezik_TB.Text.Trim();
+            projekat.VrstaProjekta = "prakticni";
+            projekat.KratakOpis = KratakOpis_TB.Text.Trim();
+
+			List<PreporucenaWebStranicaPregled> stranice = new List<PreporucenaWebStranicaPregled>();
+
+			string[] unosiStranica = PrepWebStranice_TB.Text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+
+			foreach (string unosStranice in unosiStranica)
+			{
+				PreporucenaWebStranicaPregled novaStranica = new PreporucenaWebStranicaPregled(unosStranice.Trim());
+				stranice.Add(novaStranica);
+			}
+
+			DTOManager.DodajPrakticniProjekat(projekat, stranice);
             MessageBox.Show("Uspesno ste dodali novi projekat!");
             this.Close();
         }

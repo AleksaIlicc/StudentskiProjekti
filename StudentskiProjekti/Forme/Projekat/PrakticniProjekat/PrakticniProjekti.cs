@@ -94,15 +94,15 @@ public partial class PrakticniProjekti : Form
         if (PrakticniProjekti_ListV.SelectedItems.Count == 0)
         {
             MessageBox.Show("Izaberite predmet za koji zelite da prikazete web stranice!");
+            return;
         }
-        else
+
+        int.TryParse(PrakticniProjekti_ListV.SelectedItems[0].Tag.ToString(), out int idProjekta);
+        PreporuceneWebStranice izmeniPproj = new PreporuceneWebStranice(idProjekta)
         {
-            int.TryParse(PrakticniProjekti_ListV.SelectedItems[0].Tag.ToString(), out int idProjekta);
-            PreporuceneWebStranice izmeniPproj = new PreporuceneWebStranice(idProjekta)
-            {
-                StartPosition = FormStartPosition.CenterParent
-            };
-            izmeniPproj.ShowDialog();
-        }
+            StartPosition = FormStartPosition.CenterParent
+        };
+        izmeniPproj.ShowDialog();
+
     }
 }

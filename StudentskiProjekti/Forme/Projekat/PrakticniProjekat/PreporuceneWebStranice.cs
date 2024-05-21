@@ -17,7 +17,7 @@ public partial class PreporuceneWebStranice : Form
 	private void PopuniPodacima()
 	{
 		Nazivi_ListV.Items.Clear();
-		IList<PreporucenaWebStranicaPregled> preporuceneStranice = DTOManager.VratiPreporuceneWebStranicePProjekta(projekatId);
+		List<PreporucenaWebStranicaPregled> preporuceneStranice = DTOManager.VratiPreporuceneWebStranicePProjekta(projekatId);
 
 		foreach (var s in preporuceneStranice)
 		{
