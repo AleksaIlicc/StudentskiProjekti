@@ -31,7 +31,7 @@
 			label1 = new Label();
 			label2 = new Label();
 			Naziv_TB = new TextBox();
-			SkoslaGodIzdavanja_TB = new TextBox();
+			SkolskaGodIzdavanja_TB = new TextBox();
 			Dodaj_Btn = new Button();
 			OsnovnipodaciopredmetuGB = new GroupBox();
 			MaxBrStranica_TB = new TextBox();
@@ -72,11 +72,11 @@
 			// 
 			// SkoslaGodIzdavanja_TB
 			// 
-			SkoslaGodIzdavanja_TB.Location = new System.Drawing.Point(158, 71);
-			SkoslaGodIzdavanja_TB.Name = "SkoslaGodIzdavanja_TB";
-			SkoslaGodIzdavanja_TB.Size = new System.Drawing.Size(217, 21);
-			SkoslaGodIzdavanja_TB.TabIndex = 1;
-			SkoslaGodIzdavanja_TB.KeyPress += SkoslaGodIzdavanja_TB_KeyPress;
+			SkolskaGodIzdavanja_TB.Location = new System.Drawing.Point(158, 71);
+			SkolskaGodIzdavanja_TB.Name = "SkoslaGodIzdavanja_TB";
+			SkolskaGodIzdavanja_TB.Size = new System.Drawing.Size(217, 21);
+			SkolskaGodIzdavanja_TB.TabIndex = 1;
+			SkolskaGodIzdavanja_TB.KeyPress += SkolskaGodIzdavanja_TB_KeyPress;
 			// 
 			// Dodaj_Btn
 			// 
@@ -84,7 +84,7 @@
 			Dodaj_Btn.Location = new System.Drawing.Point(218, 206);
 			Dodaj_Btn.Name = "Dodaj_Btn";
 			Dodaj_Btn.Size = new System.Drawing.Size(157, 29);
-			Dodaj_Btn.TabIndex = 5;
+			Dodaj_Btn.TabIndex = 4;
 			Dodaj_Btn.Text = "Dodaj";
 			Dodaj_Btn.UseVisualStyleBackColor = false;
 			Dodaj_Btn.Click += Dodaj_Btn_Click;
@@ -95,7 +95,7 @@
 			OsnovnipodaciopredmetuGB.Controls.Add(label4);
 			OsnovnipodaciopredmetuGB.Controls.Add(groupBox2);
 			OsnovnipodaciopredmetuGB.Controls.Add(Dodaj_Btn);
-			OsnovnipodaciopredmetuGB.Controls.Add(SkoslaGodIzdavanja_TB);
+			OsnovnipodaciopredmetuGB.Controls.Add(SkolskaGodIzdavanja_TB);
 			OsnovnipodaciopredmetuGB.Controls.Add(Naziv_TB);
 			OsnovnipodaciopredmetuGB.Controls.Add(label2);
 			OsnovnipodaciopredmetuGB.Controls.Add(label1);
@@ -134,7 +134,7 @@
 			groupBox2.Location = new System.Drawing.Point(8, 130);
 			groupBox2.Name = "groupBox2";
 			groupBox2.Size = new System.Drawing.Size(367, 57);
-			groupBox2.TabIndex = 12;
+			groupBox2.TabIndex = 3;
 			groupBox2.TabStop = false;
 			groupBox2.Text = "Tip";
 			// 
@@ -185,7 +185,7 @@
 		private Label label1;
         private Label label2;
         private TextBox Naziv_TB;
-        private TextBox SkoslaGodIzdavanja_TB;
+        private TextBox SkolskaGodIzdavanja_TB;
         private Button Dodaj_Btn;
         private GroupBox OsnovnipodaciopredmetuGB;
         private GroupBox groupBox2;

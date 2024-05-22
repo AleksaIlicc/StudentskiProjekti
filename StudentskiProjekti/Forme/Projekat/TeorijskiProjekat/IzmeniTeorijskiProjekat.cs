@@ -19,7 +19,7 @@ public partial class IzmeniTeorijskiProjekat : Form
     {
         Naziv_TB.Text = projekat.Naziv;
         SkoslaGodIzdavanja_TB.Text = projekat.SkolskaGodinaZadavanja;
-        MaxBrStrana_TB.Text = projekat.MaksBrojStrana.ToString();
+        MaxBrStrana_TB.Text = projekat.MaksBrojStrana.ToString() == "0" ? null : projekat.MaksBrojStrana.ToString();
 
         if (projekat.TipProjekta == "grupni")
         {
@@ -50,21 +50,24 @@ public partial class IzmeniTeorijskiProjekat : Form
                 return;
             }
 
-            int maksBrojStrana;
-            if (!int.TryParse(MaxBrStrana_TB.Text, out maksBrojStrana) || maksBrojStrana <= 0)
-            {
-                MessageBox.Show("Morate uneti ispravan broj za maksimalni broj strana (celobrojna vrednost veća od 0)!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (Grupni_RB.Checked == false && Pojedinacni_RB.Checked == false)
+			if (Grupni_RB.Checked == false && Pojedinacni_RB.Checked == false)
             {
                 MessageBox.Show("Morate izabrati tip projekta!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            projekat.Naziv = Naziv_TB.Text;
+			if (int.TryParse(MaxBrStrana_TB.Text, out int maksBrojStrana))
+			{
+				if (maksBrojStrana <= 0)
+				{
+					MessageBox.Show("Morate uneti ispravan broj za maksimalni broj strana (celobrojna vrednost veća od 0)!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					return;
+				}
+			}
+
+			projekat.Naziv = Naziv_TB.Text;
             projekat.SkolskaGodinaZadavanja = SkoslaGodIzdavanja_TB.Text;
-            projekat.MaksBrojStrana = int.TryParse(MaxBrStrana_TB.Text, out int parsedValue) ? parsedValue : 0;
+            projekat.MaksBrojStrana = maksBrojStrana;
 
             if (Grupni_RB.Checked)
             {
@@ -81,7 +84,7 @@ public partial class IzmeniTeorijskiProjekat : Form
         }
     }
 
-    private void SkoslaGodIzdavanja_TB_KeyPress(object sender, KeyPressEventArgs e)
+    private void SkolskaGodIzdavanja_TB_KeyPress(object sender, KeyPressEventArgs e)
     {
         if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '/')
         {

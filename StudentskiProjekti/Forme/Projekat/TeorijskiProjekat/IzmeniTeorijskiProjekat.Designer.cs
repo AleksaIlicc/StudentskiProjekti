@@ -76,7 +76,7 @@
 			SkoslaGodIzdavanja_TB.Name = "SkoslaGodIzdavanja_TB";
 			SkoslaGodIzdavanja_TB.Size = new System.Drawing.Size(217, 21);
 			SkoslaGodIzdavanja_TB.TabIndex = 1;
-			SkoslaGodIzdavanja_TB.KeyPress += SkoslaGodIzdavanja_TB_KeyPress;
+			SkoslaGodIzdavanja_TB.KeyPress += SkolskaGodIzdavanja_TB_KeyPress;
 			// 
 			// Izmeni_Btn
 			// 
@@ -84,7 +84,7 @@
 			Izmeni_Btn.Location = new System.Drawing.Point(218, 204);
 			Izmeni_Btn.Name = "Izmeni_Btn";
 			Izmeni_Btn.Size = new System.Drawing.Size(157, 29);
-			Izmeni_Btn.TabIndex = 5;
+			Izmeni_Btn.TabIndex = 4;
 			Izmeni_Btn.Text = "Izmeni";
 			Izmeni_Btn.UseVisualStyleBackColor = false;
 			Izmeni_Btn.Click += Izmeni_Btn_Click;
@@ -129,10 +129,10 @@
 			// 
 			groupBox2.Controls.Add(Pojedinacni_RB);
 			groupBox2.Controls.Add(Grupni_RB);
-			groupBox2.Location = new System.Drawing.Point(8, 131);
+			groupBox2.Location = new System.Drawing.Point(8, 133);
 			groupBox2.Name = "groupBox2";
 			groupBox2.Size = new System.Drawing.Size(367, 57);
-			groupBox2.TabIndex = 12;
+			groupBox2.TabIndex = 3;
 			groupBox2.TabStop = false;
 			groupBox2.Text = "Tip";
 			// 
