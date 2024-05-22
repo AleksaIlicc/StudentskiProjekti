@@ -201,6 +201,37 @@ public class DTOManager
         }
         return studenti;
     }
+    public static List<StudentPregled> VratiSortiraneStudenteNaProjektu(string brIndeksa, string ime, string prezime, string smer, int projid)
+    {
+        List<StudentPregled> studenti = new List<StudentPregled>();
+        try
+        {
+            ISession session = DataLayer.GetSession();
+
+            IList<Student> sviStudenti = session.Query<Student>()
+                .Where(s => (string.IsNullOrEmpty(brIndeksa) || s.BrIndeksa.StartsWith(brIndeksa)) &&
+                            (string.IsNullOrEmpty(ime) || s.LIme.StartsWith(ime)) &&
+                            (string.IsNullOrEmpty(prezime) || s.Prezime.StartsWith(prezime)) &&
+                            (string.IsNullOrEmpty(smer) || s.Smer.StartsWith(smer)) &&
+                            s.UcestvujeProjekti.Any(p => p.Projekat.Id == projid))
+                .OrderBy(s => s.BrIndeksa)
+                .ToList();
+
+            foreach (Student s in sviStudenti)
+            {
+                studenti.Add(new StudentPregled(s.BrIndeksa, s.LIme, s.ImeRoditelja, s.Prezime, s.Smer));
+            }
+
+            session.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        return studenti;
+    }
+
+
 
     public static void DodajStudenta(StudentPregled sp)
     {
@@ -333,7 +364,41 @@ public class DTOManager
         return projektiInfo;
     }
 
-    public static List<StudentPregled> VratiStudenteNaGrupnomProj(int IdTProj)//provereno je da li je projekat grupni vec tamo u kodu ali ako je potrebno nekad moze da se doda join na projekat i da se proveri
+    public static ProjekatUcesceDetalji VratiUcesceNaProj(string studentId , int projId)
+    {
+        ProjekatUcesceDetalji projektiInfo = new ProjekatUcesceDetalji();
+        try
+        {
+            ISession s = DataLayer.GetSession();
+
+            projektiInfo = s.Query<Ucestvuje>()
+                            .Where(ucestvuje => ucestvuje.Student.BrIndeksa == studentId)
+                            .Join(s.Query<Projekat>().Where(p => p.Id == projId),
+                                  ucestvuje => ucestvuje.Projekat.Id,
+                                  projekat => projekat.Id,
+                                  (ucestvuje, projekat) => new ProjekatUcesceDetalji
+                                  {
+                                      Id = projekat.Id,
+                                      NazivProjekta = projekat.Naziv,
+                                      DatumPocetkaIzrade = ucestvuje.DatumPocetkaIzrade,
+                                      DatumZavrsetkaIzrade = ucestvuje.DatumZavrsetka,
+                                      RokZaZavrsetak = ucestvuje.RokZaZavrsetak,
+                                      ProjekatZavrsen = ucestvuje.ProjekatZavrsen,
+                                      VrstaProjekta = projekat.VrstaProjekta
+                                  })
+                            .FirstOrDefault();
+
+            s.Close();
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        return projektiInfo;
+    }
+
+    public static List<StudentPregled> VratiStudenteNaProjektu(int IdTProj)//provereno je da li je projekat grupni vec tamo u kodu ali ako je potrebno nekad moze da se doda join na projekat i da se proveri
     {
         List<StudentPregled> studenti = new List<StudentPregled>();
         try
@@ -346,8 +411,10 @@ public class DTOManager
                                   (ucestvuje, student) => new StudentPregled
                                   {
                                       BrIndeksa = student.BrIndeksa,
+                                      ImeRoditelja = student.ImeRoditelja,
                                       LIme = student.LIme,
                                       Prezime = student.Prezime,
+                                      Smer = student.Smer
                                   })
                 .ToList();
 
@@ -435,6 +502,9 @@ public class DTOManager
         return izvestaji;
     }
 
+
+
+
     #endregion
 
     #region Projekti
@@ -499,6 +569,70 @@ public class DTOManager
 
         return projektiPregled;
     }
+
+    public static List<TeorijskiProjekatPregled> VratiSortiraneTProjekteZaPredmet(string idPredmeta, string tipProjekta, string skolskaGodina)
+    {
+        List<TeorijskiProjekatPregled> projektiPregled = new List<TeorijskiProjekatPregled>();
+        try
+        {
+            ISession s = DataLayer.GetSession();
+
+
+
+           var projekti = s.Query<TeorijskiProjekat>()
+                .Where(p => p.PripadaPredmetu.Id == idPredmeta 
+                        && (string.IsNullOrEmpty(tipProjekta) || p.TipProjekta == tipProjekta)
+                        && (string.IsNullOrEmpty(skolskaGodina) || p.SkolskaGodinaZadavanja == skolskaGodina))
+                .ToList();
+
+            foreach (var p in projekti)
+            {
+                projektiPregled.Add(new TeorijskiProjekatPregled { Id = p.Id, Naziv = p.Naziv, SkolskaGodinaZadavanja = p.SkolskaGodinaZadavanja, TipProjekta = p.TipProjekta, MaksBrojStrana = p.MaksBrojStrana });
+            }
+                             
+            s.Close();
+        }
+        catch (Exception ec)
+        {
+            Console.WriteLine(ec);
+        }
+
+        return projektiPregled;
+    }
+
+    public static List<PrakticniProjekatPregled> VratiSortiranePProjekteZaPredmet(string idPredmeta, string tipProjekta, string skolskaGodina , string prepProgJez)
+    {
+        List<PrakticniProjekatPregled> projektiPregled = new List<PrakticniProjekatPregled>();
+        try
+        {
+            ISession s = DataLayer.GetSession();
+
+
+
+            var projekti = s.Query<PrakticniProjekat>()
+                 .Where(p => p.PripadaPredmetu.Id == idPredmeta
+                         && (string.IsNullOrEmpty(tipProjekta) || p.TipProjekta == tipProjekta)
+                         && (string.IsNullOrEmpty(skolskaGodina) || p.SkolskaGodinaZadavanja == skolskaGodina)
+                         && (string.IsNullOrEmpty(prepProgJez) || p.PreporuceniProgramskiJezik == prepProgJez))
+                 .ToList();
+
+            foreach (var p in projekti)
+            {
+                projektiPregled.Add(new PrakticniProjekatPregled { Id = p.Id, Naziv = p.Naziv, SkolskaGodinaZadavanja = p.SkolskaGodinaZadavanja, TipProjekta = p.TipProjekta, PreporuceniProgramskiJezik = p.PreporuceniProgramskiJezik });
+            }
+
+            s.Close();
+        }
+        catch (Exception ec)
+        {
+            Console.WriteLine(ec);
+        }
+
+        return projektiPregled;
+    }
+
+
+
 
     #endregion
 

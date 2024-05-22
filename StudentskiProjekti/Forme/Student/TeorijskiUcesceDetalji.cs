@@ -46,7 +46,7 @@ public partial class TeorijskiUcesceDetalji : Form
     private void PopuniPodacimaListView()
     {
         OstaliClanovi_ListV.Items.Clear();
-        List<DTOs.StudentPregled> studenti = DTOManager.VratiStudenteNaGrupnomProj(te.Id);
+        List<DTOs.StudentPregled> studenti = DTOManager.VratiStudenteNaProjektu(te.Id);
 
         foreach (DTOs.StudentPregled s in studenti)
         {

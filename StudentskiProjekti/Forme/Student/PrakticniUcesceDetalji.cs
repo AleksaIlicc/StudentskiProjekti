@@ -58,7 +58,7 @@ namespace StudentskiProjekti.Forme
 		private void PopuniPodacimaListView()
 		{
 			OstaliClanovi_ListV.Items.Clear();
-			List<DTOs.StudentPregled> studenti = DTOManager.VratiStudenteNaGrupnomProj(pp.Id);
+			List<DTOs.StudentPregled> studenti = DTOManager.VratiStudenteNaProjektu(pp.Id);
 
 			foreach (DTOs.StudentPregled s in studenti)
 			{

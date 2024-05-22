@@ -32,7 +32,7 @@ namespace StudentskiProjekti.Forme
         {
             Izvestaji_ListV.Items.Clear();
 
-            List<DTOs.StudentPregled> studenti = DTOManager.VratiStudenteNaGrupnomProj(pp.Id);
+            List<DTOs.StudentPregled> studenti = DTOManager.VratiStudenteNaProjektu(pp.Id);
 
             foreach (DTOs.StudentPregled student in studenti)
             {

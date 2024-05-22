@@ -35,7 +35,7 @@ public partial class OstaliStudentiNaProjektu : Form
     private void PopuniPodacimaListViewPrakticni()
     {
         OstaliStudenti_ListV.Items.Clear();
-        List<DTOs.StudentPregled> studenti = DTOManager.VratiStudenteNaGrupnomProj(pp.Id);
+        List<DTOs.StudentPregled> studenti = DTOManager.VratiStudenteNaProjektu(pp.Id);
 
         foreach (DTOs.StudentPregled s in studenti)
         {
@@ -53,7 +53,7 @@ public partial class OstaliStudentiNaProjektu : Form
     private void PopuniPodacimaListViewTeorijski()
     {
         OstaliStudenti_ListV.Items.Clear();
-        List<DTOs.StudentPregled> studenti = DTOManager.VratiStudenteNaGrupnomProj(te.Id);
+        List<DTOs.StudentPregled> studenti = DTOManager.VratiStudenteNaProjektu(te.Id);
 
         foreach (DTOs.StudentPregled s in studenti)
         {

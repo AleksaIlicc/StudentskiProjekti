@@ -29,7 +29,7 @@ public class DTOs
     #region Projekat
     public class ProjekatPregled
     {
-        public int Id { get; protected set; }
+        public int Id { get; set; }
         public string TipProjekta { get; set; }
         public string Naziv { get; set; }
         public string SkolskaGodinaZadavanja { get; set; }

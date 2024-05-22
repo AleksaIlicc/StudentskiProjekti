@@ -105,4 +105,51 @@ public partial class PrakticniProjekti : Form
         izmeniPproj.ShowDialog();
 
     }
+
+    private void Sortiraj_Btn_Click(object sender, EventArgs e)
+    {
+        if (!Grupni_RB.Checked && !Pojedinacni_RB.Checked && SkoslkaGodZad_TB.Text == "" && PrepProgJez_TB.Text == "")
+        {
+            MessageBox.Show("Izaberite po čemu želite da sortirate.", "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+
+        string tipProjekta = Grupni_RB.Checked ? "grupni" : Pojedinacni_RB.Checked ? "pojedinacni" : "";
+        string skolskaGodina = SkoslkaGodZad_TB.Text;
+        string prepProgJezik = PrepProgJez_TB.Text;
+
+        List<PrakticniProjekatPregled> projekti = DTOManager.VratiSortiranePProjekteZaPredmet(izabraniPredmet.Id, tipProjekta, skolskaGodina, prepProgJezik);
+
+        PrakticniProjekti_ListV.Items.Clear();
+        foreach (PrakticniProjekatPregled p in projekti)
+        {
+            ListViewItem item = new ListViewItem(new string[] { p.Naziv, p.SkolskaGodinaZadavanja, p.TipProjekta, p.PreporuceniProgramskiJezik });
+            PrakticniProjekti_ListV.Items.Add(item);
+        }
+
+        PrakticniProjekti_ListV.Refresh();
+    }
+
+    private void Ocisti_Btn_Click(object sender, EventArgs e)
+    {
+        PrepProgJez_TB.Text = "";
+        Grupni_RB.Checked = false;
+        Pojedinacni_RB.Checked = false;
+        SkoslkaGodZad_TB.Text = "";
+        PopuniPodacima();
+    }
+
+    private void PrikaziStudNaProj_Btn_Click(object sender, EventArgs e)
+    {
+        if (PrakticniProjekti_ListV.SelectedItems.Count == 0)
+        {
+            MessageBox.Show("Izaberite neki od projekata!", "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+        StudentiNaProjektu studNaProj = new StudentiNaProjektu(DTOManager.VratiPrakticniProjekat((int)PrakticniProjekti_ListV.SelectedItems[0].Tag))
+        {
+            StartPosition = FormStartPosition.CenterParent
+        };
+        studNaProj.ShowDialog();
+    }
 }
