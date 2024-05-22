@@ -22,7 +22,7 @@ public partial class TeorijskiProjekti : Form
 
 		foreach (TeorijskiProjekatPregled p in teorijskiprojekti)
 		{
-			ListViewItem item = new ListViewItem(new string[] { p.Naziv, p.SkolskaGodinaZadavanja, p.TipProjekta, p.MaksBrojStrana.ToString() });
+			ListViewItem item = new ListViewItem(new string[] { p.Naziv, p.SkolskaGodinaZadavanja, p.TipProjekta, p.MaksBrojStrana.ToString() == "0" ? null : p.MaksBrojStrana.ToString() });
 			item.Tag = p.Id;
 			TeorijskiProjekti_ListV.Items.Add(item);
 		}
@@ -88,7 +88,7 @@ public partial class TeorijskiProjekti : Form
             return;
         }
 
-        int idProjekta = int.TryParse(TeorijskiProjekti_ListV.SelectedItems[0].Tag.ToString(), out int result) ? result : -1;
+        int idProjekta = int.TryParse(TeorijskiProjekti_ListV.SelectedItems[0].Tag.ToString(), out int result) ? result : 0;
         TeorijskiProjekatPregled izabraniProjekat = DTOManager.VratiTeorijskiProjekat(idProjekta);
         Literature literature = new Literature(izabraniProjekat)
 		{

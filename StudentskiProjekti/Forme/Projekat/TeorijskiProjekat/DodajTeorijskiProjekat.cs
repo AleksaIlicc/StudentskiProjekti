@@ -18,26 +18,67 @@ public partial class DodajTeorijskiProjekat : Form
 
         if (result == DialogResult.OK)
         {
-            this.projekat.Naziv = Naziv_TB.Text;
-            this.projekat.SkolskaGodinaZadavanja = SkoslaGodIzdavanja_TB.Text;
+			if (string.IsNullOrEmpty(Naziv_TB.Text))
+			{
+				MessageBox.Show("Morate uneti naziv projekta!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			if (string.IsNullOrEmpty(SkolskaGodIzdavanja_TB.Text))
+			{
+				MessageBox.Show("Morate uneti skolsku godinu zadavanja projekta!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			if (!Pojedinacni_RB.Checked && !Grupni_RB.Checked)
+			{
+				MessageBox.Show("Morate odabrati da li je projekat pojedinačni ili grupni!!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			if (int.TryParse(MaxBrStranica_TB.Text, out int maksBrojStrana))
+			{
+                if (maksBrojStrana <= 0) 
+                { 
+				    MessageBox.Show("Morate uneti ispravan broj za maksimalni broj strana (celobrojna vrednost veća od 0)!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				    return;
+				}
+			}
+
+			projekat.Naziv = Naziv_TB.Text;
+            projekat.SkolskaGodinaZadavanja = SkolskaGodIzdavanja_TB.Text;
             if (Pojedinacni_RB.Checked)
             {
-                this.projekat.TipProjekta = "pojedinacni";
+                projekat.TipProjekta = "pojedinacni";
             }
             else if (Grupni_RB.Checked)
             {
-                this.projekat.TipProjekta = "grupni";
+                projekat.TipProjekta = "grupni";
             }
-            this.projekat.MaksBrojStrana = int.TryParse(MaxBrStranica_TB.Text, out int maksBrojStranica) ? maksBrojStranica : default(int);
-            this.projekat.VrstaProjekta = "teorijski";
+            projekat.MaksBrojStrana = maksBrojStrana;
+            projekat.VrstaProjekta = "teorijski";
 
             DTOManager.DodajTeorijskiProjekat(projekat);
             MessageBox.Show("Uspesno ste dodali novi projekat!");
-            this.Close();
+
+			string porukaLiteratura = "Da li želite da dodate postojeću literaturu za ovaj projekat?";
+			string titleLiteratura = "Pitanje o literaturi";
+			DialogResult resultLiteratura = MessageBox.Show(porukaLiteratura, titleLiteratura, MessageBoxButtons.YesNo);
+
+			if (resultLiteratura == DialogResult.Yes)
+			{
+				DodajPostojecuLiteraturu dodajLiteraturuForm = new DodajPostojecuLiteraturu(projekat.Id)
+                {
+					StartPosition = FormStartPosition.CenterParent
+				};
+				dodajLiteraturuForm.ShowDialog();
+			}
+
+			this.Close();
         }
     }
 
-    private void SkoslaGodIzdavanja_TB_KeyPress(object sender, KeyPressEventArgs e)
+    private void SkolskaGodIzdavanja_TB_KeyPress(object sender, KeyPressEventArgs e)
     {
         if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '/')
         {
