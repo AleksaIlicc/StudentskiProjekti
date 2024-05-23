@@ -86,8 +86,9 @@ public class DTOs
 
     #region Literatura
 
-    public abstract class LiteraturaPregled 
+    public class LiteraturaPregled 
     {
+        public int Id { get; set; }
         public string Naziv { get; set; }
 
         public LiteraturaPregled(string naziv)

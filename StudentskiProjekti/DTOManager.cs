@@ -1,4 +1,8 @@
-﻿using static StudentskiProjekti.DTOs;
+﻿using DocumentFormat.OpenXml.Drawing.Spreadsheet;
+using StudentskiProjekti.Entiteti;
+using StudentskiProjekti.Forme;
+using static StudentskiProjekti.DTOs;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 namespace StudentskiProjekti;
 public class DTOManager
 {
@@ -808,6 +812,31 @@ public class DTOManager
 			Console.WriteLine(e.Message);
 		}
 	}
+
+    public static List<LiteraturaPregled> VratiLiteratureZaProjekat()
+    {
+        List<LiteraturaPregled> sveLiterature = [];
+        try
+        {
+            ISession s = DataLayer.GetSession();
+            sveLiterature = s.Query<Literatura>()
+                             .Select(l => new LiteraturaPregled
+                            {
+                                Naziv = l.Naziv,
+                                Id = l.LitId
+                            })
+                            .ToList();
+
+            s.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        return sveLiterature;
+    }
+
+
 
 	#region Knjiga
 
