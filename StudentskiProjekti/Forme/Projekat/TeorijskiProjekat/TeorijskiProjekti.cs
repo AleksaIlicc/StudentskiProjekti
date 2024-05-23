@@ -101,7 +101,7 @@ public partial class TeorijskiProjekti : Form
     {
         if (!Grupni_RB.Checked && !Pojedinacni_RB.Checked && SkoslkaGodZad_TB.Text == "")
         {
-            MessageBox.Show("Izaberite po čemu želite da sortirate.", "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show("Izaberite po čemu želite da sortirate.", "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Information);
             return;
         }
 
@@ -132,7 +132,7 @@ public partial class TeorijskiProjekti : Form
     {
         if(TeorijskiProjekti_ListV.SelectedItems.Count == 0)
         {
-            MessageBox.Show("Izaberite neki od projekata!", "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show("Izaberite neki od projekata!", "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Information);
             return;
         }
         StudentiNaProjektu studNaProj = new StudentiNaProjektu(DTOManager.VratiTeorijskiProjekat((int)TeorijskiProjekti_ListV.SelectedItems[0].Tag))

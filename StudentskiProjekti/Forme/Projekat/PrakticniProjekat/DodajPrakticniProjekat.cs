@@ -31,7 +31,7 @@ public partial class DodajPrakticniProjekat : Form
 
 			if (!Pojedinacni_RB.Checked && !Grupni_RB.Checked)
             {
-				MessageBox.Show("Morate odabrati da li je projekat pojedinačni ili grupni!!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("Morate odabrati da li je projekat pojedinačni ili grupni!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
 

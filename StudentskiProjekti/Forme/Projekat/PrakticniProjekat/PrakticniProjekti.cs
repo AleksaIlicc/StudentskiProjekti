@@ -144,7 +144,7 @@ public partial class PrakticniProjekti : Form
     {
         if (PrakticniProjekti_ListV.SelectedItems.Count == 0)
         {
-            MessageBox.Show("Izaberite neki od projekata!", "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show("Izaberite neki od projekata!", "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Information);
             return;
         }
         StudentiNaProjektu studNaProj = new StudentiNaProjektu(DTOManager.VratiPrakticniProjekat((int)PrakticniProjekti_ListV.SelectedItems[0].Tag))

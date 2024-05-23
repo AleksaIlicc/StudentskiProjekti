@@ -32,7 +32,7 @@ public partial class DodajTeorijskiProjekat : Form
 
 			if (!Pojedinacni_RB.Checked && !Grupni_RB.Checked)
 			{
-				MessageBox.Show("Morate odabrati da li je projekat pojedinačni ili grupni!!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("Morate odabrati da li je projekat pojedinačni ili grupni!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
 
@@ -58,7 +58,7 @@ public partial class DodajTeorijskiProjekat : Form
             projekat.MaksBrojStrana = maksBrojStrana;
             projekat.VrstaProjekta = "teorijski";
 
-            DTOManager.DodajTeorijskiProjekat(projekat);
+            projekat.Id = DTOManager.DodajTeorijskiProjekat(projekat);
             MessageBox.Show("Uspesno ste dodali novi projekat!");
 
 			string porukaLiteratura = "Da li želite da dodate postojeću literaturu za ovaj projekat?";

@@ -41,7 +41,7 @@ public partial class Projekti : Form
 	{
 		if (!Prakticni_RB.Checked && !Teorijski_RB.Checked && !Grupni_RB.Checked && !Pojedinacni_RB.Checked && SkoslkaGodZad_TB.Text == "")
 		{
-			MessageBox.Show("Izaberite po čemu želite da sortirate.", "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			MessageBox.Show("Izaberite po čemu želite da sortirate.", "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			return;
 		}
 

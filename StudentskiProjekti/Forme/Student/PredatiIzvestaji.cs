@@ -1,22 +1,29 @@
-﻿namespace StudentskiProjekti.Forme;
-
+﻿using static StudentskiProjekti.DTOs;
+namespace StudentskiProjekti.Forme;
 public partial class PredatiIzvestaji : Form
 {
-
-    DTOs.StudentPregled sp = new DTOs.StudentPregled();
-    DTOs.ProjekatUcesceDetalji pd = new DTOs.ProjekatUcesceDetalji();
-    DTOs.PrakticniProjekatPregled pp = new DTOs.PrakticniProjekatPregled();
-    public PredatiIzvestaji(DTOs.StudentPregled sp, DTOs.PrakticniProjekatPregled pp, DTOs.ProjekatUcesceDetalji pd)
+    StudentPregled sp = new StudentPregled();
+    ProjekatUcesceDetalji pd = new ProjekatUcesceDetalji();
+    PrakticniProjekatPregled pp = new PrakticniProjekatPregled();
+    public PredatiIzvestaji(StudentPregled sp, PrakticniProjekatPregled pp)
     {
         InitializeComponent();
         this.sp = sp;
-        this.pd = pd;
         this.pp = pp;
-    }
+        this.pd = DTOManager.VratiUcesceNaProj(sp.BrIndeksa, pp.Id);
+	}
 
-    private void PredatiIzvestaji_Load(object sender, EventArgs e)
+	public PredatiIzvestaji(StudentPregled sp, PrakticniProjekatPregled pp, ProjekatUcesceDetalji pd)
+	{
+		InitializeComponent();
+		this.sp = sp;
+		this.pp = pp;
+        this.pd = pd;
+	}
+
+	private void PredatiIzvestaji_Load(object sender, EventArgs e)
     {
-        PopuniPodacimaListView();
+		PopuniPodacimaListView();
         NazivProj_LB.Text = pp.Naziv;
         DatumZavrIzrade_LB.Text = pd.DatumZavrsetkaIzrade?.ToString("dd.MM.yyyy");
         DatumPocIzrade_LB.Text = pd.DatumPocetkaIzrade.ToString("dd.MM.yyyy");
@@ -40,9 +47,9 @@ public partial class PredatiIzvestaji : Form
     private void PopuniPodacimaListView()
     {
         Izvestaji_ListV.Items.Clear();
-        List<DTOs.IzvestajPregled> izvestaji = DTOManager.VratiIzvestajeZaStudenta(sp.BrIndeksa, pp.Id);
+        List<IzvestajPregled> izvestaji = DTOManager.VratiIzvestajeZaStudenta(sp.BrIndeksa, pp.Id);
 
-        foreach (DTOs.IzvestajPregled i in izvestaji)
+        foreach (IzvestajPregled i in izvestaji)
         {
             string opisIzvest = i.OpisIzvest;
             string datumPred = i.DatumPred?.ToString("dd.MM.yyyy") ?? "N/A";

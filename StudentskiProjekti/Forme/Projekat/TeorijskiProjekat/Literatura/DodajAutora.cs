@@ -14,8 +14,11 @@ public partial class DodajAutora : Form
 		string title = "Pitanje";
 		MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
 		DialogResult result = MessageBox.Show(poruka, title, buttons);
-		DTOManager.DodajAutora(idLiterature, Naziv_TB.Text);
-		MessageBox.Show("Uspesno ste dodali novog autora!");
-		this.Close();
+		if(result == DialogResult.OK)
+		{
+			DTOManager.DodajAutora(idLiterature, Naziv_TB.Text);
+			MessageBox.Show("Uspesno ste dodali novog autora!");
+			this.Close();
+		}
 	}
 }

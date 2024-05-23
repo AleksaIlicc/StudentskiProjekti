@@ -98,7 +98,7 @@ public partial class Studenti : Form
         string smerTB = Smer_TB.Text;
         if (string.IsNullOrEmpty(brIndeksaTB) && string.IsNullOrEmpty(imeTB) && string.IsNullOrEmpty(prezimeTB) && string.IsNullOrEmpty(smerTB))
         {
-            MessageBox.Show("Izaberite po čemu želite da sortirate.", "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show("Izaberite po čemu želite da sortirate.", "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Information);
             return;
         }
 
