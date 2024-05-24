@@ -11,9 +11,16 @@ public partial class PrakticniUcesceDetalji : Form
 		this.sp = sp;
 		this.pd = pd;
 	}
+    public PrakticniUcesceDetalji(DTOs.StudentPregled sp, DTOs.PrakticniProjekatPregled pp)
+    {
+        InitializeComponent();
+        this.pp = pp;
+        this.sp = sp;
+        this.pd = DTOManager.VratiUcesceNaProj(sp.BrIndeksa, pp.Id);
+    }
 
 
-	private void PrakticniUcesceDetalji_Load(object sender, EventArgs e)
+    private void PrakticniUcesceDetalji_Load(object sender, EventArgs e)
 	{
 		PopuniPodacimaLabele();
 		if (pp.TipProjekta == "grupni")

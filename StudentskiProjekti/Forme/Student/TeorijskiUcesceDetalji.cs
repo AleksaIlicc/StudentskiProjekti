@@ -13,6 +13,15 @@ public partial class TeorijskiUcesceDetalji : Form
         this.pd = pd;
     }
 
+    public TeorijskiUcesceDetalji(DTOs.StudentPregled sp, DTOs.TeorijskiProjekatPregled te)
+    {
+        InitializeComponent();
+        this.te = te;
+        this.sp = sp;
+        this.pd = DTOManager.VratiUcesceNaProj(sp.BrIndeksa, te.Id);
+    }
+
+
     private void TeorijskiUcesceDetalji_Load(object sender, EventArgs e)
     {
         PopuniPodacimaLabele();

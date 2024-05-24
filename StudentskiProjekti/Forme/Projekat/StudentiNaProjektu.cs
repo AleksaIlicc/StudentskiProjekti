@@ -40,50 +40,38 @@ public partial class StudentiNaProjektu : Form
         {
             Naziv_LB.Text = pp.Naziv;
             SkolskaGodZad_LB.Text = pp.SkolskaGodinaZadavanja.ToString();
-            DodatnaLit_Izvestaji_Btn.Text = "Prikazi izvestaje koje je student predao na projektu";
         }
         else if (vrsta == "teorijski")
         {
             Naziv_LB.Text = tp.Naziv;
             SkolskaGodZad_LB.Text = tp.SkolskaGodinaZadavanja.ToString();
-            DodatnaLit_Izvestaji_Btn.Text = "Prikazi preporucenu literaturu na projektu za studenta";
         }
     }
 
     private void DodatnaLit_Izvestaji_Btn_Click(object sender, EventArgs e)
     {
+
+        if (Studenti_ListV.SelectedItems.Count == 0)
+        {
+            MessageBox.Show("Izaberite studenta za kog zelite da vidite izvestaje!", "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return;
+        }
+        StudentPregled st = DTOManager.VratiStudenta(Studenti_ListV.SelectedItems[0].SubItems[0].Text);
         if (vrsta == "prakticni")
         {
-            if (Studenti_ListV.SelectedItems.Count == 0)
-            {
-                MessageBox.Show("Izaberite studenta za kog zelite da vidite izvestaje!", "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-
-            StudentPregled st = DTOManager.VratiStudenta(Studenti_ListV.SelectedItems[0].SubItems[0].Text);
-            PredatiIzvestaji izvestaji = new PredatiIzvestaji(st, pp)
+            PrakticniUcesceDetalji prakticnidet = new PrakticniUcesceDetalji(st, pp)
             {
                 StartPosition = FormStartPosition.CenterParent
             };
-            izvestaji.ShowDialog();
+            prakticnidet.ShowDialog();
         }
         else if (vrsta == "teorijski")
         {
-            if (Studenti_ListV.SelectedItems.Count == 0)
+            TeorijskiUcesceDetalji teorijskidet = new TeorijskiUcesceDetalji(st, tp)
             {
-                MessageBox.Show("Izaberite studenta za kog zelite da vidite dopunsku literaturu!", "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-           
-            string opisIzvestaja = DTOManager.VratiDopunskuLiteraturu(tp.Id, Studenti_ListV.SelectedItems[0].SubItems[0].Text);
-            if (string.IsNullOrEmpty(opisIzvestaja))
-            {
-                MessageBox.Show("Student nema dopunsku literaturu.", "Opis izveštaja", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show(opisIzvestaja, "Opis izveštaja", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+                StartPosition = FormStartPosition.CenterParent
+            };
+            teorijskidet.ShowDialog();
         }
     }
 
