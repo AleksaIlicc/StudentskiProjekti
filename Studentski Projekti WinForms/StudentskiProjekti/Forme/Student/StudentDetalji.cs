@@ -30,7 +30,7 @@ public partial class StudentDetalji : Form
         foreach (ProjekatUcesceDetalji p in detalji)
         {
             string datumzavizrade = p.DatumZavrsetkaIzrade.HasValue ? p.DatumZavrsetkaIzrade.Value.ToString(format) : string.Empty;
-            ListViewItem item = new ListViewItem(new string[] { p.NazivProjekta, p.DatumPocetkaIzrade.ToString(format), datumzavizrade, p.RokZaZavrsetak.ToString(format), p.ProjekatZavrsen, p.VrstaProjekta });
+            ListViewItem item = new ListViewItem(new string[] {p.NazivPredmeta, p.NazivProjekta, p.DatumPocetkaIzrade.ToString(format), datumzavizrade, p.RokZaZavrsetak.ToString(format), p.ProjekatZavrsen, p.VrstaProjekta });
             item.Tag = p.Id;
 
             StudentDetalji_ListV.Items.Add(item);
@@ -46,15 +46,15 @@ public partial class StudentDetalji : Form
             MessageBox.Show("Izaberite studenta za kog zelite da prikazete vise informacija o ucescu!");
             return;
         }
-        pd.NazivProjekta = StudentDetalji_ListV.SelectedItems[0].SubItems[0].Text;
-        pd.VrstaProjekta = StudentDetalji_ListV.SelectedItems[0].SubItems[5].Text;
-        pd.ProjekatZavrsen = StudentDetalji_ListV.SelectedItems[0].SubItems[4].Text;
-        pd.DatumPocetkaIzrade = DateTime.ParseExact(StudentDetalji_ListV.SelectedItems[0].SubItems[1].Text, format, CultureInfo.InvariantCulture);
-		pd.DatumZavrsetkaIzrade = DateTime.TryParse(StudentDetalji_ListV.SelectedItems[0].SubItems[2].Text, out var datumZavrsetka) ? datumZavrsetka : null;
-        pd.RokZaZavrsetak = DateTime.ParseExact(StudentDetalji_ListV.SelectedItems[0].SubItems[3].Text, format, CultureInfo.InvariantCulture);
+        pd.NazivProjekta = StudentDetalji_ListV.SelectedItems[0].SubItems[1].Text;
+        pd.VrstaProjekta = StudentDetalji_ListV.SelectedItems[0].SubItems[6].Text;
+        pd.ProjekatZavrsen = StudentDetalji_ListV.SelectedItems[0].SubItems[5].Text;
+        pd.DatumPocetkaIzrade = DateTime.ParseExact(StudentDetalji_ListV.SelectedItems[0].SubItems[2].Text, format, CultureInfo.InvariantCulture);
+		pd.DatumZavrsetkaIzrade = DateTime.TryParse(StudentDetalji_ListV.SelectedItems[0].SubItems[3].Text, out var datumZavrsetka) ? datumZavrsetka : null;
+        pd.RokZaZavrsetak = DateTime.ParseExact(StudentDetalji_ListV.SelectedItems[0].SubItems[4].Text, format, CultureInfo.InvariantCulture);
 
 
-		if (StudentDetalji_ListV.SelectedItems[0].SubItems[5].Text == "teorijski")
+		if (StudentDetalji_ListV.SelectedItems[0].SubItems[6].Text == "teorijski")
         {
             TeorijskiProjekatPregled tp = DTOManager.VratiTeorijskiProjekat((int)StudentDetalji_ListV.SelectedItems[0].Tag);
             TeorijskiUcesceDetalji teorijskiUcesceDetalji = new TeorijskiUcesceDetalji(sp, tp, pd)
@@ -63,7 +63,7 @@ public partial class StudentDetalji : Form
             };
             teorijskiUcesceDetalji.ShowDialog();
         }
-        else if (StudentDetalji_ListV.SelectedItems[0].SubItems[5].Text == "prakticni")
+        else if (StudentDetalji_ListV.SelectedItems[0].SubItems[6].Text == "prakticni")
         {
 
             PrakticniProjekatPregled pp = DTOManager.VratiPrakticniProjekat((int)StudentDetalji_ListV.SelectedItems[0].Tag);

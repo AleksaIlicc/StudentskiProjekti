@@ -9,6 +9,6 @@ public class IzvestajMapiranja : ClassMap<Izvestaj>
         Map(x => x.Opis, "OPIS");
         Map(x => x.DatumPredaje, "DATUM_PREDAJE");
 
-        HasMany(x => x.PredaoIzvestaji).KeyColumn("IZVESTAJ_ID").Cascade.All().Inverse();
+        HasOne(x => x.PredaoIzvestaj).PropertyRef(x => x.Izvestaj).Cascade.All();
     }
 }

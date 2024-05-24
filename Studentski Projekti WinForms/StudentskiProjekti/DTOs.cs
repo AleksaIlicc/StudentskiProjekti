@@ -64,6 +64,7 @@ public class DTOs
         public DateTime RokZaZavrsetak { get; set; }
         public string ProjekatZavrsen { get; set; }
         public string VrstaProjekta { get; set; }
+        public string NazivPredmeta {  get; set; }
     }
     #endregion
 
@@ -236,13 +237,14 @@ public class DTOs
     public class IzvestajPregled
     {
 
-        public DateTime? DatumPred { get; set; }
-        public string OpisIzvest { get; set; }
+        public int Id { get; set; }
+        public DateTime DatumPredaje { get; set; }
+        public string Opis { get; set; }
 
-        public IzvestajPregled(DateTime datumPred, string opisIzvest)
+        public IzvestajPregled(DateTime datumPredmeta, string opis)
         {
-            OpisIzvest = opisIzvest;
-            DatumPred = datumPred;
+            Opis = opis;
+            DatumPredaje = datumPredmeta;
         }
         public IzvestajPregled() { }
     }

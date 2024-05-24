@@ -4,12 +4,6 @@ namespace StudentskiProjekti.Forme;
 public partial class IzmeniPredmet : Form
 {
 	public PredmetPregled predmet = new PredmetPregled();
-
-	public IzmeniPredmet()
-	{
-		InitializeComponent();
-	}
-
 	public IzmeniPredmet(PredmetPregled p)
 	{
 		InitializeComponent();

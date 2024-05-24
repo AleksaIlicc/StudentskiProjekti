@@ -35,14 +35,6 @@
             columnHeader2 = new ColumnHeader();
             label5 = new Label();
             OstaliClanovi_Btn = new Button();
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
-            label4 = new Label();
-            BrIndeksa_LB = new Label();
-            Smer_LB = new Label();
-            Prezime_LB = new Label();
-            Ime_LB = new Label();
             Podaci_o_predmetimaGB = new GroupBox();
             IzmeniIzvestaj_Btn = new Button();
             DodajIzvestaj_Btn = new Button();
@@ -55,8 +47,18 @@
             label12 = new Label();
             UkupanBrIzvest_LB = new Label();
             UkupanBrIzPrikaz_LB = new Label();
+            groupBox1 = new GroupBox();
+            label6 = new Label();
+            Smer_LB = new Label();
+            Ime_LB = new Label();
+            label10 = new Label();
+            label13 = new Label();
+            Prezime_LB = new Label();
+            label15 = new Label();
+            BrIndeksa_LB = new Label();
             Izvestaji_GB.SuspendLayout();
             Podaci_o_predmetimaGB.SuspendLayout();
+            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // Izvestaji_GB
@@ -124,74 +126,6 @@
             OstaliClanovi_Btn.UseVisualStyleBackColor = false;
             OstaliClanovi_Btn.Click += OstaliClanovi_Btn_Click;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(260, 465);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(76, 15);
-            label1.TabIndex = 9;
-            label1.Text = "Br. indeksa:";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new System.Drawing.Point(260, 500);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(33, 15);
-            label2.TabIndex = 10;
-            label2.Text = "Ime:";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(260, 563);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(42, 15);
-            label3.TabIndex = 11;
-            label3.Text = "Smer:";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(260, 529);
-            label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(57, 15);
-            label4.TabIndex = 12;
-            label4.Text = "Prezime:";
-            // 
-            // BrIndeksa_LB
-            // 
-            BrIndeksa_LB.AutoSize = true;
-            BrIndeksa_LB.Location = new System.Drawing.Point(367, 465);
-            BrIndeksa_LB.Name = "BrIndeksa_LB";
-            BrIndeksa_LB.Size = new System.Drawing.Size(0, 15);
-            BrIndeksa_LB.TabIndex = 14;
-            // 
-            // Smer_LB
-            // 
-            Smer_LB.AutoSize = true;
-            Smer_LB.Location = new System.Drawing.Point(367, 563);
-            Smer_LB.Name = "Smer_LB";
-            Smer_LB.Size = new System.Drawing.Size(0, 15);
-            Smer_LB.TabIndex = 15;
-            // 
-            // Prezime_LB
-            // 
-            Prezime_LB.AutoSize = true;
-            Prezime_LB.Location = new System.Drawing.Point(367, 529);
-            Prezime_LB.Name = "Prezime_LB";
-            Prezime_LB.Size = new System.Drawing.Size(0, 15);
-            Prezime_LB.TabIndex = 16;
-            // 
-            // Ime_LB
-            // 
-            Ime_LB.AutoSize = true;
-            Ime_LB.Location = new System.Drawing.Point(367, 500);
-            Ime_LB.Name = "Ime_LB";
-            Ime_LB.Size = new System.Drawing.Size(0, 15);
-            Ime_LB.TabIndex = 17;
-            // 
             // Podaci_o_predmetimaGB
             // 
             Podaci_o_predmetimaGB.Controls.Add(IzmeniIzvestaj_Btn);
@@ -215,6 +149,7 @@
             IzmeniIzvestaj_Btn.TabIndex = 2;
             IzmeniIzvestaj_Btn.Text = "Izmeni izvestaj";
             IzmeniIzvestaj_Btn.UseVisualStyleBackColor = false;
+            IzmeniIzvestaj_Btn.Click += IzmeniIzvestaj_Btn_Click;
             // 
             // DodajIzvestaj_Btn
             // 
@@ -226,6 +161,7 @@
             DodajIzvestaj_Btn.TabIndex = 1;
             DodajIzvestaj_Btn.Text = "Dodaj izvestaj";
             DodajIzvestaj_Btn.UseVisualStyleBackColor = false;
+            DodajIzvestaj_Btn.Click += DodajIzvestaj_Btn_Click;
             // 
             // ObrisiIzvestaj_Btn
             // 
@@ -237,6 +173,7 @@
             ObrisiIzvestaj_Btn.TabIndex = 0;
             ObrisiIzvestaj_Btn.Text = "Obrisi izvestaj";
             ObrisiIzvestaj_Btn.UseVisualStyleBackColor = false;
+            ObrisiIzvestaj_Btn.Click += ObrisiIzvestaj_Btn_Click;
             // 
             // NazivProj_LB
             // 
@@ -308,12 +245,99 @@
             UkupanBrIzPrikaz_LB.Text = "Ukupan broj izvestaja koje je grupa predala:";
             UkupanBrIzPrikaz_LB.Visible = false;
             // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(label6);
+            groupBox1.Controls.Add(Smer_LB);
+            groupBox1.Controls.Add(Ime_LB);
+            groupBox1.Controls.Add(label10);
+            groupBox1.Controls.Add(label13);
+            groupBox1.Controls.Add(Prezime_LB);
+            groupBox1.Controls.Add(label15);
+            groupBox1.Controls.Add(BrIndeksa_LB);
+            groupBox1.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            groupBox1.Location = new System.Drawing.Point(236, 407);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new System.Drawing.Size(308, 182);
+            groupBox1.TabIndex = 29;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Podaci o studentu";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(26, 107);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(57, 15);
+            label6.TabIndex = 12;
+            label6.Text = "Prezime:";
+            // 
+            // Smer_LB
+            // 
+            Smer_LB.AutoSize = true;
+            Smer_LB.Location = new System.Drawing.Point(133, 138);
+            Smer_LB.Name = "Smer_LB";
+            Smer_LB.Size = new System.Drawing.Size(0, 15);
+            Smer_LB.TabIndex = 15;
+            // 
+            // Ime_LB
+            // 
+            Ime_LB.AutoSize = true;
+            Ime_LB.Location = new System.Drawing.Point(133, 78);
+            Ime_LB.Name = "Ime_LB";
+            Ime_LB.Size = new System.Drawing.Size(0, 15);
+            Ime_LB.TabIndex = 17;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new System.Drawing.Point(26, 138);
+            label10.Name = "label10";
+            label10.Size = new System.Drawing.Size(42, 15);
+            label10.TabIndex = 11;
+            label10.Text = "Smer:";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new System.Drawing.Point(26, 43);
+            label13.Name = "label13";
+            label13.Size = new System.Drawing.Size(76, 15);
+            label13.TabIndex = 9;
+            label13.Text = "Br. indeksa:";
+            // 
+            // Prezime_LB
+            // 
+            Prezime_LB.AutoSize = true;
+            Prezime_LB.Location = new System.Drawing.Point(133, 107);
+            Prezime_LB.Name = "Prezime_LB";
+            Prezime_LB.Size = new System.Drawing.Size(0, 15);
+            Prezime_LB.TabIndex = 16;
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Location = new System.Drawing.Point(26, 78);
+            label15.Name = "label15";
+            label15.Size = new System.Drawing.Size(33, 15);
+            label15.TabIndex = 10;
+            label15.Text = "Ime:";
+            // 
+            // BrIndeksa_LB
+            // 
+            BrIndeksa_LB.AutoSize = true;
+            BrIndeksa_LB.Location = new System.Drawing.Point(133, 43);
+            BrIndeksa_LB.Name = "BrIndeksa_LB";
+            BrIndeksa_LB.Size = new System.Drawing.Size(0, 15);
+            BrIndeksa_LB.TabIndex = 14;
+            // 
             // PredatiIzvestaji
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = System.Drawing.Color.Linen;
             ClientSize = new System.Drawing.Size(858, 595);
+            Controls.Add(groupBox1);
             Controls.Add(Izvestaji_GB);
             Controls.Add(UkupanBrIzvest_LB);
             Controls.Add(UkupanBrIzPrikaz_LB);
@@ -324,14 +348,6 @@
             Controls.Add(NazivProj_LB);
             Controls.Add(label7);
             Controls.Add(Podaci_o_predmetimaGB);
-            Controls.Add(Ime_LB);
-            Controls.Add(Prezime_LB);
-            Controls.Add(Smer_LB);
-            Controls.Add(BrIndeksa_LB);
-            Controls.Add(label4);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label1);
             Controls.Add(OstaliClanovi_Btn);
             Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             Margin = new Padding(5, 3, 5, 3);
@@ -346,6 +362,8 @@
             Izvestaji_GB.ResumeLayout(false);
             Izvestaji_GB.PerformLayout();
             Podaci_o_predmetimaGB.ResumeLayout(false);
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -355,14 +373,6 @@
         private GroupBox Izvestaji_GB;
         private ListView Izvestaji_ListV;
         private Button OstaliClanovi_Btn;
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private Label label4;
-        private Label BrIndeksa_LB;
-        private Label Smer_LB;
-        private Label Prezime_LB;
-        private Label Ime_LB;
         private Label label5;
         private GroupBox Podaci_o_predmetimaGB;
         private Button IzmeniIzvestaj_Btn;
@@ -379,5 +389,14 @@
         private ColumnHeader columnHeader2;
         private Label UkupanBrIzvest_LB;
         private Label UkupanBrIzPrikaz_LB;
+        private GroupBox groupBox1;
+        private Label label6;
+        private Label Smer_LB;
+        private Label Ime_LB;
+        private Label label10;
+        private Label label13;
+        private Label Prezime_LB;
+        private Label label15;
+        private Label BrIndeksa_LB;
     }
 }
