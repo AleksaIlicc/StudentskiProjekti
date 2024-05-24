@@ -1,14 +1,13 @@
-﻿using DocumentFormat.OpenXml.Office2010.Excel;
-using System.Globalization;
-
+﻿using System.Globalization;
+using static StudentskiProjekti.DTOs;
 namespace StudentskiProjekti.Forme;
 public partial class StudentDetalji : Form
 {
-    DTOs.StudentPregled sp = new DTOs.StudentPregled();
-    DTOs.ProjekatUcesceDetalji pd = new DTOs.ProjekatUcesceDetalji();
+    StudentPregled sp = new StudentPregled();
+    ProjekatUcesceDetalji pd = new ProjekatUcesceDetalji();
     string format = "dd.MM.yyyy";
 
-	public StudentDetalji(DTOs.StudentPregled sp)
+	public StudentDetalji(StudentPregled sp)
     {
         InitializeComponent();
         this.sp = sp;
@@ -26,16 +25,15 @@ public partial class StudentDetalji : Form
     public void PopuniPodacima()
     {
         StudentDetalji_ListV.Items.Clear();
-        List<DTOs.ProjekatUcesceDetalji> detalji = DTOManager.VratiProjekteZaStudenta(sp.BrIndeksa);
+        List<ProjekatUcesceDetalji> detalji = DTOManager.VratiProjekteZaStudenta(sp.BrIndeksa);
 
-        foreach (DTOs.ProjekatUcesceDetalji p in detalji)
+        foreach (ProjekatUcesceDetalji p in detalji)
         {
             string datumzavizrade = p.DatumZavrsetkaIzrade.HasValue ? p.DatumZavrsetkaIzrade.Value.ToString(format) : string.Empty;
             ListViewItem item = new ListViewItem(new string[] { p.NazivProjekta, p.DatumPocetkaIzrade.ToString(format), datumzavizrade, p.RokZaZavrsetak.ToString(format), p.ProjekatZavrsen, p.VrstaProjekta });
             item.Tag = p.Id;
 
             StudentDetalji_ListV.Items.Add(item);
-
         }
 
         StudentDetalji_ListV.Refresh();
@@ -58,7 +56,7 @@ public partial class StudentDetalji : Form
 
 		if (StudentDetalji_ListV.SelectedItems[0].SubItems[5].Text == "teorijski")
         {
-            DTOs.TeorijskiProjekatPregled tp = DTOManager.VratiTeorijskiProjekat((int)StudentDetalji_ListV.SelectedItems[0].Tag);
+            TeorijskiProjekatPregled tp = DTOManager.VratiTeorijskiProjekat((int)StudentDetalji_ListV.SelectedItems[0].Tag);
             TeorijskiUcesceDetalji teorijskiUcesceDetalji = new TeorijskiUcesceDetalji(sp, tp, pd)
             {
                 StartPosition = FormStartPosition.CenterParent
@@ -68,7 +66,7 @@ public partial class StudentDetalji : Form
         else if (StudentDetalji_ListV.SelectedItems[0].SubItems[5].Text == "prakticni")
         {
 
-            DTOs.PrakticniProjekatPregled pp = DTOManager.VratiPrakticniProjekat((int)StudentDetalji_ListV.SelectedItems[0].Tag);
+            PrakticniProjekatPregled pp = DTOManager.VratiPrakticniProjekat((int)StudentDetalji_ListV.SelectedItems[0].Tag);
             PrakticniUcesceDetalji prakticniUcesceDetalji = new PrakticniUcesceDetalji(sp, pp, pd)
             {
                 StartPosition = FormStartPosition.CenterParent

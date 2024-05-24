@@ -36,13 +36,13 @@ public partial class DodajStudenta : Form
 				return;
 			}
 
-			this.student.BrIndeksa = BrIndeksa_TB.Text;
-			this.student.LIme = Ime_TB.Text;
-			this.student.ImeRoditelja = ImeRoditelja_TB.Text;
-			this.student.Prezime = Prezime_TB.Text;
-			this.student.Smer = Smer_TB.Text;
+			student.BrIndeksa = BrIndeksa_TB.Text;
+			student.LIme = Ime_TB.Text;
+			student.ImeRoditelja = ImeRoditelja_TB.Text;
+			student.Prezime = Prezime_TB.Text;
+			student.Smer = Smer_TB.Text;
 
-			DTOManager.DodajStudenta(this.student);
+			DTOManager.DodajStudenta(student);
 			MessageBox.Show("Uspešno ste dodali novog studenta!", "Uspeh", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			this.Close();
 		}

@@ -18,11 +18,11 @@ public partial class IzmeniStudenta : Form
 
 	public void PopuniPodacima()
 	{
-		BrIndeksa_TB.Text = this.sp.BrIndeksa;
-		Ime_TB.Text = this.sp.LIme;
-		ImeRoditelja_TB.Text = this.sp.ImeRoditelja;
-		Prezime_TB.Text = this.sp.Prezime;
-		Smer_TB.Text = this.sp.Smer;
+		BrIndeksa_TB.Text = sp.BrIndeksa;
+		Ime_TB.Text = sp.LIme;
+		ImeRoditelja_TB.Text = sp.ImeRoditelja;
+		Prezime_TB.Text = sp.Prezime;
+		Smer_TB.Text = sp.Smer;
 	}
 	private void Izmeni_Btn_Click(object sender, EventArgs e)
 	{
@@ -50,15 +50,15 @@ public partial class IzmeniStudenta : Form
 				return;
 			}
 
-			if (DTOManager.VratiStudenta(BrIndeksa_TB.Text) == null || DTOManager.VratiStudenta(BrIndeksa_TB.Text).BrIndeksa == this.sp.BrIndeksa)
+			if (DTOManager.VratiStudenta(BrIndeksa_TB.Text) == null || DTOManager.VratiStudenta(BrIndeksa_TB.Text).BrIndeksa == sp.BrIndeksa)
 			{
-				this.sp.BrIndeksa = BrIndeksa_TB.Text;
-				this.sp.LIme = Ime_TB.Text;
-				this.sp.ImeRoditelja = ImeRoditelja_TB.Text;
-				this.sp.Prezime = Prezime_TB.Text;
-				this.sp.Smer = Smer_TB.Text;
+				sp.BrIndeksa = BrIndeksa_TB.Text;
+				sp.LIme = Ime_TB.Text;
+				sp.ImeRoditelja = ImeRoditelja_TB.Text;
+				sp.Prezime = Prezime_TB.Text;
+				sp.Smer = Smer_TB.Text;
 
-				DTOManager.AzurirajStudenta(this.sp);
+				DTOManager.AzurirajStudenta(sp);
 				MessageBox.Show("Azuriranje studenta je uspesno izvrseno!");
 				this.Close();
 			}

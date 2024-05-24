@@ -62,7 +62,7 @@
 			StudentDetalji_GB.Location = new System.Drawing.Point(8, 12);
 			StudentDetalji_GB.Name = "StudentDetalji_GB";
 			StudentDetalji_GB.Size = new System.Drawing.Size(777, 385);
-			StudentDetalji_GB.TabIndex = 3;
+			StudentDetalji_GB.TabIndex = 0;
 			StudentDetalji_GB.TabStop = false;
 			StudentDetalji_GB.Text = "Projekti na kojima radi:";
 			// 
@@ -122,7 +122,7 @@
 			Ucesce_Btn.Location = new System.Drawing.Point(604, 517);
 			Ucesce_Btn.Name = "Ucesce_Btn";
 			Ucesce_Btn.Size = new System.Drawing.Size(170, 69);
-			Ucesce_Btn.TabIndex = 1;
+			Ucesce_Btn.TabIndex = 2;
 			Ucesce_Btn.Text = "Prikazi vise\r\ninformacija o ucescu";
 			Ucesce_Btn.UseVisualStyleBackColor = false;
 			Ucesce_Btn.Click += Ucesce_Btn_Click;
@@ -136,7 +136,7 @@
 			Podaci_o_predmetimaGB.Location = new System.Drawing.Point(8, 403);
 			Podaci_o_predmetimaGB.Name = "Podaci_o_predmetimaGB";
 			Podaci_o_predmetimaGB.Size = new System.Drawing.Size(177, 182);
-			Podaci_o_predmetimaGB.TabIndex = 8;
+			Podaci_o_predmetimaGB.TabIndex = 1;
 			Podaci_o_predmetimaGB.TabStop = false;
 			Podaci_o_predmetimaGB.Text = "Izmeni ucesce";
 			// 
@@ -147,7 +147,7 @@
 			IzmeniUcesce_Btn.Location = new System.Drawing.Point(15, 85);
 			IzmeniUcesce_Btn.Name = "IzmeniUcesce_Btn";
 			IzmeniUcesce_Btn.Size = new System.Drawing.Size(146, 38);
-			IzmeniUcesce_Btn.TabIndex = 2;
+			IzmeniUcesce_Btn.TabIndex = 1;
 			IzmeniUcesce_Btn.Text = "Izmeni ucesce";
 			IzmeniUcesce_Btn.UseVisualStyleBackColor = false;
 			// 
@@ -158,7 +158,7 @@
 			DodajUcesce_Btn.Location = new System.Drawing.Point(15, 41);
 			DodajUcesce_Btn.Name = "DodajUcesce_Btn";
 			DodajUcesce_Btn.Size = new System.Drawing.Size(146, 38);
-			DodajUcesce_Btn.TabIndex = 1;
+			DodajUcesce_Btn.TabIndex = 0;
 			DodajUcesce_Btn.Text = "Dodaj novo ucesce";
 			DodajUcesce_Btn.UseVisualStyleBackColor = false;
 			// 
@@ -169,7 +169,7 @@
 			ObrisiUcesce_Btn.Location = new System.Drawing.Point(15, 129);
 			ObrisiUcesce_Btn.Name = "ObrisiUcesce_Btn";
 			ObrisiUcesce_Btn.Size = new System.Drawing.Size(146, 38);
-			ObrisiUcesce_Btn.TabIndex = 0;
+			ObrisiUcesce_Btn.TabIndex = 2;
 			ObrisiUcesce_Btn.Text = "Obrisi ucesce";
 			ObrisiUcesce_Btn.UseVisualStyleBackColor = false;
 			// 

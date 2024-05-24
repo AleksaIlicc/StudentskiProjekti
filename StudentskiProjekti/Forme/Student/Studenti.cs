@@ -66,7 +66,7 @@ public partial class Studenti : Form
     {
         if (Studenti_ListV.SelectedItems.Count == 0)
         {
-            MessageBox.Show("Izaberite studenta kojeg zelite da izmenite!");
+            MessageBox.Show("Izaberite studenta cije informacije zelite da izmenite!");
             return;
         }
 

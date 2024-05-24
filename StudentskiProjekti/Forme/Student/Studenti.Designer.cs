@@ -66,7 +66,7 @@ namespace StudentskiProjekti.Forme
 			Studenti_GB.Location = new System.Drawing.Point(8, 12);
 			Studenti_GB.Name = "Studenti_GB";
 			Studenti_GB.Size = new System.Drawing.Size(736, 323);
-			Studenti_GB.TabIndex = 4;
+			Studenti_GB.TabIndex = 0;
 			Studenti_GB.TabStop = false;
 			Studenti_GB.Text = "Studenti";
 			// 
@@ -121,7 +121,7 @@ namespace StudentskiProjekti.Forme
 			Podaci_o_predmetimaGB.Location = new System.Drawing.Point(30, 364);
 			Podaci_o_predmetimaGB.Name = "Podaci_o_predmetimaGB";
 			Podaci_o_predmetimaGB.Size = new System.Drawing.Size(202, 206);
-			Podaci_o_predmetimaGB.TabIndex = 0;
+			Podaci_o_predmetimaGB.TabIndex = 1;
 			Podaci_o_predmetimaGB.TabStop = false;
 			Podaci_o_predmetimaGB.Text = "Izmeni";
 			// 
@@ -132,7 +132,7 @@ namespace StudentskiProjekti.Forme
 			IzmeniStudenta_Btn.Location = new System.Drawing.Point(34, 85);
 			IzmeniStudenta_Btn.Name = "IzmeniStudenta_Btn";
 			IzmeniStudenta_Btn.Size = new System.Drawing.Size(132, 38);
-			IzmeniStudenta_Btn.TabIndex = 2;
+			IzmeniStudenta_Btn.TabIndex = 1;
 			IzmeniStudenta_Btn.Text = "Izmeni studenta";
 			IzmeniStudenta_Btn.UseVisualStyleBackColor = false;
 			IzmeniStudenta_Btn.Click += IzmeniStudenta_Btn_Click;
@@ -144,7 +144,7 @@ namespace StudentskiProjekti.Forme
 			DodajStudenta_Btn.Location = new System.Drawing.Point(34, 26);
 			DodajStudenta_Btn.Name = "DodajStudenta_Btn";
 			DodajStudenta_Btn.Size = new System.Drawing.Size(132, 38);
-			DodajStudenta_Btn.TabIndex = 1;
+			DodajStudenta_Btn.TabIndex = 0;
 			DodajStudenta_Btn.Text = "Dodaj studenta";
 			DodajStudenta_Btn.UseVisualStyleBackColor = false;
 			DodajStudenta_Btn.Click += DodajStudenta_Btn_Click;
@@ -156,7 +156,7 @@ namespace StudentskiProjekti.Forme
 			ObrisiStudenta_Btn.Location = new System.Drawing.Point(34, 140);
 			ObrisiStudenta_Btn.Name = "ObrisiStudenta_Btn";
 			ObrisiStudenta_Btn.Size = new System.Drawing.Size(132, 38);
-			ObrisiStudenta_Btn.TabIndex = 0;
+			ObrisiStudenta_Btn.TabIndex = 2;
 			ObrisiStudenta_Btn.Text = "Obrisi studenta";
 			ObrisiStudenta_Btn.UseVisualStyleBackColor = false;
 			ObrisiStudenta_Btn.Click += ObrisiStudenta_Btn_Click;
@@ -176,7 +176,7 @@ namespace StudentskiProjekti.Forme
 			Prikaz_GB.Location = new System.Drawing.Point(256, 366);
 			Prikaz_GB.Name = "Prikaz_GB";
 			Prikaz_GB.Size = new System.Drawing.Size(296, 204);
-			Prikaz_GB.TabIndex = 1;
+			Prikaz_GB.TabIndex = 2;
 			Prikaz_GB.TabStop = false;
 			Prikaz_GB.Text = "Prikaz";
 			// 
@@ -278,7 +278,7 @@ namespace StudentskiProjekti.Forme
 			Prikazi_Btn.Location = new System.Drawing.Point(586, 461);
 			Prikazi_Btn.Name = "Prikazi_Btn";
 			Prikazi_Btn.Size = new System.Drawing.Size(156, 54);
-			Prikazi_Btn.TabIndex = 2;
+			Prikazi_Btn.TabIndex = 3;
 			Prikazi_Btn.Text = "Prikazi ucesca na projektima";
 			Prikazi_Btn.UseVisualStyleBackColor = false;
 			Prikazi_Btn.Click += Prikazi_Btn_Click;
@@ -291,7 +291,7 @@ namespace StudentskiProjekti.Forme
 			Excel_Btn.Location = new System.Drawing.Point(586, 521);
 			Excel_Btn.Name = "Excel_Btn";
 			Excel_Btn.Size = new System.Drawing.Size(156, 49);
-			Excel_Btn.TabIndex = 3;
+			Excel_Btn.TabIndex = 4;
 			Excel_Btn.Text = "Snimi studente u \r\nExcel tabelu";
 			Excel_Btn.UseVisualStyleBackColor = false;
 			Excel_Btn.Click += Excel_Btn_Click;
