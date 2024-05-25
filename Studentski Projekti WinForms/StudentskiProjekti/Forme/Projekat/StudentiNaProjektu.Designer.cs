@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StudentiNaProjektu));
             Studenti_GB = new GroupBox();
             SkolskaGodZad_LB = new Label();
             label8 = new Label();
@@ -235,6 +236,7 @@
             Controls.Add(Excel_Btn);
             Controls.Add(Studenti_GB);
             Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MaximumSize = new System.Drawing.Size(692, 659);
             MinimizeBox = false;

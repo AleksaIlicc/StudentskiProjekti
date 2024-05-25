@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IzmeniIzvestaj));
             OsnovniPodOIzvestaju = new GroupBox();
             DatumPredaje_DP = new DateTimePicker();
             Izmeni_Btn = new Button();
@@ -103,6 +104,7 @@
             BackColor = System.Drawing.Color.AntiqueWhite;
             ClientSize = new System.Drawing.Size(358, 172);
             Controls.Add(OsnovniPodOIzvestaju);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MaximumSize = new System.Drawing.Size(374, 211);
             MinimizeBox = false;

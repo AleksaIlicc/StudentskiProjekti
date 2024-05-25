@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OstaliStudentiNaProjektu));
             OstaliStudenti_GB = new GroupBox();
             OstaliStudenti_ListV = new ListView();
             columnHeader11 = new ColumnHeader();
@@ -78,18 +79,19 @@
             columnHeader13.TextAlign = HorizontalAlignment.Center;
             columnHeader13.Width = 100;
             // 
-            // OstaliStudentiNaPProjektu
+            // OstaliStudentiNaProjektu
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = System.Drawing.Color.Linen;
             ClientSize = new System.Drawing.Size(339, 354);
             Controls.Add(OstaliStudenti_GB);
             Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MaximumSize = new System.Drawing.Size(355, 393);
             MinimizeBox = false;
             MinimumSize = new System.Drawing.Size(355, 393);
-            Name = "OstaliStudentiNaPProjektu";
+            Name = "OstaliStudentiNaProjektu";
             Text = "Studenti";
             Load += OstaliStudentiNaPProjektu_Load;
             OstaliStudenti_GB.ResumeLayout(false);

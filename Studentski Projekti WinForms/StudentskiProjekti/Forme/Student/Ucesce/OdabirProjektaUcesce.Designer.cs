@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OdabirProjektaUcesce));
             Projekti_GB = new GroupBox();
             Projekti_ListV = new ListView();
             columnHeader1 = new ColumnHeader();
@@ -190,6 +191,7 @@
             Controls.Add(label1);
             Controls.Add(Projekti_GB);
             Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(5, 3, 5, 3);
             MaximizeBox = false;
             MaximumSize = new System.Drawing.Size(817, 427);

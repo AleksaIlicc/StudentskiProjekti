@@ -28,6 +28,7 @@ partial class OdabirStudentaUcesce
     /// </summary>
     private void InitializeComponent()
     {
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OdabirStudentaUcesce));
         Studenti_GB = new GroupBox();
         Studenti_ListV = new ListView();
         columnHeader1 = new ColumnHeader();
@@ -235,6 +236,7 @@ partial class OdabirStudentaUcesce
         Controls.Add(Prikaz_GB);
         Controls.Add(Studenti_GB);
         Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+        Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
         MaximizeBox = false;
         MaximumSize = new System.Drawing.Size(772, 620);
         MinimizeBox = false;

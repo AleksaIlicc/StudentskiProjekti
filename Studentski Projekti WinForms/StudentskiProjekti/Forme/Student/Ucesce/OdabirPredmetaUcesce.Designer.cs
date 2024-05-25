@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OdabirPredmetaUcesce));
             Predmeti_GB = new GroupBox();
             label3 = new Label();
             Predmeti_ListV = new ListView();
@@ -197,6 +198,7 @@
             Controls.Add(PrikazPredmeta_GB);
             Controls.Add(Predmeti_GB);
             Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MaximumSize = new System.Drawing.Size(637, 570);
             MinimizeBox = false;

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DodajUcesce));
             OsnovnipodaciopredmetuGB = new GroupBox();
             RokZaZavr_DP = new DateTimePicker();
             DatumZavrsetkaIzrade_DP = new DateTimePicker();
@@ -167,6 +168,7 @@
             BackColor = System.Drawing.Color.AntiqueWhite;
             ClientSize = new System.Drawing.Size(481, 232);
             Controls.Add(OsnovnipodaciopredmetuGB);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "DodajUcesce";
