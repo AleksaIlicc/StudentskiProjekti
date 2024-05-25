@@ -74,7 +74,8 @@ public partial class StudentDetalji : Form
 
     private void DodajUcesce_Btn_Click(object sender, EventArgs e)
     {
-        OdabirPredmetaUcesce odabirPredmetaUcesce = new OdabirPredmetaUcesce(sp)
+
+        OdabirPredmetaUcesce odabirPredmetaUcesce = new OdabirPredmetaUcesce(sp.BrIndeksa)
         {
             StartPosition = FormStartPosition.CenterParent
         };
@@ -84,7 +85,7 @@ public partial class StudentDetalji : Form
 
     private void IzmeniUcesce_Btn_Click(object sender, EventArgs e)
     {
-        IzmeniUcesce izmeniUcesce = new IzmeniUcesce((int)StudentDetalji_ListV.SelectedItems[0].Tag, sp)
+        IzmeniUcesce izmeniUcesce = new IzmeniUcesce((int)StudentDetalji_ListV.SelectedItems[0].Tag, sp.BrIndeksa)
         {
             StartPosition = FormStartPosition.CenterParent
         };
@@ -96,11 +97,11 @@ public partial class StudentDetalji : Form
     {
         if (StudentDetalji_ListV.SelectedItems.Count == 0)
         {
-            MessageBox.Show("Izaberite predmet koji zelite da obrisete!");
+            MessageBox.Show("Izaberite ucesce koje zelite da obrisete!");
             return;
         }
 
-        int idUcesca = DTOManager.VratiUcesce((int)StudentDetalji_ListV.SelectedItems[0].Tag , sp.BrIndeksa).Id;
+        UcestvujePregled ucestvujep = DTOManager.VratiUcesce((int)StudentDetalji_ListV.SelectedItems[0].Tag , sp.BrIndeksa);
         string poruka = "Da li zelite da obrisete izabrano ucesce?";
         string title = "Pitanje";
         MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
@@ -108,7 +109,7 @@ public partial class StudentDetalji : Form
 
         if (result == DialogResult.OK)
         {
-            DTOManager.ObrisiUcesce(idUcesca);
+            DTOManager.ObrisiUcesce(ucestvujep);
             MessageBox.Show("Brisanje ucesca je uspesno obavljeno!");
             PopuniPodacima();
         }

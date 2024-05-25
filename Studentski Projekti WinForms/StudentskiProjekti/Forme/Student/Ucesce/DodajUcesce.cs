@@ -38,6 +38,23 @@ public partial class DodajUcesce : Form
 
         if (result == DialogResult.OK)
         {
+      
+            if (DatmuPocetkaIzrade_DP.Value > RokZaZavr_DP.Value)
+            {
+                MessageBox.Show("Datum početka izrade ne može biti posle roka za završetak!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (DatumZavrsetkaIzrade_DP.Value < DatmuPocetkaIzrade_DP.Value)
+            {
+                MessageBox.Show("Datum zavrsetka izrade ne moze biti pre datuma pocetka izrade!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (DatumZavrsetkaIzrade_DP.Checked && DatumZavrsetkaIzrade_DP.Value > DateTime.Now)
+            {
+                MessageBox.Show("Datum završetka izrade ne može biti posle današnjeg datuma!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             UcestvujePregled up = new UcestvujePregled();
 
             up.DatumPocetkaIzrade = DatmuPocetkaIzrade_DP.Value;
@@ -63,7 +80,6 @@ public partial class DodajUcesce : Form
             }
             if (projp.TipProjekta == "grupni")
             {
-
                 poruka = "Projekat pod nazivom: " + projp.Naziv + " je grupni projekat!\nDodavanjem ucesca, student: " + sp.LIme + " " + sp.Prezime + " ce biti dodat/a u grupu studenata koji rade na projektu.";
                 title = "Pitanje";
                 buttons = MessageBoxButtons.OKCancel;
@@ -75,12 +91,11 @@ public partial class DodajUcesce : Form
                 }
             }
 
-            DTOManager.DodajUcesce(sp, projp, up);
+            DTOManager.DodajUcesce(sp.BrIndeksa, projp.Id, up);
             MessageBox.Show("Uspešno ste dodali novo učešće!");
             this.Close();
         }
     }
-
     private bool IsValidUrl(string url)
     {
         return Uri.TryCreate(url, UriKind.Absolute, out Uri uriResult)

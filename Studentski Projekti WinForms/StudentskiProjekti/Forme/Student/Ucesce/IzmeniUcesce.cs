@@ -8,11 +8,11 @@ namespace StudentskiProjekti.Forme
         ProjekatPregled projp;
         StudentPregled sp;
         int projid;
-        public IzmeniUcesce(int projid, StudentPregled sp)
+        public IzmeniUcesce(int projid, string sp)
         {
             InitializeComponent();
             this.projid = projid;
-            this.sp = sp;
+            this.sp = DTOManager.VratiStudenta(sp);
         }
 
         private void IzmeniUcesce_Load(object sender, EventArgs e)
@@ -22,7 +22,17 @@ namespace StudentskiProjekti.Forme
 
             DatmuPocetkaIzrade_DP.Value = up.DatumPocetkaIzrade;
             RokZaZavr_DP.Value = up.RokZaZavrsetak;
-            DatumZavrsetkaIzrade_DP.Value = up.DatumZavrsetka ?? DateTime.Now;
+            if (up.DatumZavrsetka == null)
+            {
+                DatumZavrsetkaIzrade_DP.Checked = false;
+                DatumZavrsetkaIzrade_DP.Value = DateTime.Now;
+            }
+            else if (up.DatumZavrsetka != null)
+            {
+                DatumZavrsetkaIzrade_DP.Checked = true;
+                DatumZavrsetkaIzrade_DP.Value = up.DatumZavrsetka ?? DateTime.Now;
+            }
+    
             DatumZavrsetkaIzrade_DP.Checked = up.DatumZavrsetka.HasValue;
 
             if (projp.VrstaProjekta == "prakticni")
@@ -49,10 +59,30 @@ namespace StudentskiProjekti.Forme
 
             if (result == DialogResult.OK)
             {
+                if (DatmuPocetkaIzrade_DP.Value > RokZaZavr_DP.Value)
+                {
+                    MessageBox.Show("Datum početka izrade ne može biti posle roka za završetak!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (DatumZavrsetkaIzrade_DP.Value < DatmuPocetkaIzrade_DP.Value)
+                {
+                    MessageBox.Show("Datum zavrsetka izrade ne moze biti pre datuma pocetka izrade!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (DatumZavrsetkaIzrade_DP.Checked && DatumZavrsetkaIzrade_DP.Value > DateTime.Now)
+                {
+                    MessageBox.Show("Datum završetka izrade ne može biti posle današnjeg datuma!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 up.DatumPocetkaIzrade = DatmuPocetkaIzrade_DP.Value;
                 if (DatumZavrsetkaIzrade_DP.Checked)
                 {
                     up.DatumZavrsetka = DatumZavrsetkaIzrade_DP.Value;
+                }
+                else
+                {
+                    up.DatumZavrsetka = null;
                 }
                 up.RokZaZavrsetak = RokZaZavr_DP.Value;
 

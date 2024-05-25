@@ -3,8 +3,8 @@ namespace StudentskiProjekti.Forme;
 
 public partial class OdabirProjektaUcesce : Form
 {
-    PredmetPregled pred = new PredmetPregled();
-    StudentPregled sp = new StudentPregled();
+    PredmetPregled pred;
+    StudentPregled sp;
     public OdabirProjektaUcesce(PredmetPregled pred, StudentPregled sp)
     {
         InitializeComponent();
@@ -44,27 +44,14 @@ public partial class OdabirProjektaUcesce : Form
             return;
         }
         this.Hide();
-        PrakticniProjekatPregled pp = DTOManager.VratiPrakticniProjekat((int)Projekti_ListV.SelectedItems[0].Tag);
-        TeorijskiProjekatPregled tp = DTOManager.VratiTeorijskiProjekat((int)Projekti_ListV.SelectedItems[0].Tag);
+        ProjekatPregled p = DTOManager.VratiProjekat((int)Projekti_ListV.SelectedItems[0].Tag);
 
-        if (pp != null)
+        DodajUcesce dodajUcesce = new DodajUcesce(p, sp)
         {
-            DodajUcesce dodajUcesce = new DodajUcesce(pp, sp)
-            {
-                StartPosition = FormStartPosition.CenterParent,
-                Owner = this
-            };
-            dodajUcesce.ShowDialog();
-        }
-        else if (tp != null)
-        {
-            DodajUcesce dodajUcesce = new DodajUcesce(tp, sp)
-            {
-                StartPosition = FormStartPosition.CenterParent,
-                Owner = this
-            };
-            dodajUcesce.ShowDialog();
-        }
+            StartPosition = FormStartPosition.CenterParent,
+            Owner = this
+        };
+        dodajUcesce.ShowDialog();
         this.Close();
     }
 }
