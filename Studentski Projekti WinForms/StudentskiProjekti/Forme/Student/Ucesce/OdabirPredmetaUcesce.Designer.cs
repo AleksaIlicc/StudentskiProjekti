@@ -43,7 +43,7 @@
             label1 = new Label();
             Semestar_TB = new TextBox();
             NazivKatedre_TB = new TextBox();
-            Prikazi_Btn = new Button();
+            Izaberi_Btn = new Button();
             Predmeti_GB.SuspendLayout();
             PrikazPredmeta_GB.SuspendLayout();
             SuspendLayout();
@@ -176,25 +176,25 @@
             NazivKatedre_TB.Size = new System.Drawing.Size(108, 21);
             NazivKatedre_TB.TabIndex = 2;
             // 
-            // Prikazi_Btn
+            // Izaberi_Btn
             // 
-            Prikazi_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
-            Prikazi_Btn.Font = new System.Drawing.Font("Georgia", 14F);
-            Prikazi_Btn.ForeColor = System.Drawing.SystemColors.ControlText;
-            Prikazi_Btn.Location = new System.Drawing.Point(464, 465);
-            Prikazi_Btn.Name = "Prikazi_Btn";
-            Prikazi_Btn.Size = new System.Drawing.Size(141, 54);
-            Prikazi_Btn.TabIndex = 3;
-            Prikazi_Btn.Text = "Izaberi predmet";
-            Prikazi_Btn.UseVisualStyleBackColor = false;
-            Prikazi_Btn.Click += Prikazi_Btn_Click;
+            Izaberi_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
+            Izaberi_Btn.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Bold);
+            Izaberi_Btn.ForeColor = System.Drawing.SystemColors.ControlText;
+            Izaberi_Btn.Location = new System.Drawing.Point(438, 451);
+            Izaberi_Btn.Name = "Izaberi_Btn";
+            Izaberi_Btn.Size = new System.Drawing.Size(167, 68);
+            Izaberi_Btn.TabIndex = 4;
+            Izaberi_Btn.Text = "Izaberite predmet";
+            Izaberi_Btn.UseVisualStyleBackColor = false;
+            Izaberi_Btn.Click += Izaberi_Btn_Click;
             // 
             // OdabirPredmetaUcesce
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = System.Drawing.Color.Linen;
             ClientSize = new System.Drawing.Size(621, 531);
-            Controls.Add(Prikazi_Btn);
+            Controls.Add(Izaberi_Btn);
             Controls.Add(PrikazPredmeta_GB);
             Controls.Add(Predmeti_GB);
             Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
@@ -222,12 +222,12 @@
         private TextBox Semestar_TB;
         private TextBox NazivKatedre_TB;
         private Button Sortiraj_Btn;
-        private Button Prikazi_Btn;
         private ColumnHeader columnHeader1;
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader3;
         private ColumnHeader columnHeader4;
         private Button Ocisti_Btn;
         private Label label3;
+        private Button Izaberi_Btn;
     }
 }

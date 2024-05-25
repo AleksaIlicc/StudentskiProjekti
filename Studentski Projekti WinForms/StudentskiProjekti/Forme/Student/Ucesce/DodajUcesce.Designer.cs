@@ -70,7 +70,7 @@
             RokZaZavr_DP.Location = new System.Drawing.Point(210, 93);
             RokZaZavr_DP.Name = "RokZaZavr_DP";
             RokZaZavr_DP.Size = new System.Drawing.Size(217, 21);
-            RokZaZavr_DP.TabIndex = 9;
+            RokZaZavr_DP.TabIndex = 2;
             // 
             // DatumZavrsetkaIzrade_DP
             // 
@@ -78,21 +78,21 @@
             DatumZavrsetkaIzrade_DP.Name = "DatumZavrsetkaIzrade_DP";
             DatumZavrsetkaIzrade_DP.ShowCheckBox = true;
             DatumZavrsetkaIzrade_DP.Size = new System.Drawing.Size(217, 21);
-            DatumZavrsetkaIzrade_DP.TabIndex = 8;
+            DatumZavrsetkaIzrade_DP.TabIndex = 1;
             // 
             // DatmuPocetkaIzrade_DP
             // 
             DatmuPocetkaIzrade_DP.Location = new System.Drawing.Point(210, 39);
             DatmuPocetkaIzrade_DP.Name = "DatmuPocetkaIzrade_DP";
             DatmuPocetkaIzrade_DP.Size = new System.Drawing.Size(217, 21);
-            DatmuPocetkaIzrade_DP.TabIndex = 7;
+            DatmuPocetkaIzrade_DP.TabIndex = 0;
             // 
             // ProgJ_DodLit_TB
             // 
             ProgJ_DodLit_TB.Location = new System.Drawing.Point(210, 120);
             ProgJ_DodLit_TB.Name = "ProgJ_DodLit_TB";
             ProgJ_DodLit_TB.Size = new System.Drawing.Size(217, 21);
-            ProgJ_DodLit_TB.TabIndex = 5;
+            ProgJ_DodLit_TB.TabIndex = 3;
             // 
             // ProgJ_DodLit_LBL
             // 
@@ -110,7 +110,7 @@
             Dodaj_Btn.Location = new System.Drawing.Point(306, 174);
             Dodaj_Btn.Name = "Dodaj_Btn";
             Dodaj_Btn.Size = new System.Drawing.Size(121, 29);
-            Dodaj_Btn.TabIndex = 4;
+            Dodaj_Btn.TabIndex = 5;
             Dodaj_Btn.Text = "Dodaj";
             Dodaj_Btn.UseVisualStyleBackColor = false;
             Dodaj_Btn.Click += Dodaj_Btn_Click;
@@ -120,7 +120,7 @@
             URL_TB.Location = new System.Drawing.Point(210, 147);
             URL_TB.Name = "URL_TB";
             URL_TB.Size = new System.Drawing.Size(217, 21);
-            URL_TB.TabIndex = 3;
+            URL_TB.TabIndex = 4;
             // 
             // UrlDok_LBL
             // 
@@ -170,7 +170,9 @@
             Controls.Add(OsnovnipodaciopredmetuGB);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
+            MaximumSize = new System.Drawing.Size(497, 271);
             MinimizeBox = false;
+            MinimumSize = new System.Drawing.Size(497, 271);
             Name = "DodajUcesce";
             Text = "Dodaj ucesce";
             Load += DodajUcesce_Load;

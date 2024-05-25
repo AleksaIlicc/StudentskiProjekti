@@ -165,11 +165,12 @@
             // IzaberiProjekat_Btn
             // 
             IzaberiProjekat_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
-            IzaberiProjekat_Btn.Font = new System.Drawing.Font("Georgia", 10F, System.Drawing.FontStyle.Bold);
-            IzaberiProjekat_Btn.Location = new System.Drawing.Point(551, 327);
+            IzaberiProjekat_Btn.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Bold);
+            IzaberiProjekat_Btn.ForeColor = System.Drawing.SystemColors.ControlText;
+            IzaberiProjekat_Btn.Location = new System.Drawing.Point(620, 328);
             IzaberiProjekat_Btn.Name = "IzaberiProjekat_Btn";
-            IzaberiProjekat_Btn.Size = new System.Drawing.Size(236, 53);
-            IzaberiProjekat_Btn.TabIndex = 9;
+            IzaberiProjekat_Btn.Size = new System.Drawing.Size(167, 68);
+            IzaberiProjekat_Btn.TabIndex = 10;
             IzaberiProjekat_Btn.Text = "Izaberite projekat";
             IzaberiProjekat_Btn.UseVisualStyleBackColor = false;
             IzaberiProjekat_Btn.Click += IzaberiProjekat_Btn_Click;
@@ -179,7 +180,7 @@
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = System.Drawing.Color.Linen;
-            ClientSize = new System.Drawing.Size(801, 388);
+            ClientSize = new System.Drawing.Size(801, 408);
             Controls.Add(IzaberiProjekat_Btn);
             Controls.Add(Katedra_Lbl);
             Controls.Add(Semestar_Lbl);
@@ -194,10 +195,10 @@
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(5, 3, 5, 3);
             MaximizeBox = false;
-            MaximumSize = new System.Drawing.Size(817, 427);
+            MaximumSize = new System.Drawing.Size(817, 447);
             MdiChildrenMinimizedAnchorBottom = false;
             MinimizeBox = false;
-            MinimumSize = new System.Drawing.Size(817, 427);
+            MinimumSize = new System.Drawing.Size(817, 447);
             Name = "OdabirProjektaUcesce";
             Text = "Projekti na predmetu";
             Load += OdabirProjektaUcesce_Load;

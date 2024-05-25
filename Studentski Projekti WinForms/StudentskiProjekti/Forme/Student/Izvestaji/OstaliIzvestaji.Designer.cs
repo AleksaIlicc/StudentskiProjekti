@@ -58,7 +58,7 @@
             label5.Location = new System.Drawing.Point(6, 30);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(318, 15);
-            label5.TabIndex = 11;
+            label5.TabIndex = 0;
             label5.Text = "Duplim klikom na red mozete videti ceo opis izvestaja:";
             // 
             // Izvestaji_ListV

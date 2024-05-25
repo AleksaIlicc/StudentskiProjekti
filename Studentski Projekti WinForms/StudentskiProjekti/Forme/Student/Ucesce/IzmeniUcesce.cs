@@ -37,7 +37,7 @@ namespace StudentskiProjekti.Forme
 
             if (projp.VrstaProjekta == "prakticni")
             {
-                ProgJ_DodLit_LBL.Text = "Odabrnani programski jezik:";
+                ProgJ_DodLit_LBL.Text = "Odabrani programski jezik:";
                 ProgJ_DodLit_TB.Text = up.OdabranProgramskiJezik;
                 URL_TB.Text = up.UrlDokumentacijeProgJezika;
             }

@@ -51,15 +51,16 @@ public partial class OdabirPredmetaUcesce : Form
         PopuniPodacima();
     }
 
-    private void Prikazi_Btn_Click(object sender, EventArgs e)
+    private void Izaberi_Btn_Click(object sender, EventArgs e)
     {
-        if(Predmeti_ListV.SelectedItems.Count == 0) {
+        if (Predmeti_ListV.SelectedItems.Count == 0)
+        {
             MessageBox.Show("Izaberite predmet za koji zelite da dodate ucesce!");
             return;
         }
         this.Hide();
         PredmetPregled pred = DTOManager.VratiPredmet(Predmeti_ListV.SelectedItems[0].SubItems[0].Text);
-        OdabirProjektaUcesce odabirProjektaUcesce = new OdabirProjektaUcesce(pred , sp)
+        OdabirProjektaUcesce odabirProjektaUcesce = new OdabirProjektaUcesce(pred, sp)
         {
             StartPosition = FormStartPosition.CenterParent,
             Owner = this

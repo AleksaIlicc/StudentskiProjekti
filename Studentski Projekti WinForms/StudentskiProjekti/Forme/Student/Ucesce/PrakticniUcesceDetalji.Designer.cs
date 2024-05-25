@@ -51,9 +51,7 @@
             Izvestaji_Btn = new Button();
             OdabraniProgJezik_LB = new Label();
             OdabraniPJezik_LB = new Label();
-            MaksimalanBrStranica_LB = new Label();
             SkolskaGodinaZad_LB = new Label();
-            label14 = new Label();
             label7 = new Label();
             OstaliClanovi_GB.SuspendLayout();
             PodaciOProjektu_GB.SuspendLayout();
@@ -210,9 +208,7 @@
             PodaciOProjektu_GB.Controls.Add(Izvestaji_Btn);
             PodaciOProjektu_GB.Controls.Add(OdabraniProgJezik_LB);
             PodaciOProjektu_GB.Controls.Add(OdabraniPJezik_LB);
-            PodaciOProjektu_GB.Controls.Add(MaksimalanBrStranica_LB);
             PodaciOProjektu_GB.Controls.Add(SkolskaGodinaZad_LB);
-            PodaciOProjektu_GB.Controls.Add(label14);
             PodaciOProjektu_GB.Controls.Add(label7);
             PodaciOProjektu_GB.Controls.Add(ProjekatZavrsen_LB);
             PodaciOProjektu_GB.Controls.Add(RokZaZavrsetak_LB);
@@ -234,7 +230,7 @@
             // UrlDokumentacije_LB
             // 
             UrlDokumentacije_LB.AutoSize = true;
-            UrlDokumentacije_LB.Location = new System.Drawing.Point(200, 374);
+            UrlDokumentacije_LB.Location = new System.Drawing.Point(200, 345);
             UrlDokumentacije_LB.MaximumSize = new System.Drawing.Size(320, 0);
             UrlDokumentacije_LB.Name = "UrlDokumentacije_LB";
             UrlDokumentacije_LB.Size = new System.Drawing.Size(0, 15);
@@ -243,7 +239,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(6, 374);
+            label6.Location = new System.Drawing.Point(6, 345);
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(188, 15);
             label6.TabIndex = 24;
@@ -264,7 +260,7 @@
             // OdabraniProgJezik_LB
             // 
             OdabraniProgJezik_LB.AutoSize = true;
-            OdabraniProgJezik_LB.Location = new System.Drawing.Point(200, 333);
+            OdabraniProgJezik_LB.Location = new System.Drawing.Point(200, 304);
             OdabraniProgJezik_LB.MaximumSize = new System.Drawing.Size(320, 0);
             OdabraniProgJezik_LB.Name = "OdabraniProgJezik_LB";
             OdabraniProgJezik_LB.Size = new System.Drawing.Size(0, 15);
@@ -273,20 +269,11 @@
             // OdabraniPJezik_LB
             // 
             OdabraniPJezik_LB.AutoSize = true;
-            OdabraniPJezik_LB.Location = new System.Drawing.Point(6, 333);
+            OdabraniPJezik_LB.Location = new System.Drawing.Point(6, 304);
             OdabraniPJezik_LB.Name = "OdabraniPJezik_LB";
             OdabraniPJezik_LB.Size = new System.Drawing.Size(128, 15);
             OdabraniPJezik_LB.TabIndex = 21;
             OdabraniPJezik_LB.Text = "Odabrani prog. jezik:";
-            // 
-            // MaksimalanBrStranica_LB
-            // 
-            MaksimalanBrStranica_LB.AutoSize = true;
-            MaksimalanBrStranica_LB.Location = new System.Drawing.Point(200, 284);
-            MaksimalanBrStranica_LB.MaximumSize = new System.Drawing.Size(320, 0);
-            MaksimalanBrStranica_LB.Name = "MaksimalanBrStranica_LB";
-            MaksimalanBrStranica_LB.Size = new System.Drawing.Size(0, 15);
-            MaksimalanBrStranica_LB.TabIndex = 20;
             // 
             // SkolskaGodinaZad_LB
             // 
@@ -296,15 +283,6 @@
             SkolskaGodinaZad_LB.Name = "SkolskaGodinaZad_LB";
             SkolskaGodinaZad_LB.Size = new System.Drawing.Size(0, 15);
             SkolskaGodinaZad_LB.TabIndex = 18;
-            // 
-            // label14
-            // 
-            label14.AutoSize = true;
-            label14.Location = new System.Drawing.Point(6, 284);
-            label14.Name = "label14";
-            label14.Size = new System.Drawing.Size(150, 15);
-            label14.TabIndex = 19;
-            label14.Text = "Maksimalan broj strana:";
             // 
             // label7
             // 
@@ -361,8 +339,6 @@
         private GroupBox PodaciOProjektu_GB;
         private Label SkolskaGodinaZad_LB;
         private Label label7;
-        private Label MaksimalanBrStranica_LB;
-        private Label label14;
         private Button Izvestaji_Btn;
         private Label OdabraniProgJezik_LB;
         private Label OdabraniPJezik_LB;

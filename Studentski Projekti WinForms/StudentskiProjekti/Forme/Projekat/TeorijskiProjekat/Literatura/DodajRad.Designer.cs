@@ -175,7 +175,7 @@
             Controls.Add(OsnovnipodaciopredmetuGB);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
-            MaximumSize = new System.Drawing.Size(401, 320);
+            MaximumSize = new System.Drawing.Size(401, 310);
             MinimizeBox = false;
             MinimumSize = new System.Drawing.Size(401, 310);
             Name = "DodajRad";

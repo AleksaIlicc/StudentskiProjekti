@@ -58,7 +58,7 @@ partial class DodajIzvestaj
         DatumPredaje_DP.Location = new System.Drawing.Point(110, 69);
         DatumPredaje_DP.Name = "DatumPredaje_DP";
         DatumPredaje_DP.Size = new System.Drawing.Size(231, 21);
-        DatumPredaje_DP.TabIndex = 5;
+        DatumPredaje_DP.TabIndex = 1;
         // 
         // Dodaj_Btn
         // 
@@ -66,7 +66,7 @@ partial class DodajIzvestaj
         Dodaj_Btn.Location = new System.Drawing.Point(220, 106);
         Dodaj_Btn.Name = "Dodaj_Btn";
         Dodaj_Btn.Size = new System.Drawing.Size(121, 29);
-        Dodaj_Btn.TabIndex = 4;
+        Dodaj_Btn.TabIndex = 2;
         Dodaj_Btn.Text = "Dodaj";
         Dodaj_Btn.UseVisualStyleBackColor = false;
         Dodaj_Btn.Click += Dodaj_Btn_Click;

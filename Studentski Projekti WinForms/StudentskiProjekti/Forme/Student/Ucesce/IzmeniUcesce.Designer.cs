@@ -70,7 +70,7 @@
             RokZaZavr_DP.Location = new System.Drawing.Point(210, 93);
             RokZaZavr_DP.Name = "RokZaZavr_DP";
             RokZaZavr_DP.Size = new System.Drawing.Size(217, 21);
-            RokZaZavr_DP.TabIndex = 9;
+            RokZaZavr_DP.TabIndex = 2;
             // 
             // DatumZavrsetkaIzrade_DP
             // 
@@ -78,21 +78,21 @@
             DatumZavrsetkaIzrade_DP.Name = "DatumZavrsetkaIzrade_DP";
             DatumZavrsetkaIzrade_DP.ShowCheckBox = true;
             DatumZavrsetkaIzrade_DP.Size = new System.Drawing.Size(217, 21);
-            DatumZavrsetkaIzrade_DP.TabIndex = 8;
+            DatumZavrsetkaIzrade_DP.TabIndex = 1;
             // 
             // DatmuPocetkaIzrade_DP
             // 
             DatmuPocetkaIzrade_DP.Location = new System.Drawing.Point(210, 39);
             DatmuPocetkaIzrade_DP.Name = "DatmuPocetkaIzrade_DP";
             DatmuPocetkaIzrade_DP.Size = new System.Drawing.Size(217, 21);
-            DatmuPocetkaIzrade_DP.TabIndex = 7;
+            DatmuPocetkaIzrade_DP.TabIndex = 0;
             // 
             // ProgJ_DodLit_TB
             // 
             ProgJ_DodLit_TB.Location = new System.Drawing.Point(210, 120);
             ProgJ_DodLit_TB.Name = "ProgJ_DodLit_TB";
             ProgJ_DodLit_TB.Size = new System.Drawing.Size(217, 21);
-            ProgJ_DodLit_TB.TabIndex = 5;
+            ProgJ_DodLit_TB.TabIndex = 3;
             // 
             // ProgJ_DodLit_LBL
             // 
@@ -110,7 +110,7 @@
             Izmeni_Btn.Location = new System.Drawing.Point(306, 174);
             Izmeni_Btn.Name = "Izmeni_Btn";
             Izmeni_Btn.Size = new System.Drawing.Size(121, 29);
-            Izmeni_Btn.TabIndex = 4;
+            Izmeni_Btn.TabIndex = 5;
             Izmeni_Btn.Text = "Izmeni";
             Izmeni_Btn.UseVisualStyleBackColor = false;
             Izmeni_Btn.Click += Izmeni_Btn_Click;
@@ -120,7 +120,7 @@
             URL_TB.Location = new System.Drawing.Point(210, 147);
             URL_TB.Name = "URL_TB";
             URL_TB.Size = new System.Drawing.Size(217, 21);
-            URL_TB.TabIndex = 3;
+            URL_TB.TabIndex = 4;
             // 
             // UrlDok_LBL
             // 

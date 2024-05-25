@@ -58,7 +58,7 @@
             DatumPredaje_DP.Location = new System.Drawing.Point(110, 69);
             DatumPredaje_DP.Name = "DatumPredaje_DP";
             DatumPredaje_DP.Size = new System.Drawing.Size(231, 21);
-            DatumPredaje_DP.TabIndex = 5;
+            DatumPredaje_DP.TabIndex = 1;
             // 
             // Izmeni_Btn
             // 
@@ -66,7 +66,7 @@
             Izmeni_Btn.Location = new System.Drawing.Point(220, 106);
             Izmeni_Btn.Name = "Izmeni_Btn";
             Izmeni_Btn.Size = new System.Drawing.Size(121, 29);
-            Izmeni_Btn.TabIndex = 4;
+            Izmeni_Btn.TabIndex = 2;
             Izmeni_Btn.Text = "Izmeni";
             Izmeni_Btn.UseVisualStyleBackColor = false;
             Izmeni_Btn.Click += Izmeni_Btn_Click;

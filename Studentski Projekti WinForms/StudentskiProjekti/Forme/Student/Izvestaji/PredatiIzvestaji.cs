@@ -84,6 +84,11 @@ public partial class PredatiIzvestaji : Form
 
     private void IzmeniIzvestaj_Btn_Click(object sender, EventArgs e)
     {
+        if (Izvestaji_ListV.SelectedItems.Count == 0)
+        {
+            MessageBox.Show("Izaberite izvestaj koji zelite da izmenite!");
+            return;
+        }
         IzvestajPregled izvestaj = DTOManager.VratiIzvestaj((int)Izvestaji_ListV.SelectedItems[0].Tag);
         IzmeniIzvestaj izmeniIzvestaj = new IzmeniIzvestaj(izvestaj, pd)
         {

@@ -1189,8 +1189,9 @@ public class DTOManager
             ISession s = DataLayer.GetSession();
 
             knjiga = s.Query<Knjiga>()
+                         .Where(k => k.ISBN == isbn)
                          .Select(k => new KnjigaPregled(k.Literatura.Naziv, k.ISBN, k.Izdavac, k.GodinaIzdanja))
-                         .FirstOrDefault(k => k.ISBN == isbn);
+                         .FirstOrDefault();
 
             s.Close();
         }
@@ -1685,8 +1686,9 @@ public class DTOManager
             ISession s = DataLayer.GetSession();
 
             clanak = s.Query<ClanakUCasopisu>()
+                                            .Where(c => c.ISSN == issn)
                                             .Select(c => new ClanakUCasopisuPregled(c.Literatura.Naziv, c.ISSN, c.ImeCasopisa, c.Broj, c.Godina))
-                                            .FirstOrDefault(c => c.ISSN == issn);
+                                            .FirstOrDefault();
 
             s.Close();
         }

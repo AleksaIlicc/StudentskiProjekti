@@ -18,7 +18,7 @@ public partial class DodajUcesce : Form
     {
         if (projp.VrstaProjekta == "prakticni")
         {
-            ProgJ_DodLit_LBL.Text = "Odabrnani programski jezik:";
+            ProgJ_DodLit_LBL.Text = "Odabrani programski jezik:";
 
         }
         else if (projp.VrstaProjekta == "teorijski")

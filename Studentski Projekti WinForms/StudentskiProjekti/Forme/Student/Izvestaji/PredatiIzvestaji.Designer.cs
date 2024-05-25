@@ -70,7 +70,7 @@
             Izvestaji_GB.Location = new System.Drawing.Point(6, 121);
             Izvestaji_GB.Name = "Izvestaji_GB";
             Izvestaji_GB.Size = new System.Drawing.Size(845, 278);
-            Izvestaji_GB.TabIndex = 3;
+            Izvestaji_GB.TabIndex = 0;
             Izvestaji_GB.TabStop = false;
             Izvestaji_GB.Text = "Izvestaji";
             // 
@@ -122,7 +122,7 @@
             OstaliClanovi_Btn.Location = new System.Drawing.Point(660, 518);
             OstaliClanovi_Btn.Name = "OstaliClanovi_Btn";
             OstaliClanovi_Btn.Size = new System.Drawing.Size(180, 69);
-            OstaliClanovi_Btn.TabIndex = 1;
+            OstaliClanovi_Btn.TabIndex = 2;
             OstaliClanovi_Btn.Text = "Prikazi izvestaje koji su predali ostali clanovi grupe";
             OstaliClanovi_Btn.UseVisualStyleBackColor = false;
             OstaliClanovi_Btn.Click += OstaliClanovi_Btn_Click;
@@ -136,7 +136,7 @@
             Podaci_o_predmetimaGB.Location = new System.Drawing.Point(12, 406);
             Podaci_o_predmetimaGB.Name = "Podaci_o_predmetimaGB";
             Podaci_o_predmetimaGB.Size = new System.Drawing.Size(167, 183);
-            Podaci_o_predmetimaGB.TabIndex = 18;
+            Podaci_o_predmetimaGB.TabIndex = 1;
             Podaci_o_predmetimaGB.TabStop = false;
             Podaci_o_predmetimaGB.Text = "Izmeni";
             // 
@@ -147,7 +147,7 @@
             IzmeniIzvestaj_Btn.Location = new System.Drawing.Point(19, 79);
             IzmeniIzvestaj_Btn.Name = "IzmeniIzvestaj_Btn";
             IzmeniIzvestaj_Btn.Size = new System.Drawing.Size(132, 38);
-            IzmeniIzvestaj_Btn.TabIndex = 2;
+            IzmeniIzvestaj_Btn.TabIndex = 1;
             IzmeniIzvestaj_Btn.Text = "Izmeni izvestaj";
             IzmeniIzvestaj_Btn.UseVisualStyleBackColor = false;
             IzmeniIzvestaj_Btn.Click += IzmeniIzvestaj_Btn_Click;
@@ -159,7 +159,7 @@
             DodajIzvestaj_Btn.Location = new System.Drawing.Point(19, 32);
             DodajIzvestaj_Btn.Name = "DodajIzvestaj_Btn";
             DodajIzvestaj_Btn.Size = new System.Drawing.Size(132, 38);
-            DodajIzvestaj_Btn.TabIndex = 1;
+            DodajIzvestaj_Btn.TabIndex = 0;
             DodajIzvestaj_Btn.Text = "Dodaj izvestaj";
             DodajIzvestaj_Btn.UseVisualStyleBackColor = false;
             DodajIzvestaj_Btn.Click += DodajIzvestaj_Btn_Click;
@@ -171,7 +171,7 @@
             ObrisiIzvestaj_Btn.Location = new System.Drawing.Point(19, 127);
             ObrisiIzvestaj_Btn.Name = "ObrisiIzvestaj_Btn";
             ObrisiIzvestaj_Btn.Size = new System.Drawing.Size(132, 38);
-            ObrisiIzvestaj_Btn.TabIndex = 0;
+            ObrisiIzvestaj_Btn.TabIndex = 2;
             ObrisiIzvestaj_Btn.Text = "Obrisi izvestaj";
             ObrisiIzvestaj_Btn.UseVisualStyleBackColor = false;
             ObrisiIzvestaj_Btn.Click += ObrisiIzvestaj_Btn_Click;

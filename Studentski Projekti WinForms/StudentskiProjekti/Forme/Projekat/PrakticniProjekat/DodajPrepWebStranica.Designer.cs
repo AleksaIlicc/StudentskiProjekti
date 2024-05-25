@@ -76,7 +76,9 @@
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 2, 3, 2);
             MaximizeBox = false;
+            MaximumSize = new System.Drawing.Size(331, 150);
             MinimizeBox = false;
+            MinimumSize = new System.Drawing.Size(331, 150);
             Name = "DodajPrepWebStranica";
             Text = "Dodaj preporucenu web stranicu";
             ResumeLayout(false);
