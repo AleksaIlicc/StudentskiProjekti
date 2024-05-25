@@ -2,37 +2,29 @@
 namespace StudentskiProjekti.Forme;
 public partial class TeorijskiUcesceDetalji : Form  
 {
-    StudentPregled sp = new StudentPregled();
-    ProjekatPregled te = new TeorijskiProjekatPregled();
-    ProjekatUcesceDetalji pd = new ProjekatUcesceDetalji();
-
-    public TeorijskiUcesceDetalji(StudentPregled sp, TeorijskiProjekatPregled te, ProjekatUcesceDetalji pd)
-    {
-        InitializeComponent();
-        this.te = te;
-        this.sp = sp;
-        this.pd = pd;
-    }
+    StudentPregled sp;
+    ProjekatPregled p;
+    ProjekatUcesceDetalji pd;
 
     public TeorijskiUcesceDetalji(StudentPregled sp, ProjekatPregled p)
     {
         InitializeComponent();
-        this.te = p;
+        this.p = p;
         this.sp = sp;
-        this.pd = DTOManager.VratiUcesceNaProj(sp.BrIndeksa, te.Id);
+        this.pd = DTOManager.VratiUcesceDetalji(sp.BrIndeksa, p.Id);
     }
 
     private void TeorijskiUcesceDetalji_Load(object sender, EventArgs e)
     {
         PopuniPodacimaLabele();
-        if (te.TipProjekta == "grupni")
+        if (p.TipProjekta == "grupni")
         {
             this.MaximumSize = new System.Drawing.Size(919, 451);
             this.MinimumSize = new System.Drawing.Size(919, 451);
             PrikaziStudenteNaIstom_Btn.Visible = false;
             PopuniPodacimaListView();
         }
-        else if (te.TipProjekta == "pojedinacni")
+        else if (p.TipProjekta == "pojedinacni")
         {
             this.MaximumSize = new System.Drawing.Size(585, 500);
             this.MinimumSize = new System.Drawing.Size(585, 500);
@@ -43,19 +35,19 @@ public partial class TeorijskiUcesceDetalji : Form
 
     private void PopuniPodacimaLabele()
     {
-        Naziv_LB.Text = te.Naziv;
+        Naziv_LB.Text = p.Naziv;
         DatumPocetka_LB.Text = pd.DatumPocetkaIzrade.ToString("dd.MM.yyyy");
         DatumZavrsetka_LB.Text = pd.DatumZavrsetkaIzrade?.ToString("dd.MM.yyyy") ?? "";
         RokZaZavrsetak_LB.Text = pd.RokZaZavrsetak.ToString("dd.MM.yyyy");
         ProjekatZavrsen_LB.Text = pd.ProjekatZavrsen;
-        SkolskaGodinaZad_LB.Text = te.SkolskaGodinaZadavanja.ToString();
-        DopunskaLit_LB.Text = DTOManager.VratiDopunskuLiteraturu(te.Id, sp.BrIndeksa);
+        SkolskaGodinaZad_LB.Text = p.SkolskaGodinaZadavanja;
+        DopunskaLit_LB.Text = pd.DopunskaLiteratura ?? "";
     }
 
     private void PopuniPodacimaListView()
     {
         OstaliClanovi_ListV.Items.Clear();
-        List<StudentPregled> studenti = DTOManager.VratiStudenteNaProjektu(te.Id);
+        List<StudentPregled> studenti = DTOManager.VratiStudenteNaProjektu(p.Id);
 
         foreach (StudentPregled s in studenti)
         {
@@ -72,7 +64,7 @@ public partial class TeorijskiUcesceDetalji : Form
 
     private void PrikaziStudente_Btn_Click(object sender, EventArgs e)
     {
-        OstaliStudentiNaProjektu studenti = new OstaliStudentiNaProjektu(sp , te)
+        OstaliStudentiNaProjektu studenti = new OstaliStudentiNaProjektu(sp.BrIndeksa, p.Id)
         {
             StartPosition = FormStartPosition.CenterParent
         };

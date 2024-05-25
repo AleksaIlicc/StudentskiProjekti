@@ -4,9 +4,9 @@ namespace StudentskiProjekti.Forme
 {
     public partial class IzmeniUcesce : Form
     {
+        UcestvujePregled up;
         ProjekatPregled projp;
         StudentPregled sp;
-        UcestvujePregled up;
         int projid;
         public IzmeniUcesce(int projid, StudentPregled sp)
         {

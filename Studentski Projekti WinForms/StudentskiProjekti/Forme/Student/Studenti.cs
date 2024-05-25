@@ -123,9 +123,9 @@ public partial class Studenti : Form
         }
 
         string brIndeksa = Studenti_ListV.SelectedItems[0].SubItems[0].Text;
-        StudentPregled izabraniPredmet = DTOManager.VratiStudenta(brIndeksa);
+        StudentPregled student = DTOManager.VratiStudenta(brIndeksa);
 
-        StudentDetalji projekti = new StudentDetalji(izabraniPredmet)
+        StudentDetalji projekti = new StudentDetalji(student)
         {
             StartPosition = FormStartPosition.CenterParent
         };

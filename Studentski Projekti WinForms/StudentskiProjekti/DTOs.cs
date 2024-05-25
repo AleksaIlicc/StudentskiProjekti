@@ -27,6 +27,7 @@ public class DTOs
     #endregion
 
     #region Projekat
+
     public class ProjekatPregled
     {
         public int Id { get; set; }
@@ -55,9 +56,10 @@ public class DTOs
         {
         }
     }
+
     public class ProjekatUcesceDetalji
     {
-        public int Id { get; set; }
+        public int IdProjekta { get; set; }
         public string NazivProjekta { get; set; }
         public DateTime DatumPocetkaIzrade { get; set; }
         public DateTime? DatumZavrsetkaIzrade { get; set; }
@@ -65,7 +67,11 @@ public class DTOs
         public string ProjekatZavrsen { get; set; }
         public string VrstaProjekta { get; set; }
         public string NazivPredmeta {  get; set; }
-    }
+		public string OdabranProgramskiJezik { get; set; }
+		public string UrlDokumentacijeProgJezika { get; set; }
+		public string DopunskaLiteratura { get; set; }
+	}
+
     #endregion
 
     #region TeorijskiProjekat
@@ -81,8 +87,6 @@ public class DTOs
         }
 
         public TeorijskiProjekatPregled() : base() { }
-
-
     }
 
     #region Literatura
@@ -183,6 +187,7 @@ public class DTOs
     #endregion
 
     #region PrakticniProjekat
+
     public class PrakticniProjekatPregled : ProjekatPregled
     {
         public string KratakOpis { get; set; }
@@ -235,9 +240,9 @@ public class DTOs
     #endregion
 
     #region Izvestaj
+
     public class IzvestajPregled
     {
-
         public int Id { get; set; }
         public DateTime DatumPredaje { get; set; }
         public string Opis { get; set; }
@@ -253,6 +258,7 @@ public class DTOs
     #endregion
 
     #region Ucestvuje
+
     public class UcestvujePregled
     {
         public int Id { get; set; }
@@ -274,6 +280,7 @@ public class DTOs
         }
         public UcestvujePregled() { }
     }
+
     #endregion
 }
 

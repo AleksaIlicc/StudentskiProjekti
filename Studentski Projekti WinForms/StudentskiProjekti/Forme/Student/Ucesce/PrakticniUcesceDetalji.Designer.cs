@@ -45,6 +45,8 @@
 			RokZaZavrsetak_LB = new Label();
 			ProjekatZavrsen_LB = new Label();
 			PodaciOProjektu_GB = new GroupBox();
+			UrlDokumentacije_LB = new Label();
+			label6 = new Label();
 			Izvestaji_Btn = new Button();
 			OdabraniProgJezik_LB = new Label();
 			OdabraniPJezik_LB = new Label();
@@ -60,7 +62,7 @@
 			// 
 			PrikaziStudenteNaIstom_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
 			PrikaziStudenteNaIstom_Btn.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-			PrikaziStudenteNaIstom_Btn.Location = new System.Drawing.Point(382, 464);
+			PrikaziStudenteNaIstom_Btn.Location = new System.Drawing.Point(382, 485);
 			PrikaziStudenteNaIstom_Btn.Name = "PrikaziStudenteNaIstom_Btn";
 			PrikaziStudenteNaIstom_Btn.Size = new System.Drawing.Size(166, 47);
 			PrikaziStudenteNaIstom_Btn.TabIndex = 1;
@@ -75,7 +77,7 @@
 			OstaliClanovi_GB.Location = new System.Drawing.Point(566, 12);
 			OstaliClanovi_GB.Name = "OstaliClanovi_GB";
 			OstaliClanovi_GB.Size = new System.Drawing.Size(316, 259);
-			OstaliClanovi_GB.TabIndex = 4;
+			OstaliClanovi_GB.TabIndex = 2;
 			OstaliClanovi_GB.TabStop = false;
 			OstaliClanovi_GB.Text = "Ostali clanovi grupe:";
 			// 
@@ -158,8 +160,8 @@
 			// Naziv_LB
 			// 
 			Naziv_LB.AutoSize = true;
-			Naziv_LB.Location = new System.Drawing.Point(174, 33);
-			Naziv_LB.MaximumSize = new System.Drawing.Size(350, 0);
+			Naziv_LB.Location = new System.Drawing.Point(200, 33);
+			Naziv_LB.MaximumSize = new System.Drawing.Size(320, 0);
 			Naziv_LB.Name = "Naziv_LB";
 			Naziv_LB.Size = new System.Drawing.Size(0, 15);
 			Naziv_LB.TabIndex = 12;
@@ -167,8 +169,8 @@
 			// DatumPocetka_LB
 			// 
 			DatumPocetka_LB.AutoSize = true;
-			DatumPocetka_LB.Location = new System.Drawing.Point(174, 76);
-			DatumPocetka_LB.MaximumSize = new System.Drawing.Size(350, 0);
+			DatumPocetka_LB.Location = new System.Drawing.Point(200, 76);
+			DatumPocetka_LB.MaximumSize = new System.Drawing.Size(320, 0);
 			DatumPocetka_LB.Name = "DatumPocetka_LB";
 			DatumPocetka_LB.Size = new System.Drawing.Size(0, 15);
 			DatumPocetka_LB.TabIndex = 13;
@@ -176,8 +178,8 @@
 			// DatumZavrsetka_LB
 			// 
 			DatumZavrsetka_LB.AutoSize = true;
-			DatumZavrsetka_LB.Location = new System.Drawing.Point(174, 117);
-			DatumZavrsetka_LB.MaximumSize = new System.Drawing.Size(350, 0);
+			DatumZavrsetka_LB.Location = new System.Drawing.Point(200, 117);
+			DatumZavrsetka_LB.MaximumSize = new System.Drawing.Size(320, 0);
 			DatumZavrsetka_LB.Name = "DatumZavrsetka_LB";
 			DatumZavrsetka_LB.Size = new System.Drawing.Size(0, 15);
 			DatumZavrsetka_LB.TabIndex = 14;
@@ -185,8 +187,8 @@
 			// RokZaZavrsetak_LB
 			// 
 			RokZaZavrsetak_LB.AutoSize = true;
-			RokZaZavrsetak_LB.Location = new System.Drawing.Point(174, 162);
-			RokZaZavrsetak_LB.MaximumSize = new System.Drawing.Size(350, 0);
+			RokZaZavrsetak_LB.Location = new System.Drawing.Point(200, 162);
+			RokZaZavrsetak_LB.MaximumSize = new System.Drawing.Size(320, 0);
 			RokZaZavrsetak_LB.Name = "RokZaZavrsetak_LB";
 			RokZaZavrsetak_LB.Size = new System.Drawing.Size(0, 15);
 			RokZaZavrsetak_LB.TabIndex = 15;
@@ -194,14 +196,16 @@
 			// ProjekatZavrsen_LB
 			// 
 			ProjekatZavrsen_LB.AutoSize = true;
-			ProjekatZavrsen_LB.Location = new System.Drawing.Point(174, 202);
-			ProjekatZavrsen_LB.MaximumSize = new System.Drawing.Size(350, 0);
+			ProjekatZavrsen_LB.Location = new System.Drawing.Point(200, 202);
+			ProjekatZavrsen_LB.MaximumSize = new System.Drawing.Size(320, 0);
 			ProjekatZavrsen_LB.Name = "ProjekatZavrsen_LB";
 			ProjekatZavrsen_LB.Size = new System.Drawing.Size(0, 15);
 			ProjekatZavrsen_LB.TabIndex = 16;
 			// 
 			// PodaciOProjektu_GB
 			// 
+			PodaciOProjektu_GB.Controls.Add(UrlDokumentacije_LB);
+			PodaciOProjektu_GB.Controls.Add(label6);
 			PodaciOProjektu_GB.Controls.Add(Izvestaji_Btn);
 			PodaciOProjektu_GB.Controls.Add(OdabraniProgJezik_LB);
 			PodaciOProjektu_GB.Controls.Add(OdabraniPJezik_LB);
@@ -221,19 +225,37 @@
 			PodaciOProjektu_GB.Controls.Add(label1);
 			PodaciOProjektu_GB.Location = new System.Drawing.Point(12, 12);
 			PodaciOProjektu_GB.Name = "PodaciOProjektu_GB";
-			PodaciOProjektu_GB.Size = new System.Drawing.Size(542, 446);
-			PodaciOProjektu_GB.TabIndex = 17;
+			PodaciOProjektu_GB.Size = new System.Drawing.Size(542, 466);
+			PodaciOProjektu_GB.TabIndex = 0;
 			PodaciOProjektu_GB.TabStop = false;
 			PodaciOProjektu_GB.Text = "Podaci o projektu:";
+			// 
+			// UrlDokumentacije_LB
+			// 
+			UrlDokumentacije_LB.AutoSize = true;
+			UrlDokumentacije_LB.Location = new System.Drawing.Point(200, 374);
+			UrlDokumentacije_LB.MaximumSize = new System.Drawing.Size(320, 0);
+			UrlDokumentacije_LB.Name = "UrlDokumentacije_LB";
+			UrlDokumentacije_LB.Size = new System.Drawing.Size(0, 15);
+			UrlDokumentacije_LB.TabIndex = 25;
+			// 
+			// label6
+			// 
+			label6.AutoSize = true;
+			label6.Location = new System.Drawing.Point(6, 374);
+			label6.Name = "label6";
+			label6.Size = new System.Drawing.Size(188, 15);
+			label6.TabIndex = 24;
+			label6.Text = "Url dokumentacije prog. jezika:";
 			// 
 			// Izvestaji_Btn
 			// 
 			Izvestaji_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
 			Izvestaji_Btn.Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-			Izvestaji_Btn.Location = new System.Drawing.Point(370, 393);
+			Izvestaji_Btn.Location = new System.Drawing.Point(370, 413);
 			Izvestaji_Btn.Name = "Izvestaji_Btn";
 			Izvestaji_Btn.Size = new System.Drawing.Size(166, 47);
-			Izvestaji_Btn.TabIndex = 23;
+			Izvestaji_Btn.TabIndex = 1;
 			Izvestaji_Btn.Text = "Prikazi izvestaje koji su predati";
 			Izvestaji_Btn.UseVisualStyleBackColor = false;
 			Izvestaji_Btn.Click += Izvestaji_Btn_Click;
@@ -241,8 +263,8 @@
 			// OdabraniProgJezik_LB
 			// 
 			OdabraniProgJezik_LB.AutoSize = true;
-			OdabraniProgJezik_LB.Location = new System.Drawing.Point(174, 333);
-			OdabraniProgJezik_LB.MaximumSize = new System.Drawing.Size(350, 0);
+			OdabraniProgJezik_LB.Location = new System.Drawing.Point(200, 333);
+			OdabraniProgJezik_LB.MaximumSize = new System.Drawing.Size(320, 0);
 			OdabraniProgJezik_LB.Name = "OdabraniProgJezik_LB";
 			OdabraniProgJezik_LB.Size = new System.Drawing.Size(0, 15);
 			OdabraniProgJezik_LB.TabIndex = 22;
@@ -259,8 +281,8 @@
 			// MaksimalanBrStranica_LB
 			// 
 			MaksimalanBrStranica_LB.AutoSize = true;
-			MaksimalanBrStranica_LB.Location = new System.Drawing.Point(174, 284);
-			MaksimalanBrStranica_LB.MaximumSize = new System.Drawing.Size(350, 0);
+			MaksimalanBrStranica_LB.Location = new System.Drawing.Point(200, 284);
+			MaksimalanBrStranica_LB.MaximumSize = new System.Drawing.Size(320, 0);
 			MaksimalanBrStranica_LB.Name = "MaksimalanBrStranica_LB";
 			MaksimalanBrStranica_LB.Size = new System.Drawing.Size(0, 15);
 			MaksimalanBrStranica_LB.TabIndex = 20;
@@ -268,8 +290,8 @@
 			// SkolskaGodinaZad_LB
 			// 
 			SkolskaGodinaZad_LB.AutoSize = true;
-			SkolskaGodinaZad_LB.Location = new System.Drawing.Point(174, 244);
-			SkolskaGodinaZad_LB.MaximumSize = new System.Drawing.Size(350, 0);
+			SkolskaGodinaZad_LB.Location = new System.Drawing.Point(200, 244);
+			SkolskaGodinaZad_LB.MaximumSize = new System.Drawing.Size(320, 0);
 			SkolskaGodinaZad_LB.Name = "SkolskaGodinaZad_LB";
 			SkolskaGodinaZad_LB.Size = new System.Drawing.Size(0, 15);
 			SkolskaGodinaZad_LB.TabIndex = 18;
@@ -297,17 +319,17 @@
 			AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
 			BackColor = System.Drawing.Color.Linen;
-			ClientSize = new System.Drawing.Size(886, 517);
+			ClientSize = new System.Drawing.Size(886, 537);
 			Controls.Add(PodaciOProjektu_GB);
 			Controls.Add(OstaliClanovi_GB);
 			Controls.Add(PrikaziStudenteNaIstom_Btn);
 			Font = new System.Drawing.Font("Georgia", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
 			Margin = new Padding(5, 3, 5, 3);
 			MaximizeBox = false;
-			MaximumSize = new System.Drawing.Size(902, 556);
+			MaximumSize = new System.Drawing.Size(902, 576);
 			MdiChildrenMinimizedAnchorBottom = false;
 			MinimizeBox = false;
-			MinimumSize = new System.Drawing.Size(902, 556);
+			MinimumSize = new System.Drawing.Size(902, 576);
 			Name = "PrakticniUcesceDetalji";
 			Text = " Detalji za ucesce";
 			Load += PrakticniUcesceDetalji_Load;
@@ -342,5 +364,7 @@
         private Button Izvestaji_Btn;
         private Label OdabraniProgJezik_LB;
         private Label OdabraniPJezik_LB;
-    }
+		private Label UrlDokumentacije_LB;
+		private Label label6;
+	}
 }

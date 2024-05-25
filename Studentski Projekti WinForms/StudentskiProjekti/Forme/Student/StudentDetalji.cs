@@ -3,8 +3,8 @@ using static StudentskiProjekti.DTOs;
 namespace StudentskiProjekti.Forme;
 public partial class StudentDetalji : Form
 {
-    StudentPregled sp = new StudentPregled();
     ProjekatUcesceDetalji pd = new ProjekatUcesceDetalji();
+    StudentPregled sp;
     string format = "dd.MM.yyyy";
 
     public StudentDetalji(StudentPregled sp)
@@ -30,7 +30,7 @@ public partial class StudentDetalji : Form
         foreach (ProjekatUcesceDetalji p in detalji)
         {
             ListViewItem item = new ListViewItem(new string[] {p.NazivPredmeta, p.NazivProjekta, p.DatumPocetkaIzrade.ToString(format), p.DatumZavrsetkaIzrade?.ToString(format), p.RokZaZavrsetak.ToString(format), p.ProjekatZavrsen, p.VrstaProjekta });
-            item.Tag = p.Id;
+            item.Tag = p.IdProjekta;
 
             StudentDetalji_ListV.Items.Add(item);
         }
@@ -53,11 +53,10 @@ public partial class StudentDetalji : Form
         pd.DatumZavrsetkaIzrade = DateTime.TryParse(StudentDetalji_ListV.SelectedItems[0].SubItems[3].Text, out var datumZavrsetka) ? datumZavrsetka : null;
         pd.RokZaZavrsetak = DateTime.ParseExact(StudentDetalji_ListV.SelectedItems[0].SubItems[4].Text, format, CultureInfo.InvariantCulture);
 
-
+		ProjekatPregled p = DTOManager.VratiProjekat((int)StudentDetalji_ListV.SelectedItems[0].Tag);
 		if (StudentDetalji_ListV.SelectedItems[0].SubItems[6].Text == "teorijski")
         {
-            TeorijskiProjekatPregled tp = DTOManager.VratiTeorijskiProjekat((int)StudentDetalji_ListV.SelectedItems[0].Tag);
-            TeorijskiUcesceDetalji teorijskiUcesceDetalji = new TeorijskiUcesceDetalji(sp, tp, pd)
+            TeorijskiUcesceDetalji teorijskiUcesceDetalji = new TeorijskiUcesceDetalji(sp, p)
             {
                 StartPosition = FormStartPosition.CenterParent
             };
@@ -65,8 +64,7 @@ public partial class StudentDetalji : Form
         }
         else if (StudentDetalji_ListV.SelectedItems[0].SubItems[6].Text == "prakticni")
         {
-            PrakticniProjekatPregled pp = DTOManager.VratiPrakticniProjekat((int)StudentDetalji_ListV.SelectedItems[0].Tag);
-            PrakticniUcesceDetalji prakticniUcesceDetalji = new PrakticniUcesceDetalji(sp, pp, pd)
+            PrakticniUcesceDetalji prakticniUcesceDetalji = new PrakticniUcesceDetalji(sp, p)
             {
                 StartPosition = FormStartPosition.CenterParent
             };

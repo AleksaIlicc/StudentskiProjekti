@@ -2,12 +2,11 @@
 using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml;
 using static StudentskiProjekti.DTOs;
-using System.Windows.Forms;
-
 namespace StudentskiProjekti.Forme;
 public partial class Projekti : Form
 {
-	private PredmetPregled izabraniPredmet;
+	PredmetPregled izabraniPredmet;
+
 	public Projekti(PredmetPregled izabraniPredmet)
 	{
 		InitializeComponent();

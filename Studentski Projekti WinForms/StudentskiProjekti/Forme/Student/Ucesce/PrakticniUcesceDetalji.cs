@@ -2,40 +2,32 @@
 namespace StudentskiProjekti.Forme;
 public partial class PrakticniUcesceDetalji : Form
 {
-	StudentPregled sp = new StudentPregled();
-	ProjekatPregled pp = new PrakticniProjekatPregled();
-	ProjekatUcesceDetalji pd = new ProjekatUcesceDetalji();
-
-	public PrakticniUcesceDetalji(StudentPregled sp, PrakticniProjekatPregled pp, ProjekatUcesceDetalji pd)
-	{
-		InitializeComponent();
-		this.pp = pp;
-		this.sp = sp;
-		this.pd = pd;
-	}
+	StudentPregled sp;
+	ProjekatPregled p;
+	ProjekatUcesceDetalji pd;
 
     public PrakticniUcesceDetalji(StudentPregled sp, ProjekatPregled p)
     {
         InitializeComponent();
-        this.pp = p;
+        this.p = p;
         this.sp = sp;
-        this.pd = DTOManager.VratiUcesceNaProj(sp.BrIndeksa, pp.Id);
+        this.pd = DTOManager.VratiUcesceDetalji(sp.BrIndeksa, p.Id);
     }
 
     private void PrakticniUcesceDetalji_Load(object sender, EventArgs e)
 	{
 		PopuniPodacimaLabele();
-		if (pp.TipProjekta == "grupni")
+		if (p.TipProjekta == "grupni")
 		{
-			this.MaximumSize = new System.Drawing.Size(902, 506);
-			this.MinimumSize = new System.Drawing.Size(902, 506);
+			this.MaximumSize = new System.Drawing.Size(902, 520);
+			this.MinimumSize = new System.Drawing.Size(902, 520);
 			PrikaziStudenteNaIstom_Btn.Visible = false;
 			PopuniPodacimaListView();
 		}
-		else if (pp.TipProjekta == "pojedinacni")
+		else if (p.TipProjekta == "pojedinacni")
 		{
-			this.MaximumSize = new System.Drawing.Size(583, 560);
-			this.MinimumSize = new System.Drawing.Size(583, 560);
+			this.MaximumSize = new System.Drawing.Size(583, 576);
+			this.MinimumSize = new System.Drawing.Size(583, 576);
 			OstaliClanovi_GB.Visible = false;
 			OstaliClanovi_ListV.Visible = false;
 		}
@@ -43,19 +35,20 @@ public partial class PrakticniUcesceDetalji : Form
 
 	private void PopuniPodacimaLabele()
 	{
-		Naziv_LB.Text = pp.Naziv;
+		Naziv_LB.Text = p.Naziv;
 		DatumPocetka_LB.Text = pd.DatumPocetkaIzrade.ToString("dd.MM.yyyy");
 		DatumZavrsetka_LB.Text = pd.DatumZavrsetkaIzrade?.ToString("dd.MM.yyyy") ?? "";
 		RokZaZavrsetak_LB.Text = pd.RokZaZavrsetak.ToString("dd.MM.yyyy");
 		ProjekatZavrsen_LB.Text = pd.ProjekatZavrsen;
-		SkolskaGodinaZad_LB.Text = pp.SkolskaGodinaZadavanja.ToString();
-		OdabraniProgJezik_LB.Text = DTOManager.VratiOdabraniProgJezik(pp.Id, sp.BrIndeksa);
+		SkolskaGodinaZad_LB.Text = p.SkolskaGodinaZadavanja;
+		OdabraniProgJezik_LB.Text = pd.OdabranProgramskiJezik ?? "";
+		UrlDokumentacije_LB.Text = pd.UrlDokumentacijeProgJezika ?? "";
 	}
 
 	private void PopuniPodacimaListView()
 	{
 		OstaliClanovi_ListV.Items.Clear();
-		List<StudentPregled> studenti = DTOManager.VratiStudenteNaProjektu(pp.Id);
+		List<StudentPregled> studenti = DTOManager.VratiStudenteNaProjektu(p.Id);
 
 		foreach (StudentPregled s in studenti)
 		{
@@ -72,7 +65,7 @@ public partial class PrakticniUcesceDetalji : Form
 
 	private void PrikaziStudenteNaIstom_Btn_Click(object sender, EventArgs e)
 	{
-		OstaliStudentiNaProjektu studenti = new OstaliStudentiNaProjektu(sp, pp)
+		OstaliStudentiNaProjektu studenti = new OstaliStudentiNaProjektu(sp.BrIndeksa, p.Id)
 		{
 			StartPosition = FormStartPosition.CenterParent
 		};
@@ -81,7 +74,7 @@ public partial class PrakticniUcesceDetalji : Form
 
 	private void Izvestaji_Btn_Click(object sender, EventArgs e)
 	{
-		PredatiIzvestaji izvestaji = new PredatiIzvestaji(sp, pp, pd)
+		PredatiIzvestaji izvestaji = new PredatiIzvestaji(sp, p, pd)
 		{
 			StartPosition = FormStartPosition.CenterParent
 		};

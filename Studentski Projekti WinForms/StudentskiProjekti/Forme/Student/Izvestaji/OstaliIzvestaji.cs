@@ -2,13 +2,13 @@
 namespace StudentskiProjekti.Forme;
 public partial class OstaliIzvestaji : Form
 {
-    ProjekatPregled pp = new PrakticniProjekatPregled();
-    StudentPregled sp = new StudentPregled();
-    public OstaliIzvestaji(ProjekatPregled pp, StudentPregled sp)
+    int projekatId;
+    string brojIndeksa;
+    public OstaliIzvestaji(int projekatId, string brojIndeksa)
     {
         InitializeComponent();
-        this.pp = pp;
-        this.sp = sp;
+        this.projekatId = projekatId;
+        this.brojIndeksa = brojIndeksa;
     }
 
     private void OstaliIzvestaji_Load(object sender, EventArgs e)
@@ -20,15 +20,15 @@ public partial class OstaliIzvestaji : Form
     {
         Izvestaji_ListV.Items.Clear();
 
-        List<StudentPregled> studenti = DTOManager.VratiStudenteNaProjektu(pp.Id);
+        List<StudentPregled> studenti = DTOManager.VratiStudenteNaProjektu(projekatId);
 
         foreach (StudentPregled student in studenti)
         {
-            if (student.BrIndeksa == sp.BrIndeksa)
+            if (student.BrIndeksa == brojIndeksa)
             {
                 continue;
             }
-            List<IzvestajPregled> izvestaji = DTOManager.VratiIzvestajeZaGrupu(student.BrIndeksa , pp.Id);
+            List<IzvestajPregled> izvestaji = DTOManager.VratiIzvestajeZaStudenta(student.BrIndeksa, projekatId);
 
             foreach (IzvestajPregled izvestaj in izvestaji)
             {

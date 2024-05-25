@@ -2,9 +2,9 @@
 namespace StudentskiProjekti.Forme;
 public partial class PredatiIzvestaji : Form
 {
-    StudentPregled sp = new StudentPregled();
-    ProjekatUcesceDetalji pd = new ProjekatUcesceDetalji();
-    ProjekatPregled pp = new PrakticniProjekatPregled();
+    StudentPregled sp;
+    ProjekatUcesceDetalji pd;
+    ProjekatPregled pp;
 
     public PredatiIzvestaji(StudentPregled sp, ProjekatPregled pp, ProjekatUcesceDetalji pd)
     {
@@ -65,7 +65,7 @@ public partial class PredatiIzvestaji : Form
 
     private void OstaliClanovi_Btn_Click(object sender, EventArgs e)
     {
-        OstaliIzvestaji ostali = new OstaliIzvestaji(pp, sp)
+        OstaliIzvestaji ostali = new OstaliIzvestaji(pp.Id, sp.BrIndeksa)
         {
             StartPosition = FormStartPosition.CenterParent
         };
@@ -74,7 +74,7 @@ public partial class PredatiIzvestaji : Form
 
     private void DodajIzvestaj_Btn_Click(object sender, EventArgs e)
     {
-        DodajIzvestaj dodajIzvestaj = new DodajIzvestaj(sp, pp, pd)
+        DodajIzvestaj dodajIzvestaj = new DodajIzvestaj(sp.BrIndeksa, pp.Id, pd)
         {
             StartPosition = FormStartPosition.CenterParent
         };
@@ -84,7 +84,7 @@ public partial class PredatiIzvestaji : Form
 
     private void IzmeniIzvestaj_Btn_Click(object sender, EventArgs e)
     {
-        IzvestajPregled izvestaj = DTOManager.VratiIzvestaj((int)(Izvestaji_ListV.SelectedItems[0].Tag));
+        IzvestajPregled izvestaj = DTOManager.VratiIzvestaj((int)Izvestaji_ListV.SelectedItems[0].Tag);
         IzmeniIzvestaj izmeniIzvestaj = new IzmeniIzvestaj(izvestaj, pd)
         {
             StartPosition = FormStartPosition.CenterParent
@@ -92,6 +92,7 @@ public partial class PredatiIzvestaji : Form
         izmeniIzvestaj.ShowDialog();
         PopuniPodacima();
     }
+
     private void ObrisiIzvestaj_Btn_Click(object sender, EventArgs e)
     {
         if (Izvestaji_ListV.SelectedItems.Count == 0)

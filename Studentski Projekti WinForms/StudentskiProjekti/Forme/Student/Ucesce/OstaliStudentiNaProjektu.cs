@@ -2,14 +2,14 @@
 namespace StudentskiProjekti.Forme;
 public partial class OstaliStudentiNaProjektu : Form
 {
-    ProjekatPregled p = new ProjekatPregled();
-    StudentPregled sp = new StudentPregled();
+    string brojIndeksa;
+    int projekatId;
 
-    public OstaliStudentiNaProjektu(StudentPregled sp, ProjekatPregled p)
+    public OstaliStudentiNaProjektu(string brojIndeksa, int projekatId)
     {
         InitializeComponent();
-        this.sp = sp;
-        this.p = p;
+        this.brojIndeksa = brojIndeksa;
+        this.projekatId = projekatId;
     }
 
     private void OstaliStudentiNaPProjektu_Load(object sender, EventArgs e)
@@ -20,11 +20,11 @@ public partial class OstaliStudentiNaProjektu : Form
     private void PopuniPodacimaListViewPrakticni()
     {
         OstaliStudenti_ListV.Items.Clear();
-        List<StudentPregled> studenti = DTOManager.VratiStudenteNaProjektu(p.Id);
+        List<StudentPregled> studenti = DTOManager.VratiStudenteNaProjektu(projekatId);
 
         foreach (StudentPregled s in studenti)
         {
-            if (s.BrIndeksa == sp.BrIndeksa)
+            if (s.BrIndeksa == brojIndeksa)
             {
                 continue;
             }

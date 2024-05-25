@@ -2,16 +2,16 @@
 namespace StudentskiProjekti.Forme;
 public partial class DodajIzvestaj : Form
 {
-    ProjekatPregled pp = new PrakticniProjekatPregled();
-    StudentPregled sp = new StudentPregled();
     IzvestajPregled ip = new IzvestajPregled();
-    ProjekatUcesceDetalji pd = new ProjekatUcesceDetalji();
+    ProjekatUcesceDetalji pd;
+    int projekatId;
+    string brIndeksa;
 
-    public DodajIzvestaj(StudentPregled sp, ProjekatPregled pp, ProjekatUcesceDetalji pd)
+    public DodajIzvestaj(string brIndeksa, int projekatId, ProjekatUcesceDetalji pd)
     {
         InitializeComponent();
-        this.sp = sp;
-        this.pp = pp;
+        this.brIndeksa = brIndeksa;
+        this.projekatId = projekatId;
         this.pd = pd;
     }
 
@@ -35,16 +35,17 @@ public partial class DodajIzvestaj : Form
                 MessageBox.Show("Morate uneti datum predaje!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (DatumPredaje_DP.Value < pd.DatumPocetkaIzrade)
-            {
-                MessageBox.Show("Morate uneti validan datum predaje!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
 
-            ip.Opis = Opis_TB.Text;
+			if (DatumPredaje_DP.Value < pd.DatumPocetkaIzrade || DatumPredaje_DP.Value > DateTime.Now)
+			{
+				MessageBox.Show("Morate uneti validan datum predaje!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			ip.Opis = Opis_TB.Text;
             ip.DatumPredaje = DatumPredaje_DP.Value;
 
-            DTOManager.DodajIzvestaj(pp.Id , sp.BrIndeksa , ip);
+            DTOManager.DodajIzvestaj(projekatId, brIndeksa, ip);
             MessageBox.Show("Uspesno ste dodali novi izvestaj!");
             Close();
         }
