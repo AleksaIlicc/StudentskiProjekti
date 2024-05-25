@@ -474,16 +474,16 @@ public class DTOManager
         return izvestaji;
     }
 
-    public static void DodajUcesce(StudentPregled sp, ProjekatPregled proj, UcestvujePregled up)
+    public static void DodajUcesce(string brind, int projId, UcestvujePregled up)
     {
         try
         {
             ISession s = DataLayer.GetSession();
 
-            Student stud = s.Load<Student>(sp.BrIndeksa);
-            Projekat p = s.Load<Projekat>(proj.Id);
+            Student stud = s.Load<Student>(brind);
+            Projekat p = s.Load<Projekat>(projId);
             Ucestvuje ucesce = s.Query<Ucestvuje>()
-                                .Where(p => p.Student.BrIndeksa == sp.BrIndeksa && p.Projekat.Id == proj.Id)
+                                .Where(p => p.Student.BrIndeksa == brind && p.Projekat.Id == projId)
                                 .FirstOrDefault();
 
             if (ucesce != null)
@@ -502,6 +502,8 @@ public class DTOManager
                 Student = stud,
                 Projekat = p,
             };
+
+            ucesce.ProjekatZavrsen = ucesce.DatumZavrsetka.HasValue ? "da" : "ne";
 
             s.Save(ucesce);
 
@@ -530,6 +532,8 @@ public class DTOManager
             o.UrlDokumentacijeProgJezika = up.UrlDokumentacijeProgJezika;
             o.DopunskaLiteratura = up.DopunskaLiteratura;
 
+            o.ProjekatZavrsen = o.DatumZavrsetka.HasValue ? "da" : "ne";
+
             s.SaveOrUpdate(o);
             s.Flush();
 
@@ -552,7 +556,7 @@ public class DTOManager
                            .Where(p => p.Student.BrIndeksa == studid && p.Projekat.Id == projid)
                            .FirstOrDefault();
 
-            up = new UcestvujePregled(o.Id , o.DatumPocetkaIzrade , o.RokZaZavrsetak , o.ProjekatZavrsen , o.OdabranProgramskiJezik , o.UrlDokumentacijeProgJezika , o.DopunskaLiteratura);
+            up = new UcestvujePregled(o.Id , o.DatumPocetkaIzrade,o.DatumZavrsetka , o.RokZaZavrsetak  , o.OdabranProgramskiJezik , o.UrlDokumentacijeProgJezika , o.DopunskaLiteratura);
             s.Close();
         }
         catch (Exception ec)
@@ -563,13 +567,13 @@ public class DTOManager
         return up;
     }
 
-    public static void ObrisiUcesce(int idUcesca)
+    public static void ObrisiUcesce(UcestvujePregled ucescep)
     {
         try
         {
             ISession s = DataLayer.GetSession();
 
-            Ucestvuje ucesce = s.Load<Ucestvuje>(idUcesca);
+            Ucestvuje ucesce = s.Load<Ucestvuje>(ucescep.Id);
 
             s.Delete(ucesce);
 
@@ -591,7 +595,7 @@ public class DTOManager
 
     public static ProjekatPregled VratiProjekat(int id)
     {
-		ProjekatPregled projekatPregled = null;
+		ProjekatPregled projekatPregled = new ProjekatPregled();
 		try
 		{
 			ISession s = DataLayer.GetSession();

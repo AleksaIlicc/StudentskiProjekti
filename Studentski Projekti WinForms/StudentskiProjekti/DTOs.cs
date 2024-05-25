@@ -263,10 +263,11 @@ public class DTOs
         public string UrlDokumentacijeProgJezika { get; set; }
         public string DopunskaLiteratura { get; set; }
 
-        public UcestvujePregled(int id, DateTime datumPocetkaIzrade, DateTime rokZaZavrsetak,string projekatZavrsen, string odabranProgramskiJezik,string urlDokumentacijeProgJezika, string dopunskaLiteratura)
+        public UcestvujePregled(int id, DateTime datumPocetkaIzrade, DateTime? datumZavrsetka, DateTime rokZaZavrsetak, string odabranProgramskiJezik,string urlDokumentacijeProgJezika, string dopunskaLiteratura)
         {
             Id = id;
             DatumPocetkaIzrade = datumPocetkaIzrade;
+            DatumZavrsetka = datumZavrsetka;
             RokZaZavrsetak = rokZaZavrsetak;
             OdabranProgramskiJezik = odabranProgramskiJezik;
             UrlDokumentacijeProgJezika = urlDokumentacijeProgJezika;

@@ -4,11 +4,11 @@ namespace StudentskiProjekti.Forme;
 
 public partial class OdabirPredmetaUcesce : Form
 {
-    StudentPregled sp =  new StudentPregled();
-    public OdabirPredmetaUcesce(StudentPregled sp)
+    StudentPregled sp;
+    public OdabirPredmetaUcesce(string studBrInd)
     {
         InitializeComponent();
-        this.sp = sp;
+        this.sp = DTOManager.VratiStudenta(studBrInd);
     }
 
     private void OdabirPredmetaUcesce_Load(object sender, EventArgs e)
@@ -58,7 +58,7 @@ public partial class OdabirPredmetaUcesce : Form
             return;
         }
         this.Hide();
-        PredmetPregled pred = DTOManager.VratiPredmet(Predmeti_ListV.SelectedItems[0].Text);
+        PredmetPregled pred = DTOManager.VratiPredmet(Predmeti_ListV.SelectedItems[0].SubItems[0].Text);
         OdabirProjektaUcesce odabirProjektaUcesce = new OdabirProjektaUcesce(pred , sp)
         {
             StartPosition = FormStartPosition.CenterParent,

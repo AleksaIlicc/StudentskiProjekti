@@ -7,11 +7,11 @@ public partial class StudentiNaProjektu : Form
 {
     ProjekatPregled p = new ProjekatPregled();
 
-	public StudentiNaProjektu(int idProjekta)
-	{
-		InitializeComponent();
+    public StudentiNaProjektu(int idProjekta)
+    {
+        InitializeComponent();
         p = DTOManager.VratiProjekat(idProjekta);
-	}
+    }
 
     private void StudentiNaProjektu_Load(object sender, EventArgs e)
     {
@@ -60,7 +60,7 @@ public partial class StudentiNaProjektu : Form
     {
         Studenti_ListV.Items.Clear();
         List<StudentPregled> studenti = DTOManager.VratiStudenteNaProjektu(p.Id);
-        
+
         foreach (StudentPregled s in studenti)
         {
             ListViewItem item = new ListViewItem(new string[] { s.BrIndeksa, s.LIme, s.ImeRoditelja, s.Prezime, s.Smer });
@@ -110,6 +110,53 @@ public partial class StudentiNaProjektu : Form
                 workbookPart.Workbook.Save();
                 MessageBox.Show("Fajl je uspešno kreiran.", "Informacija", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+    }
+
+    private void DodajUcesce_Btn_Click(object sender, EventArgs e)
+    {
+        OdabirStudentaUcesce odabirStudentaUcesce = new OdabirStudentaUcesce(p)
+        {
+            StartPosition = FormStartPosition.CenterParent
+        };
+        odabirStudentaUcesce.ShowDialog();
+        PopuniPodacima();
+    }
+
+    private void IzmeniUcesce_Btn_Click(object sender, EventArgs e)
+    {
+        if (Studenti_ListV.SelectedItems.Count == 0)
+        {
+            MessageBox.Show("Izaberite studenta cije ucesce zelite da izmenite!");
+            return;
+        }
+        IzmeniUcesce izmeniUcesce = new IzmeniUcesce(p.Id, Studenti_ListV.SelectedItems[0].SubItems[0].Text)
+        {
+            StartPosition = FormStartPosition.CenterParent
+        };
+        izmeniUcesce.ShowDialog();
+        PopuniPodacima();
+    }
+
+    private void ObrisiUcesce_Btn_Click(object sender, EventArgs e)
+    {
+        if (Studenti_ListV.SelectedItems.Count == 0)
+        {
+            MessageBox.Show("Izaberite studenta cije ucesce zelite da obrisete!");
+            return;
+        }
+
+        UcestvujePregled ucestvujep = DTOManager.VratiUcesce(p.Id, Studenti_ListV.SelectedItems[0].SubItems[0].Text);
+        string poruka = "Da li zelite da obrisete ucesce izabranog studenta?";
+        string title = "Pitanje";
+        MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+        DialogResult result = MessageBox.Show(poruka, title, buttons);
+
+        if (result == DialogResult.OK)
+        {
+            DTOManager.ObrisiUcesce(ucestvujep);
+            MessageBox.Show("Brisanje ucesca studenta je uspesno obavljeno!");
+            PopuniPodacima();
         }
     }
 }
