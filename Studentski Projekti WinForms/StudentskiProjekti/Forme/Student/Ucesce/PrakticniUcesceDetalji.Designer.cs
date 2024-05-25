@@ -339,7 +339,6 @@
         private Label label7;
         private Label MaksimalanBrStranica_LB;
         private Label label14;
-        private TextBox DopunskaLit_TB;
         private Button Izvestaji_Btn;
         private Label OdabraniProgJezik_LB;
         private Label OdabraniPJezik_LB;

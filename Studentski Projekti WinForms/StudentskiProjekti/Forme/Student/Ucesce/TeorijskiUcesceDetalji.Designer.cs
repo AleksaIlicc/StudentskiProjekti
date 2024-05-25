@@ -324,7 +324,6 @@
         private Label label7;
         private Label MaksimalanBrStranica_LB;
         private Label label14;
-        private TextBox DopunskaLit_TB;
         private Label DopunskaLit_LB;
         private Label label16;
 		private Button PrikaziStudenteNaIstom_Btn;

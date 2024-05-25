@@ -187,7 +187,6 @@
         private Label label3;
         private Label label2;
         private Label label1;
-        private TextBox Katedra_TB;
         private TextBox Naziv_TB;
         private TextBox ISBN_TB;
         private TextBox Izdavac_TB;

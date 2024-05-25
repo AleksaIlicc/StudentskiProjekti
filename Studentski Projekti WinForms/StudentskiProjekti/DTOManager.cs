@@ -614,7 +614,7 @@ public class DTOManager
 		return projekatPregled;
 	}
 
-    public static List<ProjekatPregled> VratiProjekteZaPredmet(string idPredmeta)
+	public static List<ProjekatPregled> VratiProjekteZaPredmet(string idPredmeta)
     {
         List<ProjekatPregled> projektiPregled = new List<ProjekatPregled>();
         try
@@ -733,31 +733,6 @@ public class DTOManager
         }
 
         return projektiPregled;
-    }
-    public static ProjekatPregled VratiProjekat(int idProj)
-    {
-        ProjekatPregled pp = new ProjekatPregled();
-        try
-        {
-            ISession s = DataLayer.GetSession();
-
-
-            Projekat projekat = s.Load<Projekat>(idProj);
-
-            pp.Id = projekat.Id;
-            pp.Naziv = projekat.Naziv;
-            pp.VrstaProjekta = projekat.VrstaProjekta;
-            pp.TipProjekta = projekat.TipProjekta;
-            pp.SkolskaGodinaZadavanja = projekat.SkolskaGodinaZadavanja;
-
-            s.Close();
-        }
-        catch (Exception ec)
-        {
-            Console.WriteLine(ec);
-        }
-
-        return pp;
     }
 
     #endregion

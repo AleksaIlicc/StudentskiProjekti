@@ -204,7 +204,6 @@
 		}
 
 		#endregion
-		private TextBox Katedra_TB;
 		private GroupBox OsnovnipodaciopredmetuGB;
 		private TextBox Autori_TB;
 		private Label label6;
