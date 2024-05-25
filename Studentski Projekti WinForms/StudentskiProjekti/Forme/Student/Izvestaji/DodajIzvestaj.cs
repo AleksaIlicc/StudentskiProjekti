@@ -1,14 +1,13 @@
 ﻿using static StudentskiProjekti.DTOs;
-
 namespace StudentskiProjekti.Forme;
 public partial class DodajIzvestaj : Form
 {
-
-    PrakticniProjekatPregled pp = new PrakticniProjekatPregled();
+    ProjekatPregled pp = new PrakticniProjekatPregled();
     StudentPregled sp = new StudentPregled();
     IzvestajPregled ip = new IzvestajPregled();
     ProjekatUcesceDetalji pd = new ProjekatUcesceDetalji();
-    public DodajIzvestaj(StudentPregled sp, PrakticniProjekatPregled pp, ProjekatUcesceDetalji pd)
+
+    public DodajIzvestaj(StudentPregled sp, ProjekatPregled pp, ProjekatUcesceDetalji pd)
     {
         InitializeComponent();
         this.sp = sp;

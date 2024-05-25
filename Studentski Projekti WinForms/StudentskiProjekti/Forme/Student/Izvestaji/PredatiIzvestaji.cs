@@ -4,16 +4,9 @@ public partial class PredatiIzvestaji : Form
 {
     StudentPregled sp = new StudentPregled();
     ProjekatUcesceDetalji pd = new ProjekatUcesceDetalji();
-    PrakticniProjekatPregled pp = new PrakticniProjekatPregled();
-    public PredatiIzvestaji(StudentPregled sp, PrakticniProjekatPregled pp)
-    {
-        InitializeComponent();
-        this.sp = sp;
-        this.pp = pp;
-        this.pd = DTOManager.VratiUcesceNaProj(sp.BrIndeksa, pp.Id);
-    }
+    ProjekatPregled pp = new PrakticniProjekatPregled();
 
-    public PredatiIzvestaji(StudentPregled sp, PrakticniProjekatPregled pp, ProjekatUcesceDetalji pd)
+    public PredatiIzvestaji(StudentPregled sp, ProjekatPregled pp, ProjekatUcesceDetalji pd)
     {
         InitializeComponent();
         this.sp = sp;
@@ -50,18 +43,10 @@ public partial class PredatiIzvestaji : Form
         List<IzvestajPregled> izvestaji = DTOManager.VratiIzvestajeZaStudenta(sp.BrIndeksa, pp.Id);
 
         foreach (IzvestajPregled i in izvestaji)
-        {
-            string opisIzvest = i.Opis;
-            string datumPred = i.DatumPredaje.ToString("dd.MM.yyyy") ?? "N/A";
-            string razlika = "N/A";
+        { 
+            string razlika = Math.Round((i.DatumPredaje - pd.DatumPocetkaIzrade).TotalDays).ToString() + " dana";
 
-
-            TimeSpan? daysDiff = i.DatumPredaje - pd.DatumPocetkaIzrade;
-            razlika = daysDiff.HasValue ? Math.Round(daysDiff.Value.TotalDays).ToString() : "N/A";
-
-            razlika += " dana";
-
-            ListViewItem item = new ListViewItem(new string[] { opisIzvest, datumPred, razlika });
+            ListViewItem item = new ListViewItem(new string[] { i.Opis, i.DatumPredaje.ToString("dd.MM.yyyy"), razlika });
             item.Tag = i.Id;
             Izvestaji_ListV.Items.Add(item);
         }
@@ -80,7 +65,7 @@ public partial class PredatiIzvestaji : Form
 
     private void OstaliClanovi_Btn_Click(object sender, EventArgs e)
     {
-        OstaliIzvestaji ostali = new OstaliIzvestaji(pp, sp, pd)
+        OstaliIzvestaji ostali = new OstaliIzvestaji(pp, sp)
         {
             StartPosition = FormStartPosition.CenterParent
         };
@@ -99,8 +84,8 @@ public partial class PredatiIzvestaji : Form
 
     private void IzmeniIzvestaj_Btn_Click(object sender, EventArgs e)
     {
-        IzvestajPregled izves = DTOManager.VratiIzvestaj((int)(Izvestaji_ListV.SelectedItems[0].Tag));
-        IzmeniIzvestaj izmeniIzvestaj = new IzmeniIzvestaj(sp, pp, izves, pd)
+        IzvestajPregled izvestaj = DTOManager.VratiIzvestaj((int)(Izvestaji_ListV.SelectedItems[0].Tag));
+        IzmeniIzvestaj izmeniIzvestaj = new IzmeniIzvestaj(izvestaj, pd)
         {
             StartPosition = FormStartPosition.CenterParent
         };

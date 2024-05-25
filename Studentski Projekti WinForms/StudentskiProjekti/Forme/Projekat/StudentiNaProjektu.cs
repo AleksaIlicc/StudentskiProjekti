@@ -2,72 +2,53 @@
 using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml;
 using static StudentskiProjekti.DTOs;
-
 namespace StudentskiProjekti.Forme;
-
 public partial class StudentiNaProjektu : Form
 {
-	TeorijskiProjekatPregled tp = new TeorijskiProjekatPregled();
-    PrakticniProjekatPregled pp = new PrakticniProjekatPregled();
-    string vrsta;
-    public StudentiNaProjektu(TeorijskiProjekatPregled tp)
-    {
-        InitializeComponent();
-        this.tp = tp;
-        this.vrsta = "teorijski";
-    }
+    ProjekatPregled p = new ProjekatPregled();
 
-    public StudentiNaProjektu(PrakticniProjekatPregled pp)
-    {
-        InitializeComponent();
-        this.pp = pp;
-        this.vrsta = "prakticni";
-    }
+	public StudentiNaProjektu(int idProjekta)
+	{
+		InitializeComponent();
+        p = DTOManager.VratiProjekat(idProjekta);
+	}
 
     private void StudentiNaProjektu_Load(object sender, EventArgs e)
     {
         PopuniPodacima();
-        if (pp.TipProjekta == "grupni" || tp.TipProjekta == "grupni")
+        if (p.TipProjekta == "grupni")
         {
             TipProj_LB.Text = "Studenti u grupi koja radi na projektu:";
         }
-        else if (pp.TipProjekta == "pojedinacni" || tp.TipProjekta == "pojedinacni")
+        else if (p.TipProjekta == "pojedinacni")
         {
             TipProj_LB.Text = "Studenti koji rade na projektu:";
         }
 
-        if (vrsta == "prakticni")
-        {
-            Naziv_LB.Text = pp.Naziv;
-            SkolskaGodZad_LB.Text = pp.SkolskaGodinaZadavanja.ToString();
-        }
-        else if (vrsta == "teorijski")
-        {
-            Naziv_LB.Text = tp.Naziv;
-            SkolskaGodZad_LB.Text = tp.SkolskaGodinaZadavanja.ToString();
-        }
+        Naziv_LB.Text = p.Naziv;
+        SkolskaGodZad_LB.Text = p.SkolskaGodinaZadavanja.ToString();
     }
 
-    private void DodatnaLit_Izvestaji_Btn_Click(object sender, EventArgs e)
+    private void DetaljiUcesca_Btn_Click(object sender, EventArgs e)
     {
-
         if (Studenti_ListV.SelectedItems.Count == 0)
         {
-            MessageBox.Show("Izaberite studenta za kog zelite da vidite izvestaje!", "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Izaberite studenta za kog zelite da vidite detalje ucesca!", "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Information);
             return;
         }
+
         StudentPregled st = DTOManager.VratiStudenta(Studenti_ListV.SelectedItems[0].SubItems[0].Text);
-        if (vrsta == "prakticni")
+        if (p.VrstaProjekta == "prakticni")
         {
-            PrakticniUcesceDetalji prakticnidet = new PrakticniUcesceDetalji(st, pp)
+            PrakticniUcesceDetalji prakticnidet = new PrakticniUcesceDetalji(st, p)
             {
                 StartPosition = FormStartPosition.CenterParent
             };
             prakticnidet.ShowDialog();
         }
-        else if (vrsta == "teorijski")
+        else if (p.VrstaProjekta == "teorijski")
         {
-            TeorijskiUcesceDetalji teorijskidet = new TeorijskiUcesceDetalji(st, tp)
+            TeorijskiUcesceDetalji teorijskidet = new TeorijskiUcesceDetalji(st, p)
             {
                 StartPosition = FormStartPosition.CenterParent
             };
@@ -75,20 +56,11 @@ public partial class StudentiNaProjektu : Form
         }
     }
 
-
     private void PopuniPodacima()
     {
         Studenti_ListV.Items.Clear();
-        List<StudentPregled> studenti = new List<StudentPregled>();
-        if (vrsta == "prakticni")
-        {
-            studenti = DTOManager.VratiStudenteNaProjektu(pp.Id);
-        }
-        else if (vrsta == "teorijski")
-        {
-            studenti = DTOManager.VratiStudenteNaProjektu(tp.Id);
-        }
-
+        List<StudentPregled> studenti = DTOManager.VratiStudenteNaProjektu(p.Id);
+        
         foreach (StudentPregled s in studenti)
         {
             ListViewItem item = new ListViewItem(new string[] { s.BrIndeksa, s.LIme, s.ImeRoditelja, s.Prezime, s.Smer });

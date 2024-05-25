@@ -31,7 +31,7 @@ partial class IzmeniPrakticniProjekat
 		label1 = new Label();
 		label2 = new Label();
 		Naziv_TB = new TextBox();
-		SkoslaGodIzdavanja_TB = new TextBox();
+		SkolskaGodIzdavanja_TB = new TextBox();
 		Izmeni_Btn = new Button();
 		OsnovnipodaciopredmetuGB = new GroupBox();
 		PreporuceniProgJezik_TB = new TextBox();
@@ -77,11 +77,11 @@ partial class IzmeniPrakticniProjekat
 		// 
 		// SkoslaGodIzdavanja_TB
 		// 
-		SkoslaGodIzdavanja_TB.Location = new System.Drawing.Point(169, 69);
-		SkoslaGodIzdavanja_TB.Name = "SkoslaGodIzdavanja_TB";
-		SkoslaGodIzdavanja_TB.Size = new System.Drawing.Size(217, 21);
-		SkoslaGodIzdavanja_TB.TabIndex = 1;
-		SkoslaGodIzdavanja_TB.KeyPress += SkoslaGodIzdavanja_TB_KeyPress;
+		SkolskaGodIzdavanja_TB.Location = new System.Drawing.Point(169, 69);
+		SkolskaGodIzdavanja_TB.Name = "SkoslaGodIzdavanja_TB";
+		SkolskaGodIzdavanja_TB.Size = new System.Drawing.Size(217, 21);
+		SkolskaGodIzdavanja_TB.TabIndex = 1;
+		SkolskaGodIzdavanja_TB.KeyPress += SkolskaGodIzdavanja_TB_KeyPress;
 		// 
 		// Izmeni_Btn
 		// 
@@ -105,7 +105,7 @@ partial class IzmeniPrakticniProjekat
 		OsnovnipodaciopredmetuGB.Controls.Add(PrepWebStranice_TB);
 		OsnovnipodaciopredmetuGB.Controls.Add(label6);
 		OsnovnipodaciopredmetuGB.Controls.Add(Izmeni_Btn);
-		OsnovnipodaciopredmetuGB.Controls.Add(SkoslaGodIzdavanja_TB);
+		OsnovnipodaciopredmetuGB.Controls.Add(SkolskaGodIzdavanja_TB);
 		OsnovnipodaciopredmetuGB.Controls.Add(Naziv_TB);
 		OsnovnipodaciopredmetuGB.Controls.Add(label2);
 		OsnovnipodaciopredmetuGB.Controls.Add(label1);
@@ -240,7 +240,7 @@ partial class IzmeniPrakticniProjekat
 	private Label label1;
     private Label label2;
     private TextBox Naziv_TB;
-    private TextBox SkoslaGodIzdavanja_TB;
+    private TextBox SkolskaGodIzdavanja_TB;
     private Button Izmeni_Btn;
     private GroupBox OsnovnipodaciopredmetuGB;
     private TextBox PreporuceniProgJezik_TB;

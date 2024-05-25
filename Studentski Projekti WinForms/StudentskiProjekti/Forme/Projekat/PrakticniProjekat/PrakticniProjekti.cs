@@ -84,10 +84,19 @@ public partial class PrakticniProjekti : Form
             MessageBox.Show("Izaberite predmet za koji zelite da prikazete opis!");
             return;
         }
-        int idProjekta = (int)PrakticniProjekti_ListV.SelectedItems[0].Tag;
-        string opisProjekta = DTOManager.VratiOpisPrakticnogProjekta(idProjekta);
-        MessageBox.Show(opisProjekta, "Kratak opis projekta");
-    }
+
+		int idProjekta = (int)PrakticniProjekti_ListV.SelectedItems[0].Tag;
+		string opisProjekta = DTOManager.VratiOpisPrakticnogProjekta(idProjekta);
+
+		if (string.IsNullOrWhiteSpace(opisProjekta))
+		{
+			MessageBox.Show("Ne postoji opis za ovaj projekat.", "Kratak opis projekta");
+		}
+		else
+		{
+			MessageBox.Show(opisProjekta, "Kratak opis projekta");
+		}
+	}
 
     private void PreporuceneWebStrane_Btn_Click(object sender, EventArgs e)
     {
@@ -108,7 +117,7 @@ public partial class PrakticniProjekti : Form
 
     private void Sortiraj_Btn_Click(object sender, EventArgs e)
     {
-        if (!Grupni_RB.Checked && !Pojedinacni_RB.Checked && SkoslkaGodZad_TB.Text == "" && PrepProgJez_TB.Text == "")
+        if (!Grupni_RB.Checked && !Pojedinacni_RB.Checked && SkoslkaGodZad_TB.Text == "")
         {
             MessageBox.Show("Izaberite po čemu želite da sortirate.", "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return;
@@ -116,9 +125,8 @@ public partial class PrakticniProjekti : Form
 
         string tipProjekta = Grupni_RB.Checked ? "grupni" : Pojedinacni_RB.Checked ? "pojedinacni" : "";
         string skolskaGodina = SkoslkaGodZad_TB.Text;
-        string prepProgJezik = PrepProgJez_TB.Text;
 
-        List<PrakticniProjekatPregled> projekti = DTOManager.VratiSortiranePProjekteZaPredmet(izabraniPredmet.Id, tipProjekta, skolskaGodina, prepProgJezik);
+        List<PrakticniProjekatPregled> projekti = DTOManager.VratiSortiranePProjekteZaPredmet(izabraniPredmet.Id, tipProjekta, skolskaGodina);
 
         PrakticniProjekti_ListV.Items.Clear();
         foreach (PrakticniProjekatPregled p in projekti)
@@ -133,10 +141,9 @@ public partial class PrakticniProjekti : Form
 
     private void Ocisti_Btn_Click(object sender, EventArgs e)
     {
-        PrepProgJez_TB.Text = "";
         Grupni_RB.Checked = false;
         Pojedinacni_RB.Checked = false;
-        SkoslkaGodZad_TB.Text = "";
+        SkoslkaGodZad_TB.Clear();
         PopuniPodacima();
     }
 
@@ -147,7 +154,7 @@ public partial class PrakticniProjekti : Form
             MessageBox.Show("Izaberite neki od projekata!", "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Information);
             return;
         }
-        StudentiNaProjektu studNaProj = new StudentiNaProjektu(DTOManager.VratiPrakticniProjekat((int)PrakticniProjekti_ListV.SelectedItems[0].Tag))
+        StudentiNaProjektu studNaProj = new StudentiNaProjektu((int)PrakticniProjekti_ListV.SelectedItems[0].Tag)
         {
             StartPosition = FormStartPosition.CenterParent
         };

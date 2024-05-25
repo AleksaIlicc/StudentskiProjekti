@@ -1,12 +1,14 @@
 ﻿using static StudentskiProjekti.DTOs;
-
 namespace StudentskiProjekti.Forme;
 public partial class IzmeniTeorijskiProjekat : Form
 {
     TeorijskiProjekatPregled projekat;
-    public IzmeniTeorijskiProjekat(TeorijskiProjekatPregled p)
+	string tipProjekta;
+
+	public IzmeniTeorijskiProjekat(TeorijskiProjekatPregled p)
     {
         projekat = p;
+        tipProjekta = p.TipProjekta;
         InitializeComponent();
     }
 
@@ -78,7 +80,21 @@ public partial class IzmeniTeorijskiProjekat : Form
                 projekat.TipProjekta = "pojedinacni";
             }
 
-            DTOManager.AzurirajTeorijskiProjekat(projekat);
+			if (projekat.TipProjekta != tipProjekta)
+			{
+				string upozorenje = "Promenom tipa projekta obrisaće se svi učesnici na ovom projektu, ukoliko postoje učešća na projektu. Da li želite da nastavite?";
+				DialogResult potvrda = MessageBox.Show(upozorenje, "Upozorenje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+				if (potvrda == DialogResult.Yes)
+				{
+					DTOManager.ObrisiUcesnikeTeorijskogProjekta(projekat.Id);
+				}
+				else
+				{
+					return;
+				}
+			}
+
+			DTOManager.AzurirajTeorijskiProjekat(projekat);
             MessageBox.Show("Azuriranje teorijskog projekta je uspesno izvrseno!");
             this.Close();
         }

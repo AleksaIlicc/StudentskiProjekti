@@ -1,24 +1,26 @@
-﻿namespace StudentskiProjekti.Forme;
+﻿using static StudentskiProjekti.DTOs;
+namespace StudentskiProjekti.Forme;
 public partial class PrakticniUcesceDetalji : Form
 {
-	DTOs.StudentPregled sp = new DTOs.StudentPregled();
-	DTOs.PrakticniProjekatPregled pp = new DTOs.PrakticniProjekatPregled();
-	DTOs.ProjekatUcesceDetalji pd = new DTOs.ProjekatUcesceDetalji();
-	public PrakticniUcesceDetalji(DTOs.StudentPregled sp, DTOs.PrakticniProjekatPregled pp, DTOs.ProjekatUcesceDetalji pd)
+	StudentPregled sp = new StudentPregled();
+	ProjekatPregled pp = new PrakticniProjekatPregled();
+	ProjekatUcesceDetalji pd = new ProjekatUcesceDetalji();
+
+	public PrakticniUcesceDetalji(StudentPregled sp, PrakticniProjekatPregled pp, ProjekatUcesceDetalji pd)
 	{
 		InitializeComponent();
 		this.pp = pp;
 		this.sp = sp;
 		this.pd = pd;
 	}
-    public PrakticniUcesceDetalji(DTOs.StudentPregled sp, DTOs.PrakticniProjekatPregled pp)
+
+    public PrakticniUcesceDetalji(StudentPregled sp, ProjekatPregled p)
     {
         InitializeComponent();
-        this.pp = pp;
+        this.pp = p;
         this.sp = sp;
         this.pd = DTOManager.VratiUcesceNaProj(sp.BrIndeksa, pp.Id);
     }
-
 
     private void PrakticniUcesceDetalji_Load(object sender, EventArgs e)
 	{
@@ -37,8 +39,8 @@ public partial class PrakticniUcesceDetalji : Form
 			OstaliClanovi_GB.Visible = false;
 			OstaliClanovi_ListV.Visible = false;
 		}
-
 	}
+
 	private void PopuniPodacimaLabele()
 	{
 		Naziv_LB.Text = pp.Naziv;
@@ -53,9 +55,9 @@ public partial class PrakticniUcesceDetalji : Form
 	private void PopuniPodacimaListView()
 	{
 		OstaliClanovi_ListV.Items.Clear();
-		List<DTOs.StudentPregled> studenti = DTOManager.VratiStudenteNaProjektu(pp.Id);
+		List<StudentPregled> studenti = DTOManager.VratiStudenteNaProjektu(pp.Id);
 
-		foreach (DTOs.StudentPregled s in studenti)
+		foreach (StudentPregled s in studenti)
 		{
 			if (s.BrIndeksa == sp.BrIndeksa)
 			{
