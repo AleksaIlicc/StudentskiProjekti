@@ -85,7 +85,7 @@ partial class DodajPrakticniProjekat
 		SkolskaGodIzdavanja_TB.Name = "SkoslaGodIzdavanja_TB";
 		SkolskaGodIzdavanja_TB.Size = new System.Drawing.Size(215, 21);
 		SkolskaGodIzdavanja_TB.TabIndex = 1;
-		SkolskaGodIzdavanja_TB.KeyPress += SkoslaGodIzdavanja_TB_KeyPress;
+		SkolskaGodIzdavanja_TB.KeyPress += SkolskaGodIzdavanja_TB_KeyPress;
 		// 
 		// Dodaj_Btn
 		// 

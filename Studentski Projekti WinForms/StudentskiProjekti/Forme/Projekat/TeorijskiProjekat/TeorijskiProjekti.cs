@@ -1,5 +1,4 @@
 ﻿using static StudentskiProjekti.DTOs;
-
 namespace StudentskiProjekti.Forme;
 public partial class TeorijskiProjekti : Form
 {
@@ -135,7 +134,8 @@ public partial class TeorijskiProjekti : Form
             MessageBox.Show("Izaberite neki od projekata!", "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Information);
             return;
         }
-        StudentiNaProjektu studNaProj = new StudentiNaProjektu(DTOManager.VratiTeorijskiProjekat((int)TeorijskiProjekti_ListV.SelectedItems[0].Tag))
+       
+        StudentiNaProjektu studNaProj = new StudentiNaProjektu((int)TeorijskiProjekti_ListV.SelectedItems[0].Tag)
         {
             StartPosition = FormStartPosition.CenterParent
         };

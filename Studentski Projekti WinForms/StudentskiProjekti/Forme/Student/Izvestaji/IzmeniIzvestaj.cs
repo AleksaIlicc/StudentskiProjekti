@@ -1,20 +1,12 @@
-﻿using StudentskiProjekti.Entiteti;
-using static StudentskiProjekti.DTOs;
-
+﻿using static StudentskiProjekti.DTOs;
 namespace StudentskiProjekti.Forme;
-
 public partial class IzmeniIzvestaj : Form
 {
-
-    PrakticniProjekatPregled pp = new PrakticniProjekatPregled();
-    StudentPregled sp = new StudentPregled();
     IzvestajPregled ip = new IzvestajPregled();
     ProjekatUcesceDetalji pd = new ProjekatUcesceDetalji();
-    public IzmeniIzvestaj(StudentPregled sp, PrakticniProjekatPregled pp, IzvestajPregled ip , ProjekatUcesceDetalji pd)
+    public IzmeniIzvestaj(IzvestajPregled ip , ProjekatUcesceDetalji pd)
     {
         InitializeComponent();
-        this.sp = sp;
-        this.pp = pp;
         this.ip = ip;
         this.pd = pd;
     }

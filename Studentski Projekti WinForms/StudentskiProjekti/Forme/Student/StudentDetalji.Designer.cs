@@ -20,7 +20,7 @@
 			base.Dispose(disposing);
 		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
         /// <summary>
         /// Required method for Designer support - do not modify
@@ -296,9 +296,9 @@
             ResumeLayout(false);
         }
 
-        #endregion
+		#endregion
 
-        private GroupBox StudentDetalji_GB;
+		private GroupBox StudentDetalji_GB;
 		private ListView StudentDetalji_ListV;
 		private Button Ucesce_Btn;
 		private ColumnHeader columnHeader3;

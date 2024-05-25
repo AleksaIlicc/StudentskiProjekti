@@ -1,16 +1,14 @@
-﻿namespace StudentskiProjekti.Forme;
-
+﻿using static StudentskiProjekti.DTOs;
+namespace StudentskiProjekti.Forme;
 public partial class OstaliIzvestaji : Form
 {
-    DTOs.PrakticniProjekatPregled pp = new DTOs.PrakticniProjekatPregled();
-    DTOs.StudentPregled sp = new DTOs.StudentPregled();
-    DTOs.ProjekatUcesceDetalji pd = new DTOs.ProjekatUcesceDetalji();
-    public OstaliIzvestaji(DTOs.PrakticniProjekatPregled pp, DTOs.StudentPregled sp, DTOs.ProjekatUcesceDetalji pd)
+    ProjekatPregled pp = new PrakticniProjekatPregled();
+    StudentPregled sp = new StudentPregled();
+    public OstaliIzvestaji(ProjekatPregled pp, StudentPregled sp)
     {
         InitializeComponent();
         this.pp = pp;
         this.sp = sp;
-        this.pd = pd;
     }
 
     private void OstaliIzvestaji_Load(object sender, EventArgs e)
@@ -22,17 +20,17 @@ public partial class OstaliIzvestaji : Form
     {
         Izvestaji_ListV.Items.Clear();
 
-        List<DTOs.StudentPregled> studenti = DTOManager.VratiStudenteNaProjektu(pp.Id);
+        List<StudentPregled> studenti = DTOManager.VratiStudenteNaProjektu(pp.Id);
 
-        foreach (DTOs.StudentPregled student in studenti)
+        foreach (StudentPregled student in studenti)
         {
             if (student.BrIndeksa == sp.BrIndeksa)
             {
                 continue;
             }
-            List<DTOs.IzvestajPregled> izvestaji = DTOManager.VratiIzvestajeZaGrupu(student.BrIndeksa , pp.Id);
+            List<IzvestajPregled> izvestaji = DTOManager.VratiIzvestajeZaGrupu(student.BrIndeksa , pp.Id);
 
-            foreach (DTOs.IzvestajPregled izvestaj in izvestaji)
+            foreach (IzvestajPregled izvestaj in izvestaji)
             {
                 ListViewItem item = new ListViewItem(new string[] { student.BrIndeksa, student.LIme, student.Prezime , izvestaj.Opis , izvestaj.DatumPredaje.ToString("dd.MM.yyyy")});
                 Izvestaji_ListV.Items.Add(item);

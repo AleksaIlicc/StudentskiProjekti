@@ -141,7 +141,7 @@ namespace StudentskiProjekti.Forme
 			// 
 			DodajStudenta_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
 			DodajStudenta_Btn.Font = new System.Drawing.Font("Georgia", 9F);
-			DodajStudenta_Btn.Location = new System.Drawing.Point(34, 26);
+			DodajStudenta_Btn.Location = new System.Drawing.Point(34, 33);
 			DodajStudenta_Btn.Name = "DodajStudenta_Btn";
 			DodajStudenta_Btn.Size = new System.Drawing.Size(132, 38);
 			DodajStudenta_Btn.TabIndex = 0;
@@ -153,7 +153,7 @@ namespace StudentskiProjekti.Forme
 			// 
 			ObrisiStudenta_Btn.BackColor = System.Drawing.Color.AntiqueWhite;
 			ObrisiStudenta_Btn.Font = new System.Drawing.Font("Georgia", 9F);
-			ObrisiStudenta_Btn.Location = new System.Drawing.Point(34, 140);
+			ObrisiStudenta_Btn.Location = new System.Drawing.Point(34, 135);
 			ObrisiStudenta_Btn.Name = "ObrisiStudenta_Btn";
 			ObrisiStudenta_Btn.Size = new System.Drawing.Size(132, 38);
 			ObrisiStudenta_Btn.TabIndex = 2;

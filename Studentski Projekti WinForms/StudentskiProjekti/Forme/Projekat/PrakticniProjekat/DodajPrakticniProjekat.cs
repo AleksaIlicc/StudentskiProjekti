@@ -67,7 +67,7 @@ public partial class DodajPrakticniProjekat : Form
         }
     }
 
-    private void SkoslaGodIzdavanja_TB_KeyPress(object sender, KeyPressEventArgs e)
+    private void SkolskaGodIzdavanja_TB_KeyPress(object sender, KeyPressEventArgs e)
     {
         if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '/')
         {

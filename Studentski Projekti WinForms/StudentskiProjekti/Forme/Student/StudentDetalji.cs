@@ -29,10 +29,7 @@ public partial class StudentDetalji : Form
 
         foreach (ProjekatUcesceDetalji p in detalji)
         {
-
-            string projekatZavrsen = p.DatumZavrsetkaIzrade.HasValue ? "Da" : "Ne";
-
-            ListViewItem item = new ListViewItem(new string[] { p.NazivPredmeta, p.NazivProjekta, p.DatumPocetkaIzrade.ToString(format), p.DatumZavrsetkaIzrade?.ToString(format), p.RokZaZavrsetak.ToString(format), projekatZavrsen, p.VrstaProjekta });
+            ListViewItem item = new ListViewItem(new string[] {p.NazivPredmeta, p.NazivProjekta, p.DatumPocetkaIzrade.ToString(format), p.DatumZavrsetkaIzrade?.ToString(format), p.RokZaZavrsetak.ToString(format), p.ProjekatZavrsen, p.VrstaProjekta });
             item.Tag = p.Id;
 
             StudentDetalji_ListV.Items.Add(item);
@@ -41,7 +38,6 @@ public partial class StudentDetalji : Form
         StudentDetalji_ListV.Refresh();
     }
 
-
     private void Ucesce_Btn_Click(object sender, EventArgs e)
     {
         if (StudentDetalji_ListV.SelectedItems.Count == 0)
@@ -49,6 +45,7 @@ public partial class StudentDetalji : Form
             MessageBox.Show("Izaberite studenta za kog zelite da prikazete vise informacija o ucescu!");
             return;
         }
+
         pd.NazivProjekta = StudentDetalji_ListV.SelectedItems[0].SubItems[1].Text;
         pd.VrstaProjekta = StudentDetalji_ListV.SelectedItems[0].SubItems[6].Text;
         pd.ProjekatZavrsen = StudentDetalji_ListV.SelectedItems[0].SubItems[5].Text;
@@ -57,7 +54,7 @@ public partial class StudentDetalji : Form
         pd.RokZaZavrsetak = DateTime.ParseExact(StudentDetalji_ListV.SelectedItems[0].SubItems[4].Text, format, CultureInfo.InvariantCulture);
 
 
-        if (StudentDetalji_ListV.SelectedItems[0].SubItems[6].Text == "teorijski")
+		if (StudentDetalji_ListV.SelectedItems[0].SubItems[6].Text == "teorijski")
         {
             TeorijskiProjekatPregled tp = DTOManager.VratiTeorijskiProjekat((int)StudentDetalji_ListV.SelectedItems[0].Tag);
             TeorijskiUcesceDetalji teorijskiUcesceDetalji = new TeorijskiUcesceDetalji(sp, tp, pd)
@@ -68,7 +65,6 @@ public partial class StudentDetalji : Form
         }
         else if (StudentDetalji_ListV.SelectedItems[0].SubItems[6].Text == "prakticni")
         {
-
             PrakticniProjekatPregled pp = DTOManager.VratiPrakticniProjekat((int)StudentDetalji_ListV.SelectedItems[0].Tag);
             PrakticniUcesceDetalji prakticniUcesceDetalji = new PrakticniUcesceDetalji(sp, pp, pd)
             {

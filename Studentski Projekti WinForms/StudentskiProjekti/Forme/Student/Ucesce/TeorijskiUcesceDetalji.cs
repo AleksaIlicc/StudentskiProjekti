@@ -1,11 +1,12 @@
-﻿namespace StudentskiProjekti.Forme;
-
+﻿using static StudentskiProjekti.DTOs;
+namespace StudentskiProjekti.Forme;
 public partial class TeorijskiUcesceDetalji : Form  
 {
-    DTOs.StudentPregled sp = new DTOs.StudentPregled();
-    DTOs.TeorijskiProjekatPregled te = new DTOs.TeorijskiProjekatPregled();
-    DTOs.ProjekatUcesceDetalji pd = new DTOs.ProjekatUcesceDetalji();
-    public TeorijskiUcesceDetalji(DTOs.StudentPregled sp, DTOs.TeorijskiProjekatPregled te, DTOs.ProjekatUcesceDetalji pd)
+    StudentPregled sp = new StudentPregled();
+    ProjekatPregled te = new TeorijskiProjekatPregled();
+    ProjekatUcesceDetalji pd = new ProjekatUcesceDetalji();
+
+    public TeorijskiUcesceDetalji(StudentPregled sp, TeorijskiProjekatPregled te, ProjekatUcesceDetalji pd)
     {
         InitializeComponent();
         this.te = te;
@@ -13,14 +14,13 @@ public partial class TeorijskiUcesceDetalji : Form
         this.pd = pd;
     }
 
-    public TeorijskiUcesceDetalji(DTOs.StudentPregled sp, DTOs.TeorijskiProjekatPregled te)
+    public TeorijskiUcesceDetalji(StudentPregled sp, ProjekatPregled p)
     {
         InitializeComponent();
-        this.te = te;
+        this.te = p;
         this.sp = sp;
         this.pd = DTOManager.VratiUcesceNaProj(sp.BrIndeksa, te.Id);
     }
-
 
     private void TeorijskiUcesceDetalji_Load(object sender, EventArgs e)
     {
@@ -34,13 +34,13 @@ public partial class TeorijskiUcesceDetalji : Form
         }
         else if (te.TipProjekta == "pojedinacni")
         {
-            this.MaximumSize = new System.Drawing.Size(585, 541);
-            this.MinimumSize = new System.Drawing.Size(585, 541);
+            this.MaximumSize = new System.Drawing.Size(585, 500);
+            this.MinimumSize = new System.Drawing.Size(585, 500);
             OstaliClanovi_GB.Visible = false;
             OstaliClanovi_ListV.Visible = false;
         }
-
     }
+
     private void PopuniPodacimaLabele()
     {
         Naziv_LB.Text = te.Naziv;
@@ -55,9 +55,9 @@ public partial class TeorijskiUcesceDetalji : Form
     private void PopuniPodacimaListView()
     {
         OstaliClanovi_ListV.Items.Clear();
-        List<DTOs.StudentPregled> studenti = DTOManager.VratiStudenteNaProjektu(te.Id);
+        List<StudentPregled> studenti = DTOManager.VratiStudenteNaProjektu(te.Id);
 
-        foreach (DTOs.StudentPregled s in studenti)
+        foreach (StudentPregled s in studenti)
         {
             if (s.BrIndeksa == sp.BrIndeksa)
             {
