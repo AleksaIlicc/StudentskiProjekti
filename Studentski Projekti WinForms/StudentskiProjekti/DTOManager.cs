@@ -473,6 +473,114 @@ public class DTOManager
         return izvestaji;
     }
 
+    public static void DodajUcesce(StudentPregled sp, ProjekatPregled proj, UcestvujePregled up)
+    {
+        try
+        {
+            ISession s = DataLayer.GetSession();
+
+            Student stud = s.Load<Student>(sp.BrIndeksa);
+            Projekat p = s.Load<Projekat>(proj.Id);
+            Ucestvuje ucesce = s.Query<Ucestvuje>()
+                                .Where(p => p.Student.BrIndeksa == sp.BrIndeksa && p.Projekat.Id == proj.Id)
+                                .FirstOrDefault();
+
+            if (ucesce != null)
+            {
+                return;
+            }
+            
+            ucesce = new Ucestvuje()
+            {
+                DatumPocetkaIzrade = up.DatumPocetkaIzrade,
+                DatumZavrsetka = up.DatumZavrsetka,
+                RokZaZavrsetak = up.RokZaZavrsetak,
+                OdabranProgramskiJezik = up.OdabranProgramskiJezik,
+                UrlDokumentacijeProgJezika = up.UrlDokumentacijeProgJezika,
+                DopunskaLiteratura = up.DopunskaLiteratura,
+                Student = stud,
+                Projekat = p,
+            };
+
+            s.Save(ucesce);
+
+            s.Flush();
+
+            s.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
+
+    public static void AzurirajUcesce(UcestvujePregled up)
+    {
+        try
+        {
+            ISession s = DataLayer.GetSession();
+
+            Ucestvuje o = s.Load<Ucestvuje>(up.Id);
+
+            o.RokZaZavrsetak = up.RokZaZavrsetak;
+            o.DatumZavrsetka = up.DatumZavrsetka;
+            o.DatumPocetkaIzrade = up.DatumPocetkaIzrade;
+            o.OdabranProgramskiJezik = up.OdabranProgramskiJezik;
+            o.UrlDokumentacijeProgJezika = up.UrlDokumentacijeProgJezika;
+            o.DopunskaLiteratura = up.DopunskaLiteratura;
+
+            s.SaveOrUpdate(o);
+            s.Flush();
+
+            s.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
+
+    public static UcestvujePregled VratiUcesce(int projid , string studid)
+    {
+        UcestvujePregled up = null;
+        try
+        {   
+            ISession s = DataLayer.GetSession();
+
+            Ucestvuje o = s.Query<Ucestvuje>()
+                           .Where(p => p.Student.BrIndeksa == studid && p.Projekat.Id == projid)
+                           .FirstOrDefault();
+
+            up = new UcestvujePregled(o.Id , o.DatumPocetkaIzrade , o.RokZaZavrsetak , o.ProjekatZavrsen , o.OdabranProgramskiJezik , o.UrlDokumentacijeProgJezika , o.DopunskaLiteratura);
+            s.Close();
+        }
+        catch (Exception ec)
+        {
+            Console.WriteLine(ec.Message);
+        }
+
+        return up;
+    }
+
+    public static void ObrisiUcesce(int idUcesca)
+    {
+        try
+        {
+            ISession s = DataLayer.GetSession();
+
+            Ucestvuje ucesce = s.Load<Ucestvuje>(idUcesca);
+
+            s.Delete(ucesce);
+
+            s.Flush();
+
+            s.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
 
 
 
@@ -600,6 +708,31 @@ public class DTOManager
         }
 
         return projektiPregled;
+    }
+    public static ProjekatPregled VratiProjekat(int idProj)
+    {
+        ProjekatPregled pp = new ProjekatPregled();
+        try
+        {
+            ISession s = DataLayer.GetSession();
+
+
+            Projekat projekat = s.Load<Projekat>(idProj);
+
+            pp.Id = projekat.Id;
+            pp.Naziv = projekat.Naziv;
+            pp.VrstaProjekta = projekat.VrstaProjekta;
+            pp.TipProjekta = projekat.TipProjekta;
+            pp.SkolskaGodinaZadavanja = projekat.SkolskaGodinaZadavanja;
+
+            s.Close();
+        }
+        catch (Exception ec)
+        {
+            Console.WriteLine(ec);
+        }
+
+        return pp;
     }
 
 

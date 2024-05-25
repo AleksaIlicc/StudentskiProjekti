@@ -7,7 +7,7 @@ public partial class StudentDetalji : Form
     ProjekatUcesceDetalji pd = new ProjekatUcesceDetalji();
     string format = "dd.MM.yyyy";
 
-	public StudentDetalji(StudentPregled sp)
+    public StudentDetalji(StudentPregled sp)
     {
         InitializeComponent();
         this.sp = sp;
@@ -29,8 +29,10 @@ public partial class StudentDetalji : Form
 
         foreach (ProjekatUcesceDetalji p in detalji)
         {
-            string datumzavizrade = p.DatumZavrsetkaIzrade.HasValue ? p.DatumZavrsetkaIzrade.Value.ToString(format) : string.Empty;
-            ListViewItem item = new ListViewItem(new string[] {p.NazivPredmeta, p.NazivProjekta, p.DatumPocetkaIzrade.ToString(format), datumzavizrade, p.RokZaZavrsetak.ToString(format), p.ProjekatZavrsen, p.VrstaProjekta });
+
+            string projekatZavrsen = p.DatumZavrsetkaIzrade.HasValue ? "Da" : "Ne";
+
+            ListViewItem item = new ListViewItem(new string[] { p.NazivPredmeta, p.NazivProjekta, p.DatumPocetkaIzrade.ToString(format), p.DatumZavrsetkaIzrade?.ToString(format), p.RokZaZavrsetak.ToString(format), projekatZavrsen, p.VrstaProjekta });
             item.Tag = p.Id;
 
             StudentDetalji_ListV.Items.Add(item);
@@ -38,6 +40,7 @@ public partial class StudentDetalji : Form
 
         StudentDetalji_ListV.Refresh();
     }
+
 
     private void Ucesce_Btn_Click(object sender, EventArgs e)
     {
@@ -50,11 +53,11 @@ public partial class StudentDetalji : Form
         pd.VrstaProjekta = StudentDetalji_ListV.SelectedItems[0].SubItems[6].Text;
         pd.ProjekatZavrsen = StudentDetalji_ListV.SelectedItems[0].SubItems[5].Text;
         pd.DatumPocetkaIzrade = DateTime.ParseExact(StudentDetalji_ListV.SelectedItems[0].SubItems[2].Text, format, CultureInfo.InvariantCulture);
-		pd.DatumZavrsetkaIzrade = DateTime.TryParse(StudentDetalji_ListV.SelectedItems[0].SubItems[3].Text, out var datumZavrsetka) ? datumZavrsetka : null;
+        pd.DatumZavrsetkaIzrade = DateTime.TryParse(StudentDetalji_ListV.SelectedItems[0].SubItems[3].Text, out var datumZavrsetka) ? datumZavrsetka : null;
         pd.RokZaZavrsetak = DateTime.ParseExact(StudentDetalji_ListV.SelectedItems[0].SubItems[4].Text, format, CultureInfo.InvariantCulture);
 
 
-		if (StudentDetalji_ListV.SelectedItems[0].SubItems[6].Text == "teorijski")
+        if (StudentDetalji_ListV.SelectedItems[0].SubItems[6].Text == "teorijski")
         {
             TeorijskiProjekatPregled tp = DTOManager.VratiTeorijskiProjekat((int)StudentDetalji_ListV.SelectedItems[0].Tag);
             TeorijskiUcesceDetalji teorijskiUcesceDetalji = new TeorijskiUcesceDetalji(sp, tp, pd)
@@ -72,6 +75,48 @@ public partial class StudentDetalji : Form
                 StartPosition = FormStartPosition.CenterParent
             };
             prakticniUcesceDetalji.ShowDialog();
+        }
+    }
+
+    private void DodajUcesce_Btn_Click(object sender, EventArgs e)
+    {
+        OdabirPredmetaUcesce odabirPredmetaUcesce = new OdabirPredmetaUcesce(sp)
+        {
+            StartPosition = FormStartPosition.CenterParent
+        };
+        odabirPredmetaUcesce.ShowDialog();
+        PopuniPodacima();
+    }
+
+    private void IzmeniUcesce_Btn_Click(object sender, EventArgs e)
+    {
+        IzmeniUcesce izmeniUcesce = new IzmeniUcesce((int)StudentDetalji_ListV.SelectedItems[0].Tag, sp)
+        {
+            StartPosition = FormStartPosition.CenterParent
+        };
+        izmeniUcesce.ShowDialog();
+        PopuniPodacima();
+    }
+
+    private void ObrisiUcesce_Btn_Click(object sender, EventArgs e)
+    {
+        if (StudentDetalji_ListV.SelectedItems.Count == 0)
+        {
+            MessageBox.Show("Izaberite predmet koji zelite da obrisete!");
+            return;
+        }
+
+        int idUcesca = DTOManager.VratiUcesce((int)StudentDetalji_ListV.SelectedItems[0].Tag , sp.BrIndeksa).Id;
+        string poruka = "Da li zelite da obrisete izabrano ucesce?";
+        string title = "Pitanje";
+        MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
+        DialogResult result = MessageBox.Show(poruka, title, buttons);
+
+        if (result == DialogResult.OK)
+        {
+            DTOManager.ObrisiUcesce(idUcesca);
+            MessageBox.Show("Brisanje ucesca je uspesno obavljeno!");
+            PopuniPodacima();
         }
     }
 }

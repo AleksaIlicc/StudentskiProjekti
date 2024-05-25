@@ -157,6 +157,7 @@
             IzmeniUcesce_Btn.TabIndex = 1;
             IzmeniUcesce_Btn.Text = "Izmeni ucesce";
             IzmeniUcesce_Btn.UseVisualStyleBackColor = false;
+            IzmeniUcesce_Btn.Click += IzmeniUcesce_Btn_Click;
             // 
             // DodajUcesce_Btn
             // 
@@ -168,6 +169,7 @@
             DodajUcesce_Btn.TabIndex = 0;
             DodajUcesce_Btn.Text = "Dodaj novo ucesce";
             DodajUcesce_Btn.UseVisualStyleBackColor = false;
+            DodajUcesce_Btn.Click += DodajUcesce_Btn_Click;
             // 
             // ObrisiUcesce_Btn
             // 
@@ -179,6 +181,7 @@
             ObrisiUcesce_Btn.TabIndex = 2;
             ObrisiUcesce_Btn.Text = "Obrisi ucesce";
             ObrisiUcesce_Btn.UseVisualStyleBackColor = false;
+            ObrisiUcesce_Btn.Click += ObrisiUcesce_Btn_Click;
             // 
             // label1
             // 

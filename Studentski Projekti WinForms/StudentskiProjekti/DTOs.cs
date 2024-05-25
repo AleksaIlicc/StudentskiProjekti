@@ -190,6 +190,7 @@ public class DTOs
 
         public PrakticniProjekatPregled(int id, string naziv, string skolskaGodinaZadavanja, string tipProjekta, string preporuceniProgramskiJezik) : base(id, naziv, skolskaGodinaZadavanja, tipProjekta)
         {
+            base.VrstaProjekta = "prakticni";
             PreporuceniProgramskiJezik = preporuceniProgramskiJezik;
         }
         public PrakticniProjekatPregled() : base() { }
@@ -249,6 +250,30 @@ public class DTOs
         public IzvestajPregled() { }
     }
 
+    #endregion
+
+    #region Ucestvuje
+    public class UcestvujePregled
+    {
+        public int Id { get; set; }
+        public DateTime DatumPocetkaIzrade { get; set; }
+        public DateTime? DatumZavrsetka { get; set; }
+        public DateTime RokZaZavrsetak { get; set; }
+        public string OdabranProgramskiJezik { get; set; }
+        public string UrlDokumentacijeProgJezika { get; set; }
+        public string DopunskaLiteratura { get; set; }
+
+        public UcestvujePregled(int id, DateTime datumPocetkaIzrade, DateTime rokZaZavrsetak,string projekatZavrsen, string odabranProgramskiJezik,string urlDokumentacijeProgJezika, string dopunskaLiteratura)
+        {
+            Id = id;
+            DatumPocetkaIzrade = datumPocetkaIzrade;
+            RokZaZavrsetak = rokZaZavrsetak;
+            OdabranProgramskiJezik = odabranProgramskiJezik;
+            UrlDokumentacijeProgJezika = urlDokumentacijeProgJezika;
+            DopunskaLiteratura = dopunskaLiteratura;
+        }
+        public UcestvujePregled() { }
+    }
     #endregion
 }
 
