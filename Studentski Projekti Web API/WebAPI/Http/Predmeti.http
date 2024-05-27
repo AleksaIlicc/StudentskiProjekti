@@ -1,0 +1,9 @@
+﻿@WebAPI_HostAddress =  https://localhost:5276
+
+GET {{WebAPI_HostAddress}}/Predmet/PreuzmiPredmete
+
+###
+
+GET {{WebAPI_HostAddress}}/predmet/PreuzmiSortiranePredmete?katedra=Rač&semestar=3
+
+###

@@ -2,11 +2,11 @@
 
 public static class DataProvider
 {
-	#region Odeljenja
-	
+    #region Odeljenja
+
     public static async Task<Result<List<PredmetView>, ErrorMessage>> VratiSvePredmeteAsync()
     {
-        List<PredmetView> data = new();
+        List<PredmetView> data = [];
 
         ISession? s = null;
         try
@@ -36,13 +36,11 @@ public static class DataProvider
         return data;
     }
 
-	/*
-    public static async Task<Result<List<OdeljenjeView>, ErrorMessage>> VratiSvaOdeljenjaProdavniceAsync(int id)
+    public static Result<List<PredmetView>, ErrorMessage> VratiSortiranePredmete(string? semestarFilter, string? katedraFilter)
     {
-        List<OdeljenjeView> data = new();
-
+        List<PredmetView> data = [];
+        
         ISession? s = null;
-
         try
         {
             s = DataLayer.GetSession();
@@ -52,13 +50,18 @@ public static class DataProvider
                 return "Nemoguće otvoriti sesiju.".ToError(403);
             }
 
-            data = (await s.QueryOver<Odeljenje>().ListAsync())
-                           .Where(p => p.PripadaProdavnici?.Id == id)
-                           .Select(p => new OdeljenjeView(p)).ToList();
+            data = s.Query<Predmet>()
+                        .Where(p =>
+                            (string.IsNullOrEmpty(semestarFilter) || p.Semestar.ToString() == semestarFilter) &&
+                            (string.IsNullOrEmpty(katedraFilter) || p.Katedra != null && p.Katedra.StartsWith(katedraFilter, StringComparison.OrdinalIgnoreCase)))
+                        .OrderBy(p => p.Naziv)
+                        .Select(p => new PredmetView(p))
+                        .ToList();
+
         }
         catch (Exception)
         {
-            return "Došlo je do greške prilikom prikupljanja informacija o odeljenjima.".ToError(400);
+            return "Došlo je do greške prilikom prikupljanja informacija o predmetima.".ToError(400);
         }
         finally
         {
@@ -68,6 +71,6 @@ public static class DataProvider
 
         return data;
     }
-    */
-	#endregion
+
+    #endregion
 }
