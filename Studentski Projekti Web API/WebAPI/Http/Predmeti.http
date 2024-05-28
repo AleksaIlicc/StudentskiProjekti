@@ -7,3 +7,31 @@ GET {{WebAPI_HostAddress}}/Predmet/PreuzmiPredmete
 GET {{WebAPI_HostAddress}}/predmet/PreuzmiSortiranePredmete?katedra=Rač&semestar=3
 
 ###
+
+POST {{WebAPI_HostAddress}}/Predmet/DodajPredmet
+Content-Type: application/json
+
+{
+  "Id": "MAT101",
+  "Naziv": "Matematika 1",
+  "Semestar": 1,
+  "Katedra": "Matematika"
+}
+
+###
+
+PUT {{WebAPI_HostAddress}}/predmet/IzmeniPredmet
+Content-Type: application/json
+
+{
+  "Id": "MAT101",
+  "Naziv": "Matematika 1",
+  "Semestar": 1,
+  "Katedra": "Matematika"
+}
+
+###
+
+DELETE {{WebAPI_HostAddress}}/predmet/ObrisiPredmet/MAT101
+
+###

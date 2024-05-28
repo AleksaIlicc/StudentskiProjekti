@@ -5,17 +5,11 @@ namespace Library;
 
 internal static class DataLayer
 {
-	private static ISessionFactory factory;
-	private static object lockObj;
+	private static ISessionFactory? factory = null;
+	private static object lockObj = new object();
 	
 
-	static DataLayer()
-	{
-		factory = null;
-		lockObj = new object();
-	}
-
-	public static ISession GetSession()
+	public static ISession? GetSession()
 	{
 		if (factory == null)
 		{
@@ -25,19 +19,19 @@ internal static class DataLayer
 			}
 		}
 
-		return factory.OpenSession();
+		return factory?.OpenSession();
 	}
 
-	private static ISessionFactory CreateSessionFactory()
+	private static ISessionFactory? CreateSessionFactory()
 	{
 		try
 		{
 			// ShowSql prikazuje SQL koji je generisan, ali u .NET Core aplikacijama se prikazuju u konzoli.
 			// Ako se aplikacija pokrene sa dotnet "putanja do build verzije", mogu da se vide
 
-			string dataSource = Environment.GetEnvironmentVariable("DATA_SOURCE");
-			string userId = Environment.GetEnvironmentVariable("USER_ID");
-			string password = Environment.GetEnvironmentVariable("PASSWORD");
+			string? dataSource = Environment.GetEnvironmentVariable("DATA_SOURCE");
+			string? userId = Environment.GetEnvironmentVariable("USER_ID");
+			string? password = Environment.GetEnvironmentVariable("PASSWORD");
 
 			var cfg = OracleManagedDataClientConfiguration.Oracle10
 			.ShowSql()
