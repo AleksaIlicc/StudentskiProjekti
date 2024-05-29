@@ -279,7 +279,7 @@ public static class DataProvider
         }
         catch (Exception)
         {
-            return GetError("Greska pri dodavanju studenta.", 404);
+            return "Greska pri dodavanju studenta.".ToError(404);
         }
         finally
         {
@@ -290,7 +290,41 @@ public static class DataProvider
         return true;
     }
 
+    public static Result<bool, ErrorMessage> AzurirajStudenta(StudentiView sp)
+    {
+        ISession? s = null;
 
+        try
+        {
+            s = DataLayer.GetSession();
+
+            if (!(s?.IsConnected ?? false))
+            {
+                return "Nemoguće otvoriti sesiju.".ToError(403);
+            }
+
+            Student o = s.Load<Student>(sp.BrIndeksa);
+            o.LIme = sp.LIme!;
+            o.ImeRoditelja = sp.ImeRoditelja!;
+            o.Prezime = sp.Prezime!;
+            o.Smer = sp.Smer!;
+
+            s.SaveOrUpdate(o);
+            s.Flush();
+
+        }
+        catch (Exception)
+        {
+            return "Greska pri azuriranju studenta.".ToError(400);
+        }
+        finally
+        {
+            s?.Close();
+            s?.Dispose();
+        }
+
+        return true;
+    }
     public static Result<bool, ErrorMessage> ObrisiStudenta(string brIndeksa)
     {
         ISession? s = null;
@@ -311,7 +345,7 @@ public static class DataProvider
         }
         catch (Exception)
         {
-            return "Greška prilikom brisanja predmeta.".ToError(400);
+            return "Greška prilikom brisanja studenta.".ToError(400);
         }
         finally
         {
@@ -360,11 +394,11 @@ public static class DataProvider
 
 		return data;
 	}
-
-    public static Result<bool, ErrorMessage> AzurirajStudenta(StudentiView sp)
+    public static Result<List<ProjekatView>, ErrorMessage> VratiSortiraneProjekteZaPredmet(string idPredmeta, string vrstaProjekta, string tipProjekta, string skolskaGodina)
     {
-        ISession? s = null;
+        List<ProjekatView> data = [];
 
+        ISession? s = null;
         try
         {
             s = DataLayer.GetSession();
@@ -374,19 +408,19 @@ public static class DataProvider
                 return "Nemoguće otvoriti sesiju.".ToError(403);
             }
 
-            Student o = s.Load<Student>(sp.BrIndeksa);
-            o.LIme = sp.LIme!;
-            o.ImeRoditelja = sp.ImeRoditelja!;
-            o.Prezime = sp.Prezime!;
-            o.Smer = sp.Smer!;
-
-            s.SaveOrUpdate(o);
-            s.Flush();
+            data = s.Query<Projekat>()
+                .Where(p => p.PripadaPredmetu.Id == idPredmeta &&
+                (string.IsNullOrEmpty(vrstaProjekta) || p.VrstaProjekta == vrstaProjekta) &&
+                (string.IsNullOrEmpty(tipProjekta) || p.TipProjekta == tipProjekta) &&
+                (string.IsNullOrEmpty(skolskaGodina) || p.SkolskaGodinaZadavanja == skolskaGodina))
+                .OrderBy(pr => pr.SkolskaGodinaZadavanja)
+                .Select(p => new ProjekatView(p))
+                .ToList();
 
         }
         catch (Exception)
         {
-            return "Greska pri azuriranju predmeta.".ToError(400);
+            return "Došlo je do greške prilikom prikupljanja informacija o projektima predmeta.".ToError(400);
         }
         finally
         {
@@ -394,47 +428,45 @@ public static class DataProvider
             s?.Dispose();
         }
 
-        return true;
+        return data;
     }
+
     #endregion
-	public static Result<List<ProjekatView>,ErrorMessage> VratiSortiraneProjekteZaPredmet(string idPredmeta, string vrstaProjekta, string tipProjekta, string skolskaGodina)
-	{
-		List<ProjekatView> data = [];
 
-		ISession? s = null;
-		try
-		{
-			s = DataLayer.GetSession();
+    #region PrakticniProjekti 
+    public static async Task<Result<List<PrakticniProjekatView>, ErrorMessage>> VratiPrakticneProjekteZaPredmetAsync(string idPredmeta)
+    {
+        List<PrakticniProjekatView> data = [];
 
-			if (!(s?.IsConnected ?? false))
-			{
-				return "Nemoguće otvoriti sesiju.".ToError(403);
-			}
+        ISession? s = null;
+        try
+        {
+            s = DataLayer.GetSession();
 
-			data = s.Query<Projekat>()
-				.Where(p => p.PripadaPredmetu.Id == idPredmeta &&
-				(string.IsNullOrEmpty(vrstaProjekta) || p.VrstaProjekta == vrstaProjekta) &&
-				(string.IsNullOrEmpty(tipProjekta) || p.TipProjekta == tipProjekta) &&
-				(string.IsNullOrEmpty(skolskaGodina) || p.SkolskaGodinaZadavanja == skolskaGodina))
-				.OrderBy(pr => pr.SkolskaGodinaZadavanja)
-				.Select(p => new ProjekatView(p))
-				.ToList();
-		
-		}
-		catch (Exception)
-		{
-			return "Došlo je do greške prilikom prikupljanja informacija o projektima predmeta.".ToError(400);
-		}
-		finally
-		{
-			s?.Close();
-			s?.Dispose();
-		}
+            if (!(s?.IsConnected ?? false))
+            {
+                return "Nemoguće otvoriti sesiju.".ToError(403);
+            }
 
-		return data;
-	}
+            data =(await s.Query<PrakticniProjekat>()
+                                      .Where(p => p.PripadaPredmetu.Id == idPredmeta)
+                                      .OrderBy(p => p.SkolskaGodinaZadavanja)
+                                      .ToListAsync())
+                                      .Select(p => new PrakticniProjekatView(p))
+                                      .ToList();
+        }
+        catch (Exception)
+        {
+            return "Došlo je do greške prilikom prikupljanja informacija o prakticnim projektima predmeta.".ToError(400);
+        }
+        finally
+        {
+            s?.Close();
+            s?.Dispose();
+        }
 
+        return data;
+    }
 
-
-	#endregion
+    #endregion
 }

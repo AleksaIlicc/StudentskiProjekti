@@ -1,14 +1,6 @@
 ﻿@WebAPI_HostAddress = https://localhost:5276
 
 
-POST {{WebAPI_HostAddress}}/student/DodajStudenta
-Content-Type: application/json
-
-{
-  //StudentiView
-}
-
-###
 # Dobavljanje svih studenata
 GET {{WebAPI_HostAddress}}/Student/PreuzmiStudente
 ###
