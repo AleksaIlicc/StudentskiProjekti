@@ -1,4 +1,6 @@
-﻿namespace Library;
+﻿using NHibernate.Linq;
+
+namespace Library;
 
 public static class DataProvider
 {
@@ -100,7 +102,7 @@ public static class DataProvider
 		}
 		catch (Exception)
 		{
-			return GetError("Greska pri dodavanju predmeta.", 404);
+			return "Greska pri dodavanju predmeta.".ToError(404);
 		}
 		finally
 		{
@@ -176,6 +178,84 @@ public static class DataProvider
 
 		return true;
 	}
+
+	#endregion
+
+	#region Projekti
+
+	public static async Task<Result<List<ProjekatView>, ErrorMessage>> VratiSveProjektePredmetaAsync(string idPredmeta)
+	{
+		List<ProjekatView> data = [];
+
+		ISession? s = null;
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+
+			data = (await s.Query<Projekat>()
+						.Where(p => p.PripadaPredmetu.Id == idPredmeta)
+						.OrderBy(p => p.SkolskaGodinaZadavanja)
+						.ToListAsync())
+						.Select(p => new ProjekatView(p))
+						.ToList();
+
+		}
+		catch (Exception)
+		{
+			return "Došlo je do greške prilikom prikupljanja informacija o projektima predmeta.".ToError(400);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+
+		return data;
+	}
+
+	public static Result<List<ProjekatView>,ErrorMessage> VratiSortiraneProjekteZaPredmet(string idPredmeta, string vrstaProjekta, string tipProjekta, string skolskaGodina)
+	{
+		List<ProjekatView> data = [];
+
+		ISession? s = null;
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+
+			data = s.Query<Projekat>()
+				.Where(p => p.PripadaPredmetu.Id == idPredmeta &&
+				(string.IsNullOrEmpty(vrstaProjekta) || p.VrstaProjekta == vrstaProjekta) &&
+				(string.IsNullOrEmpty(tipProjekta) || p.TipProjekta == tipProjekta) &&
+				(string.IsNullOrEmpty(skolskaGodina) || p.SkolskaGodinaZadavanja == skolskaGodina))
+				.OrderBy(pr => pr.SkolskaGodinaZadavanja)
+				.Select(p => new ProjekatView(p))
+				.ToList();
+		
+		}
+		catch (Exception)
+		{
+			return "Došlo je do greške prilikom prikupljanja informacija o projektima predmeta.".ToError(400);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+
+		return data;
+	}
+
+
 
 	#endregion
 }
