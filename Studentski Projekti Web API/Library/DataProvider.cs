@@ -1,4 +1,5 @@
 ﻿using NHibernate.Linq;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Library;
 
@@ -179,6 +180,36 @@ public static class DataProvider
 		return true;
 	}
 
+	public static Result<PredmetView, ErrorMessage> VratiPredmet(string id)
+	{
+		PredmetView? data = null;
+		ISession? s = null;
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+
+			Predmet o = s.Load<Predmet>(id);
+			data = new PredmetView(o);
+		}
+		catch (Exception)
+		{
+			return "Greška prilikom pribavljanja predmeta.".ToError(404);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+
+		return data;
+	}
+
 	#endregion
 
 	#region Projekti
@@ -255,7 +286,382 @@ public static class DataProvider
 		return data;
 	}
 
+	public static Result <List<TeorijskiProjekatView>,ErrorMessage> VratiTeorijskeProjekteZaPredmet(string idPredmeta)
+	{
+		List<TeorijskiProjekatView> data = [];
 
+		ISession? s = null;
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+
+			data = s.Query<TeorijskiProjekat>()
+				.Where(p => p.PripadaPredmetu.Id == idPredmeta)
+				.OrderBy(pr => pr.SkolskaGodinaZadavanja)
+				.Select(p => new TeorijskiProjekatView(p))
+				.ToList();
+		}
+		catch (Exception)
+		{
+			return "Došlo je do greške prilikom prikupljanja informacija o teorijskim projektima predmeta.".ToError(400);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+
+		return data;
+	}
+
+	#endregion
+
+	#region TeorijskiProjekti
+
+	public static Result<bool, ErrorMessage> DodajTeorijskiProjekat(TeorijskiProjekatView p)
+	{
+
+		ISession? s = null;
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+
+			Predmet pred = s.Load<Predmet>(p.PripadaPredmetu!.Id);
+
+			TeorijskiProjekat o = new TeorijskiProjekat()
+			{
+				Naziv = p.Naziv!,
+				SkolskaGodinaZadavanja = p.SkolskaGodinaZadavanja!,
+				MaksBrojStrana = (int)p.MaksBrojStrana!,
+				VrstaProjekta = "teorijski",
+				TipProjekta = p.TipProjekta!,
+				PripadaPredmetu = pred,
+			};
+
+			s.Save(o);
+
+			s.Flush();
+		}
+		catch (Exception)
+		{
+			return "Greska pri dodavanju projekta".ToError(404);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+
+		return true;
+	}
+
+	public static Result<bool, ErrorMessage> ObrisiTeorijskiProjekat(int id)
+	{
+		ISession? s = null;
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+
+			TeorijskiProjekat o = s.Load<TeorijskiProjekat>(id);
+
+			s.Delete(o);
+
+			s.Flush();
+		}
+		catch (Exception)
+		{
+			return "Greška pri brisanju projekta.".ToError(400);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+
+		return true;
+	}
+
+	public static Result<bool, ErrorMessage> AzurirajTeorijskiProjekat(TeorijskiProjekatView p)
+	{
+		ISession? s = null;
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+
+			TeorijskiProjekat o = s.Load<TeorijskiProjekat>(p.Id);
+			o.Naziv = p.Naziv!;
+			o.SkolskaGodinaZadavanja = p.SkolskaGodinaZadavanja!;
+			o.MaksBrojStrana = (int)p.MaksBrojStrana!;
+			o.TipProjekta = p.TipProjekta!;
+
+			s.SaveOrUpdate(o);
+
+			s.Flush();
+		}
+		catch (Exception)
+		{
+			return "Greška prilikom azuriranja projekta.".ToError(400);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+
+		return true;
+	}
+
+	public static Result<TeorijskiProjekatView,ErrorMessage> VratiTeorijskiProjekat(int id)
+	{
+		TeorijskiProjekatView? data = null;
+		ISession? s = null;
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+
+			TeorijskiProjekat o = s.Load<TeorijskiProjekat>(id);
+			data = new TeorijskiProjekatView(o);
+		}
+		catch (Exception)
+		{
+			return "Greška prilikom pribavljanja projekta.".ToError(404);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+
+		return data;
+	}
+
+	public static Result<bool, ErrorMessage> ObrisiUcesnikeTeorijskogProjekta(int id)
+	{
+		ISession? s = null;
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+
+			var ucestvujePojavljivanja = s.Query<Ucestvuje>()
+											.Where(u => u.Projekat.Id == id)
+											.ToList();
+
+			foreach (var uPojavljivanje in ucestvujePojavljivanja)
+			{
+				s.Delete(uPojavljivanje);
+			}
+
+			s.Flush();
+
+		}
+		catch (Exception)
+		{
+			return "Greška prilikom brisanja ucesnika teorijskog projekta.".ToError(404);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+		return true;
+	}
+
+	#endregion
+
+	#region Ucestvuje
+
+	public static Result<bool, ErrorMessage> DodajUcesce(string brind, int projId, UcestvujeView u)
+	{
+		ISession? s = null;
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+			Student stud = s.Load<Student>(brind);
+			Projekat p = s.Load<Projekat>(projId);
+			Ucestvuje? ucesce = s.Query<Ucestvuje>()
+								.Where(p => p.Student.BrIndeksa == brind && p.Projekat.Id == projId)
+								.FirstOrDefault();
+
+			if(ucesce != null)
+			{
+				return $"Student sa indeksom {stud.BrIndeksa} vec radi na projektu.".ToError(404);
+			}
+
+			Ucestvuje o = new Ucestvuje()
+			{
+				DatumPocetkaIzrade = (DateTime)u.DatumPocetkaIzrade!,
+				DatumZavrsetka = u.DatumZavrsetka!,
+				RokZaZavrsetak = (DateTime)u.RokZaZavrsetak!,
+				OdabranProgramskiJezik = u.OdabranProgramskiJezik!,
+				UrlDokumentacijeProgJezika = u.UrlDokumentacijeProgJezika!,
+				DopunskaLiteratura = u.DopunskaLiteratura!,
+				Student = stud,
+				Projekat = p,
+			};
+
+			ucesce!.ProjekatZavrsen = ucesce.DatumZavrsetka.HasValue ? "da" : "ne";
+
+			s.Save(o);
+
+			s.Flush();
+		}
+		catch (Exception)
+		{
+			return "Greska pri dodavanju ucesca.".ToError(400);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+
+		return true;
+	}
+
+	public static Result<bool, ErrorMessage> AzurirajUcesce(UcestvujeView u)
+	{
+		ISession? s = null;
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+
+			Ucestvuje o = s.Load<Ucestvuje>(u.Id);
+			o.DatumPocetkaIzrade = (DateTime)u.DatumPocetkaIzrade!;
+			o.DatumZavrsetka = u.DatumZavrsetka!;
+			o.RokZaZavrsetak = (DateTime)u.RokZaZavrsetak!;
+			o.OdabranProgramskiJezik = u.OdabranProgramskiJezik!;
+			o.UrlDokumentacijeProgJezika = u.UrlDokumentacijeProgJezika!;
+			o.DopunskaLiteratura = u.DopunskaLiteratura!;
+
+			o.ProjekatZavrsen = o.DatumZavrsetka.HasValue ? "da" : "ne";
+
+			s.SaveOrUpdate(o);
+
+			s.Flush();
+		}
+		catch (Exception)
+		{
+			return "Greska pri azuriranju ucesca.".ToError(400);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+
+		return true;
+	}
+
+	public static Result<bool, ErrorMessage> ObrisiUcesce(int id)
+	{
+		ISession? s = null;
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+
+			Ucestvuje o = s.Load<Ucestvuje>(id);
+
+			s.Delete(o);
+
+			s.Flush();
+		}
+		catch (Exception)
+		{
+			return "Greska pri brisanju ucesca.".ToError(400);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+
+		return true;
+	}
+
+	public static Result<UcestvujeView, ErrorMessage> VratiUcesce(int projid, string studid)
+	{
+		UcestvujeView? data = null;
+		ISession? s = null;
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+
+			data = s.Query<Ucestvuje>()
+					.Where(p => p.Student.BrIndeksa == studid && p.Projekat.Id == projid)
+					.Select(o => new UcestvujeView(o))
+					.FirstOrDefault();
+		}
+		catch (Exception)
+		{
+			return "Greška prilikom pribavljanja ucesca.".ToError(404);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+
+		return data!;
+	}
 
 	#endregion
 }

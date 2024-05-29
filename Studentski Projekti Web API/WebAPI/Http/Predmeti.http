@@ -4,7 +4,7 @@ GET {{WebAPI_HostAddress}}/Predmet/PreuzmiPredmete
 
 ###
 
-GET {{WebAPI_HostAddress}}/predmet/PreuzmiSortiranePredmete?katedra=Rač&semestar=3
+GET {{WebAPI_HostAddress}}/Predmet/PreuzmiSortiranePredmete?katedra=Rač&semestar=3
 
 ###
 
@@ -20,7 +20,7 @@ Content-Type: application/json
 
 ###
 
-PUT {{WebAPI_HostAddress}}/predmet/IzmeniPredmet
+PUT {{WebAPI_HostAddress}}/Predmet/IzmeniPredmet
 Content-Type: application/json
 
 {
@@ -32,6 +32,10 @@ Content-Type: application/json
 
 ###
 
-DELETE {{WebAPI_HostAddress}}/predmet/ObrisiPredmet/MAT101
+DELETE {{WebAPI_HostAddress}}/Predmet/ObrisiPredmet/MAT101
+
+###
+
+GET {{WebAPI_HostAddress}}/Predmet/PreuzmiPredmet/CS105
 
 ###

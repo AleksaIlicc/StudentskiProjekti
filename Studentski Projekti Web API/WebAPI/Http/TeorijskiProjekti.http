@@ -1,0 +1,48 @@
+﻿@WebAPI_HostAddress = https://localhost:5276
+
+# metoda za testiranje funkcionalnosti
+GET {{WebAPI_HostAddress}}/Projekat/PreuzmiTeorijskeProjekteZaPredmet/CS102
+
+###
+
+
+POST {{WebAPI_HostAddress}}/TeorijskiProjekat/DodajProjekat
+Content-Type: application/json
+
+{
+    "TipProjekta": "grupni",
+    "Naziv": "Dizajn baze podataka za biblioteku",
+    "SkolskaGodinaZadavanja": "2023/2024",
+    "PripadaPredmetu": {
+      "Id": "CS102"
+    },
+    "MaksBrojStrana": 70
+}
+
+###
+
+# s obzirom da se dinamicki postavlja id projekta, postaviti odgovarajuci id za azuriranje
+PUT {{WebAPI_HostAddress}}/TeorijskiProjekat/IzmeniProjekat
+Content-Type: application/json
+
+{
+    "Id": 231,
+    "TipProjekta": "grupni",
+    "Naziv": "Dizajn baze podataka za biblioteku",
+    "SkolskaGodinaZadavanja": "2023/2024",
+    "PripadaPredmetu": {
+      "Id": "CS102"
+    },
+    "MaksBrojStrana": 50
+}
+
+###
+
+# s obzirom da se dinamicki postavlja id projekta, postaviti odgovarajuci id za brisanje
+DELETE {{WebAPI_HostAddress}}/TeorijskiProjekat/ObrisiProjekat/231
+
+###
+
+GET {{WebAPI_HostAddress}}/TeorijskiProjekat/PreuzmiTeorijskiProjekat/15
+
+###

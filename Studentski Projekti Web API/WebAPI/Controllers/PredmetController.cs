@@ -47,6 +47,7 @@ public class PredmetController : ControllerBase
 	[ProducesResponseType(StatusCodes.Status201Created)]
 	[ProducesResponseType(StatusCodes.Status404NotFound)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	public IActionResult DodajPredmet([FromBody] PredmetView predmet)
 	{
 		(bool isError, var result, var error) = DataProvider.DodajPredmet(predmet);
@@ -91,5 +92,23 @@ public class PredmetController : ControllerBase
 		}
 
 		return Ok($"Predmet sa sifrom {predmet.Id} uspesno izmenjen.");
+	}
+
+	[HttpGet]
+	[Route("PreuzmiPredmet/{sifra}")]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status404NotFound)]
+	[ProducesResponseType(StatusCodes.Status403Forbidden)]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
+	public IActionResult PreuzmiPredmet(string sifra)
+	{
+		(bool isError, var predmet, var error) = DataProvider.VratiPredmet(sifra);
+
+		if (isError)
+		{
+			return StatusCode(error?.StatusCode ?? 400, error?.Message);
+		}
+
+		return Ok(predmet);
 	}
 }

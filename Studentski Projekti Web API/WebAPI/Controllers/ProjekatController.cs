@@ -41,4 +41,21 @@ public class ProjekatController : Controller
 
 		return Ok(projekti);
 	}
+
+	[HttpGet]
+	[Route("PreuzmiTeorijskeProjekteZaPredmet/{id}")]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
+	[ProducesResponseType(StatusCodes.Status403Forbidden)]
+	public IActionResult VratiTeorijskeProjekteZaPredmet(string id)
+	{
+		(bool isError, var projekti, var error) = DataProvider.VratiTeorijskeProjekteZaPredmet(id);
+
+		if (isError)
+		{
+			return StatusCode(error?.StatusCode ?? 400, error?.Message);
+		}
+
+		return Ok(projekti);
+	}
 }
