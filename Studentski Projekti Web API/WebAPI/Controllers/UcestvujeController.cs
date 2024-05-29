@@ -31,6 +31,7 @@ public class UcestvujeController : ControllerBase
 	[ProducesResponseType(StatusCodes.Status404NotFound)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
+	[ProducesResponseType(StatusCodes.Status409Conflict)]
 	public IActionResult DodajUcesce([FromBody] UcestvujeView ucestvuje, string projid, string studid)
 	{
 		(bool isError, var result, var error) = DataProvider.DodajUcesce(studid, Int32.Parse(projid), ucestvuje);
