@@ -1,5 +1,70 @@
 @WebAPI_HostAddress = https://localhost:5276
 
-GET {{WebAPI_HostAddress}}/prakticniprojekat/PreuzmiPrakticneProjekteZaPredmet/CS102
+
+GET {{WebAPI_HostAddress}}/projekat/PreuzmiPrakticneProjekteZaPredmet/CS102
 
 ###
+POST {{WebAPI_HostAddress}}/Projekat/Prakticni/Dodaj
+Content-Type: application/json
+{
+    "projekat": {
+        "Naziv": "NazivProjekta",
+        "SkolskaGodinaZadavanja": "2024/2025",
+        "PreporuceniProgramskiJezik": "C#",
+        "VrstaProjekta": "prakticni",
+        "TipProjekta": "grupni",
+        "KratakOpis": "Kratak opis projekta",
+        "PripadaPredmetu": {
+            "Id": "CS102"
+        }
+    },
+    "stranice": [
+        {
+            "Naziv": "WebStranica1"
+        },
+        {
+            "Naziv": "WebStranica2"
+        }
+    ]
+}
+
+###
+
+GET {{WebAPI_HostAddress}}/Projekat/Prakticni/VratiProjekat/249
+
+### s obzirom da se dinamicki postavlja id projekta, postaviti odgovarajuci id za azuriranje
+
+PUT {{WebAPI_HostAddress}}/Projekat/Prakticni/Azuriraj
+Content-Type: application/json
+
+{
+    "projekat": {
+        "Id": 249,
+        "Naziv": "NazivProjekta1",
+        "SkolskaGodinaZadavanja": "2024/2026",
+        "PreporuceniProgramskiJezik": "C++",
+        "VrstaProjekta": "prakticni",
+        "TipProjekta": "grupni",
+        "KratakOpis": "Kratak opis projekta1",
+        "PripadaPredmetu": {
+            "Id": "CS102"
+        }
+    },
+    "stranice": [
+        {
+            "Naziv": "WebStranica1"
+        },
+        {
+            "Naziv": "WebStranica2"
+        }
+    ]
+}
+### s obzirom da se dinamicki postavlja id projekta, postaviti odgovarajuci id za brisanje
+
+DELETE {{WebAPI_HostAddress}}/Projekat/Prakticni/Obrisi/249
+
+###s obzirom da se dinamicki postavlja id projekta, postaviti odgovarajuci id za brisanje ucesnika
+
+DELETE {{WebAPI_HostAddress}}/Projekat/Prakticni/ObrisiUcesnike/249
+
+
