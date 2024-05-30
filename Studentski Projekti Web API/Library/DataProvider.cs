@@ -528,6 +528,39 @@ public static class DataProvider
 
 		return data;
 	}
+    public static async Task<Result<List<PrakticniProjekatView>, ErrorMessage>> VratiPrakticneProjekteZaPredmetAsync(string idPredmeta)
+    {
+        List<PrakticniProjekatView> data = [];
+
+        ISession? s = null;
+        try
+        {
+            s = DataLayer.GetSession();
+
+            if (!(s?.IsConnected ?? false))
+            {
+                return "Nemoguće otvoriti sesiju.".ToError(403);
+            }
+
+            data = (await s.Query<PrakticniProjekat>()
+                                      .Where(p => p.PripadaPredmetu.Id == idPredmeta)
+                                      .OrderBy(p => p.SkolskaGodinaZadavanja)
+                                      .ToListAsync())
+                                      .Select(p => new PrakticniProjekatView(p))
+                                      .ToList();
+        }
+        catch (Exception)
+        {
+            return "Došlo je do greške prilikom prikupljanja informacija o prakticnim projektima predmeta.".ToError(400);
+        }
+        finally
+        {
+            s?.Close();
+            s?.Dispose();
+        }
+
+        return data;
+    }
 
 	public static Result<bool, ErrorMessage> ObrisiUcesnikeProjekta(int id)
 	{
@@ -598,9 +631,9 @@ public static class DataProvider
 		
 	#endregion
 
-	#region TeorijskiProjekti
+    #region TeorijskiProjekti
 
-	public static Result<bool, ErrorMessage> DodajTeorijskiProjekat(TeorijskiProjekatView p)
+    public static Result<bool, ErrorMessage> DodajTeorijskiProjekat(TeorijskiProjekatView p)
 	{
 
 		ISession? s = null;
@@ -907,11 +940,10 @@ public static class DataProvider
 
 	#region PrakticniProjekti 
 
-	public static async Task<Result<List<PrakticniProjekatView>, ErrorMessage>> VratiPrakticneProjekteZaPredmetAsync(string idPredmeta)
+    public static Result<bool, ErrorMessage> DodajPrakticniProjekat(PrakticniProjekatView p, List<PreporucenaWebStranicaView> stranice)
     {
-        List<PrakticniProjekatView> data = [];
-
         ISession? s = null;
+
 		try
 		{
 			s = DataLayer.GetSession();
@@ -920,17 +952,35 @@ public static class DataProvider
 			{
 				return "Nemoguće otvoriti sesiju.".ToError(403);
 			}
+			Predmet pred = s.Load<Predmet>(p.PripadaPredmetu?.Id);
 
-			data = (await s.Query<PrakticniProjekat>()
-									  .Where(p => p.PripadaPredmetu.Id == idPredmeta)
-									  .OrderBy(p => p.SkolskaGodinaZadavanja)
-									  .ToListAsync())
-									  .Select(p => new PrakticniProjekatView(p))
-									  .ToList();
+			PrakticniProjekat o = new PrakticniProjekat()
+			{
+				Naziv = p.Naziv!,
+				SkolskaGodinaZadavanja = p.SkolskaGodinaZadavanja!,
+				PreporuceniProgramskiJezik = p.PreporuceniProgramskiJezik!,
+				VrstaProjekta = p.VrstaProjekta!,
+				TipProjekta = p.TipProjekta!,
+				KratakOpis = p.KratakOpis!,
+				PripadaPredmetu = pred
+			};
+
+			List<PProjektiWebStranice> prepStranice = [];
+
+			foreach (var stranica in stranice)
+			{
+				prepStranice.Add(new PProjektiWebStranice() { PreporucenaWebStrana = stranica.Naziv!, PProjekat = o });
+			}
+
+			o.PreporuceneWebStranice = prepStranice;
+
+			s.Save(o);
+
+			s.Flush();
 		}
 		catch (Exception)
 		{
-			return "Došlo je do greške prilikom prikupljanja informacija o prakticnim projektima predmeta.".ToError(400);
+			return "Greska pri dodavanju prakticnog projekta.".ToError(404);
 		}
 		finally
 		{
@@ -938,8 +988,201 @@ public static class DataProvider
 			s?.Dispose();
 		}
 
-		return data;
-	}
+        return true;
+    }
+    public static Result<bool, ErrorMessage> ObrisiUcesnikePrakticnogProjekta(int id)
+    {
+        ISession? s = null;
+
+        try
+        {
+            s = DataLayer.GetSession();
+
+            if (!(s?.IsConnected ?? false))
+            {
+                return "Nemoguće otvoriti sesiju.".ToError(403);
+            }
+
+            var ucestvujePojavljivanja = s.Query<Ucestvuje>()
+                            .Where(u => u.Projekat.Id == id)
+                            .ToList();
+
+            foreach (var uPojavljivanje in ucestvujePojavljivanja)
+            {
+                s.Delete(uPojavljivanje);
+            }
+
+            var izvestajiPojavljivanja = s.Query<Predao>()
+                                    .Where(s => s.Projekat.Id == id)
+                                    .ToList();
+
+            foreach (var iPojavljivanje in izvestajiPojavljivanja)
+            {
+                s.Delete(iPojavljivanje);
+            }
+
+            s.Flush();
+
+            s.Close();
+        }
+        catch (Exception)
+        {
+            return "Greška prilikom brisanja ucesnika prakticnog projekta.".ToError(400);
+        }
+        finally
+        {
+            s?.Close();
+            s?.Dispose();
+        }
+
+        return true;
+    }
+
+    public static Result<bool, ErrorMessage> ObrisiPrakticniProjekat(int id)
+    {
+        ISession? s = null;
+
+        try
+        {
+            s = DataLayer.GetSession();
+
+            if (!(s?.IsConnected ?? false))
+            {
+                return "Nemoguće otvoriti sesiju.".ToError(403);
+            }
+
+            PrakticniProjekat o = s.Load<PrakticniProjekat>(id);
+
+            s.Delete(o);
+
+            s.Flush();
+        }
+        catch (Exception)
+        {
+            return "Greška prilikom brisanja prakticnog projekta.".ToError(400);
+        }
+        finally
+        {
+            s?.Close();
+            s?.Dispose();
+        }
+
+        return true;
+    }
+
+    private static Result<bool, ErrorMessage> AzurirajPrakticniProjekat(PrakticniProjekatView p , ISession s)
+    {
+        try
+        {
+
+            PrakticniProjekat o = s.Load<PrakticniProjekat>(p.Id);
+			o.Naziv = p.Naziv!;
+			o.SkolskaGodinaZadavanja = p.SkolskaGodinaZadavanja!;
+			o.PreporuceniProgramskiJezik = p.PreporuceniProgramskiJezik!;
+			o.TipProjekta = p.TipProjekta!;
+			o.KratakOpis = p.KratakOpis!;
+
+            s.SaveOrUpdate(o);
+            s.Flush();
+        }
+        catch (Exception)
+        {
+            return "Greska pri azuriranju predmeta.".ToError(400);
+        }
+        return true;
+    }
+    private static Result<bool, ErrorMessage> AzurirajStranicePrakticnogProjekta(int? id, List<PreporucenaWebStranicaView> stranice, ISession s)
+    {
+		try
+		{
+			var projekat = s.Load<PrakticniProjekat>(id);
+
+			foreach (var postojecaStranica in projekat.PreporuceneWebStranice)
+			{
+				s.Delete(postojecaStranica);
+			}
+
+			List<PProjektiWebStranice> noveStranice = [];
+			foreach (var stranica in stranice)
+			{
+				noveStranice.Add(new PProjektiWebStranice() { PreporucenaWebStrana = stranica.Naziv!, PProjekat = projekat });
+			}
+
+			projekat.PreporuceneWebStranice = noveStranice;
+
+			s.Update(projekat);
+		}
+		catch (Exception)
+		{
+			return "Greska pri azuriranju predmeta.".ToError(400);
+		}
+        return true;
+    }
+   public static Result<bool, ErrorMessage> AzurirajPrakticniProjekatSaStranicama(PrakticniProjekatView p, List<PreporucenaWebStranicaView> stranice)
+   {
+        ISession? s = null;
+        try
+        {
+            s = DataLayer.GetSession();
+
+            if (!(s?.IsConnected ?? false))
+            {
+                return "Nemoguće otvoriti sesiju.".ToError(403);
+            }
+            using ITransaction t = s.BeginTransaction();
+            try
+            {
+                AzurirajPrakticniProjekat(p, s);
+                AzurirajStranicePrakticnogProjekta(p.Id, stranice, s);
+
+                t.Commit();
+            }
+            catch (Exception ex)
+            {
+                t.Rollback();
+                Console.WriteLine(ex.Message);
+            }
+        }
+        catch (Exception)
+        {
+            return "Greska pri azuriranju predmeta.".ToError(400);
+        }
+        finally
+        {
+            s?.Close();
+            s?.Dispose();
+        }
+        return true;
+    }
+    public static Result<PrakticniProjekatView, ErrorMessage> VratiPrakticniProjekat(int id)
+    {
+        PrakticniProjekatView? p = null;
+
+        ISession? s = null;
+        try
+        {
+            s = DataLayer.GetSession();
+
+            if (!(s?.IsConnected ?? false))
+            {
+                return "Nemoguće otvoriti sesiju.".ToError(403);
+            }
+
+            PrakticniProjekat o = s.Load<PrakticniProjekat>(id);
+            p = new PrakticniProjekatView(o);
+        }
+        catch (Exception)
+        {
+            return "Došlo je do greške prilikom prikupljanja informacija o predmetima.".ToError(400);
+        }
+        finally
+        {
+            s?.Close();
+            s?.Dispose();
+        }
+
+        return p;
+    }
     #region PreporuceneWebStranice
     public static Result<List<PreporucenaWebStranicaView>, ErrorMessage> VratiPreporuceneWebStranicePProjekta(int idProjekta)
     {
@@ -963,7 +1206,7 @@ public static class DataProvider
         }
         catch (Exception)
         {
-            return "Došlo je do greške prilikom prikupljanja informacija o predmetima.".ToError(400);
+            return "Došlo je do greške prilikom prikupljanja informacija o web stranicama.".ToError(400);
         }
         finally
         {
@@ -990,7 +1233,7 @@ public static class DataProvider
 
 			PProjektiWebStranice novaWebStranica = new PProjektiWebStranice()
 			{
-				PreporucenaWebStrana = p.Naziv,
+				PreporucenaWebStrana = p.Naziv!,
 				PProjekat = pProjekat
 			};
 
@@ -1000,7 +1243,7 @@ public static class DataProvider
 		}
 		catch (Exception)
 		{
-			return "Greska pri dodavanju predmeta.".ToError(404);
+			return "Greska pri dodavanju web stranice.".ToError(404);
 		}
 		finally
 		{
@@ -1033,7 +1276,7 @@ public static class DataProvider
         }
         catch (Exception)
         {
-            return "Greška prilikom brisanja predmeta.".ToError(400);
+            return "Greška prilikom brisanja web stranice.".ToError(400);
         }
         finally
         {
