@@ -8,6 +8,7 @@ public class UcestvujeView
 	public string? OdabranProgramskiJezik { get; set; }
 	public string? UrlDokumentacijeProgJezika { get; set; }
 	public string? DopunskaLiteratura { get; set; }
+	public string? ProjekatZavrsen { get; set; }
 
 	internal UcestvujeView(Ucestvuje u)
 	{
@@ -18,6 +19,7 @@ public class UcestvujeView
 		OdabranProgramskiJezik = u.OdabranProgramskiJezik;
 		UrlDokumentacijeProgJezika = u.UrlDokumentacijeProgJezika;
 		DopunskaLiteratura = u.DopunskaLiteratura;
+		ProjekatZavrsen = u.ProjekatZavrsen;
 	}
 	public UcestvujeView() { }
 }

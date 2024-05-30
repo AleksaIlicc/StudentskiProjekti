@@ -707,21 +707,19 @@ public static class DataProvider
 				return "Ucesce vec postoji.".ToError(409);
 			}
 
-			ucesce = s.Query<Ucestvuje>()
-						.Where(p => p.Student.BrIndeksa == brind && p.Projekat.Id == projId)
-						.FirstOrDefault(); Ucestvuje o = new Ucestvuje()
-						{
-							DatumPocetkaIzrade = (DateTime)u.DatumPocetkaIzrade!,
-							DatumZavrsetka = u.DatumZavrsetka!,
-							RokZaZavrsetak = (DateTime)u.RokZaZavrsetak!,
-							OdabranProgramskiJezik = u.OdabranProgramskiJezik!,
-							UrlDokumentacijeProgJezika = u.UrlDokumentacijeProgJezika!,
-							DopunskaLiteratura = u.DopunskaLiteratura!,
-							Student = stud,
-							Projekat = p,
-						};
+			Ucestvuje o = new Ucestvuje()
+			{
+				DatumPocetkaIzrade = (DateTime)u.DatumPocetkaIzrade!,
+				DatumZavrsetka = u.DatumZavrsetka!,
+				RokZaZavrsetak = (DateTime)u.RokZaZavrsetak!,
+				OdabranProgramskiJezik = u.OdabranProgramskiJezik!,
+				UrlDokumentacijeProgJezika = u.UrlDokumentacijeProgJezika!,
+				DopunskaLiteratura = u.DopunskaLiteratura!,
+				Student = stud,
+				Projekat = p,
+			};
 
-			ucesce!.ProjekatZavrsen = ucesce.DatumZavrsetka.HasValue ? "da" : "ne";
+			o!.ProjekatZavrsen = o.DatumZavrsetka.HasValue ? "da" : "ne";
 
 			s.Save(o);
 

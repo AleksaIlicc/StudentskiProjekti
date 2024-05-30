@@ -1,6 +1,36 @@
 ﻿@WebAPI_HostAddress = https://localhost:5276
 
 
-GET {{WebAPI_HostAddress}}/Ucestvuje/PreuzmiUcesce/1/18001
+GET {{WebAPI_HostAddress}}/Ucestvuje/PreuzmiUcesce/51/18033
+
+###
+
+POST {{WebAPI_HostAddress}}/Ucestvuje/DodajUcesce/51/18033
+Content-Type: application/json
+
+{
+  "DatumPocetkaIzrade": "2022-10-01T00:00:00",
+  "RokZaZavrsetak": "2022-12-20T00:00:00",
+  "DopunskaLiteratura": "C# in Depth by Jon Skeet"
+}
+
+###
+
+# s obzirom da se dinamicki postavlja id ucesca, postaviti odgovarajuci id za brisanje
+DELETE {{WebAPI_HostAddress}}/Ucestvuje/ObrisiUcesce/72
+
+###
+
+# s obzirom da se dinamicki postavlja id ucesca, postaviti odgovarajuci id za azuriranje
+PUT {{WebAPI_HostAddress}}/Ucestvuje/AzurirajUcesce
+Content-Type: application/json
+
+{
+  "Id": 72,
+  "DatumPocetkaIzrade": "2022-10-01T00:00:00",
+  "DatumZavrsetka": "2022-12-27T07:17:00",
+  "RokZaZavrsetak": "2022-12-31T00:00:00",
+  "DopunskaLiteratura": "C# in Depth by Jon Skeet"
+}
 
 ###
