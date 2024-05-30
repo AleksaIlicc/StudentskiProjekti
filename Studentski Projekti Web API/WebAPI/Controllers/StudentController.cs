@@ -30,7 +30,7 @@ public class StudentController:ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
-    public IActionResult VratiSortiranePredmete([FromQuery(Name = "brIndeksa")] string? brindFilter = null, [FromQuery(Name = "ime")] string? imeFilter = null, [FromQuery(Name = "prezime")] string? prezimeFilter = null, [FromQuery(Name = "smer")] string? smerFilter = null)
+    public IActionResult VratiSortiraneStudente([FromQuery(Name = "brIndeksa")] string? brindFilter = null, [FromQuery(Name = "ime")] string? imeFilter = null, [FromQuery(Name = "prezime")] string? prezimeFilter = null, [FromQuery(Name = "smer")] string? smerFilter = null)
     {
         (bool isError, var studenti, var error) = DataProvider.VratiSortiraneStudente(brindFilter, imeFilter, prezimeFilter, smerFilter);
 
@@ -56,7 +56,7 @@ public class StudentController:ControllerBase
             return StatusCode(error?.StatusCode ?? 400, error?.Message);
         }
 
-        return StatusCode(201, $"Student sa brojem inedksa {student.BrIndeksa} je uspesno dodat.");
+        return StatusCode(201, $"Student sa brojem indeksa {student.BrIndeksa} je uspesno dodat.");
     }
 
     [HttpDelete]
@@ -64,7 +64,7 @@ public class StudentController:ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
-    public IActionResult ObrisiPredmet(string brInd)
+    public IActionResult ObrisiStudenta(string brInd)
     {
         (bool isError, var result, var error) = DataProvider.ObrisiStudenta(brInd);
 
@@ -73,7 +73,7 @@ public class StudentController:ControllerBase
             return StatusCode(error?.StatusCode ?? 400, error?.Message);
         }
 
-        return Ok($"Student sa brojem inedksa {brInd} je uspesno obrisan.");
+        return Ok($"Student sa brojem indeksa {brInd} je uspesno obrisan.");
     }
 
     [HttpPut]
@@ -81,7 +81,7 @@ public class StudentController:ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
-    public IActionResult IzmeniPredmet([FromBody] StudentiView student)
+    public IActionResult IzmeniStudenta([FromBody] StudentiView student)
     {
         (bool isError, var result, var error) = DataProvider.AzurirajStudenta(student);
 
@@ -90,6 +90,23 @@ public class StudentController:ControllerBase
             return StatusCode(error?.StatusCode ?? 400, error?.Message);
         }
 
-        return Ok($"Student sa brojem inedksa {student.BrIndeksa} je uspesno izmenjen.");
+        return Ok($"Student sa brojem indeksa {student.BrIndeksa} je uspesno izmenjen.");
     }
+    [HttpGet]
+    [Route("PreuzmiStudenta/{brInd}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public IActionResult VratiStudenta(string brInd)
+	{
+		(bool isError, var student, var error) = DataProvider.VratiStudenta(brInd);
+
+		if (isError)
+		{
+			return StatusCode(error?.StatusCode ?? 400, error?.Message);
+		}
+
+		return Ok(student);
+	}
 }

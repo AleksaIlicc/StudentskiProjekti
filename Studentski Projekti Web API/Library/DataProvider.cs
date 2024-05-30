@@ -228,7 +228,7 @@ public static class DataProvider
             }
             data = (await s.QueryOver<Student>().ListAsync())
                                 .OrderBy(s => s.BrIndeksa)
-                                .Select(s => new StudentiView(s.BrIndeksa, s.LIme, s.ImeRoditelja, s.Prezime, s.Smer))
+                                .Select(s => new StudentiView(s))
                                 .ToList();
 
         }
@@ -263,7 +263,7 @@ public static class DataProvider
                             (string.IsNullOrEmpty(ime) || s.LIme.StartsWith(ime)) &&
                             (string.IsNullOrEmpty(prezime) || s.Prezime.StartsWith(prezime)) &&
                             (string.IsNullOrEmpty(smer) || s.Smer.StartsWith(smer)))
-                .Select(s => new StudentiView(s.BrIndeksa, s.LIme, s.ImeRoditelja, s.Prezime, s.Smer))
+                .Select(s => new StudentiView(s))
                 .ToList();
 
 
@@ -386,6 +386,36 @@ public static class DataProvider
         }
 
 		return true;
+	}
+
+	public static Result<StudentiView,ErrorMessage> VratiStudenta(string brIndeksa)
+	{
+		StudentiView? data = null;
+		ISession? s = null;
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+
+			Student o = s.Load<Student>(brIndeksa);
+			data = new StudentiView(o);
+		}
+		catch (Exception)
+		{
+			return "Greška prilikom pribavljanja studenta.".ToError(404);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+
+		return data;
 	}
 
 	#endregion

@@ -1,15 +1,14 @@
 ﻿@WebAPI_HostAddress = https://localhost:5276
 
 
-# Dobavljanje svih studenata
 GET {{WebAPI_HostAddress}}/Student/PreuzmiStudente
+
 ###
 
-# Dobavljanje sortiranih studenata sa opcionalnim filterima
 GET {{WebAPI_HostAddress}}/Student/PreuzmiSortiraneStudente?brIndeksa=1802&ime=M
+
 ###
 
-# Dodavanje novog studenta
 POST {{WebAPI_HostAddress}}/Student/DodajStudenta
 Content-Type: application/json
 
@@ -20,13 +19,13 @@ Content-Type: application/json
   "prezime": "Ivanovic",
   "smer": "Racunarstvo"
 }
+
 ###
 
-# Brisanje studenta sa određenim brojem indeksa
 DELETE {{WebAPI_HostAddress}}/Student/ObrisiStudenta/19001
+
 ###
 
-# Izmena podataka o studentu
 PUT {{WebAPI_HostAddress}}/Student/IzmeniStudenta
 Content-Type: application/json
 
@@ -37,3 +36,9 @@ Content-Type: application/json
   "prezime": "Ivanovic",
   "smer": "Racunarstvo"
 }
+
+###
+
+GET {{WebAPI_HostAddress}}/student/PreuzmiStudenta/19001
+
+###
