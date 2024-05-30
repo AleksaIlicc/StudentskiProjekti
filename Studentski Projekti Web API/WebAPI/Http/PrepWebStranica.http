@@ -1,0 +1,24 @@
+@WebAPI_HostAddress = https://localhost:5276
+
+GET {{WebAPI_HostAddress}}/prepwebstranica/VratiPrepWebStraniceZaPProjekat/28
+
+###
+
+POST {{WebAPI_HostAddress}}/prepwebstranica/DodajPrepWebStranicu/28
+Content-Type: application/json
+
+{
+  "naziv": "VasNaziv"
+}
+
+###
+
+
+
+DELETE {{WebAPI_HostAddress}}/prepwebstranica/ObrisiPrepWebStranicu/28
+Content-Type: application/json
+
+{
+  "naziv": "VasNaziv"
+}
+###

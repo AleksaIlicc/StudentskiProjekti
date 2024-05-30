@@ -1,4 +1,5 @@
-﻿using NHibernate.Linq;
+﻿using FluentNHibernate.Conventions;
+using NHibernate.Linq;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Library;
@@ -878,6 +879,111 @@ public static class DataProvider
 
 		return data;
 	}
-	
+    #region PreporuceneWebStranice
+    public static Result<List<PreporucenaWebStranicaView>, ErrorMessage> VratiPreporuceneWebStranicePProjekta(int idProjekta)
+    {
+        List<PreporucenaWebStranicaView> data = [];
+
+        ISession? s = null;
+        try
+        {
+            s = DataLayer.GetSession();
+
+            if (!(s?.IsConnected ?? false))
+            {
+                return "Nemoguće otvoriti sesiju.".ToError(403);
+            }
+  
+            data = s.Query<PProjektiWebStranice>()
+					.Where(p => p.PProjekat.Id == idProjekta)
+					.OrderBy(p => p.PreporucenaWebStrana)
+					.Select(ws => new PreporucenaWebStranicaView(ws.PreporucenaWebStrana))
+					.ToList();
+        }
+        catch (Exception)
+        {
+            return "Došlo je do greške prilikom prikupljanja informacija o predmetima.".ToError(400);
+        }
+        finally
+        {
+            s?.Close();
+            s?.Dispose();
+        }
+        return data;
+    }
+
+    public static Result<bool, ErrorMessage> DodajPreporucenuWebStranicuZaProjekat(int idProjekta, PreporucenaWebStranicaView p)
+    {
+        ISession? s = null;
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+
+			PrakticniProjekat pProjekat = s.Load<PrakticniProjekat>(idProjekta);
+
+			PProjektiWebStranice novaWebStranica = new PProjektiWebStranice()
+			{
+				PreporucenaWebStrana = p.Naziv,
+				PProjekat = pProjekat
+			};
+
+			s.Save(novaWebStranica);
+
+			s.Flush();
+		}
+		catch (Exception)
+		{
+			return "Greska pri dodavanju predmeta.".ToError(404);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+        return true;
+    }
+
+    public static Result<bool, ErrorMessage> ObrisiPreporucenuWebStranicuZaProjekat(int idProjekta, PreporucenaWebStranicaView ps)
+    {
+        ISession? s = null;
+
+        try
+        {
+            s = DataLayer.GetSession();
+
+            if (!(s?.IsConnected ?? false))
+            {
+                return "Nemoguće otvoriti sesiju.".ToError(403);
+            }
+
+            PProjektiWebStranice? stranica = s.Query<PProjektiWebStranice>()
+											 .FirstOrDefault(p => p.PProjekat.Id == idProjekta && p.PreporucenaWebStrana == ps.Naziv);
+
+            s.Delete(stranica);
+
+            s.Flush();
+
+        }
+        catch (Exception)
+        {
+            return "Greška prilikom brisanja predmeta.".ToError(400);
+        }
+        finally
+        {
+            s?.Close();
+            s?.Dispose();
+        }
+
+        return true;
+    }
+
+    #endregion
+
     #endregion
 }
