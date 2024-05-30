@@ -7,13 +7,13 @@ public class StudentiView
     public string? Prezime { get; set; }
     public string? Smer { get; set; }
 
-    internal StudentiView(string brIndeksa, string ime, string imeRoditelja, string prezime, string smer)
+    internal StudentiView(Student s)
     {
-        this.BrIndeksa = brIndeksa;
-        this.LIme = ime;
-        this.ImeRoditelja = imeRoditelja;
-        this.Prezime = prezime;
-        this.Smer = smer;
+        this.BrIndeksa = s.BrIndeksa;
+        this.LIme = s.LIme;
+        this.ImeRoditelja = s.ImeRoditelja;
+        this.Prezime = s.Prezime;
+        this.Smer = s.Smer;
     }
 
     public StudentiView()
