@@ -419,11 +419,55 @@ public static class DataProvider
 		return data;
 	}
 
-	#endregion
+    public static Result<List<ProjekatUcesceDetaljiView>, ErrorMessage> VratiProjekteZaStudenta(string studentId)
+    {
+        List<ProjekatUcesceDetaljiView> data = [];
 
-	#region Projekti
+        ISession? s = null;
+        try
+        {
+            s = DataLayer.GetSession();
 
-	public static async Task<Result<List<ProjekatView>, ErrorMessage>> VratiSveProjektePredmetaAsync(string idPredmeta)
+            if (!(s?.IsConnected ?? false))
+            {
+                return "Nemoguće otvoriti sesiju.".ToError(403);
+            }
+
+            data = s.Query<Ucestvuje>()
+                    .Where(ucestvuje => ucestvuje.Student.BrIndeksa == studentId)
+                    .Join(s.Query<Projekat>(),
+                            ucestvuje => ucestvuje.Projekat.Id,
+                            projekat => projekat.Id,
+                            (ucestvuje, projekat) => new ProjekatUcesceDetaljiView
+                            {
+                                IdProjekta = projekat.Id,
+                                NazivProjekta = projekat.Naziv,
+                                DatumPocetkaIzrade = ucestvuje.DatumPocetkaIzrade,
+                                DatumZavrsetkaIzrade = ucestvuje.DatumZavrsetka,
+                                RokZaZavrsetak = ucestvuje.RokZaZavrsetak,
+                                ProjekatZavrsen = ucestvuje.ProjekatZavrsen,
+                                VrstaProjekta = projekat.VrstaProjekta,
+                                NazivPredmeta = projekat.PripadaPredmetu.Naziv,
+                            })
+                    .ToList();
+        }
+        catch (Exception)
+        {
+            return "Došlo je do greške prilikom prikupljanja informacija o projektima.".ToError(400);
+        }
+        finally
+        {
+            s?.Close();
+            s?.Dispose();
+        }
+
+        return data;
+    }
+    #endregion
+
+    #region Projekti
+
+    public static async Task<Result<List<ProjekatView>, ErrorMessage>> VratiSveProjektePredmetaAsync(string idPredmeta)
 	{
 		List<ProjekatView> data = [];
 
@@ -936,9 +980,56 @@ public static class DataProvider
 		return data!;
 	}
 
-	#endregion
+	public static Result<ProjekatUcesceDetaljiView, ErrorMessage> VratiUcesceDetalji(string studentId, int projId)
+    {
+		ProjekatUcesceDetaljiView? projektiInfo = null;
+        ISession? s = null;
 
-	#region PrakticniProjekti 
+        try
+        {
+            s = DataLayer.GetSession();
+
+            if (!(s?.IsConnected ?? false))
+            {
+                return "Nemoguće otvoriti sesiju.".ToError(403);
+            }
+
+			projektiInfo = s.Query<Ucestvuje>()
+							.Where(ucestvuje => ucestvuje.Student.BrIndeksa == studentId && ucestvuje.Projekat.Id == projId)
+							.Join(s.Query<Projekat>(),
+								  ucestvuje => ucestvuje.Projekat.Id,
+								  projekat => projekat.Id,
+								  (ucestvuje, projekat) => new ProjekatUcesceDetaljiView
+								  {
+									  IdProjekta = projekat.Id,
+									  NazivProjekta = projekat.Naziv,
+									  DatumPocetkaIzrade = ucestvuje.DatumPocetkaIzrade,
+									  DatumZavrsetkaIzrade = ucestvuje.DatumZavrsetka,
+									  RokZaZavrsetak = ucestvuje.RokZaZavrsetak,
+									  ProjekatZavrsen = ucestvuje.ProjekatZavrsen,
+									  VrstaProjekta = projekat.VrstaProjekta,
+									  DopunskaLiteratura = ucestvuje.DopunskaLiteratura,
+									  OdabranProgramskiJezik = ucestvuje.OdabranProgramskiJezik,
+									  UrlDokumentacijeProgJezika = ucestvuje.UrlDokumentacijeProgJezika
+								  })
+							.FirstOrDefault();
+        }
+        catch (Exception)
+        {
+            return "Greška prilikom pribavljanja detalja ucesca.".ToError(404);
+        }
+        finally
+        {
+            s?.Close();
+            s?.Dispose();
+        }
+
+        return projektiInfo!;
+    }
+
+    #endregion
+
+    #region PrakticniProjekti 
 
     public static Result<bool, ErrorMessage> DodajPrakticniProjekat(PrakticniProjekatView p, List<PreporucenaWebStranicaView> stranice)
     {
@@ -1470,7 +1561,37 @@ public static class DataProvider
         }
         return data;
     }
+
+    public static Result<int, ErrorMessage> VratiBrPredIzvestajaNaGrupi(int projid)
+    {
+		int brojizv = 0;
+
+        ISession? s = null;
+        try
+        {
+            s = DataLayer.GetSession();
+
+            if (!(s?.IsConnected ?? false))
+            {
+                return "Nemoguće otvoriti sesiju.".ToError(403);
+            }
+            brojizv = s.Query<Predao>()
+                        .Where(p => p.Projekat.Id == projid)
+                        .Count();
+        }
+        catch (Exception)
+        {
+            return "Došlo je do greške prilikom prikupljanja informacija o broju izvestaja.".ToError(400);
+        }
+        finally
+        {
+            s?.Close();
+            s?.Dispose();
+        }
+        return brojizv;
+    }
     #endregion
 
     #endregion
+
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Library;
 using Library.DTOs;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WebAPI.Controllers;
 
@@ -9,7 +10,7 @@ namespace WebAPI.Controllers;
 public class UcestvujeController : ControllerBase
 {
 	[HttpGet]
-	[Route("Preuzmi/{projid}/{studid}")]
+	[Route("PreuzmiDetalje/{projid}/{studid}")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -77,4 +78,22 @@ public class UcestvujeController : ControllerBase
 
 		return Ok($"Uspesno azurirano ucesce studenta na projektu.");
 	}
+
+    [HttpGet]
+    [Route("ZaStudenta/{studentId}/{projId}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public IActionResult VratiUcesceDetalji(string studentId, int projId)
+    {
+        (bool isError, var result, var error) = DataProvider.VratiUcesceDetalji(studentId, projId);
+
+        if (isError)
+        {
+            return StatusCode(error?.StatusCode ?? 400, error?.Message);
+        }
+
+        return Ok(result);
+    }
 }

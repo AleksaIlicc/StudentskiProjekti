@@ -109,4 +109,22 @@ public class StudentController:ControllerBase
 
 		return Ok(student);
 	}
+
+    [HttpGet]
+    [Route("VratiProjekte/{studentId}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public IActionResult VratiProjekteZaStudenta(string studentId)
+    {
+        (bool isError, var student, var error) = DataProvider.VratiProjekteZaStudenta(studentId);
+
+        if (isError)
+        {
+            return StatusCode(error?.StatusCode ?? 400, error?.Message);
+        }
+
+        return Ok(student);
+    }
 }
