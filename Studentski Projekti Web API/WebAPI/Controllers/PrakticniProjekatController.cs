@@ -37,7 +37,7 @@ public class PrakticniProjekatController : Controller
         }
         catch (JsonException ex)
         {
-            return BadRequest($"Invalid JSON format: {ex.Message}");
+            return BadRequest($"Nevalidan JSON format: {ex.Message}");
         }
     }
 
@@ -104,7 +104,7 @@ public class PrakticniProjekatController : Controller
         }
         catch (JsonException ex)
         {
-            return BadRequest($"Invalid JSON format: {ex.Message}");
+            return BadRequest($"Nevalidan JSON format: {ex.Message}");
         }
     }
 

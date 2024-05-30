@@ -1,6 +1,5 @@
-﻿using FluentNHibernate.Conventions;
+﻿using Library.Entiteti;
 using NHibernate.Linq;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Library;
 
@@ -744,7 +743,7 @@ public static class DataProvider
 		return true;
 	}
 
-	public static Result<TeorijskiProjekatView,ErrorMessage> VratiTeorijskiProjekat(int id)
+	public static Result<TeorijskiProjekatView, ErrorMessage> VratiTeorijskiProjekat(int id)
 	{
 		TeorijskiProjekatView? data = null;
 		ISession? s = null;
@@ -773,6 +772,422 @@ public static class DataProvider
 
 		return data;
 	}
+
+	#region Literatura
+
+	public static Result<bool, ErrorMessage> DodajAutora(int idLiterature, AutorView autor)
+	{
+		ISession? s = null;
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+
+			Literatura l = s.Load<Literatura>(idLiterature);
+
+			LitAutor? o = s.Query<LitAutor>()
+				.Where(l => l.Literatura.LitId == idLiterature && l.Autor == autor.Autor)
+				.FirstOrDefault();
+
+			if (o != null)	
+				return "Autor već postoji.".ToError(409);
+			
+			o = new LitAutor()
+			{
+				Autor = autor.Autor!,
+				Literatura = l
+			};
+
+			s.Save(o);
+
+			s.Flush();
+		}
+		catch (Exception)
+		{
+			return "Greska pri dodavanju autora.".ToError(404);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+		return true;
+	}
+
+	public static Result<List<AutorView>, ErrorMessage> VratiAutoreZaLiteraturu(int idLiterature)
+	{
+		List<AutorView> data = [];
+		ISession? s = null;
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+
+			data = s.Query<LitAutor>()
+				.Where(l => l.Literatura.LitId == idLiterature)
+				.Select(l => new AutorView(l))
+				.ToList();
+		}
+		catch (Exception)
+		{
+			return "Došlo je do greške prilikom prikupljanja informacija o autorima literature.".ToError(400);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+		return data;
+	}
+
+	public static Result<bool, ErrorMessage> ObrisiAutora(int idLiterature, AutorView autor)
+	{
+		ISession? s = null;
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+
+			LitAutor? o = s.Query<LitAutor>()
+							.Where(l => l.Literatura.LitId == idLiterature && l.Autor == autor.Autor)
+							.FirstOrDefault();
+
+			if (o == null)
+				return "Autor ne postoji.".ToError(404);
+
+			s.Delete(o);
+
+			s.Flush();
+		}
+		catch (Exception)
+		{
+			return "Greška prilikom brisanja autora.".ToError(400);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+		return true;
+	}
+
+	public static Result<bool, ErrorMessage> ObrisiLiteraturu(int id)
+	{
+		ISession? s = null;
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+
+			var sadrziPojavljivanja = s.Query<Sadrzi>()
+									.Where(x => x.Literatura.LitId == id)
+									.ToList();
+
+			foreach (var pojavljivanje in sadrziPojavljivanja)
+			{
+				s.Delete(pojavljivanje);
+			}
+
+			var literatura = s.Load<Literatura>(id);
+
+			s.Delete(literatura);
+
+			s.Flush();
+		}
+		catch (Exception)
+		{
+			return "Greška prilikom brisanja literature.".ToError(400);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+		return true;
+	}
+
+	#region Knjiga
+
+	public static Result<List<KnjigaView>, ErrorMessage> VratiKnjigeZaTProjekat(int id)
+	{
+		List<KnjigaView> data = [];
+		ISession? s = null;
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+
+			data = s.Query<Sadrzi>()
+					   .Where(p => p.TProjekat.Id == id)
+					   .Join(s.Query<Knjiga>(),
+					   sadrzi => sadrzi.Literatura.LitId,
+					   knjiga => knjiga.Literatura.LitId,
+					   (sadrzi, knjiga) => new KnjigaView(knjiga)
+					   )
+					   .ToList();
+		}
+		catch (Exception)
+		{
+			return "Došlo je do greške prilikom prikupljanja informacija o knjigama.".ToError(400);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+		return data;
+	}
+
+	public static Result<int, ErrorMessage> VratiIdLiteratureKnjige(string isbn)
+	{
+		int data = 0;
+		ISession? s = null;
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+
+			data = s.Query<Knjiga>()
+				.Where(k => k.ISBN == isbn)
+				.Select(k => k.Literatura.LitId)
+				.FirstOrDefault();
+		}
+		catch (Exception)
+		{
+			return "Došlo je do greške prilikom pribavljanja informacija o knjigama.".ToError(400);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+		return data;
+	}
+
+	public static Result<bool, ErrorMessage> ObrisiKnjigu(int projekatId, string isbn)
+	{
+		ISession? s = null;
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+			Knjiga k = s.Load<Knjiga>(isbn);
+			Sadrzi? o = s.Query<Sadrzi>()
+						.Where(x => x.Literatura.LitId == k.Literatura.LitId && projekatId == x.TProjekat.Id)
+						.FirstOrDefault();
+
+			if (o == null)
+				return "Knjiga ne postoji.".ToError(404);
+
+			s.Delete(o);
+
+			s.Flush();
+		}
+		catch (Exception)
+		{
+			return "Greška prilikom brisanja knjige.".ToError(400);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+		return true;
+	}
+
+	public static Result<bool, ErrorMessage> DodajKnjigu(int tProjekatId, KnjigaView knjiga, List<AutorView> autori)
+	{
+		ISession? s = null;
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+			Literatura lit = new Literatura()
+			{
+				Naziv = knjiga.Naziv!,
+			};
+
+			List<LitAutor> listaAutora = new List<LitAutor>();
+			foreach (AutorView ap in autori)
+			{
+				listaAutora.Add(new LitAutor() { Autor = ap.Autor!, Literatura = lit });
+			}
+			lit.Autori = listaAutora;
+
+			Knjiga r = new Knjiga()
+			{
+				ISBN = knjiga.ISBN!,
+				Izdavac = knjiga.Izdavac!,
+				GodinaIzdanja = (int)knjiga.GodinaIzdanja!,
+				Literatura = lit
+			};
+
+			lit.Knjiga = r;
+
+			s.Save(lit);
+
+			Sadrzi sadrzi = new Sadrzi()
+			{
+				Literatura = lit,
+				TProjekat = s.Load<TeorijskiProjekat>(tProjekatId)
+			};
+			s.Save(sadrzi);
+
+			s.Flush();
+		}
+		catch (Exception)
+		{
+			return "Greska pri dodavanju knjige.".ToError(404);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+		return true;
+	}
+
+	public static Result<KnjigaView, ErrorMessage> VratiKnjigu(string isbn)
+	{
+		KnjigaView? data = null;
+		ISession? s = null;
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+			Knjiga o = s.Load<Knjiga>(isbn);
+			data = new KnjigaView(o);
+		}
+		catch (Exception)
+		{
+			return "Greška prilikom pribavljanja knjige.".ToError(404);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+		return data;
+	}
+
+	private static void AzurirajKnjigu(KnjigaView knjigaPregled, ISession s)
+	{
+		Knjiga knjiga = s.Load<Knjiga>(knjigaPregled.ISBN);
+		knjiga.Izdavac = knjigaPregled.Izdavac!;
+		knjiga.GodinaIzdanja = (int)knjigaPregled.GodinaIzdanja!;
+		knjiga.Literatura.Naziv = knjigaPregled.Naziv!;
+
+		s.SaveOrUpdate(knjiga);
+	}
+
+	private static void AzurirajAutoreKnjige(string isbn, List<AutorView> azuriraniAutori, ISession s)
+	{
+		var knjiga = s.Load<Knjiga>(isbn);
+		var lit = knjiga.Literatura;
+
+		foreach (var postojeciAutori in lit.Autori.ToList())
+		{
+			s.Delete(postojeciAutori);
+		}
+
+		List<LitAutor> autori = new List<LitAutor>();
+		foreach (var autorPregled in azuriraniAutori)
+		{
+			autori.Add(new LitAutor() { Autor = autorPregled.Autor!, Literatura = lit });
+		}
+
+		lit.Autori = autori;
+
+		s.Update(lit);
+	}
+
+	public static Result<bool, ErrorMessage> AzurirajKnjiguSaAutorima(KnjigaView knjigaPregled, List<AutorView> azuriraniAutori)
+	{
+		ISession? s = null;
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+
+			using ITransaction t = s.BeginTransaction();
+			try { 
+				AzurirajKnjigu(knjigaPregled, s);
+				AzurirajAutoreKnjige(knjigaPregled.ISBN!, azuriraniAutori, s);
+				t.Commit();
+			}
+			catch (Exception)
+			{
+				t.Rollback();
+				return "Greška pri ažuriranju knjige.".ToError(400);
+			}
+
+			s.Flush();
+		}
+		catch (Exception)
+		{
+			return "Greška pri ažuriranju knjige.".ToError(400);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+		return true;
+	}
+
+	#endregion
+
+	#endregion
 
 	#endregion
 
@@ -1201,7 +1616,7 @@ public static class DataProvider
             data = s.Query<PProjektiWebStranice>()
 					.Where(p => p.PProjekat.Id == idProjekta)
 					.OrderBy(p => p.PreporucenaWebStrana)
-					.Select(ws => new PreporucenaWebStranicaView(ws.PreporucenaWebStrana))
+					.Select(ws => new PreporucenaWebStranicaView(ws))
 					.ToList();
         }
         catch (Exception)

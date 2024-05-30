@@ -3,9 +3,9 @@
 public class PreporucenaWebStranicaView
 {
     public string? Naziv { get; set; }
-    internal PreporucenaWebStranicaView(string naziv)
+    internal PreporucenaWebStranicaView(PProjektiWebStranice p)
     {
-        this.Naziv = naziv;
+        Naziv = p.PreporucenaWebStrana;
     }
 
     public PreporucenaWebStranicaView() {}

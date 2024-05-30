@@ -1,0 +1,70 @@
+﻿@WebAPI_HostAddress = https://localhost:5276
+
+
+GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Knjiga/Preuzmi/Sve/5
+
+###
+
+POST {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Knjiga/Dodaj/5
+Content-Type: application/json
+
+{
+    "knjiga": {
+        "Naziv": "Knjiga1",
+        "ISBN": "978-3-16-148410-0",
+        "Izdavac": "Izdavac",
+        "GodinaIzdanja": 2022
+    },
+    "autori": [
+        {
+            "Autor": "Jovan Dragojevic"
+        },
+        {
+            "Autor": "Milutin Bojic"
+        }
+    ]
+}
+
+###
+
+GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Autori/Preuzmi/204
+
+###
+
+PUT {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Knjiga/Izmeni
+Content-Type: application/json
+
+{
+  "knjiga": {
+        "Naziv": "Knjiga 1",
+        "ISBN": "978-3-16-148410-0",
+        "Izdavac": "Izdavac",
+        "GodinaIzdanja": 2023
+    },
+    "autori": [
+        {
+            "Autor": "Jovan Blagojevic"
+        },
+        {
+            "Autor": "Milutin Bojic"
+        }
+    ]
+}
+
+###
+
+GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Knjiga/Preuzmi/978-3-16-148410-0
+
+###
+
+DELETE {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Knjiga/Obrisi/5/978-3-16-148410-0
+
+###
+
+GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Knjiga/Preuzmi/Id/978-3-16-148410-0
+
+###
+
+DELETE {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Obrisi/204
+
+###

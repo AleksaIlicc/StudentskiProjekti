@@ -1,0 +1,23 @@
+﻿@WebAPI_HostAddress = https://localhost:5276
+
+
+POST {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Autori/Dodaj/34
+Content-Type: application/json
+
+{
+  "Autor": "Stefan Markovski"
+}
+
+###
+
+GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Autori/Preuzmi/34
+
+###
+
+DELETE {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Autori/Obrisi/34
+Content-Type: application/json
+
+{
+  "autor": "Stefan Markovski"
+}
+
