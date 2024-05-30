@@ -1,15 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Library;
-using Library.DTOs;
 
 namespace WebAPI.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("Projekat")]
 public class ProjekatController : Controller
 {
 	[HttpGet]
-	[Route("PreuzmiProjekteZaPredmet/{id}")]
+	[Route("Preuzmi/ZaPredmet/{id}")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -26,7 +25,7 @@ public class ProjekatController : Controller
 	}
 
 	[HttpGet]
-	[Route("PreuzmiSortiraneProjekteZaPredmet/{id}")]
+	[Route("Preuzmi/Sortirani/ZaPredmet/{id}")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -43,13 +42,13 @@ public class ProjekatController : Controller
 	}
 
 	[HttpGet]
-	[Route("PreuzmiTeorijskeProjekteZaPredmet/{id}")]
+	[Route("Teorijski/Preuzmi/ZaPredmet/{id}")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
-	public IActionResult VratiTeorijskeProjekteZaPredmet(string id)
+	public async Task<IActionResult> VratiTProjekteZaPredmet(string id)
 	{
-		(bool isError, var projekti, var error) = DataProvider.VratiTeorijskeProjekteZaPredmet(id);
+		(bool isError, var projekti, var error) = await DataProvider.VratiTeorijskeProjekteZaPredmetAsync(id);
 
 		if (isError)
 		{
@@ -60,11 +59,11 @@ public class ProjekatController : Controller
 	}
 
     [HttpGet]
-    [Route("PreuzmiPrakticneProjekteZaPredmet/{id}")]
+    [Route("Prakticni/Preuzmi/ZaPredmet/{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
-    public async Task<IActionResult> PreuzmiPrakticneProjekteZaPredmet(string id)
+    public async Task<IActionResult> PreuzmiPProjekteZaPredmet(string id)
     {
         (bool isError, var pprojekti, var error) = await DataProvider.VratiPrakticneProjekteZaPredmetAsync(id);
 
@@ -75,4 +74,22 @@ public class ProjekatController : Controller
 
         return Ok(pprojekti);
     }
+
+	[HttpGet]
+	[Route("Prakticni/Preuzmi/Studenti/{id}")]
+	[Route("Teorijski/Preuzmi/Studenti/{id}")]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
+	[ProducesResponseType(StatusCodes.Status403Forbidden)]
+	public IActionResult VratiStudenteNaProjektu(int id)
+	{
+		(bool isError, var studenti, var error) = DataProvider.VratiStudenteNaProjektu(id);
+
+		if (isError)
+		{
+			return StatusCode(error?.StatusCode ?? 400, error?.Message);
+		}
+
+		return Ok(studenti);
+	}
 }

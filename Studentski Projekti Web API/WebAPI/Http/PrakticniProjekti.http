@@ -1,5 +1,3 @@
 @WebAPI_HostAddress = https://localhost:5276
 
-GET {{WebAPI_HostAddress}}/prakticniprojekat/PreuzmiPrakticneProjekteZaPredmet/CS102
 
-###

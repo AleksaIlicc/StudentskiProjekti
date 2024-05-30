@@ -1,15 +1,15 @@
 ﻿@WebAPI_HostAddress = https://localhost:5276
 
 
-GET {{WebAPI_HostAddress}}/Student/PreuzmiStudente
+GET {{WebAPI_HostAddress}}/Student/Preuzmi/Sve
 
 ###
 
-GET {{WebAPI_HostAddress}}/Student/PreuzmiSortiraneStudente?brIndeksa=1802&ime=M
+GET {{WebAPI_HostAddress}}/Student/Preuzmi/Sortirani?brIndeksa=1802&ime=M
 
 ###
 
-POST {{WebAPI_HostAddress}}/Student/DodajStudenta
+POST {{WebAPI_HostAddress}}/Student/Dodaj
 Content-Type: application/json
 
 {
@@ -22,11 +22,11 @@ Content-Type: application/json
 
 ###
 
-DELETE {{WebAPI_HostAddress}}/Student/ObrisiStudenta/19001
+DELETE {{WebAPI_HostAddress}}/Student/Obrisi/19001
 
 ###
 
-PUT {{WebAPI_HostAddress}}/Student/IzmeniStudenta
+PUT {{WebAPI_HostAddress}}/Student/Izmeni
 Content-Type: application/json
 
 {
@@ -39,6 +39,6 @@ Content-Type: application/json
 
 ###
 
-GET {{WebAPI_HostAddress}}/student/PreuzmiStudenta/19001
+GET {{WebAPI_HostAddress}}/student/Preuzmi/19001
 
 ###

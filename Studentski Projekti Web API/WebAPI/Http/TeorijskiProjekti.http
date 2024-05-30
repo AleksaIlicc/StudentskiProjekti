@@ -1,12 +1,11 @@
 ﻿@WebAPI_HostAddress = https://localhost:5276
 
 # metoda za testiranje funkcionalnosti
-GET {{WebAPI_HostAddress}}/Projekat/PreuzmiTeorijskeProjekteZaPredmet/CS102
+GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Preuzmi/ZaPredmet/CS102
 
 ###
 
-
-POST {{WebAPI_HostAddress}}/TeorijskiProjekat/DodajProjekat
+POST {{WebAPI_HostAddress}}/Projekat/Teorijski/Dodaj
 Content-Type: application/json
 
 {
@@ -22,11 +21,11 @@ Content-Type: application/json
 ###
 
 # s obzirom da se dinamicki postavlja id projekta, postaviti odgovarajuci id za azuriranje
-PUT {{WebAPI_HostAddress}}/TeorijskiProjekat/IzmeniProjekat
+PUT {{WebAPI_HostAddress}}/Projekat/Teorijski/Izmeni
 Content-Type: application/json
 
 {
-    "Id": 231,
+    "Id": 249,
     "TipProjekta": "grupni",
     "Naziv": "Dizajn baze podataka za biblioteku",
     "SkolskaGodinaZadavanja": "2023/2024",
@@ -39,10 +38,42 @@ Content-Type: application/json
 ###
 
 # s obzirom da se dinamicki postavlja id projekta, postaviti odgovarajuci id za brisanje
-DELETE {{WebAPI_HostAddress}}/TeorijskiProjekat/ObrisiProjekat/231
+DELETE {{WebAPI_HostAddress}}/Projekat/Teorijski/Obrisi/249
 
 ###
 
-GET {{WebAPI_HostAddress}}/TeorijskiProjekat/PreuzmiTeorijskiProjekat/15
+# ovo ucesce i ucesce ispod se dodaju radi testiranja funkcionalnosti brisanja svih ucesca sa projekta
+POST {{WebAPI_HostAddress}}/Ucesce/Dodaj/20/18033
+Content-Type: application/json
+
+{
+  "DatumPocetkaIzrade": "2022-10-01T00:00:00",
+  "RokZaZavrsetak": "2022-12-20T00:00:00",
+  "DopunskaLiteratura": "C# in Depth by Jon Skeet"
+}
+
+###
+
+
+POST {{WebAPI_HostAddress}}/Ucesce/Dodaj/20/18032
+Content-Type: application/json
+
+{
+  "DatumPocetkaIzrade": "2022-10-01T00:00:00",
+  "RokZaZavrsetak": "2022-12-20T00:00:00",
+  "DopunskaLiteratura": "C# in Depth by Jon Skeet"
+}
+
+###
+
+GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Preuzmi/Studenti/20
+
+###
+
+DELETE {{WebAPI_HostAddress}}/Projekat/Teorijski/ObrisiSvaUcesca/20
+
+###
+  
+GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Preuzmi/15
 
 ###

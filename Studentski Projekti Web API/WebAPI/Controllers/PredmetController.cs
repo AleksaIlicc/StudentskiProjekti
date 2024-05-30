@@ -5,11 +5,11 @@ using Library.DTOs;
 namespace WebAPI.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("Predmet")]
 public class PredmetController : ControllerBase
 {
 	[HttpGet]
-	[Route("PreuzmiPredmete")]
+	[Route("Preuzmi/Sve")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -26,7 +26,7 @@ public class PredmetController : ControllerBase
 	}
 
 	[HttpGet]
-	[Route("PreuzmiSortiranePredmete")]
+	[Route("Preuzmi/Sortirani")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -43,7 +43,7 @@ public class PredmetController : ControllerBase
 	}
 
 	[HttpPost]
-	[Route("DodajPredmet")]
+	[Route("Dodaj")]
 	[ProducesResponseType(StatusCodes.Status201Created)]
 	[ProducesResponseType(StatusCodes.Status404NotFound)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -61,7 +61,7 @@ public class PredmetController : ControllerBase
 	}
 
 	[HttpDelete]
-	[Route("ObrisiPredmet/{sifra}")]
+	[Route("Obrisi/{sifra}")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -78,7 +78,7 @@ public class PredmetController : ControllerBase
 	}
 
 	[HttpPut]
-	[Route("IzmeniPredmet")]
+	[Route("Izmeni")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -95,7 +95,7 @@ public class PredmetController : ControllerBase
 	}
 
 	[HttpGet]
-	[Route("PreuzmiPredmet/{sifra}")]
+	[Route("Preuzmi/{sifra}")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status404NotFound)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]

@@ -5,11 +5,11 @@ using Library.DTOs;
 namespace WebAPI.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("Student")]
 public class StudentController:ControllerBase
 {
     [HttpGet]
-    [Route("PreuzmiStudente")]
+    [Route("Preuzmi/Sve")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -26,7 +26,7 @@ public class StudentController:ControllerBase
     }
 
     [HttpGet]
-    [Route("PreuzmiSortiraneStudente")]
+    [Route("Preuzmi/Sortirani")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -43,7 +43,7 @@ public class StudentController:ControllerBase
     }
 
     [HttpPost]
-    [Route("DodajStudenta")]
+    [Route("Dodaj")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -60,7 +60,7 @@ public class StudentController:ControllerBase
     }
 
     [HttpDelete]
-    [Route("ObrisiStudenta/{brInd}")]
+    [Route("Obrisi/{brInd}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -77,7 +77,7 @@ public class StudentController:ControllerBase
     }
 
     [HttpPut]
-    [Route("IzmeniStudenta")]
+    [Route("Izmeni")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -93,7 +93,7 @@ public class StudentController:ControllerBase
         return Ok($"Student sa brojem indeksa {student.BrIndeksa} je uspesno izmenjen.");
     }
     [HttpGet]
-    [Route("PreuzmiStudenta/{brInd}")]
+    [Route("Preuzmi/{brInd}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]

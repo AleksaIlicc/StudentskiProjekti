@@ -1,10 +1,10 @@
 @WebAPI_HostAddress = https://localhost:5276
 
-GET {{WebAPI_HostAddress}}/prepwebstranica/VratiPrepWebStraniceZaPProjekat/28
+GET {{WebAPI_HostAddress}}/Projekat/Prakticni/PreporuceneWebStranice/Preuzmi/28
 
 ###
 
-POST {{WebAPI_HostAddress}}/prepwebstranica/DodajPrepWebStranicu/28
+POST {{WebAPI_HostAddress}}/Projekat/Prakticni/PreporuceneWebStranice/Dodaj/28
 Content-Type: application/json
 
 {
@@ -15,7 +15,7 @@ Content-Type: application/json
 
 
 
-DELETE {{WebAPI_HostAddress}}/prepwebstranica/ObrisiPrepWebStranicu/28
+DELETE {{WebAPI_HostAddress}}/Projekat/Prakticni/PreporuceneWebStranice/Obrisi/28
 Content-Type: application/json
 
 {

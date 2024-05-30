@@ -6,11 +6,11 @@ using System.Xml.Linq;
 namespace WebAPI.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("Projekat/Prakticni/PreporuceneWebStranice")]
 public class PrepWebStranicaController : Controller
 {
     [HttpGet]
-    [Route("VratiPrepWebStraniceZaPProjekat/{idproj}")]
+    [Route("Preuzmi/{idproj}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -27,7 +27,7 @@ public class PrepWebStranicaController : Controller
     }
 
     [HttpPost]
-    [Route("DodajPrepWebStranicu/{idproj}")]
+    [Route("Dodaj/{idproj}")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -44,7 +44,7 @@ public class PrepWebStranicaController : Controller
     }
 
     [HttpDelete]
-    [Route("ObrisiPrepWebStranicu/{idproj}")]
+    [Route("Obrisi/{idproj}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]

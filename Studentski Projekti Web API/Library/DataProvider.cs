@@ -495,7 +495,7 @@ public static class DataProvider
 		return data;
 	}
 
-	public static Result <List<TeorijskiProjekatView>,ErrorMessage> VratiTeorijskeProjekteZaPredmet(string idPredmeta)
+	public static async Task<Result<List<TeorijskiProjekatView>,ErrorMessage>> VratiTeorijskeProjekteZaPredmetAsync(string idPredmeta)
 	{
 		List<TeorijskiProjekatView> data = [];
 
@@ -509,8 +509,9 @@ public static class DataProvider
 				return "Nemoguće otvoriti sesiju.".ToError(403);
 			}
 
-			data = s.Query<TeorijskiProjekat>()
+			data = (await s.Query<TeorijskiProjekat>()
 				.Where(p => p.PripadaPredmetu.Id == idPredmeta)
+				.ToListAsync())
 				.OrderBy(pr => pr.SkolskaGodinaZadavanja)
 				.Select(p => new TeorijskiProjekatView(p))
 				.ToList();
@@ -528,6 +529,73 @@ public static class DataProvider
 		return data;
 	}
 
+	public static Result<bool, ErrorMessage> ObrisiUcesnikeProjekta(int id)
+	{
+		ISession? s = null;
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+
+			var ucestvujePojavljivanja = s.Query<Ucestvuje>()
+											.Where(u => u.Projekat.Id == id)
+											.ToList();
+
+			foreach (var uPojavljivanje in ucestvujePojavljivanja)
+			{
+				s.Delete(uPojavljivanje);
+			}
+
+			s.Flush();
+
+		}
+		catch (Exception)
+		{
+			return "Greška prilikom brisanja ucesnika teorijskog projekta.".ToError(404);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+		return true;
+	}
+
+	public static Result<List<StudentiView>, ErrorMessage> VratiStudenteNaProjektu(int id)
+	{
+		ISession? s = null;
+		List<StudentiView> data = [];
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+			data = s.Query<Ucestvuje>()
+				.Where(u => u.Projekat.Id == id)
+				.Select(u => new StudentiView(u.Student))
+				.ToList();
+		}
+		catch (Exception)
+		{
+			return "Došlo je do greške prilikom prikupljanja informacija o studentima na projektu.".ToError(400);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+		return data;
+	}
+		
 	#endregion
 
 	#region TeorijskiProjekti
@@ -671,43 +739,6 @@ public static class DataProvider
 		}
 
 		return data;
-	}
-
-	public static Result<bool, ErrorMessage> ObrisiUcesnikeTeorijskogProjekta(int id)
-	{
-		ISession? s = null;
-
-		try
-		{
-			s = DataLayer.GetSession();
-
-			if (!(s?.IsConnected ?? false))
-			{
-				return "Nemoguće otvoriti sesiju.".ToError(403);
-			}
-
-			var ucestvujePojavljivanja = s.Query<Ucestvuje>()
-											.Where(u => u.Projekat.Id == id)
-											.ToList();
-
-			foreach (var uPojavljivanje in ucestvujePojavljivanja)
-			{
-				s.Delete(uPojavljivanje);
-			}
-
-			s.Flush();
-
-		}
-		catch (Exception)
-		{
-			return "Greška prilikom brisanja ucesnika teorijskog projekta.".ToError(404);
-		}
-		finally
-		{
-			s?.Close();
-			s?.Dispose();
-		}
-		return true;
 	}
 
 	#endregion

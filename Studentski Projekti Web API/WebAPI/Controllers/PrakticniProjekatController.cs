@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebAPI.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("Projekat/Prakticni")]
 
-public class PrakticniProjekatController : Controller 
+public class PrakticniProjekatController : Controller
 {
 
 }

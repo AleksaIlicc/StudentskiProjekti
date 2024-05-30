@@ -1,11 +1,23 @@
 ﻿@WebAPI_HostAddress = https://localhost:5276
 
-GET {{WebAPI_HostAddress}}/Projekat/PreuzmiProjekteZaPredmet/CS102
+GET {{WebAPI_HostAddress}}/Projekat/Preuzmi/ZaPredmet/CS102
 
 ###
 
-GET {{WebAPI_HostAddress}}/Projekat/PreuzmiSortiraneProjekteZaPredmet/CS108?vrsta=prakticni&tip=grupni&godina=2023/2024
+GET {{WebAPI_HostAddress}}/Projekat/Preuzmi/Sortirani/ZaPredmet/CS108?vrsta=prakticni&tip=grupni&godina=2023/2024
 
 ###
 
-GET {{WebAPI_HostAddress}}/Projekat/PreuzmiTeorijskeProjekteZaPredmet/CS102
+GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Preuzmi/ZaPredmet/CS102
+
+###
+
+GET {{WebAPI_HostAddress}}/Projekat/Prakticni/Preuzmi/ZaPredmet/CS102
+
+###
+
+GET {{WebAPI_HostAddress}}/Projekat/Prakticni/Preuzmi/Studenti/22
+
+###
+
+GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Preuzmi/Studenti/1

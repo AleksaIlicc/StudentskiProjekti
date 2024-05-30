@@ -5,11 +5,11 @@ using Library.DTOs;
 namespace WebAPI.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("/Projekat/Teorijski")]
 public class TeorijskiProjekatController : Controller
 {
 	[HttpPost]
-	[Route("DodajProjekat")]
+	[Route("Dodaj")]
 	[ProducesResponseType(StatusCodes.Status201Created)]
 	[ProducesResponseType(StatusCodes.Status404NotFound)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -27,7 +27,7 @@ public class TeorijskiProjekatController : Controller
 	}
 
 	[HttpDelete]
-	[Route("ObrisiProjekat/{id}")]
+	[Route("Obrisi/{id}")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -44,7 +44,7 @@ public class TeorijskiProjekatController : Controller
 	}
 
 	[HttpPut]
-	[Route("IzmeniProjekat")]
+	[Route("Izmeni")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -61,7 +61,7 @@ public class TeorijskiProjekatController : Controller
 	}
 
 	[HttpGet]
-	[Route("PreuzmiTeorijskiProjekat/{id}")]
+	[Route("Preuzmi/{id}")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status404NotFound)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -76,5 +76,22 @@ public class TeorijskiProjekatController : Controller
 		}
 
 		return Ok(result);
+	}
+
+	[HttpDelete]
+	[Route("ObrisiSvaUcesca/{id}")]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
+	[ProducesResponseType(StatusCodes.Status403Forbidden)]
+	public IActionResult ObrisiSvaUcescaNaProjektu(int id)
+	{
+		(bool isError, var result, var error) = DataProvider.ObrisiUcesnikeProjekta(id);
+
+		if (isError)
+		{
+			return StatusCode(error?.StatusCode ?? 400, error?.Message);
+		}
+
+		return Ok("Uspesno obrisana sva ucesca na projektu.");
 	}
 }

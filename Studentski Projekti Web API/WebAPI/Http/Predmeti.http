@@ -1,14 +1,14 @@
 ﻿@WebAPI_HostAddress =  https://localhost:5276
 
-GET {{WebAPI_HostAddress}}/Predmet/PreuzmiPredmete
+GET {{WebAPI_HostAddress}}/Predmet/Preuzmi/Sve
 
 ###
 
-GET {{WebAPI_HostAddress}}/Predmet/PreuzmiSortiranePredmete?katedra=Rač&semestar=3
+GET {{WebAPI_HostAddress}}/Predmet/Preuzmi/Sortirani?katedra=Rač&semestar=3
 
 ###
 
-POST {{WebAPI_HostAddress}}/Predmet/DodajPredmet
+POST {{WebAPI_HostAddress}}/Predmet/Dodaj
 Content-Type: application/json
 
 {
@@ -20,7 +20,7 @@ Content-Type: application/json
 
 ###
 
-PUT {{WebAPI_HostAddress}}/Predmet/IzmeniPredmet
+PUT {{WebAPI_HostAddress}}/Predmet/Izmeni
 Content-Type: application/json
 
 {
@@ -32,10 +32,10 @@ Content-Type: application/json
 
 ###
 
-DELETE {{WebAPI_HostAddress}}/Predmet/ObrisiPredmet/MAT101
+DELETE {{WebAPI_HostAddress}}/Predmet/Obrisi/MAT101
 
 ###
 
-GET {{WebAPI_HostAddress}}/Predmet/PreuzmiPredmet/CS105
+GET {{WebAPI_HostAddress}}/Predmet/Preuzmi/MAT101
 
 ###

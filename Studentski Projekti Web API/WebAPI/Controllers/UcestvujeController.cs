@@ -5,11 +5,11 @@ using Library.DTOs;
 namespace WebAPI.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("Ucesce")]
 public class UcestvujeController : ControllerBase
 {
 	[HttpGet]
-	[Route("PreuzmiUcesce/{projid}/{studid}")]
+	[Route("Preuzmi/{projid}/{studid}")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -26,7 +26,7 @@ public class UcestvujeController : ControllerBase
 	}
 
 	[HttpPost]
-	[Route("DodajUcesce/{projid}/{studid}")]
+	[Route("Dodaj/{projid}/{studid}")]
 	[ProducesResponseType(StatusCodes.Status201Created)]
 	[ProducesResponseType(StatusCodes.Status404NotFound)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -45,7 +45,7 @@ public class UcestvujeController : ControllerBase
 	}
 
 	[HttpDelete]
-	[Route("ObrisiUcesce/{id}")]
+	[Route("Obrisi/{id}")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -62,7 +62,7 @@ public class UcestvujeController : ControllerBase
 	}
 
 	[HttpPut]
-	[Route("AzurirajUcesce")]
+	[Route("Azuriraj")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
