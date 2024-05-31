@@ -80,7 +80,7 @@ public class IzvestajController :Controller
     }
 
     [HttpGet]
-    [Route("PreuzmiZaStudenta/{prakProjId}/{studBrInd}")]
+    [Route("Preuzmi/ZaStudenta/{prakProjId}/{studBrInd}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -98,21 +98,21 @@ public class IzvestajController :Controller
     }
 
     [HttpGet]
-    [Route("BrojIzvestaja/{projid}")]
+    [Route("Preuzmi/Kolicina/{projid}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public IActionResult VratiBrPredIzvestajaNaGrupi(int projid)
     {
-        (bool isError, var izvestaj, var error) = DataProvider.VratiBrPredIzvestajaNaGrupi(projid);
+        (bool isError, var broj, var error) = DataProvider.VratiBrPredIzvestajaNaGrupi(projid);
 
         if (isError)
         {
             return StatusCode(error?.StatusCode ?? 400, error?.Message);
         }
 
-        return Ok($"Broj izvestaja na prokeltu sa id-jem {projid} je {izvestaj}");
+        return Ok($"Broj izvestaja na projektu je {broj}");
     }
 }
 

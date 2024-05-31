@@ -14,9 +14,9 @@ public class KnjigaController:ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public IActionResult PreuzmiSveKnjige(string id)
+    public IActionResult PreuzmiSveKnjige(int id)
 	{
-		(bool isError, var knjige, var error) = DataProvider.VratiKnjigeZaTProjekat(Int32.Parse(id));
+		(bool isError, var knjige, var error) = DataProvider.VratiKnjigeZaTProjekat(id);
 
 		if (isError)
 		{
@@ -48,7 +48,7 @@ public class KnjigaController:ControllerBase
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
-	public IActionResult DodajKnjigu([FromBody] JsonElement parameters, string idProjekta)
+	public IActionResult DodajKnjigu([FromBody] JsonElement parameters, int idProjekta)
 	{
 		try
 		{
@@ -58,7 +58,7 @@ public class KnjigaController:ControllerBase
 			var knjiga = JsonSerializer.Deserialize<KnjigaView>(knjigaJson);
 			var autori = JsonSerializer.Deserialize<List<AutorView>>(autoriJson);
 
-			var (isError, result, error) = DataProvider.DodajKnjigu(Int32.Parse(idProjekta), knjiga!, autori!);
+			var (isError, result, error) = DataProvider.DodajKnjigu(idProjekta, knjiga!, autori!);
 
 			if (isError)
 			{
@@ -95,9 +95,10 @@ public class KnjigaController:ControllerBase
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
-	public IActionResult ObrisiKnjigu(string idProjekta,string isbn)
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public IActionResult ObrisiKnjigu(int idProjekta,string isbn)
 	{
-		(bool isError, var result, var error) = DataProvider.ObrisiKnjigu(Int32.Parse(idProjekta), isbn);
+		(bool isError, var result, var error) = DataProvider.ObrisiKnjigu(idProjekta, isbn);
 
 		if (isError)
 		{

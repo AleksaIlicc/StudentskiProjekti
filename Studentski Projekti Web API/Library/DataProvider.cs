@@ -260,7 +260,7 @@ public static class DataProvider
                 .Where(s => (string.IsNullOrEmpty(brIndeksa) || s.BrIndeksa.StartsWith(brIndeksa)) &&
                             (string.IsNullOrEmpty(ime) || s.LIme.StartsWith(ime)) &&
                             (string.IsNullOrEmpty(prezime) || s.Prezime.StartsWith(prezime)) &&
-                            (string.IsNullOrEmpty(smer) || s.Smer.StartsWith(smer)))
+                            (string.IsNullOrEmpty(smer) || s.Smer!.StartsWith(smer)))
                 .Select(s => new StudentiView(s))
                 .ToList();
 
@@ -375,7 +375,7 @@ public static class DataProvider
         }
         catch (Exception)
         {
-            return "Greška prilikom brisanja studenta.".ToError(400);
+            return "Greška prilikom brisanja studenta.".ToError(404);
         }
         finally
         {
@@ -569,6 +569,7 @@ public static class DataProvider
 
 		return data;
 	}
+
     public static async Task<Result<List<PrakticniProjekatView>, ErrorMessage>> VratiPrakticneProjekteZaPredmetAsync(string idPredmeta)
     {
         List<PrakticniProjekatView> data = [];
@@ -602,43 +603,6 @@ public static class DataProvider
 
         return data;
     }
-
-	public static Result<bool, ErrorMessage> ObrisiUcesnikeProjekta(int id)
-	{
-		ISession? s = null;
-
-		try
-		{
-			s = DataLayer.GetSession();
-
-			if (!(s?.IsConnected ?? false))
-			{
-				return "Nemoguće otvoriti sesiju.".ToError(403);
-			}
-
-			var ucestvujePojavljivanja = s.Query<Ucestvuje>()
-											.Where(u => u.Projekat.Id == id)
-											.ToList();
-
-			foreach (var uPojavljivanje in ucestvujePojavljivanja)
-			{
-				s.Delete(uPojavljivanje);
-			}
-
-			s.Flush();
-
-		}
-		catch (Exception)
-		{
-			return "Greška prilikom brisanja ucesnika teorijskog projekta.".ToError(404);
-		}
-		finally
-		{
-			s?.Close();
-			s?.Dispose();
-		}
-		return true;
-	}
 
 	public static Result<List<StudentiView>, ErrorMessage> VratiStudenteNaProjektu(int id)
 	{
@@ -815,9 +779,46 @@ public static class DataProvider
 		return data;
 	}
 
-	#region Literatura
+    public static Result<bool, ErrorMessage> ObrisiUcesnikeProjekta(int id)
+    {
+        ISession? s = null;
 
-	public static Result<bool, ErrorMessage> DodajAutora(int idLiterature, AutorView autor)
+        try
+        {
+            s = DataLayer.GetSession();
+
+            if (!(s?.IsConnected ?? false))
+            {
+                return "Nemoguće otvoriti sesiju.".ToError(403);
+            }
+
+            var ucestvujePojavljivanja = s.Query<Ucestvuje>()
+                                            .Where(u => u.Projekat.Id == id)
+                                            .ToList();
+
+            foreach (var uPojavljivanje in ucestvujePojavljivanja)
+            {
+                s.Delete(uPojavljivanje);
+            }
+
+            s.Flush();
+
+        }
+        catch (Exception)
+        {
+            return "Greška prilikom brisanja ucesnika teorijskog projekta.".ToError(404);
+        }
+        finally
+        {
+            s?.Close();
+            s?.Dispose();
+        }
+        return true;
+    }
+
+    #region Literatura
+
+    public static Result<bool, ErrorMessage> DodajAutora(int idLiterature, AutorView autor)
 	{
 		ISession? s = null;
 
@@ -833,7 +834,7 @@ public static class DataProvider
 			Literatura l = s.Load<Literatura>(idLiterature);
 
 			LitAutor? o = s.Query<LitAutor>()
-				.Where(l => l.Literatura.LitId == idLiterature && l.Autor == autor.Autor)
+				.Where(l => l.Literatura!.LitId == idLiterature && l.Autor == autor.Autor)
 				.FirstOrDefault();
 
 			if (o != null)	
@@ -876,7 +877,7 @@ public static class DataProvider
 			}
 
 			data = s.Query<LitAutor>()
-				.Where(l => l.Literatura.LitId == idLiterature)
+				.Where(l => l.Literatura!.LitId == idLiterature)
 				.Select(l => new AutorView(l))
 				.ToList();
 		}
@@ -906,7 +907,7 @@ public static class DataProvider
 			}
 
 			LitAutor? o = s.Query<LitAutor>()
-							.Where(l => l.Literatura.LitId == idLiterature && l.Autor == autor.Autor)
+							.Where(l => l.Literatura!.LitId == idLiterature && l.Autor == autor.Autor)
 							.FirstOrDefault();
 
 			if (o == null)
@@ -968,9 +969,72 @@ public static class DataProvider
 		return true;
 	}
 
-	#region Rad
+    public static async Task<Result<List<LiteraturaView>, ErrorMessage>> VratiSveLiteratureAsync()
+    {
+        List<LiteraturaView> data = [];
+        ISession? s = null;
 
-	public static Result<bool, ErrorMessage> DodajRad(int tProjekatId, RadView rad, List<AutorView> autori)
+        try
+        {
+            s = DataLayer.GetSession();
+
+            if (!(s?.IsConnected ?? false))
+            {
+                return "Nemoguće otvoriti sesiju.".ToError(403);
+            }
+            data =(await s.Query<Literatura>()
+                            .OrderBy(l => l.Naziv).ToListAsync())
+                            .Select(l => new LiteraturaView(l))
+                            .ToList();
+        }
+        catch (Exception)
+        {
+            return "Došlo je do greške prilikom prikupljanja informacija o literaturama.".ToError(400);
+        }
+        finally
+        {
+            s?.Close();
+            s?.Dispose();
+        }
+
+        return data;
+    }
+
+    public static Result<List<LiteraturaView>, ErrorMessage> VratiPretrazeneLiterature(string search)
+    {
+        List<LiteraturaView> data = [];
+        ISession? s = null;
+        try
+        {
+            s = DataLayer.GetSession();
+
+            if (!(s?.IsConnected ?? false))
+            {
+                return "Nemoguće otvoriti sesiju.".ToError(403);
+            }
+            data = s.Query<Literatura>()
+                    .Where(lit => lit.Naziv.ToLower().Contains(search.ToLower()))
+                    .OrderBy(l => l.Naziv)
+                    .Select(l => new LiteraturaView(l))
+                    .ToList();
+
+        }
+        catch (Exception)
+        {
+            return "Došlo je do greške prilikom prikupljanja informacija o literaturama.".ToError(400);
+        }
+        finally
+        {
+            s?.Close();
+            s?.Dispose();
+        }
+
+        return data;
+    }
+
+    #region Rad
+
+    public static Result<bool, ErrorMessage> DodajRad(int tProjekatId, RadView rad, List<AutorView> autori)
 	{
 		ISession? s = null;
 
@@ -1437,7 +1501,7 @@ public static class DataProvider
 		var knjiga = s.Load<Knjiga>(isbn);
 		var lit = knjiga.Literatura;
 
-		foreach (var postojeciAutori in lit.Autori.ToList())
+		foreach (var postojeciAutori in lit.Autori!.ToList())
 		{
 			s.Delete(postojeciAutori);
 		}
@@ -1530,40 +1594,6 @@ public static class DataProvider
         return clanaci;
     }
 
-    public static Result<List<AutorView>, ErrorMessage> VratiAutoreZaClanak(int id)
-    {
-		List<AutorView> autori = [];
-        ISession? s = null;
-
-        try
-        {
-            s = DataLayer.GetSession();
-
-            if (!(s?.IsConnected ?? false))
-            {
-                return "Nemoguće otvoriti sesiju.".ToError(403);
-            }
-
-            var clanak = s.Load<ClanakUCasopisu>(id);
-
-            autori = s.Query<LitAutor>()
-					  .Where(p => p.Literatura.LitId == clanak.Literatura.LitId)
-					  .Select(la => new AutorView(la))
-					  .ToList();
-        }
-        catch (Exception)
-        {
-            return "Došlo je do greške prilikom pribavljanja informacija o autorima.".ToError(400);
-        }
-        finally
-        {
-            s?.Close();
-            s?.Dispose();
-        }
-
-        return autori;
-    }
-
     public static Result<bool, ErrorMessage> ObrisiClanak(int projekatId, string issn)
     {
         ISession? s = null;
@@ -1601,7 +1631,7 @@ public static class DataProvider
 
     public static Result<int, ErrorMessage> VratiIdLiteratureClanka(string issn)
     {
-        int idLiterature = 0;
+        int? idLiterature = 0;
         ISession? s = null;
 
         try
@@ -1629,47 +1659,7 @@ public static class DataProvider
             s?.Dispose();
         }
 
-        return idLiterature;
-    }
-
-    public static Result<bool, ErrorMessage> ObrisiAutoraClanka(int id, string nazivAutora)
-    {
-        ISession? s = null;
-
-        try
-        {
-            s = DataLayer.GetSession();
-
-            if (!(s?.IsConnected ?? false))
-            {
-                return "Nemoguće otvoriti sesiju.".ToError(403);
-            }
-
-            var clanak = s.Load<ClanakUCasopisu>(id);
-            var litAutor = s.Query<LitAutor>()
-							.Where(p => p.Autor == nazivAutora && p.Literatura.LitId == clanak.Literatura.LitId)
-							.FirstOrDefault();
-
-            if (litAutor == null)
-            {
-                return "Autor ne postoji.".ToError(404);
-            }
-
-            s.Delete(litAutor);
-
-            s.Flush();
-        }
-        catch (Exception)
-        {
-            return "Greška prilikom brisanja autora.".ToError(400);
-        }
-        finally
-        {
-            s?.Close();
-            s?.Dispose();
-        }
-
-        return true;
+        return (int)idLiterature!;
     }
 
     public static Result<bool, ErrorMessage> DodajClanak(int tProjekatId, ClanakUCasopisuView clanakView, List<AutorView> autori)
@@ -1765,59 +1755,40 @@ public static class DataProvider
 
     private static Result<bool, ErrorMessage> AzurirajClanak(ClanakUCasopisuView clanakView, ISession s)
     {
-		try
-		{
-			if (!(s?.IsConnected ?? false))
-			{
-				return "Nemoguće otvoriti sesiju.".ToError(403);
-			}
-			ClanakUCasopisu clanak = s.Load<ClanakUCasopisu>(clanakView.ISSN);
-			clanak.ISSN = clanakView.ISSN!;
-			clanak.ImeCasopisa = clanakView.ImeCasopisa!;
-			clanak.Broj = (int)clanakView.Broj!;
-			clanak.Godina = (int)clanakView.Godina!;
-			clanak.Literatura.Naziv = clanakView.Naziv!;
 
-			s.SaveOrUpdate(clanak);
-		}
-		catch (Exception)
-		{
-			return "Greška prilikom azuriranja članka.".ToError(404);
-		}
+		ClanakUCasopisu clanak = s.Load<ClanakUCasopisu>(clanakView.ISSN);
+		clanak.ISSN = clanakView.ISSN!;
+		clanak.ImeCasopisa = clanakView.ImeCasopisa!;
+		clanak.Broj = (int)clanakView.Broj!;
+		clanak.Godina = (int)clanakView.Godina!;
+		clanak.Literatura.Naziv = clanakView.Naziv!;
+
+		s.SaveOrUpdate(clanak);
+
         return true;
     }
 
     private static Result<bool, ErrorMessage> AzurirajAutoreClanka(string issn, List<AutorView> azuriraniAutori, ISession s)
     {
-        try
-        {
-            if (!(s?.IsConnected ?? false))
-            {
-                return "Nemoguće otvoriti sesiju.".ToError(403);
-            }
-            var clanak = s.Load<ClanakUCasopisu>(issn);
-        var lit = clanak.Literatura;
 
-        foreach (var postojeciAutori in lit.Autori.ToList())
-        {
-            s.Delete(postojeciAutori);
-        }
+		var clanak = s.Load<ClanakUCasopisu>(issn);
+		var lit = clanak.Literatura;
 
-        List<LitAutor> autori = new List<LitAutor>();
-        foreach (var autorPregled in azuriraniAutori)
-        {
-            autori.Add(new LitAutor { Autor = autorPregled.Autor!, Literatura = lit });
-        }
+		foreach (var postojeciAutori in lit.Autori!.ToList())
+		{
+			s.Delete(postojeciAutori);
+		}
 
-        lit.Autori = autori;
+		List<LitAutor> autori = new List<LitAutor>();
+		foreach (var autorPregled in azuriraniAutori)
+		{
+			autori.Add(new LitAutor { Autor = autorPregled.Autor!, Literatura = lit });
+		}
 
-        s.Update(lit);
-        }
-        catch (Exception)
-        {
-            return "Greška prilikom azuriranja članka.".ToError(404);
-        }
-        return true;
+		lit.Autori = autori;
+
+		s.Update(lit);
+		return true;
     }
 
     public static Result<bool, ErrorMessage> AzurirajClanakSaAutorima(ClanakUCasopisuView clanakView, List<AutorView> azuriraniAutori)
@@ -1860,6 +1831,7 @@ public static class DataProvider
     }
 
     #endregion
+
     #endregion
 
     #endregion
@@ -2026,7 +1998,7 @@ public static class DataProvider
 
 	public static Result<ProjekatUcesceDetaljiView, ErrorMessage> VratiUcesceDetalji(string studentId, int projId)
     {
-		ProjekatUcesceDetaljiView? projektiInfo = null;
+		ProjekatUcesceDetaljiView? data = null;
         ISession? s = null;
 
         try
@@ -2038,7 +2010,7 @@ public static class DataProvider
                 return "Nemoguće otvoriti sesiju.".ToError(403);
             }
 
-			projektiInfo = s.Query<Ucestvuje>()
+            data = s.Query<Ucestvuje>()
 							.Where(ucestvuje => ucestvuje.Student.BrIndeksa == studentId && ucestvuje.Projekat.Id == projId)
 							.Join(s.Query<Projekat>(),
 								  ucestvuje => ucestvuje.Projekat.Id,
@@ -2068,7 +2040,7 @@ public static class DataProvider
             s?.Dispose();
         }
 
-        return projektiInfo!;
+        return data!;
     }
 
     #endregion
@@ -2125,6 +2097,7 @@ public static class DataProvider
 
         return true;
     }
+
     public static Result<bool, ErrorMessage> ObrisiUcesnikePrakticnogProjekta(int id)
     {
         ISession? s = null;
@@ -2141,6 +2114,10 @@ public static class DataProvider
             var ucestvujePojavljivanja = s.Query<Ucestvuje>()
                             .Where(u => u.Projekat.Id == id)
                             .ToList();
+			if (ucestvujePojavljivanja.Count == 0)
+			{
+                return "Greška, ne postoje ucesca na ovom projektu.".ToError(404);
+            }
 
             foreach (var uPojavljivanje in ucestvujePojavljivanja)
             {
@@ -2148,7 +2125,7 @@ public static class DataProvider
             }
 
             var izvestajiPojavljivanja = s.Query<Predao>()
-                                    .Where(s => s.Projekat.Id == id)
+                                    .Where(s => s.Projekat!.Id == id)
                                     .ToList();
 
             foreach (var iPojavljivanje in izvestajiPojavljivanja)
@@ -2157,8 +2134,6 @@ public static class DataProvider
             }
 
             s.Flush();
-
-            s.Close();
         }
         catch (Exception)
         {
@@ -2207,88 +2182,79 @@ public static class DataProvider
 
     private static Result<bool, ErrorMessage> AzurirajPrakticniProjekat(PrakticniProjekatView p , ISession s)
     {
-        try
-        {
 
-            PrakticniProjekat o = s.Load<PrakticniProjekat>(p.Id);
-			o.Naziv = p.Naziv!;
-			o.SkolskaGodinaZadavanja = p.SkolskaGodinaZadavanja!;
-			o.PreporuceniProgramskiJezik = p.PreporuceniProgramskiJezik!;
-			o.TipProjekta = p.TipProjekta!;
-			o.KratakOpis = p.KratakOpis!;
+        PrakticniProjekat o = s.Load<PrakticniProjekat>(p.Id);
+		o.Naziv = p.Naziv!;
+		o.SkolskaGodinaZadavanja = p.SkolskaGodinaZadavanja!;
+		o.PreporuceniProgramskiJezik = p.PreporuceniProgramskiJezik!;
+		o.TipProjekta = p.TipProjekta!;
+		o.KratakOpis = p.KratakOpis!;
 
-            s.SaveOrUpdate(o);
-            s.Flush();
-        }
-        catch (Exception)
-        {
-            return "Greska pri azuriranju predmeta.".ToError(400);
-        }
-        return true;
+        s.SaveOrUpdate(o);
+
+		return true;
     }
+
     private static Result<bool, ErrorMessage> AzurirajStranicePrakticnogProjekta(int? id, List<PreporucenaWebStranicaView> stranice, ISession s)
     {
+
+		var projekat = s.Load<PrakticniProjekat>(id);
+
+		foreach (var postojecaStranica in projekat.PreporuceneWebStranice!)
+		{
+			s.Delete(postojecaStranica);
+		}
+
+		List<PProjektiWebStranice> noveStranice = [];
+		foreach (var stranica in stranice)
+		{
+			noveStranice.Add(new PProjektiWebStranice() { PreporucenaWebStrana = stranica.Naziv!, PProjekat = projekat });
+		}
+
+		projekat.PreporuceneWebStranice = noveStranice;
+
+		s.Update(projekat);
+
+        return true;
+    }
+
+	public static Result<bool, ErrorMessage> AzurirajPrakticniProjekatSaStranicama(PrakticniProjekatView p, List<PreporucenaWebStranicaView> stranice)
+	{
+		ISession? s = null;
 		try
 		{
-			var projekat = s.Load<PrakticniProjekat>(id);
+			s = DataLayer.GetSession();
 
-			foreach (var postojecaStranica in projekat.PreporuceneWebStranice)
+			if (!(s?.IsConnected ?? false))
 			{
-				s.Delete(postojecaStranica);
+				return "Nemoguće otvoriti sesiju.".ToError(403);
 			}
-
-			List<PProjektiWebStranice> noveStranice = [];
-			foreach (var stranica in stranice)
+			using ITransaction t = s.BeginTransaction();
+			try
 			{
-				noveStranice.Add(new PProjektiWebStranice() { PreporucenaWebStrana = stranica.Naziv!, PProjekat = projekat });
+				AzurirajPrakticniProjekat(p, s);
+				AzurirajStranicePrakticnogProjekta(p.Id, stranice, s);
+
+				t.Commit();
 			}
-
-			projekat.PreporuceneWebStranice = noveStranice;
-
-			s.Update(projekat);
+			catch (Exception ex)
+			{
+				t.Rollback();
+                return "Greska pri azuriranju prakticnog projekta.".ToError(400);
+            }
 		}
 		catch (Exception)
 		{
-			return "Greska pri azuriranju predmeta.".ToError(400);
+			return "Greska pri azuriranju prakticnog projekta.".ToError(400);
 		}
-        return true;
-    }
-   public static Result<bool, ErrorMessage> AzurirajPrakticniProjekatSaStranicama(PrakticniProjekatView p, List<PreporucenaWebStranicaView> stranice)
-   {
-        ISession? s = null;
-        try
-        {
-            s = DataLayer.GetSession();
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+		return true;
+	}
 
-            if (!(s?.IsConnected ?? false))
-            {
-                return "Nemoguće otvoriti sesiju.".ToError(403);
-            }
-            using ITransaction t = s.BeginTransaction();
-            try
-            {
-                AzurirajPrakticniProjekat(p, s);
-                AzurirajStranicePrakticnogProjekta(p.Id, stranice, s);
-
-                t.Commit();
-            }
-            catch (Exception ex)
-            {
-                t.Rollback();
-                Console.WriteLine(ex.Message);
-            }
-        }
-        catch (Exception)
-        {
-            return "Greska pri azuriranju predmeta.".ToError(400);
-        }
-        finally
-        {
-            s?.Close();
-            s?.Dispose();
-        }
-        return true;
-    }
     public static Result<PrakticniProjekatView, ErrorMessage> VratiPrakticniProjekat(int id)
     {
         PrakticniProjekatView? p = null;
@@ -2308,7 +2274,7 @@ public static class DataProvider
         }
         catch (Exception)
         {
-            return "Došlo je do greške prilikom prikupljanja informacija o predmetima.".ToError(400);
+            return "Došlo je do greške prilikom prikupljanja informacija o prakticnim projektima.".ToError(400);
         }
         finally
         {
@@ -2318,6 +2284,7 @@ public static class DataProvider
 
         return p;
     }
+
     #region PreporuceneWebStranice
     public static Result<List<PreporucenaWebStranicaView>, ErrorMessage> VratiPreporuceneWebStranicePProjekta(int idProjekta)
     {
@@ -2334,7 +2301,7 @@ public static class DataProvider
             }
   
             data = s.Query<PProjektiWebStranice>()
-					.Where(p => p.PProjekat.Id == idProjekta)
+					.Where(p => p.PProjekat!.Id == idProjekta)
 					.OrderBy(p => p.PreporucenaWebStrana)
 					.Select(ws => new PreporucenaWebStranicaView(ws))
 					.ToList();
@@ -2378,7 +2345,7 @@ public static class DataProvider
 		}
 		catch (Exception)
 		{
-			return "Greska pri dodavanju web stranice.".ToError(404);
+			return "Greska pri dodavanju preporucene web stranice.".ToError(404);
 		}
 		finally
 		{
@@ -2402,7 +2369,7 @@ public static class DataProvider
             }
 
             PProjektiWebStranice? stranica = s.Query<PProjektiWebStranice>()
-											 .FirstOrDefault(p => p.PProjekat.Id == idProjekta && p.PreporucenaWebStrana == ps.Naziv);
+											 .FirstOrDefault(p => p.PProjekat!.Id == idProjekta && p.PreporucenaWebStrana == ps.Naziv);
 
             s.Delete(stranica);
 
@@ -2411,7 +2378,7 @@ public static class DataProvider
         }
         catch (Exception)
         {
-            return "Greška prilikom brisanja web stranice.".ToError(400);
+            return "Greška prilikom brisanja preporucene web stranice.".ToError(400);
         }
         finally
         {
@@ -2471,7 +2438,6 @@ public static class DataProvider
         return true;
     }
 
-
 	public static Result<bool, ErrorMessage> AzurirajIzvestaj(IzvestajView p)
 	{
 		ISession? s = null;
@@ -2503,6 +2469,7 @@ public static class DataProvider
 		}
 		return true;
 	}
+
     public static Result<bool, ErrorMessage> ObrisiIzvestaj(int id)
 	{
         ISession? s = null;
@@ -2532,7 +2499,8 @@ public static class DataProvider
         }
         return true;
     }
-    public static Result<IzvestajView, ErrorMessage> VratiIzvestaj(int Id_Izvestaj)
+
+    public static Result<IzvestajView, ErrorMessage> VratiIzvestaj(int idIzvestaj)
 	{
 		IzvestajView? ip = null;
 		ISession? s = null;
@@ -2546,7 +2514,7 @@ public static class DataProvider
 				return "Nemoguće otvoriti sesiju.".ToError(403);
 			}
 
-			Izvestaj izvestaj = s.Load<Izvestaj>(Id_Izvestaj);
+			Izvestaj izvestaj = s.Load<Izvestaj>(idIzvestaj);
 
 			ip = new IzvestajView()
 			{
@@ -2566,6 +2534,7 @@ public static class DataProvider
         }
         return ip;
     }
+
     public static Result<List<IzvestajView>, ErrorMessage> VratiIzvestajeZaStudenta(string brIndkesa, int projekatID)
     {
         List<IzvestajView> data = [];
@@ -2581,9 +2550,9 @@ public static class DataProvider
             }
 
             data = s.Query<Predao>()
-                         .Where(p => p.Student.BrIndeksa == brIndkesa && p.Projekat.Id == projekatID)
+                         .Where(p => p.Student!.BrIndeksa == brIndkesa && p.Projekat!.Id == projekatID)
                          .Join(s.Query<Izvestaj>(),
-                             predao => predao.Izvestaj.Id,
+                             predao => predao.Izvestaj!.Id,
                              izvestaj => izvestaj.Id,
                              (predao, izvestaj) => new IzvestajView
                              {
@@ -2620,7 +2589,7 @@ public static class DataProvider
                 return "Nemoguće otvoriti sesiju.".ToError(403);
             }
             brojizv = s.Query<Predao>()
-                        .Where(p => p.Projekat.Id == projid)
+                        .Where(p => p.Projekat!.Id == projid)
                         .Count();
         }
         catch (Exception)
@@ -2637,5 +2606,4 @@ public static class DataProvider
     #endregion
 
     #endregion
-
 }

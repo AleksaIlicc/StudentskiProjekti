@@ -5,6 +5,10 @@ GET {{WebAPI_HostAddress}}/Ucesce/Preuzmi/51/18033
 
 ###
 
+GET {{WebAPI_HostAddress}}/Ucesce/PreuzmiDetalje/51/18033
+
+###
+
 POST {{WebAPI_HostAddress}}/Ucesce/Dodaj/51/18033
 Content-Type: application/json
 
@@ -14,27 +18,21 @@ Content-Type: application/json
   "DopunskaLiteratura": "C# in Depth by Jon Skeet"
 }
 
-###
+### s obzirom da se dinamicki postavlja id ucesca, postaviti odgovarajuci id za brisanje
 
-# s obzirom da se dinamicki postavlja id ucesca, postaviti odgovarajuci id za brisanje
-DELETE {{WebAPI_HostAddress}}/Ucesce/Obrisi/79
+DELETE {{WebAPI_HostAddress}}/Ucesce/Obrisi/84
 
-###
+### s obzirom da se dinamicki postavlja id ucesca, postaviti odgovarajuci id za azuriranje
 
-# s obzirom da se dinamicki postavlja id ucesca, postaviti odgovarajuci id za azuriranje
 PUT {{WebAPI_HostAddress}}/Ucesce/Azuriraj
 Content-Type: application/json
 
 {
-  "Id": 79,
+  "Id": 84,
   "DatumPocetkaIzrade": "2022-10-01T00:00:00",
   "DatumZavrsetka": "2022-12-27T07:17:00",
   "RokZaZavrsetak": "2022-12-31T00:00:00",
   "DopunskaLiteratura": "C# in Depth by Jon Skeet"
 }
-
-###
-
-GET {{WebAPI_HostAddress}}/Ucesce/PreuzmiDetalje/21/18021
 
 ###

@@ -29,9 +29,9 @@ public class ProjekatController : Controller
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
-	public IActionResult VratiSortiraneProjekteZaPredmet(string id, [FromQuery(Name = "vrsta")] string? vrstaProjekta = null, [FromQuery(Name = "tip")] string? tipProjekta = null, [FromQuery(Name = "godina")] string? skolskaGodina = null)
+	public IActionResult VratiSortiraneProjekteZaPredmet(string id, string? vrsta = null,  string? tip = null, string? godina = null)
 	{
-		(bool isError, var projekti, var error) = DataProvider.VratiSortiraneProjekteZaPredmet(id, vrstaProjekta!, tipProjekta!, skolskaGodina!);
+		(bool isError, var projekti, var error) = DataProvider.VratiSortiraneProjekteZaPredmet(id, vrsta!, tip!, godina!);
 
 		if (isError)
 		{

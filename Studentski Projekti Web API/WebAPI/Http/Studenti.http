@@ -39,10 +39,8 @@ Content-Type: application/json
 
 ###
 
-GET {{WebAPI_HostAddress}}/student/Preuzmi/19001
+GET {{WebAPI_HostAddress}}/Student/Preuzmi/19001
 
 ###
 
-GET {{WebAPI_HostAddress}}/Student/VratiProjekte/18017
-
-###
+GET {{WebAPI_HostAddress}}/Student/Preuzmi/Projekti/18017

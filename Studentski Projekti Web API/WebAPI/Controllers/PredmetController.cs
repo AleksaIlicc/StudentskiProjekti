@@ -30,9 +30,9 @@ public class PredmetController : ControllerBase
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
-	public IActionResult VratiSortiranePredmete([FromQuery(Name = "semestar")] string? semestarFilter = null, [FromQuery(Name = "katedra")] string? katedraFilter = null)
+	public IActionResult VratiSortiranePredmete(string? semestar = null, string? katedra = null)
 	{
-		(bool isError, var predmeti, var error) = DataProvider.VratiSortiranePredmete(semestarFilter, katedraFilter);
+		(bool isError, var predmeti, var error) = DataProvider.VratiSortiranePredmete(semestar, katedra);
 
 		if (isError)
 		{
@@ -74,7 +74,7 @@ public class PredmetController : ControllerBase
 			return StatusCode(error?.StatusCode ?? 400, error?.Message);
 		}
 
-		return Ok($"Predmet sa sifrom {sifra} uspesno obrisan.");
+		return Ok($"Predmet sa sifrom {sifra} je uspesno obrisan.");
 	}
 
 	[HttpPut]
@@ -91,7 +91,7 @@ public class PredmetController : ControllerBase
 			return StatusCode(error?.StatusCode ?? 400, error?.Message);
 		}
 
-		return Ok($"Predmet sa sifrom {predmet.Id} uspesno izmenjen.");
+		return Ok($"Predmet sa sifrom {predmet.Id} je uspesno izmenjen.");
 	}
 
 	[HttpGet]

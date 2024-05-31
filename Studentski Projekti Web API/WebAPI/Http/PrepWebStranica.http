@@ -13,12 +13,10 @@ Content-Type: application/json
 
 ###
 
-
-
 DELETE {{WebAPI_HostAddress}}/Projekat/Prakticni/PreporuceneWebStranice/Obrisi/28
 Content-Type: application/json
 
 {
   "naziv": "VasNaziv"
 }
-###
+

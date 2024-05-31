@@ -14,9 +14,9 @@ public class RadController:ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public IActionResult PreuzmiSveRadove(string id)
+    public IActionResult PreuzmiSveRadove(int id)
 	{
-		(bool isError, var radovi, var error) = DataProvider.VratiRadoveZaTProjekat(Int32.Parse(id));
+		(bool isError, var radovi, var error) = DataProvider.VratiRadoveZaTProjekat(id);
 
 		if (isError)
 		{
@@ -31,9 +31,9 @@ public class RadController:ControllerBase
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
-	public IActionResult VratiIdLiteratureRada(string id)
+	public IActionResult VratiIdLiteratureRada(int id)
 	{
-		(bool isError, var litId, var error) = DataProvider.VratiIdLiteratureRada(Int32.Parse(id));
+		(bool isError, var litId, var error) = DataProvider.VratiIdLiteratureRada(id);
 
 		if (isError)
 		{
@@ -48,7 +48,7 @@ public class RadController:ControllerBase
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
-	public IActionResult DodajRad([FromBody] JsonElement parameters, string idProjekta)
+	public IActionResult DodajRad([FromBody] JsonElement parameters, int idProjekta)
 	{
 		try
 		{
@@ -58,7 +58,7 @@ public class RadController:ControllerBase
 			var rad = JsonSerializer.Deserialize<RadView>(radJson);
 			var autori = JsonSerializer.Deserialize<List<AutorView>>(autoriJson);
 
-			var (isError, result, error) = DataProvider.DodajRad(Int32.Parse(idProjekta), rad!, autori!);
+			var (isError, result, error) = DataProvider.DodajRad(idProjekta, rad!, autori!);
 
 			if (isError)
 			{
@@ -78,9 +78,9 @@ public class RadController:ControllerBase
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
-	public IActionResult PreuzmiRad(string id)
+	public IActionResult PreuzmiRad(int id)
 	{
-		(bool isError, var rad, var error) = DataProvider.VratiRad(Int32.Parse(id));
+		(bool isError, var rad, var error) = DataProvider.VratiRad(id);
 
 		if (isError)
 		{

@@ -1,6 +1,14 @@
 ﻿@WebAPI_HostAddress = https://localhost:5276
 
 
+GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Preuzmi/Sve
+
+###
+
+GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Preuzmi/Pretrazene?search=Net
+
+###
+
 POST {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Autori/Dodaj/34
 Content-Type: application/json
 

@@ -27,7 +27,7 @@ Content-Type: application/json
 
 ###  s obzirom da se dinamicki postavlja id rada, postaviti odgovarajuci id za preuzimanje autora
 
-GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Autori/Preuzmi/206
+GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Autori/Preuzmi/223
 
 ### s obzirom da se dinamicki postavlja id rada, postaviti odgovarajuci id za azuriranje
 
@@ -54,16 +54,16 @@ Content-Type: application/json
 
 ### s obzirom da se dinamicki postavlja id rada, postaviti odgovarajuci id za preuzimanje
 
-GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Rad/Preuzmi/222
+GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Rad/Preuzmi/223
 
 ### s obzirom da se dinamicki postavlja id rada, postaviti odgovarajuci id za brisanje
 
-DELETE {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Rad/Obrisi/3/222
+DELETE {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Rad/Obrisi/3/223
 
 ### s obzirom da se dinamicki postavlja id rada, postaviti odgovarajuci id za preuzimanje id-a
 
-GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Rad/Preuzmi/Id/221
+GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Rad/Preuzmi/Id/223
 
 ### s obzirom da se dinamicki postavlja id rada, postaviti odgovarajuci id za brisanje
 
-DELETE {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Obrisi/207
+DELETE {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Obrisi/209

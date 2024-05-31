@@ -6,6 +6,7 @@ public class LiteraturaView
 
     internal LiteraturaView(Literatura l)
     {
+        Id = l.LitId;
         Naziv = l.Naziv;
     }
     public LiteraturaView() { }

@@ -2,6 +2,7 @@
 using Library;
 using Library.DTOs;
 using System.Text.Json;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WebAPI.Controllers;
 
@@ -26,11 +27,11 @@ public class PrakticniProjekatController : Controller
             var projekat = JsonSerializer.Deserialize<PrakticniProjekatView>(projekatJson);
             var stranice = JsonSerializer.Deserialize<List<PreporucenaWebStranicaView>>(straniceJson);
 
-            var result = DataProvider.DodajPrakticniProjekat(projekat!, stranice!);
+            (bool isError, var result, var error) = DataProvider.DodajPrakticniProjekat(projekat!, stranice!);
 
-            if (result.IsError)
+            if (isError)
             {
-                return StatusCode(result.Error.StatusCode, result.Error.Message);
+                return StatusCode(error?.StatusCode ?? 400, error?.Message);
             }
 
             return StatusCode(201, $"Prakticni projekat '{projekat!.Naziv}' je uspesno dodat.");
@@ -49,14 +50,14 @@ public class PrakticniProjekatController : Controller
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public IActionResult ObrisiUcesnikePrakticnogProjekta(int id)
     {
-        var result = DataProvider.ObrisiUcesnikePrakticnogProjekta(id);
+        (bool isError, var result, var error) = DataProvider.ObrisiUcesnikePrakticnogProjekta(id);
 
-        if (result.IsError)
+        if (isError)
         {
-            return StatusCode(result.Error.StatusCode, result.Error.Message);
+            return StatusCode(error?.StatusCode ?? 400, error?.Message);
         }
 
-        return Ok($"Ucesca prakticnog projekta sa id {id} su uspesno obrisani.");
+        return Ok($"Ucesca prakticnog projekta su uspesno obrisana.");
     }
 
     [HttpDelete]
@@ -67,14 +68,14 @@ public class PrakticniProjekatController : Controller
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public IActionResult ObrisiPrakticniProjekat(int id)
     {
-        var result = DataProvider.ObrisiPrakticniProjekat(id);
+        (bool isError, var result, var error) = DataProvider.ObrisiPrakticniProjekat(id);
 
-        if (result.IsError)
+        if (isError)
         {
-            return StatusCode(result.Error.StatusCode, result.Error.Message);
+            return StatusCode(error?.StatusCode ?? 400, error?.Message);
         }
 
-        return Ok($"Prakticni projekat sa id {id} je uspesno obrisan.");
+        return Ok($"Prakticni projekat je uspesno obrisan.");
     }
 
     [HttpPut]
@@ -93,14 +94,14 @@ public class PrakticniProjekatController : Controller
             var projekat = JsonSerializer.Deserialize<PrakticniProjekatView>(projekatJson);
             var stranice = JsonSerializer.Deserialize<List<PreporucenaWebStranicaView>>(straniceJson);
 
-            var result = DataProvider.AzurirajPrakticniProjekatSaStranicama(projekat!, stranice!);
+            (bool isError, var result, var error) = DataProvider.AzurirajPrakticniProjekatSaStranicama(projekat!, stranice!);
 
-            if (result.IsError)
+            if (isError)
             {
-                return StatusCode(result.Error.StatusCode, result.Error.Message);
+                return StatusCode(error?.StatusCode ?? 400, error?.Message);
             }
 
-            return Ok($"Prakticni projekat sa id {projekat!.Id} je uspesno azuriran.");
+            return Ok($"Prakticni projekat je uspesno azuriran.");
         }
         catch (JsonException ex)
         {
@@ -116,20 +117,12 @@ public class PrakticniProjekatController : Controller
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public IActionResult VratiPrakticniProjekat(int id)
     {
-        var result = DataProvider.VratiPrakticniProjekat(id);
-
-        if (result.IsError)
+        (bool isError, var projekat, var error) = DataProvider.VratiPrakticniProjekat(id);
+        if (isError)
         {
-            return StatusCode(result.Error.StatusCode, result.Error.Message);
+            return StatusCode(error?.StatusCode ?? 400, error?.Message);
         }
 
-        var prakticniProjekat = result.Data;
-
-        if (prakticniProjekat == null)
-        {
-            return NotFound($"Prakticni projekat sa id {id} nije pronađen.");
-        }
-
-        return Ok(prakticniProjekat);
+        return Ok(projekat);
     }
 }

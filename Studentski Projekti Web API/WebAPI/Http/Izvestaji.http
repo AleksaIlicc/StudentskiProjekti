@@ -28,7 +28,7 @@ GET https://localhost:5276/Projekat/Prakticni/Izvestaj/Preuzmi/93
 
 ###
 
-GET https://localhost:5276/Projekat/Prakticni/Izvestaj/PreuzmiZaStudenta/21/18021
+GET https://localhost:5276/Projekat/Prakticni/Izvestaj/Preuzmi/ZaStudenta/21/18021
 
 ###
-GET {{WebAPI_HostAddress}}/Projekat/Prakticni/Izvestaj/BrojIzvestaja/21
+GET {{WebAPI_HostAddress}}/Projekat/Prakticni/Izvestaj/Preuzmi/Kolicina/21

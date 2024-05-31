@@ -18,14 +18,13 @@ Content-Type: application/json
     "MaksBrojStrana": 70
 }
 
-###
+### s obzirom da se dinamicki postavlja id projekta, postaviti odgovarajuci id za azuriranje
 
-# s obzirom da se dinamicki postavlja id projekta, postaviti odgovarajuci id za azuriranje
 PUT {{WebAPI_HostAddress}}/Projekat/Teorijski/Izmeni
 Content-Type: application/json
 
 {
-    "Id": 249,
+    "Id": 250,
     "TipProjekta": "grupni",
     "Naziv": "Dizajn baze podataka za biblioteku",
     "SkolskaGodinaZadavanja": "2023/2024",
@@ -35,14 +34,12 @@ Content-Type: application/json
     "MaksBrojStrana": 50
 }
 
-###
+### s obzirom da se dinamicki postavlja id projekta, postaviti odgovarajuci id za brisanje
 
-# s obzirom da se dinamicki postavlja id projekta, postaviti odgovarajuci id za brisanje
-DELETE {{WebAPI_HostAddress}}/Projekat/Teorijski/Obrisi/249
+DELETE {{WebAPI_HostAddress}}/Projekat/Teorijski/Obrisi/251
 
-###
+### ovo ucesce i ucesce ispod se dodaju radi testiranja funkcionalnosti brisanja svih ucesca sa projekta
 
-# ovo ucesce i ucesce ispod se dodaju radi testiranja funkcionalnosti brisanja svih ucesca sa projekta
 POST {{WebAPI_HostAddress}}/Ucesce/Dodaj/20/18033
 Content-Type: application/json
 
@@ -53,7 +50,6 @@ Content-Type: application/json
 }
 
 ###
-
 
 POST {{WebAPI_HostAddress}}/Ucesce/Dodaj/20/18032
 Content-Type: application/json

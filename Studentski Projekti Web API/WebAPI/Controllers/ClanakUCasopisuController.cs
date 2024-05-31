@@ -14,9 +14,9 @@ public class ClanakUCasopisuController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public IActionResult PreuzmiSveClanke(string id)
+    public IActionResult PreuzmiSveClanke(int id)
     {
-        (bool isError, var clanci, var error) = DataProvider.VratiSveClanakeZaTProj(Int32.Parse(id));
+        (bool isError, var clanci, var error) = DataProvider.VratiSveClanakeZaTProj(id);
 
         if (isError)
         {
@@ -48,7 +48,7 @@ public class ClanakUCasopisuController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public IActionResult DodajClanak([FromBody] JsonElement parameters, string idProjekta)
+    public IActionResult DodajClanak([FromBody] JsonElement parameters, int idProjekta)
     {
         try
         {
@@ -58,7 +58,7 @@ public class ClanakUCasopisuController : ControllerBase
             var clanak = JsonSerializer.Deserialize<ClanakUCasopisuView>(clanakJson);
             var autori = JsonSerializer.Deserialize<List<AutorView>>(autoriJson);
 
-            var result = DataProvider.DodajClanak(Int32.Parse(idProjekta), clanak!, autori!);
+            var result = DataProvider.DodajClanak(idProjekta, clanak!, autori!);
 
             if (result.IsError)
             {
@@ -78,9 +78,9 @@ public class ClanakUCasopisuController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public IActionResult PreuzmiClanak(string id)
+    public IActionResult PreuzmiClanak(int id)
     {
-        (bool isError, var clanak, var error) = DataProvider.VratiClanak(Int32.Parse(id));
+        (bool isError, var clanak, var error) = DataProvider.VratiClanak(id);
 
         if (isError)
         {
@@ -129,7 +129,7 @@ public class ClanakUCasopisuController : ControllerBase
                 return StatusCode(result.Error!.StatusCode, result.Error.Message);
             }
 
-            return Ok($"Članak sa ID-om {clanak!.Id} je uspešno izmenjen.");
+            return Ok($"Članak sa ISSN-om {clanak!.ISSN} je uspešno izmenjen.");
         }
         catch (JsonException ex)
         {

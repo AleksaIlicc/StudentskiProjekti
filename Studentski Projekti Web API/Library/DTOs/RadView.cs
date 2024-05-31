@@ -7,7 +7,7 @@ public class RadView : LiteraturaView
     public string? KonferencijaObjavljivanja { get; set; }
     public string? Format { get; set; }
 
-    internal RadView(Rad r) : base(r.Literatura)
+    internal RadView(Rad r) : base(r.Literatura!)
     {
         this.Id = r.Id;
         this.Url = r.Url;

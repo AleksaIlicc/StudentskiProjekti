@@ -27,7 +27,7 @@ Content-Type: application/json
 
 ###
 
-GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Autori/Preuzmi/204
+GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Autori/Preuzmi/208
 
 ###
 
@@ -65,6 +65,6 @@ GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Knjiga/Preuzmi/Id/978-3
 
 ###
 
-DELETE {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Obrisi/204
+DELETE {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Obrisi/208
 
 ###

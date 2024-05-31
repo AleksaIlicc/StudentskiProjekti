@@ -1,4 +1,4 @@
-﻿@WebAPI_HostAddress = https://localhost:5276
+@WebAPI_HostAddress = https://localhost:5276
 
 GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Clanak/Preuzmi/Sve/5
 
@@ -25,17 +25,18 @@ Content-Type: application/json
     ]
 }
 
-###s obzirom da se dinamicki postavlja id literature, postaviti odgovarajuci id za preuzimanje
-GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Autori/Preuzmi/205
+### s obzirom da se dinamicki postavlja id literature, postaviti odgovarajuci id za preuzimanje
 
-###s obzirom da se dinamicki postavlja id literature, postaviti odgovarajuci id za azuriranje
+GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Autori/Preuzmi/210
+
+### s obzirom da se dinamicki postavlja id literature, postaviti odgovarajuci id za azuriranje
 
 PUT {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Clanak/Izmeni
 Content-Type: application/json
 
 {
   "clanak": {
-    "Id": 205,
+    "Id": 900,
     "Naziv": "Clanak1",
     "ISSN": "1234-5678",
     "ImeCasopisa": "Casopis",
@@ -63,4 +64,4 @@ GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Clanak/Preuzmi/Id/1234-
 
 ###s obzirom da se dinamicki postavlja id literature, postaviti odgovarajuci id za brisanje
 
-DELETE {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Obrisi/205
+DELETE {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Obrisi/210

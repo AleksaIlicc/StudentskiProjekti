@@ -30,7 +30,7 @@ Content-Type: application/json
 
 ###
 
-GET {{WebAPI_HostAddress}}/Projekat/Prakticni/VratiProjekat/249
+GET {{WebAPI_HostAddress}}/Projekat/Prakticni/VratiProjekat/254
 
 ### s obzirom da se dinamicki postavlja id projekta, postaviti odgovarajuci id za azuriranje
 
@@ -39,7 +39,7 @@ Content-Type: application/json
 
 {
     "projekat": {
-        "Id": 249,
+        "Id": 254,
         "Naziv": "NazivProjekta1",
         "SkolskaGodinaZadavanja": "2024/2026",
         "PreporuceniProgramskiJezik": "C++",
@@ -61,10 +61,39 @@ Content-Type: application/json
 }
 ### s obzirom da se dinamicki postavlja id projekta, postaviti odgovarajuci id za brisanje
 
-DELETE {{WebAPI_HostAddress}}/Projekat/Prakticni/Obrisi/249
+DELETE {{WebAPI_HostAddress}}/Projekat/Prakticni/Obrisi/254
+
+### Za testiranje funkcije ispod dodata su dva ucesca
+POST {{WebAPI_HostAddress}}/Ucesce/Dodaj/254/18033
+Content-Type: application/json
+
+{
+  "DatumPocetkaIzrade": "2022-10-01T00:00:00",
+  "RokZaZavrsetak": "2022-12-20T00:00:00",
+  "OdabranProgramskiJezik":"C#",
+  "UrlDokumentacijeProgJezika":"https://learn.microsoft.com/en-us/dotnet/csharp/"
+}
+
+###
+
+POST {{WebAPI_HostAddress}}/Ucesce/Dodaj/254/18032
+Content-Type: application/json
+
+{
+  "DatumPocetkaIzrade": "2022-10-01T00:00:00",
+  "RokZaZavrsetak": "2022-12-20T00:00:00",
+  "OdabranProgramskiJezik":"C#",
+  "UrlDokumentacijeProgJezika":"https://learn.microsoft.com/en-us/dotnet/csharp/"
+}
+
+###
+
+GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Preuzmi/Studenti/51
 
 ###s obzirom da se dinamicki postavlja id projekta, postaviti odgovarajuci id za brisanje ucesnika
 
-DELETE {{WebAPI_HostAddress}}/Projekat/Prakticni/ObrisiUcesnike/249
+DELETE {{WebAPI_HostAddress}}/Projekat/Prakticni/ObrisiSvaUcesca/254
+
+
 
 

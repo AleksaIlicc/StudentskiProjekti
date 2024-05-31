@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Library;
 using Library.DTOs;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WebAPI.Controllers;
 
@@ -10,13 +9,13 @@ namespace WebAPI.Controllers;
 public class UcestvujeController : ControllerBase
 {
 	[HttpGet]
-	[Route("PreuzmiDetalje/{projid}/{studid}")]
+	[Route("Preuzmi/{projid}/{studid}")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
-	public IActionResult VratiUcesce(string projid, string studid)
+	public IActionResult VratiUcesce(int projid, string studid)
 	{
-		(bool isError, var ucesce, var error) = DataProvider.VratiUcesce(Int32.Parse(projid),studid);
+		(bool isError, var ucesce, var error) = DataProvider.VratiUcesce(projid,studid);
 
 		if (isError)
 		{
@@ -26,16 +25,33 @@ public class UcestvujeController : ControllerBase
 		return Ok(ucesce);
 	}
 
-	[HttpPost]
+    [HttpGet]
+    [Route("PreuzmiDetalje/{projid}/{studid}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public IActionResult VratiUcesceDetalji(int projid, string studid)
+    {
+        (bool isError, var ucesce, var error) = DataProvider.VratiUcesceDetalji(studid, projid);
+
+        if (isError)
+        {
+            return StatusCode(error?.StatusCode ?? 400, error?.Message);
+        }
+
+        return Ok(ucesce);
+    }
+
+    [HttpPost]
 	[Route("Dodaj/{projid}/{studid}")]
 	[ProducesResponseType(StatusCodes.Status201Created)]
 	[ProducesResponseType(StatusCodes.Status404NotFound)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	[ProducesResponseType(StatusCodes.Status409Conflict)]
-	public IActionResult DodajUcesce([FromBody] UcestvujeView ucestvuje, string projid, string studid)
+	public IActionResult DodajUcesce([FromBody] UcestvujeView ucestvuje, int projid, string studid)
 	{
-		(bool isError, var result, var error) = DataProvider.DodajUcesce(studid, Int32.Parse(projid), ucestvuje);
+		(bool isError, var result, var error) = DataProvider.DodajUcesce(studid, projid, ucestvuje);
 
 		if (isError)
 		{
@@ -50,9 +66,9 @@ public class UcestvujeController : ControllerBase
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
-	public IActionResult ObrisiUcesce(string id)
+	public IActionResult ObrisiUcesce(int id)
 	{
-		(bool isError, var result, var error) = DataProvider.ObrisiUcesce(Int32.Parse(id));
+		(bool isError, var result, var error) = DataProvider.ObrisiUcesce(id);
 
 		if (isError)
 		{

@@ -30,9 +30,9 @@ public class StudentController:ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
-    public IActionResult VratiSortiraneStudente([FromQuery(Name = "brIndeksa")] string? brindFilter = null, [FromQuery(Name = "ime")] string? imeFilter = null, [FromQuery(Name = "prezime")] string? prezimeFilter = null, [FromQuery(Name = "smer")] string? smerFilter = null)
+    public IActionResult VratiSortiraneStudente(string? brInd = null, string? ime = null, string? prezime = null, string? smer = null)
     {
-        (bool isError, var studenti, var error) = DataProvider.VratiSortiraneStudente(brindFilter, imeFilter, prezimeFilter, smerFilter);
+        (bool isError, var studenti, var error) = DataProvider.VratiSortiraneStudente(brInd, ime, prezime, smer);
 
         if (isError)
         {
@@ -47,6 +47,7 @@ public class StudentController:ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public IActionResult DodajStudenta([FromBody] StudentiView student)
     {
         (bool isError, var result, var error) = DataProvider.DodajStudenta(student);
@@ -64,6 +65,7 @@ public class StudentController:ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public IActionResult ObrisiStudenta(string brInd)
     {
         (bool isError, var result, var error) = DataProvider.ObrisiStudenta(brInd);
@@ -111,9 +113,8 @@ public class StudentController:ControllerBase
 	}
 
     [HttpGet]
-    [Route("VratiProjekte/{studentId}")]
+    [Route("Preuzmi/Projekti/{studentId}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public IActionResult VratiProjekteZaStudenta(string studentId)

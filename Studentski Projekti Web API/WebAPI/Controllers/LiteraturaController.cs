@@ -15,9 +15,9 @@ public class LiteraturaController : Controller
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	[ProducesResponseType(StatusCodes.Status409Conflict)]
-	public IActionResult DodajAutora([FromBody] AutorView autor, string idLit)
+	public IActionResult DodajAutora([FromBody] AutorView autor, int idLit)
 	{
-		(bool isError, var result, var error) = DataProvider.DodajAutora(Int32.Parse(idLit), autor );
+		(bool isError, var result, var error) = DataProvider.DodajAutora(idLit, autor);
 
 		if (isError)
 		{
@@ -33,9 +33,9 @@ public class LiteraturaController : Controller
 	[ProducesResponseType(StatusCodes.Status404NotFound)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
-	public IActionResult PreuzmiAutore(string id)
+	public IActionResult PreuzmiAutore(int id)
 	{
-		(bool isError, var autori, var error) = DataProvider.VratiAutoreZaLiteraturu(Int32.Parse(id));
+		(bool isError, var autori, var error) = DataProvider.VratiAutoreZaLiteraturu(id);
 
 		if (isError)
 		{
@@ -51,9 +51,9 @@ public class LiteraturaController : Controller
 	[ProducesResponseType(StatusCodes.Status404NotFound)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
-	public IActionResult ObrisiAutora(string idLit, [FromBody] AutorView autor)
+	public IActionResult ObrisiAutora(int idLit, [FromBody] AutorView autor)
 	{
-		(bool isError, var result, var error) = DataProvider.ObrisiAutora(Int32.Parse(idLit), autor);
+		(bool isError, var result, var error) = DataProvider.ObrisiAutora(idLit, autor);
 
 		if (isError)
 		{
@@ -68,9 +68,9 @@ public class LiteraturaController : Controller
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
-	public IActionResult ObrisiLiteraturu(string idLit)
+	public IActionResult ObrisiLiteraturu(int idLit)
 	{
-		(bool isError, var result, var error) = DataProvider.ObrisiLiteraturu(Int32.Parse(idLit));
+		(bool isError, var result, var error) = DataProvider.ObrisiLiteraturu(idLit);
 
 		if (isError)
 		{
@@ -79,4 +79,38 @@ public class LiteraturaController : Controller
 
 		return Ok($"Uspesno je obrisana literatura.");
 	}
+
+    [HttpGet]
+    [Route("Preuzmi/Sve")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> VratiSveLiterature()
+    {
+        (bool isError, var literature, var error) = await DataProvider.VratiSveLiteratureAsync();
+
+        if (isError)
+        {
+            return StatusCode(error?.StatusCode ?? 400, error?.Message);
+        }
+
+        return Ok(literature);
+    }
+
+    [HttpGet]
+    [Route("Preuzmi/Pretrazene")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public IActionResult VratiPretrazeneLiterature(string search)
+    {
+        (bool isError, var literature, var error) = DataProvider.VratiPretrazeneLiterature(search);
+
+        if (isError)
+        {
+            return StatusCode(error?.StatusCode ?? 400, error?.Message);
+        }
+
+        return Ok(literature);
+    }
 }
