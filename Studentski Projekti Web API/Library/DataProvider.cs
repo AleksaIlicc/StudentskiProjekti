@@ -1,4 +1,5 @@
 ﻿using NHibernate.Linq;
+using System.Linq;
 
 namespace Library;
 public static class DataProvider
@@ -1227,15 +1228,381 @@ public static class DataProvider
 		return true;
 	}
 
-	#endregion
+    #endregion
 
-	#endregion
+    #region ClanakUCasopisu
+    public static Result<List<ClanakUCasopisuView>, ErrorMessage> VratiSveClanakeZaTProj(int teorijskiProjekatId)
+    {
+        List<ClanakUCasopisuView> clanaci = new List<ClanakUCasopisuView>();
+        ISession? s = null;
 
-	#endregion
+        try
+        {
+            s = DataLayer.GetSession();
 
-	#region Ucestvuje
+            if (!(s?.IsConnected ?? false))
+            {
+                return "Nemoguće otvoriti sesiju.".ToError(403);
+            }
 
-	public static Result<bool, ErrorMessage> DodajUcesce(string brind, int projId, UcestvujeView u)
+            clanaci = s.Query<Sadrzi>()
+                .Where(p => p.TProjekat.Id == teorijskiProjekatId)
+                .Join(s.Query<ClanakUCasopisu>(),
+                    sadrzi => sadrzi.Literatura.LitId,
+                    clanak => clanak.Literatura.LitId,
+                    (sadrzi, clanak) => new ClanakUCasopisuView(clanak)
+                ).ToList();
+        }
+        catch (Exception)
+        {
+            return "Došlo je do greške prilikom prikupljanja informacija o člancima.".ToError(400);
+        }
+        finally
+        {
+            s?.Close();
+            s?.Dispose();
+        }
+
+        return clanaci;
+    }
+
+    public static Result<List<AutorView>, ErrorMessage> VratiAutoreZaClanak(int id)
+    {
+		List<AutorView> autori = [];
+        ISession? s = null;
+
+        try
+        {
+            s = DataLayer.GetSession();
+
+            if (!(s?.IsConnected ?? false))
+            {
+                return "Nemoguće otvoriti sesiju.".ToError(403);
+            }
+
+            var clanak = s.Load<ClanakUCasopisu>(id);
+
+            autori = s.Query<LitAutor>()
+					  .Where(p => p.Literatura.LitId == clanak.Literatura.LitId)
+					  .Select(la => new AutorView(la))
+					  .ToList();
+        }
+        catch (Exception)
+        {
+            return "Došlo je do greške prilikom pribavljanja informacija o autorima.".ToError(400);
+        }
+        finally
+        {
+            s?.Close();
+            s?.Dispose();
+        }
+
+        return autori;
+    }
+
+    public static Result<bool, ErrorMessage> ObrisiClanak(int projekatId, string issn)
+    {
+        ISession? s = null;
+
+        try
+        {
+            s = DataLayer.GetSession();
+
+            if (!(s?.IsConnected ?? false))
+            {
+                return "Nemoguće otvoriti sesiju.".ToError(403);
+            }
+
+            ClanakUCasopisu clanak = s.Load<ClanakUCasopisu>(issn);
+            var sadrzi = s.Query<Sadrzi>()
+						  .Where(x => x.Literatura.LitId == clanak.Literatura.LitId && projekatId == x.TProjekat.Id)
+						  .FirstOrDefault();
+
+            s.Delete(sadrzi);
+
+            s.Flush();
+        }
+        catch (Exception)
+        {
+            return "Greška prilikom brisanja članka.".ToError(400);
+        }
+        finally
+        {
+            s?.Close();
+            s?.Dispose();
+        }
+
+        return true;
+    }
+
+    public static Result<int, ErrorMessage> VratiIdLiteratureClanka(string issn)
+    {
+        int idLiterature = 0;
+        ISession? s = null;
+
+        try
+        {
+            s = DataLayer.GetSession();
+
+            if (!(s?.IsConnected ?? false))
+            {
+                return "Nemoguće otvoriti sesiju.".ToError(403);
+            }
+
+            var clanak = s.Load<ClanakUCasopisu>(issn);
+            idLiterature = s.Query<Literatura>()
+							.Where(p => p.LitId == clanak.Literatura.LitId)
+							.Select(l => l.LitId)
+							.FirstOrDefault();
+        }
+        catch (Exception)
+        {
+            return "Došlo je do greške prilikom pribavljanja informacija o članku.".ToError(400);
+        }
+        finally
+        {
+            s?.Close();
+            s?.Dispose();
+        }
+
+        return idLiterature;
+    }
+
+    public static Result<bool, ErrorMessage> ObrisiAutoraClanka(int id, string nazivAutora)
+    {
+        ISession? s = null;
+
+        try
+        {
+            s = DataLayer.GetSession();
+
+            if (!(s?.IsConnected ?? false))
+            {
+                return "Nemoguće otvoriti sesiju.".ToError(403);
+            }
+
+            var clanak = s.Load<ClanakUCasopisu>(id);
+            var litAutor = s.Query<LitAutor>()
+							.Where(p => p.Autor == nazivAutora && p.Literatura.LitId == clanak.Literatura.LitId)
+							.FirstOrDefault();
+
+            if (litAutor == null)
+            {
+                return "Autor ne postoji.".ToError(404);
+            }
+
+            s.Delete(litAutor);
+
+            s.Flush();
+        }
+        catch (Exception)
+        {
+            return "Greška prilikom brisanja autora.".ToError(400);
+        }
+        finally
+        {
+            s?.Close();
+            s?.Dispose();
+        }
+
+        return true;
+    }
+
+    public static Result<bool, ErrorMessage> DodajClanak(int tProjekatId, ClanakUCasopisuView clanakView, List<AutorView> autori)
+    {
+        ISession? s = null;
+
+        try
+        {
+            s = DataLayer.GetSession();
+
+            if (!(s?.IsConnected ?? false))
+            {
+                return "Nemoguće otvoriti sesiju.".ToError(403);
+            }
+
+            Literatura lit = new Literatura
+            {
+                Naziv = clanakView.Naziv!
+            };
+
+            List<LitAutor> listaAutora = [];
+            foreach (AutorView ap in autori)
+            {
+                listaAutora.Add(new LitAutor { Autor = ap.Autor!, Literatura = lit });
+            }
+            lit.Autori = listaAutora;
+
+            ClanakUCasopisu clanak = new ClanakUCasopisu
+            {
+                ISSN = clanakView.ISSN!,
+                ImeCasopisa = clanakView.ImeCasopisa!,
+                Broj = (int)clanakView.Broj!,
+                Godina = (int)clanakView.Godina!,
+                Literatura = lit
+            };
+
+            lit.ClanakUCasopisu = clanak;
+
+            s.Save(lit);
+
+            Sadrzi sadrzi = new Sadrzi
+            {
+                Literatura = lit,
+                TProjekat = s.Load<TeorijskiProjekat>(tProjekatId)
+            };
+
+            s.Save(sadrzi);
+
+            s.Flush();
+        }
+        catch (Exception)
+        {
+            return "Greska pri dodavanju članka.".ToError(404);
+        }
+        finally
+        {
+            s?.Close();
+            s?.Dispose();
+        }
+
+        return true;
+    }
+
+    public static Result<ClanakUCasopisuView, ErrorMessage> VratiClanak(int id)
+    {
+        ClanakUCasopisuView? clanakView = null;
+        ISession? s = null;
+
+        try
+        {
+            s = DataLayer.GetSession();
+
+            if (!(s?.IsConnected ?? false))
+            {
+                return "Nemoguće otvoriti sesiju.".ToError(403);
+            }
+
+            ClanakUCasopisu clanak = s.Load<ClanakUCasopisu>(id);
+            clanakView = new ClanakUCasopisuView(clanak);
+        }
+        catch (Exception)
+        {
+            return "Greška prilikom pribavljanja članka.".ToError(404);
+        }
+        finally
+        {
+            s?.Close();
+            s?.Dispose();
+        }
+
+        return clanakView;
+    }
+
+    private static Result<bool, ErrorMessage> AzurirajClanak(ClanakUCasopisuView clanakView, ISession s)
+    {
+		try
+		{
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+			ClanakUCasopisu clanak = s.Load<ClanakUCasopisu>(clanakView.ISSN);
+			clanak.ISSN = clanakView.ISSN!;
+			clanak.ImeCasopisa = clanakView.ImeCasopisa!;
+			clanak.Broj = (int)clanakView.Broj!;
+			clanak.Godina = (int)clanakView.Godina!;
+			clanak.Literatura.Naziv = clanakView.Naziv!;
+
+			s.SaveOrUpdate(clanak);
+		}
+		catch (Exception)
+		{
+			return "Greška prilikom azuriranja članka.".ToError(404);
+		}
+        return true;
+    }
+
+    private static Result<bool, ErrorMessage> AzurirajAutoreClanka(string issn, List<AutorView> azuriraniAutori, ISession s)
+    {
+        try
+        {
+            if (!(s?.IsConnected ?? false))
+            {
+                return "Nemoguće otvoriti sesiju.".ToError(403);
+            }
+            var clanak = s.Load<ClanakUCasopisu>(issn);
+        var lit = clanak.Literatura;
+
+        foreach (var postojeciAutori in lit.Autori.ToList())
+        {
+            s.Delete(postojeciAutori);
+        }
+
+        List<LitAutor> autori = new List<LitAutor>();
+        foreach (var autorPregled in azuriraniAutori)
+        {
+            autori.Add(new LitAutor { Autor = autorPregled.Autor!, Literatura = lit });
+        }
+
+        lit.Autori = autori;
+
+        s.Update(lit);
+        }
+        catch (Exception)
+        {
+            return "Greška prilikom azuriranja članka.".ToError(404);
+        }
+        return true;
+    }
+
+    public static Result<bool, ErrorMessage> AzurirajClanakSaAutorima(ClanakUCasopisuView clanakView, List<AutorView> azuriraniAutori)
+    {
+        ISession? s = null;
+        try
+        {
+            s = DataLayer.GetSession();
+
+            if (!(s?.IsConnected ?? false))
+            {
+                return "Nemoguće otvoriti sesiju.".ToError(403);
+            }
+
+            using ITransaction t = s.BeginTransaction();
+            try
+            {
+                AzurirajClanak(clanakView, s);
+                AzurirajAutoreClanka(clanakView.ISSN! , azuriraniAutori, s);
+
+                t.Commit();
+            }
+            catch (Exception)
+            {
+                t.Rollback();
+                return "Greška prilikom ažuriranja članka.".ToError(400);
+            }
+        }
+        catch (Exception)
+        {
+            return "Greška prilikom pribavljanja članka.".ToError(404);
+        }
+        finally
+        {
+            s?.Close();
+            s?.Dispose();
+        }
+
+        return true;
+    }
+
+    #endregion
+    #endregion
+
+    #endregion
+
+    #region Ucestvuje
+
+    public static Result<bool, ErrorMessage> DodajUcesce(string brind, int projId, UcestvujeView u)
 	{
 		ISession? s = null;
 
