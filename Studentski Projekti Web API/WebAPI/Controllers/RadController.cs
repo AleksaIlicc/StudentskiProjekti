@@ -6,34 +6,34 @@ using System.Text.Json;
 namespace WebAPI.Controllers;
 
 [ApiController]
-[Route("Projekat/Teorijski/Literatura/Knjiga")]
-public class KnjigaController:ControllerBase
+[Route("Projekat/Teorijski/Literatura/Rad")]
+public class RadController:ControllerBase
 {
     [HttpGet]
     [Route("Preuzmi/Sve/{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public IActionResult PreuzmiSveKnjige(string id)
+    public IActionResult PreuzmiSveRadove(string id)
 	{
-		(bool isError, var knjige, var error) = DataProvider.VratiKnjigeZaTProjekat(Int32.Parse(id));
+		(bool isError, var radovi, var error) = DataProvider.VratiRadoveZaTProjekat(Int32.Parse(id));
 
 		if (isError)
 		{
 			return StatusCode(error?.StatusCode ?? 400, error?.Message);
 		}
 
-		return Ok(knjige);
+		return Ok(radovi);
 	}
 
 	[HttpGet]
-	[Route("Preuzmi/Id/{isbn}")]
+	[Route("Preuzmi/Id/{id}")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
-	public IActionResult VratiIdLiteratureKnjige(string isbn)
+	public IActionResult VratiIdLiteratureRada(string id)
 	{
-		(bool isError, var litId, var error) = DataProvider.VratiIdLiteratureKnjige(isbn);
+		(bool isError, var litId, var error) = DataProvider.VratiIdLiteratureRada(Int32.Parse(id));
 
 		if (isError)
 		{
@@ -48,24 +48,24 @@ public class KnjigaController:ControllerBase
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
-	public IActionResult DodajKnjigu([FromBody] JsonElement parameters, string idProjekta)
+	public IActionResult DodajRad([FromBody] JsonElement parameters, string idProjekta)
 	{
 		try
 		{
-			var knjigaJson = parameters.GetProperty("knjiga").GetRawText();
+			var radJson = parameters.GetProperty("rad").GetRawText();
 			var autoriJson = parameters.GetProperty("autori").GetRawText();
 
-			var knjiga = JsonSerializer.Deserialize<KnjigaView>(knjigaJson);
+			var rad = JsonSerializer.Deserialize<RadView>(radJson);
 			var autori = JsonSerializer.Deserialize<List<AutorView>>(autoriJson);
 
-			var (isError, result, error) = DataProvider.DodajKnjigu(Int32.Parse(idProjekta), knjiga!, autori!);
+			var (isError, result, error) = DataProvider.DodajRad(Int32.Parse(idProjekta), rad!, autori!);
 
 			if (isError)
 			{
 				return StatusCode(error?.StatusCode ?? 400, error?.Message);
 			}
 
-			return StatusCode(201, $"Uspesno dodata knjiga na projektu.");
+			return StatusCode(201, $"Uspesno dodat rad na projektu.");
 		}
 		catch (JsonException ex)
 		{
@@ -74,37 +74,37 @@ public class KnjigaController:ControllerBase
 	}
 
 	[HttpGet]
-	[Route("Preuzmi/{isbn}")]
+	[Route("Preuzmi/{id}")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
-	public IActionResult PreuzmiKnjigu(string isbn)
+	public IActionResult PreuzmiRad(string id)
 	{
-		(bool isError, var knjiga, var error) = DataProvider.VratiKnjigu(isbn);
+		(bool isError, var rad, var error) = DataProvider.VratiRad(Int32.Parse(id));
 
 		if (isError)
 		{
 			return StatusCode(error?.StatusCode ?? 400, error?.Message);
 		}
 
-		return Ok(knjiga);
+		return Ok(rad);
 	}
 
 	[HttpDelete]
-	[Route("Obrisi/{idProjekta}/{isbn}")]
+	[Route("Obrisi/{idProjekta}/{id}")]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
-	public IActionResult ObrisiKnjigu(string idProjekta,string isbn)
+	public IActionResult ObrisiRad(int idProjekta, int id)
 	{
-		(bool isError, var result, var error) = DataProvider.ObrisiKnjigu(Int32.Parse(idProjekta), isbn);
+		(bool isError, var result, var error) = DataProvider.ObrisiRad(idProjekta, id);
 
 		if (isError)
 		{
 			return StatusCode(error?.StatusCode ?? 400, error?.Message);
 		}
 
-		return Ok($"Knjiga sa ISBN-om {isbn} je uspesno uklonjena sa projekta.");
+		return Ok($"Rad je uspesno uklonjen sa projekta.");
 	}
 
 	[HttpPut]
@@ -112,24 +112,24 @@ public class KnjigaController:ControllerBase
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	[ProducesResponseType(StatusCodes.Status403Forbidden)]
-	public IActionResult IzmeniKnjigu([FromBody] JsonElement parameters)
+	public IActionResult IzmeniRad([FromBody] JsonElement parameters)
 	{
 		try
 		{
-			var knjigaJson = parameters.GetProperty("knjiga").GetRawText();
+			var radJson = parameters.GetProperty("rad").GetRawText();
 			var autoriJson = parameters.GetProperty("autori").GetRawText();
 
-			var knjiga = JsonSerializer.Deserialize<KnjigaView>(knjigaJson);
+			var rad = JsonSerializer.Deserialize<RadView>(radJson);
 			var autori = JsonSerializer.Deserialize<List<AutorView>>(autoriJson);
 
-			var (isError, result, error) = DataProvider.AzurirajKnjiguSaAutorima(knjiga!, autori!);
+			var (isError, result, error) = DataProvider.AzurirajRadSaAutorima(rad!, autori!);
 
 			if (isError)
 			{
 				return StatusCode(error?.StatusCode ?? 400, error?.Message);
 			}
 
-			return Ok($"Knjiga sa ISBN-om {knjiga!.ISBN} je uspesno izmenjena.");
+			return Ok($"Rad je uspesno izmenjen.");
 		}
 		catch (JsonException ex)
 		{

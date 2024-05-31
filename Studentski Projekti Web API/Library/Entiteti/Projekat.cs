@@ -8,8 +8,8 @@ internal abstract class Projekat
     internal protected required virtual string VrstaProjekta { get; set; }
 
     internal protected required virtual Predmet PripadaPredmetu { get; set; }
-    internal protected virtual IList<Ucestvuje> UcestvujeStudenti { get; set; }
-    internal protected virtual IList<Predao> PredaoIzvestaji { get; set; }
+    internal protected virtual IList<Ucestvuje>? UcestvujeStudenti { get; set; }
+    internal protected virtual IList<Predao>? PredaoIzvestaji { get; set; }
 
     internal Projekat() 
     {
