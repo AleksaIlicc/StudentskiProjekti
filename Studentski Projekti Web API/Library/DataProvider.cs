@@ -1,5 +1,4 @@
 ﻿using NHibernate.Linq;
-using System.Linq;
 
 namespace Library;
 public static class DataProvider
@@ -969,6 +968,271 @@ public static class DataProvider
 		return true;
 	}
 
+	#region Rad
+
+	public static Result<bool, ErrorMessage> DodajRad(int tProjekatId, RadView rad, List<AutorView> autori)
+	{
+		ISession? s = null;
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+			Literatura lit = new Literatura { Naziv = rad.Naziv! };
+
+			List<LitAutor> listaAutora = new List<LitAutor>();
+			foreach (AutorView ap in autori)
+			{
+				listaAutora.Add(new LitAutor() { Autor = ap.Autor, Literatura = lit });
+			}
+			lit.Autori = listaAutora;
+
+			Rad r = new Rad()
+			{
+				Url = rad.Url,
+				Format = rad.Format,
+				KonferencijaObjavljivanja = rad.KonferencijaObjavljivanja,
+				Literatura = lit
+			};
+
+			lit.Rad = r;
+
+			s.Save(lit);
+
+			Sadrzi sadrzi = new Sadrzi()
+			{
+				Literatura = lit,
+				TProjekat = s.Load<TeorijskiProjekat>(tProjekatId)
+			};
+
+			s.Save(sadrzi);
+
+
+			s.Flush();
+		}
+		catch (Exception)
+		{
+			return "Greska pri dodavanju rada.".ToError(404);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+		return true;
+	}
+
+	public static Result<RadView, ErrorMessage> VratiRad(int id)
+	{
+		RadView? data = null;
+		ISession? s = null;
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+
+			Rad o = s.Load<Rad>(id);
+			data = new RadView(o);
+		}
+		catch (Exception)
+		{
+			return "Greška prilikom pribavljanja rada.".ToError(400);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+
+		return data;
+	}
+
+	public static Result<int, ErrorMessage> VratiIdLiteratureRada(int id)
+	{
+		int? data = 0;
+		ISession? s = null;
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+			var rad = s.Load<Rad>(id);
+			data = s.Query<Literatura>()
+						.Where(p => p.LitId == rad.Literatura!.LitId)
+						.Select(l => l.LitId)
+						.FirstOrDefault();
+		}
+		catch (Exception)
+		{
+			return "Došlo je do greške prilikom pribavljanja informacija o radu.".ToError(400);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+		return (int)data!;
+	}
+
+	public static Result<bool, ErrorMessage> ObrisiRad(int projekatId, int id)
+	{
+		ISession? s = null;
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+			Rad r = s.Load<Rad>(id);
+			Sadrzi? o = s.Query<Sadrzi>()
+						.Where(x => x.Literatura.LitId == r.Literatura!.LitId && projekatId == x.TProjekat.Id)
+						.FirstOrDefault();
+
+			if (o == null)
+				return "Rad ne postoji.".ToError(404);
+
+			s.Delete(o);
+
+			s.Flush();
+		}
+		catch (Exception)
+		{
+			return "Greška prilikom brisanja rada.".ToError(400);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+		return true;
+	}
+
+	public static Result<List<RadView>, ErrorMessage> VratiRadoveZaTProjekat(int id)
+	{
+		List<RadView> data = [];
+		ISession? s = null;
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+
+			data = s.Query<Sadrzi>()
+					   .Where(p => p.TProjekat.Id == id)
+					   .Join(s.Query<Rad>(),
+					   sadrzi => sadrzi.Literatura.LitId,
+					   rad => rad.Literatura!.LitId,
+					   (sadrzi, rad) => new RadView(rad)
+					   )
+					   .ToList();
+		}
+		catch (Exception)
+		{
+			return "Došlo je do greške prilikom prikupljanja informacija o radovima.".ToError(400);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+		return data;
+	}
+
+	private static void AzurirajRad(RadView radPregled, ISession s)
+	{
+		Rad rad = s.Load<Rad>(radPregled.Id);
+		rad.Format = radPregled.Format;
+		rad.KonferencijaObjavljivanja = radPregled.KonferencijaObjavljivanja;
+		rad.Url = radPregled.Url;
+		rad.Literatura!.Naziv = radPregled.Naziv!;
+
+		s.SaveOrUpdate(rad);
+	}
+
+	private static void AzurirajAutoreRada(int id, List<AutorView> azuriraniAutori, ISession s)
+	{
+		var rad = s.Load<Rad>(id);
+		var lit = rad.Literatura;
+
+		foreach (var postojeciAutori in lit!.Autori!.ToList())
+		{
+			s.Delete(postojeciAutori);
+		}
+
+		List<LitAutor> autori = new List<LitAutor>();
+		foreach (var autorPregled in azuriraniAutori)
+		{
+			autori.Add(new LitAutor() { Autor = autorPregled.Autor, Literatura = lit });
+		}
+
+		lit.Autori = autori;
+
+		s.Update(lit);
+	}
+
+	public static Result<bool, ErrorMessage> AzurirajRadSaAutorima(RadView radPregled, List<AutorView> azuriraniAutori)
+	{
+		ISession? s = null;
+
+		try
+		{
+			s = DataLayer.GetSession();
+
+			if (!(s?.IsConnected ?? false))
+			{
+				return "Nemoguće otvoriti sesiju.".ToError(403);
+			}
+
+			using ITransaction t = s.BeginTransaction();
+			try
+			{
+				AzurirajRad(radPregled, s);
+				AzurirajAutoreRada((int)radPregled.Id!, azuriraniAutori, s);
+
+				t.Commit();
+			}
+			catch (Exception)
+			{
+				t.Rollback();
+				return "Greška pri ažuriranju rada.".ToError(400);
+			}
+
+			s.Flush();
+		}
+		catch (Exception)
+		{
+			return "Greška pri ažuriranju rada.".ToError(400);
+		}
+		finally
+		{
+			s?.Close();
+			s?.Dispose();
+		}
+		return true;
+	}
+
+	#endregion
+
 	#region Knjiga
 
 	public static Result<List<KnjigaView>, ErrorMessage> VratiKnjigeZaTProjekat(int id)
@@ -1022,7 +1286,7 @@ public static class DataProvider
 
 			data = s.Query<Knjiga>()
 				.Where(k => k.ISBN == isbn)
-				.Select(k => k.Literatura.LitId)
+				.Select(k => (int)k.Literatura.LitId!)
 				.FirstOrDefault();
 		}
 		catch (Exception)

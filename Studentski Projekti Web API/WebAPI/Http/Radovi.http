@@ -1,0 +1,69 @@
+﻿@WebAPI_HostAddress = https://localhost:5276
+
+
+GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Rad/Preuzmi/Sve/3
+
+###
+
+POST {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Rad/Dodaj/3
+Content-Type: application/json
+
+{
+    "rad": {
+        "Naziv" : "Rad1",
+        "Url": "https://example.com",
+        "KonferencijaObjavljivanja": "Some Conference",
+        "Format": "pdf"
+    },
+    "autori": [
+        {
+            "Autor": "Milica Djokic"
+        },
+        {
+            "Autor": "Jelena Bogdanovic"
+        }
+    ]
+}
+
+###  s obzirom da se dinamicki postavlja id rada, postaviti odgovarajuci id za preuzimanje autora
+
+GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Autori/Preuzmi/206
+
+### s obzirom da se dinamicki postavlja id rada, postaviti odgovarajuci id za azuriranje
+
+PUT {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Rad/Izmeni
+Content-Type: application/json
+
+{
+  "rad": {
+        "Id": 222,
+        "Naziv" : "Rad 1",
+        "Url": "https://example.com",
+        "KonferencijaObjavljivanja": "Some Conference",
+        "Format": "post-script"
+    },
+    "autori": [
+        {
+            "Autor": "Milica Djokic"
+        },
+        {
+            "Autor": "Jovana Joksic"
+        }
+    ]
+}
+
+### s obzirom da se dinamicki postavlja id rada, postaviti odgovarajuci id za preuzimanje
+
+GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Rad/Preuzmi/222
+
+### s obzirom da se dinamicki postavlja id rada, postaviti odgovarajuci id za brisanje
+
+DELETE {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Rad/Obrisi/3/222
+
+### s obzirom da se dinamicki postavlja id rada, postaviti odgovarajuci id za preuzimanje id-a
+
+GET {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Rad/Preuzmi/Id/221
+
+### s obzirom da se dinamicki postavlja id rada, postaviti odgovarajuci id za brisanje
+
+DELETE {{WebAPI_HostAddress}}/Projekat/Teorijski/Literatura/Obrisi/207
